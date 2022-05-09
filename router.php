@@ -1,2 +1,2 @@
 <?php
-$content = "je suis un int";
+$content = "non je suis une string";
