@@ -62,6 +62,30 @@ CREATE TABLE IF NOT EXISTS `likes` (
         PRIMARY KEY (`like_id`),
     ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS `admins` (
+        `admin_id` INT NOT NULL AUTO_INCREMENT,
+        `group_id` INT,
+        `page_id` INT,
+        `user_id` INT NOT NULL,
+        PRIMARY KEY (`admin_id`),
+        ENGINE=InnoDB;
+    )
+
+CREATE TABLE IF NOT EXISTS `members` (
+        `member_id` INT NOT NULL AUTO_INCREMENT,
+        `group_id` INT,
+        `user_id` INT NOT NULL,
+        PRIMARY KEY (`member_id`),
+        ENGINE=InnoDB;
+    )
+
+CREATE TABLE IF NOT EXISTS `followers` (
+        `follower_id` INT NOT NULL AUTO_INCREMENT,
+        `page_id` INT,
+        `user_id` INT NOT NULL,
+        PRIMARY KEY (`follower_id`),
+        ENGINE=InnoDB;
+    )
 
 
 
@@ -72,13 +96,25 @@ ALTER TABLE  `articles`
 
 ALTER TABLE  `comments`
 	ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
-	ADD CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `articles`(`article_id`) ON DELETE CASCADE,
+	ADD CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `articles`(`article_id`) ON DELETE CASCADE;
 
 ALTER TABLE  `likes`
 	ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
 	ADD CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `articles`(`article_id`) ON DELETE CASCADE,
 	ADD CONSTRAINT FOREIGN KEY (`comment_id`) REFERENCES `comments`(`comment_id`) ON DELETE CASCADE;
 
+ALTER TABLE  `admins`
+	ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	ADD CONSTRAINT FOREIGN KEY (`page_id`) REFERENCES `pages`(`page_id`) ON DELETE CASCADE,
+	ADD CONSTRAINT FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE;
+
+ALTER TABLE  `members`
+	ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	ADD CONSTRAINT FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE;
+
+ALTER TABLE  `followers`
+	ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	ADD CONSTRAINT FOREIGN KEY (`page_id`) REFERENCES `pages`(`page_id`) ON DELETE CASCADE;
 
 git switch database
 git add database.sql
