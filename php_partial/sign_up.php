@@ -10,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $mail = filter_input(INPUT_POST, "email"); //récupère le mail du formulaire
     //récupère le mdp du formulaire
     $mdp = hash("sha512", filter_input(INPUT_POST, "password"));
-    $confirmMdp = hash("sha512", filter_input(INPUT_POST, "confirmPassword"));
     require_once __DIR__ . "/../database/pdo.php"; //je récupère le PDO
     //requete sql pour trouver dans la database l'utilisateur voulu
     $maRequete = $pdo->prepare("SELECT `email` FROM `user_id` WHERE `email` = :email;");
@@ -20,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     //récupère le résultat de la requète
     $user = $maRequete->fetch();
-    if ($user == false && strcmp($mdp, $confirmMdp) == 0) { //si aucun résultat
+    if ($user == false) { //si aucun résultat
         //j'ajoute le résultat du formulaire dans la database
         $maRequete = $pdo->prepare("INSERT INTO `user_id` (`email`, `mdp`) VALUES(:email, :mdp)");
         $maRequete->execute([
@@ -30,14 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         http_response_code(302);
         header('Location: /login'); //je vais à la page login
         exit();
-    } elseif ($user == true){ //sinon
-        $message = "L'utilisateur existe déjà";
-        //indique que le serveur refuse d'autoriser la requête 
-        http_response_code(403);
-        //j'appelle ma bannière html pour afficher un message d'erreur
-        require_once __DIR__ . "/../html_partial/alert/banniere.php";
-    } else {
-        $message = "Les mots de passe ne correspondent pas";
+    } else { //sinon
+        $message = "l'utilisateur existe déjà";
         //indique que le serveur refuse d'autoriser la requête 
         http_response_code(403);
         //j'appelle ma bannière html pour afficher un message d'erreur
