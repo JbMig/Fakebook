@@ -8,6 +8,9 @@ switch ($uri) {
     case "/login":
         require_once __DIR__ . "/php_partial/login.php";
         break;
+    case "/sign_up":
+        require_once __DIR__ . "/php_partial/sign_up.php";
+        break;
     case "/profile":
         require_once __DIR__ . "/php_partial/profile.php";
         break;
