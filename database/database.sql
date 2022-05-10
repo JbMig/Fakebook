@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
         `article_id` INT NOT NULL,
         `user_id` INT NOT NULL,
         `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY (`like_id`)
+        PRIMARY KEY (`comment_id`)
     ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `likes` (
