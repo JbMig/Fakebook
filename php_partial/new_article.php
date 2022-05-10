@@ -3,7 +3,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     if(isset($_POST["articleInput"])) {
         require_once __DIR__ . "/../database/pdo.php";
         $text = filter_input(INPUT_POST, "articleInput");
-        $user_id = $_SESSION["users"]["user_id"];
+        $user_id = $_SESSION["user"]["user_id"];
         if($_FILES["fileToUpload"]["name"]) {
             require_once __DIR__ . "/upload_img_post.php";
         } else {
