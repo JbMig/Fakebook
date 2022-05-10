@@ -11,19 +11,26 @@
 	<!-- if it's not the page of the current user (he's visiting someone else's page) -->
 	<div>
 	<!-- interactions -->
-		<form action="profile/" class="form" method="post" >
+		<form action="friend_request" class="form" method="post" >
 			<button type="submit" id="friend_request" name="friend_request">
 				Demande d'ami
 			<!-- relation request or remove from relations -->
 			</button>
+			<input type="hidden" name="friend_request" value="<?= $user_id ?>">
+		</form>
+		<form action="friend_removal" class="form" method="post" >
 			<button type="submit" id="friend_removal" name="friend_removal">
 				Ne plus être ami
 			<!-- relation request or remove from relations -->
 			</button>
+			<input type="hidden" name="friend_removal" value="<?= $user_id ?>">
+		</form>
+		<form action="start_chat" class="form" method="post" >
 			<button type="submit" id="start_chat" name="start_chat">
 				Démarrer la conversation
 			<!-- start chat if the person is a relationship -->
 			</button>
+			<input type="hidden" name="start_chat" value="<?= $user_id ?>">
 		</form>
 	</div>
 </section>
