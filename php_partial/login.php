@@ -34,4 +34,8 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
 //j'appelle l'html de cette page
 require_once __DIR__ . "/../html_partial/login.php";
 
+<<<<<<< HEAD
 $content = ob_get_clean(); //je stock le tampon dans cette variable
+=======
+$content = ob_get_clean(); //je stock le tampon dans cette variable
+>>>>>>> d77ed711f30f4e9a41f0ff678f86f3223bd0a55b
