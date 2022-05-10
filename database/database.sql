@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
 
 CREATE TABLE IF NOT EXISTS `articles` (
         `article_id` INT NOT NULL AUTO_INCREMENT,
-        `data` TEXT,
+        `content` TEXT,
         `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
         `image` VARCHAR(255),
         `like` BIGINT(20),
