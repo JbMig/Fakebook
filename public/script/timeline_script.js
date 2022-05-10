@@ -1,12 +1,13 @@
 var cancel = document.querySelector("#cancel");
+var newPublicationForm = document.querySelector("#newPublicationForm");
 
 function cancel_new_post() {
-    new_tweet_form.reset();
+    newPublicationForm.reset();
     var p=document.querySelector("#preview");
     p.innerHTML="";
     p.style.display="none";
 }
-cancel.addEventListener("click", cancel_new_post)
+
 // drag n drop
 var new_image_input = document.querySelector("#fileToUpload");
 var depose = document.querySelector("#depose");
@@ -48,3 +49,5 @@ depose.addEventListener("click", function(evt) {
     }
     p.style.display="block"; 
   };
+
+  cancel.addEventListener("click", cancel_new_post)

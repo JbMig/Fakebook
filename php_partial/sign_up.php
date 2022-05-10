@@ -7,6 +7,8 @@ $title = "sign up";
 // si on est en method POST, on reçoit les donnée du formulaire
 // permet de créer un utilisateur
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $prenom = filter_input(INPUT_POST, "firstName");
+    $nom = filter_input(INPUT_POST, "lastName");
     $mail = filter_input(INPUT_POST, "email"); //récupère le mail du formulaire
     //récupère le mdp du formulaire
     $mdp = hash("sha512", filter_input(INPUT_POST, "password"));
@@ -22,13 +24,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user = $maRequete->fetch();
     if ($user == false && strcmp($mdp, $confirmMdp) == 0) { //si aucun résultat
         //j'ajoute le résultat du formulaire dans la database
-        $maRequete = $pdo->prepare("INSERT INTO `users` (`email`, `password`) VALUES(:email, :mdp)");
+        $maRequete = $pdo->prepare("INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`) VALUES(:first_name, :last_name, :email, :mdp)");
         $maRequete->execute([
+            ":first_name" => $prenom,
+            ":last_name" => $nom,
             ":email" => $mail,
             ":mdp" => $mdp
         ]);
         
-        $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password` FROM `users` WHERE `email` = :email;");
+        $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password`, `first_name`, `last_name`, `profile_picture`, `banner`, `status` FROM `users` WHERE `email` = :email;");
         $maRequete->execute([
             ":email" => $mail
         ]);
@@ -55,3 +59,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 require_once __DIR__ . '/../html_partial/sign_up.php';
 
 $content = ob_get_clean(); //je stock le tampon dans cette variable
+

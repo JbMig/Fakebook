@@ -3,7 +3,6 @@
 // start buffering
 ob_start();
 $title = "Fakebook - fil d'actualité";
-$_SESSION["users"]["user_id"] = 1;
 
 require_once "../database/pdo.php";
 $user_id = $_SESSION["user"]["user_id"];
