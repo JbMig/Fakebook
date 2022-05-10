@@ -1,4 +1,3 @@
-<!-- to delete -->
 <section id="sectionPublication">
     <div id="newPublication">
         <!-- Form new article-->
