@@ -1,7 +1,9 @@
 <?php
 ob_start();
 // j'ai juste créé le fichier, pour l'instant.
-
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    require_once __DIR__ . "/../database/pdo.php"; //je récupère le PDO
+}
 
 
 
