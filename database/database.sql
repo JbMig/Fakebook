@@ -48,18 +48,18 @@ CREATE TABLE IF NOT EXISTS `comments` (
         `comment_id` INT NOT NULL AUTO_INCREMENT,
 		`content` TEXT NOT NULL,
         `image` VARCHAR(255),
+        `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
         `article_id` INT NOT NULL,
         `user_id` INT NOT NULL,
-        `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (`comment_id`)
     ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `likes` (
         `like_id` INT NOT NULL AUTO_INCREMENT,
+        `date` DATETIME DEFAULT CURRENT_TIMESTAMP, -- needed to date the notifications
         `article_id` INT NOT NULL,
         `comment_id` INT,
         `user_id` INT NOT NULL,
-        `date` DATETIME DEFAULT CURRENT_TIMESTAMP, -- needed to date the notifications
         PRIMARY KEY (`like_id`)
     ) ENGINE=InnoDB;
 
@@ -119,13 +119,13 @@ CREATE TABLE IF NOT EXISTS `notifications` (
         `notif_id` INT NOT NULL AUTO_INCREMENT,
         `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
         `type` ENUM('article','like','comment','relationship_agree','relationship_disagree','join_group_agree','join_group_disagree') NOT NULL,
+        `seen` ENUM('yes','no') NOT NULL,
         `user_id` INT,
         `group_id` INT,
         `page_id` INT,
         `like_id` INT,
         `comment_id` INT,
         `article_id` INT,
-        `seen` ENUM('yes','no') NOT NULL,
         PRIMARY KEY (`notif_id`)
     ) ENGINE=InnoDB;
 
