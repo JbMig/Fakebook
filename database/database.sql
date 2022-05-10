@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
 CREATE TABLE IF NOT EXISTS `comments` (
         `comment_id` INT NOT NULL AUTO_INCREMENT,
 		`content` TEXT NOT NULL,
+        `image` VARCHAR(255),
         `article_id` INT NOT NULL,
         `user_id` INT NOT NULL,
         `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -58,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `likes` (
         `article_id` INT NOT NULL,
         `comment_id` INT,
         `user_id` INT NOT NULL,
-        `date` DATETIME DEFAULT CURRENT_TIMESTAMP, -- nécesaire pour dater les notifications
+        `date` DATETIME DEFAULT CURRENT_TIMESTAMP, -- needed to date the notifications
         PRIMARY KEY (`like_id`),
     ) ENGINE=InnoDB;
 
@@ -73,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
 
 CREATE TABLE IF NOT EXISTS `members` (
         `member_id` INT NOT NULL AUTO_INCREMENT,
-        `group_id` INT,
+        `group_id` INT NOT NULL,
         `user_id` INT NOT NULL,
         PRIMARY KEY (`member_id`),
         ENGINE=InnoDB;
@@ -81,12 +82,60 @@ CREATE TABLE IF NOT EXISTS `members` (
 
 CREATE TABLE IF NOT EXISTS `followers` (
         `follower_id` INT NOT NULL AUTO_INCREMENT,
-        `page_id` INT,
+        `page_id` INT NOT NULL,
         `user_id` INT NOT NULL,
         PRIMARY KEY (`follower_id`),
         ENGINE=InnoDB;
     )
 
+CREATE TABLE IF NOT EXISTS `relationships` (
+        `relation_id` INT NOT NULL AUTO_INCREMENT,
+        `user_id_a` INT NOT NULL,
+        `user_id_b` INT NOT NULL,
+        PRIMARY KEY (`relation_id`),
+        ENGINE=InnoDB;
+    )
+
+CREATE TABLE IF NOT EXISTS `chats` (
+        `chat_id` INT NOT NULL AUTO_INCREMENT,
+        `name` VARCHAR(20) DEFAULT 'Nouvelle discussion',
+        `chat_pic` VARCHAR(255) DEFAULT "default_page_pic.jpeg",
+        PRIMARY KEY (`chat_id`),
+        ENGINE=InnoDB;
+    )
+
+CREATE TABLE IF NOT EXISTS `messages` (
+        `message_id` INT NOT NULL AUTO_INCREMENT,
+        `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+        `image` VARCHAR(255),
+        `chat_id` INT NOT NULL,
+        `user_id` INT NOT NULL,
+        PRIMARY KEY (`message_id`),
+        ENGINE=InnoDB;
+    )
+
+CREATE TABLE IF NOT EXISTS `chat_members` (
+        `chat_member_id` INT NOT NULL AUTO_INCREMENT,
+        `chat_id` INT NOT NULL,
+        `user_id` INT NOT NULL,
+        PRIMARY KEY (`chat_member_id`),
+        ENGINE=InnoDB;
+    )
+
+CREATE TABLE IF NOT EXISTS `notifications` (
+        `notif_id` INT NOT NULL AUTO_INCREMENT,
+        `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+        `type` ENUM('article','like','comment','relationship_agree','relationship_disagree','join_group_agree','join_group_disagree') NOT NULL,
+        `user_id` INT,
+        `group_id` INT,
+        `page_id` INT,
+        `like_id` INT,
+        `comment_id` INT,
+        `article_id` INT,
+        `seen` ENUM('yes','no') NOT NULL,
+        PRIMARY KEY (`notif_id`),
+        ENGINE=InnoDB;
+    )
 
 
 ALTER TABLE  `articles`
@@ -116,7 +165,36 @@ ALTER TABLE  `followers`
 	ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
 	ADD CONSTRAINT FOREIGN KEY (`page_id`) REFERENCES `pages`(`page_id`) ON DELETE CASCADE;
 
+ALTER TABLE  `relationships`
+	ADD CONSTRAINT FOREIGN KEY (`user_id_a`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	ADD CONSTRAINT FOREIGN KEY (`user_id_b`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
+
+ALTER TABLE  `messages`
+	ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	ADD CONSTRAINT FOREIGN KEY (`chat_id`) REFERENCES `chats`(`chat_id`) ON DELETE CASCADE;
+
+ALTER TABLE  `chat_members`
+	ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	ADD CONSTRAINT FOREIGN KEY (`chat_id`) REFERENCES `chats`(`chat_id`) ON DELETE CASCADE;
+
+ALTER TABLE  `notifications`
+	ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	ADD CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `articles`(`article_id`) ON DELETE CASCADE,
+	ADD CONSTRAINT FOREIGN KEY (`like_id`) REFERENCES `likes`(`like_id`) ON DELETE CASCADE,
+	ADD CONSTRAINT FOREIGN KEY (`comment_id`) REFERENCES `comments`(`comment_id`) ON DELETE CASCADE,
+	ADD CONSTRAINT FOREIGN KEY (`page_id`) REFERENCES `pages`(`page_id`) ON DELETE CASCADE,
+	ADD CONSTRAINT FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE;
+
+
+
+-- pour push sur la branche database
+-- si pas fait : .\Fakebook\
 git switch database
-git add database.sql
-git commit -m 'refactor - début de la bdd - pas encore testé'
+git add database.sql -- ou juste "git add database" si on veut push tout le dossier
+git commit -m 'texte'
 git push -u origin database
+-- pour mettre sur le main
+git switch main
+git merge database
+git push -u origin main
+-- et on n'oublie pas de faire "git pull" régulièrement
