@@ -11,6 +11,10 @@ $maRequete = $pdo->prepare("SELECT * FROM `articles` ORDER BY `date` DESC"); // 
     $maRequete->execute();
     $articles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
+$maRequete = $pdo->prepare("SELECT `user_id`, `profil_picture`, `first_name`, `last_name` FROM `users` WHERE `status` = 'active' "); // add condition for relationship
+    $maRequete->execute();
+    $profiles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
 require_once __DIR__ . "/../html_partial/timeline.php";
 // clean buffering in $content
 $content = ob_get_clean();
