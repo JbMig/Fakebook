@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         //indique que le serveur refuse d'autoriser la requête 
         http_response_code(403);
         //j'appelle ma bannière html pour afficher un message d'erreur
-        require_once __DIR__ . "/../html_partial/alerts/baniere.php";
+        require_once __DIR__ . "/../html_partial/alert/banniere.php";
     }
 }
 //j'appelle l'html de cette page
