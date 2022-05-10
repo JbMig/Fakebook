@@ -206,18 +206,3 @@ select * from users;
 select * from articles;
 select * from comments;
 -- Lucie shouldn't be in the table anymore, which should have erased her comment on Thomas' article.
-
-
-
-
--- pour push sur la branche database
--- si pas fait : .\Fakebook\
-git switch database
-git add database.sql -- ou juste "git add database" si on veut push tout le dossier
-git commit -m 'texte'
-git push -u origin database
--- pour mettre sur le main
-git switch main
-git merge database
-git push -u origin main
--- et on n'oublie pas de faire "git pull" régulièrement
