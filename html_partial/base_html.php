@@ -15,7 +15,7 @@
     </main>
 
     <footer>
-        
+        <!-- require the right script by checking url -->
         <?php require_once __DIR__ . "/../php_partial/get_script.php"; ?>
     </footer>
 </body>
