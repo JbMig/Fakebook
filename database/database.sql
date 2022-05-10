@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
         `picture` VARCHAR(255) DEFAULT "default_page_pic.jpeg",
         `banner` VARCHAR(255) DEFAULT "default_banner.jpg",
 		`creation_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY (`page_id`),
+        PRIMARY KEY (`page_id`)
     ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `groups` (
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
         `banner` VARCHAR(255) DEFAULT "default_banner.jpg",
 		`creation_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
 		`status` ENUM('public', 'private') DEFAULT 'public',
-        PRIMARY KEY (`group_id`),
+        PRIMARY KEY (`group_id`)
     ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `articles` (
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
         `user_id` INT NOT NULL,
         `group_id` INT,
         `page_id` INT,
-        PRIMARY KEY (`article_id`),
+        PRIMARY KEY (`article_id`)
     ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `comments` (
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
         `article_id` INT NOT NULL,
         `user_id` INT NOT NULL,
         `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY (`like_id`),
+        PRIMARY KEY (`like_id`)
     ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `likes` (
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `likes` (
         `comment_id` INT,
         `user_id` INT NOT NULL,
         `date` DATETIME DEFAULT CURRENT_TIMESTAMP, -- needed to date the notifications
-        PRIMARY KEY (`like_id`),
+        PRIMARY KEY (`like_id`)
     ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `admins` (
@@ -68,41 +68,36 @@ CREATE TABLE IF NOT EXISTS `admins` (
         `group_id` INT,
         `page_id` INT,
         `user_id` INT NOT NULL,
-        PRIMARY KEY (`admin_id`),
-        ENGINE=InnoDB;
-    )
+        PRIMARY KEY (`admin_id`) 
+    ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `members` (
         `member_id` INT NOT NULL AUTO_INCREMENT,
         `group_id` INT NOT NULL,
         `user_id` INT NOT NULL,
-        PRIMARY KEY (`member_id`),
-        ENGINE=InnoDB;
-    )
+        PRIMARY KEY (`member_id`)
+    ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `followers` (
         `follower_id` INT NOT NULL AUTO_INCREMENT,
         `page_id` INT NOT NULL,
         `user_id` INT NOT NULL,
-        PRIMARY KEY (`follower_id`),
-        ENGINE=InnoDB;
-    )
+        PRIMARY KEY (`follower_id`)
+    ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `relationships` (
         `relation_id` INT NOT NULL AUTO_INCREMENT,
         `user_id_a` INT NOT NULL,
         `user_id_b` INT NOT NULL,
-        PRIMARY KEY (`relation_id`),
-        ENGINE=InnoDB;
-    )
+        PRIMARY KEY (`relation_id`)
+    ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `chats` (
         `chat_id` INT NOT NULL AUTO_INCREMENT,
         `name` VARCHAR(20) DEFAULT 'Nouvelle discussion',
         `chat_pic` VARCHAR(255) DEFAULT "default_page_pic.jpeg",
-        PRIMARY KEY (`chat_id`),
-        ENGINE=InnoDB;
-    )
+        PRIMARY KEY (`chat_id`)
+    ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `messages` (
         `message_id` INT NOT NULL AUTO_INCREMENT,
@@ -110,17 +105,15 @@ CREATE TABLE IF NOT EXISTS `messages` (
         `image` VARCHAR(255),
         `chat_id` INT NOT NULL,
         `user_id` INT NOT NULL,
-        PRIMARY KEY (`message_id`),
-        ENGINE=InnoDB;
-    )
+        PRIMARY KEY (`message_id`)
+    ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `chat_members` (
         `chat_member_id` INT NOT NULL AUTO_INCREMENT,
         `chat_id` INT NOT NULL,
         `user_id` INT NOT NULL,
-        PRIMARY KEY (`chat_member_id`),
-        ENGINE=InnoDB;
-    )
+        PRIMARY KEY (`chat_member_id`)
+    ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `notifications` (
         `notif_id` INT NOT NULL AUTO_INCREMENT,
@@ -133,9 +126,8 @@ CREATE TABLE IF NOT EXISTS `notifications` (
         `comment_id` INT,
         `article_id` INT,
         `seen` ENUM('yes','no') NOT NULL,
-        PRIMARY KEY (`notif_id`),
-        ENGINE=InnoDB;
-    )
+        PRIMARY KEY (`notif_id`)
+    ) ENGINE=InnoDB;
 
 
 ALTER TABLE  `articles`
