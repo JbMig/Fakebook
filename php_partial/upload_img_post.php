@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
     // si l'image est inferieur à 
-    if ($_FILES["fileToUpload"]["size"] > 500000) {
+    if ($_FILES["fileToUpload"]["size"] > 5971520) {
         $message = "image trop volumineuse";
         http_response_code(403);
         require_once __DIR__ . "/../html_partial/alert/banniere.php";
