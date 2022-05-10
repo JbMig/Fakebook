@@ -69,10 +69,12 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
                     ":picture" => $full_name
                 ]);
             http_response_code(302);
-            header("location: /timeline");
-            exit();
-            // je reviens à la page tweet
-            header("Location: /tweet");
+            $direction = explode("/",$_SERVER["HTTP_REFERER"]);
+            if($direction[3] === "profile") {
+                header("Location: /profile");
+            } else if ($direction[3] === "timeline") {
+                header("Location: /timeline");
+            }
             exit();
         } else {
             $message = "Une erreur est survenue";
