@@ -1,5 +1,5 @@
 <?php if($uri === "/login") :?>
-    <span>je suis dans login</span>
+    <!-- script here -->
 <?php elseif($uri === "/entrer.php") :?>
-    <span>je suis dans entrer</span>
+    <!-- script here -->
 <?php endif; ?>
