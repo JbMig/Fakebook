@@ -10,7 +10,7 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
     require_once __DIR__ . "/../database/pdo.php"; //je récupère le PDO
     $mail = filter_input(INPUT_POST, "mail"); //récupère le mail du formulaire
     //récupère le mdp du formulaire
-    $mdp = hash("sha512", filter_input(INPUT_POST, "mdp")); 
+    $mdp = hash("sha512", filter_input(INPUT_POST, "mdp"));
     //requete sql pour trouver dans la database l'utilisateur voulu
     $maRequete = $pdo->prepare("SELECT `id`, `mail`, `mdp` FROM `user` WHERE `mail` = :mail;");
     $maRequete->execute([
@@ -32,6 +32,6 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
     }
 }
 //j'appelle l'html de cette page
-require_once __DIR__ . "/../html_partial/login.php"; 
+require_once __DIR__ . "/../html_partial/login.php";
 
 $content = ob_get_clean(); //je stock le tampon dans cette variable
