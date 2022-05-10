@@ -179,6 +179,38 @@ ALTER TABLE  `notifications`
 
 
 
+-- tests
+INSERT INTO `users` (mail, mdp, first_name)
+    VALUES
+    ('blabla@bb.com', 'blabla1', 'Barbara'),
+    ('toto@toto.com', 'toto2', 'Thomas'),
+    ('lulu@lulu.com', 'lulu3', 'Lucie'),
+    ('sissi@sy.com', 'sissi4', 'Sylvaine');
+
+INSERT INTO `articles` (user_id, data)
+    VALUES
+    (1, 'Barbara est dans la place !'),
+    (2, 'Pk je suis le seul mec ?');
+
+INSERT INTO `comments` (content, article_id, user_id)
+    VALUES
+    ("Parce que c'est une fille qui a créé la bdd XD", 2, 3),
+    ('Arrête de te la pêter !',1,4);
+
+DELETE FROM `articles` WHERE `article_id`=1;
+select * from articles;
+select * from comments;
+-- the 1st article should be erased, and its comment along with it (comment_id=2).
+
+DELETE FROM `users` WHERE `user_id`=3;
+select * from users;
+select * from articles;
+select * from comments;
+-- Lucie shouldn't be in the table anymore, which should have erased her comment on Thomas' article.
+
+
+
+
 -- pour push sur la branche database
 -- si pas fait : .\Fakebook\
 git switch database
