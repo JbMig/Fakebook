@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 //mise en tampon pour stockage dans une variable
 ob_start();
@@ -35,3 +36,5 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
 require_once __DIR__ . "/../html_partial/login.php";
 
 $content = ob_get_clean(); //je stock le tampon dans cette variable
+=======
+>>>>>>> main
