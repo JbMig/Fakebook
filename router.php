@@ -17,6 +17,9 @@ switch ($uri) {
     case "/timeline":
         require_once __DIR__ . "/php_partial/timeline.php";
         break;
+    case "/new_article":
+        require_once __DIR__ . "/php_partial/new_article.php";
+        break;
 }
 
 // we require base_html to display $content ($content references in files from php_partial)

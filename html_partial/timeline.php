@@ -1,7 +1,7 @@
 <section id="sectionPublication">
     <div id="newPublication">
         <!-- Form new article-->
-        <form id="newPublicationForm" method="post" enctype="multipart/form-data">
+        <form id="newPublicationForm" method="post" enctype="multipart/form-data" action="/new_article">
             <label id="publicationLabel" for="articleInput">Ecrivez votre message</label><br>
             <textarea id="articleInput" name="articleInput" type="text"></textarea>
             <div id="depose">Déposez vos images ou cliquez pour choisir</div>
