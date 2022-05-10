@@ -8,11 +8,11 @@ $title = "login";
 //permet de verifier l'utilisateur dans la base de donnée pour créer un connexion
 if ("POST" === $_SERVER["REQUEST_METHOD"]) {
     require_once __DIR__ . "/../database/pdo.php"; //je récupère le PDO
-    $mail = filter_input(INPUT_POST, "email"); //récupère le mail du formulaire
+    $mail = filter_input(INPUT_POST, "mail"); //récupère le mail du formulaire
     //récupère le mdp du formulaire
     $mdp = hash("sha512", filter_input(INPUT_POST, "mdp"));
     //requete sql pour trouver dans la database l'utilisateur voulu
-    $maRequete = $pdo->prepare("SELECT `id`, `email`, `password` FROM `user_id` WHERE `email` = :email;");
+    $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password` FROM `users` WHERE `email` = :email;");
     $maRequete->execute([
         ":email" => $mail
     ]);
@@ -20,6 +20,8 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
     $user = $maRequete->fetch();
     //si aucun résultat ou si le mot de passe est invalide
     if (!$user || $user["password"] !== $mdp) {
+        var_dump($mail) . PHP_EOL;
+        var_dump($mdp);
         $message = "Utilisateur invalide";
         //indique que le serveur refuse d'autoriser la requête 
         http_response_code(403);
@@ -27,7 +29,7 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
         require_once __DIR__ . "/../html_partial/alert/banniere.php";
     } else { //sinon j'ajoute le resultat de la requete dans la session
         $_SESSION["user_id"] = $user;
-        header("Location: /projet"); //je vais à la page projet
+        header("Location: /timeline"); //je vais à la page projet
         exit();
     }
 }
