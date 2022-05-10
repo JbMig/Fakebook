@@ -9,7 +9,7 @@
                 <form method="POST">
                     <div><p Class="emailSignUp"><span class="green">Email :</span></p><input type="email" id="email" name="email" placeholder=""></div>
                     <div><p Class="passwordSignUp"><span class="green">Password :</span></p><input type="password" id="password" name="password" placeholder=""></div>
-                    <div><p Class="confirmPasswordSignUp"><span class="green">Confirm password :</span></p><input type="confirmPassword" id="confirmPassword" name="confirmPassword" placeholder=""></div>
+                    <div><p Class="confirmPasswordSignUp"><span class="green">Confirm password :</span></p><input type="password" id="confirmPassword" name="confirmPassword" placeholder=""></div>
                     <div><input type="submit" id="valider" value="Valider"/></div>
                 </form>
             </div>

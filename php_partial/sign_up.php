@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $mdp = hash("sha512", filter_input(INPUT_POST, "password"));
     require_once __DIR__ . "/../database/pdo.php"; //je récupère le PDO
     //requete sql pour trouver dans la database l'utilisateur voulu
-    $maRequete = $pdo->prepare("SELECT `email` FROM `user_id` WHERE `email` = :email;");
+    $maRequete = $pdo->prepare("SELECT `email` FROM `users` WHERE `email` = :email;");
     $maRequete->execute([
         ":email" => $mail
     ]);
@@ -21,10 +21,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user = $maRequete->fetch();
     if ($user == false) { //si aucun résultat
         //j'ajoute le résultat du formulaire dans la database
-        $maRequete = $pdo->prepare("INSERT INTO `user_id` (`email`, `mdp`) VALUES(:email, :mdp)");
+        $maRequete = $pdo->prepare("INSERT INTO `users` (`email`, `password`) VALUES(:email, :mdp)");
         $maRequete->execute([
             ":email" => $mail,
-            ":password" => $mdp
+            ":mdp" => $mdp
         ]);
         http_response_code(302);
         header('Location: /login'); //je vais à la page login
