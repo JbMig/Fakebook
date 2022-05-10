@@ -24,10 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user = $maRequete->fetch();
     if ($user == false && strcmp($mdp, $confirmMdp) == 0) { //si aucun résultat
         //j'ajoute le résultat du formulaire dans la database
-        $maRequete = $pdo->prepare("INSERT INTO `users` (`email`, `password`) VALUES(:email, :mdp)");
+        $maRequete = $pdo->prepare("INSERT INTO `users` (`email`, `password`) VALUES(:first_name, :last_name, :email, :mdp)");
         $maRequete->execute([
             ":first_name" => $prenom,
-            "last_name" => $nom,
+            ":last_name" => $nom,
             ":email" => $mail,
             ":mdp" => $mdp
         ]);
