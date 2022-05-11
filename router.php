@@ -26,6 +26,14 @@ switch ($uri) {
     case "/delete_article":
         require_once __DIR__ . "/php_partial/delete_article.php";
         break;
+	case "/friend_request":
+		require_once __DIR__ . "/php_partial/friend_request.php";
+		break;
+    case "/delete":
+        require_once __DIR__ . "/php_partial/delete_article.php";
+    case "/modify_article":
+        require_once __DIR__ . "/php_partial/modify_article.php";
+        break;
 }
 
 // we require base_html to display $content ($content references in files from php_partial)

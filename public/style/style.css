@@ -1,3 +1,4 @@
+/* drag'n drop */
 #depose {
     /* position: absolute; */
     height:60px;
@@ -30,6 +31,12 @@
     vertical-align: middle;
 }
 
+/* every button */
 button {
     cursor: pointer;
+}
+
+/* modify_article_form */
+#form_modify_article {
+    display: none;
 }
