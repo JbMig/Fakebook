@@ -15,6 +15,7 @@
 	<!-- if it's not the page of the current user (he's visiting someone else's page) -->
 	<div>
 	<!-- interactions -->
+	<?php if ($_SESSION["user"]["user_id"] != $profile["user_id"]) :?>
 		<form action="friend_request" class="form" method="post" >
 			<button type="submit" id="friend_request" name="friend_request">
 				Demande d'ami
@@ -36,6 +37,7 @@
 			</button>
 			<input type="hidden" name="start_chat" value="<?= $user_id ?>">
 		</form>
+	<?php endif ?>
 	</div>
 </section>
 
