@@ -31,6 +31,8 @@ switch ($uri) {
 		break;
     case "/delete":
         require_once __DIR__ . "/php_partial/delete_article.php";
+    case "/modify_article":
+        require_once __DIR__ . "/php_partial/modify_article.php";
         break;
 }
 
