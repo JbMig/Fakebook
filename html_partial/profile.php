@@ -1,14 +1,16 @@
-<form id="deco_form" method="post" action="/sign_out">
-    <button class="nav_deco" id="deconnection" type="submit">Deconnection</button>
-    <input type="hidden" name="deco">
-</form>
+<section>
+	<form id="deco_form" method="post" action="/sign_out">
+		<button class="nav_deco" id="deconnection" type="submit">Deconnection</button>
+		<input type="hidden" name="deco">
+	</form>
+	<a href="timeline">Fil d'actualité</a>
+</section>
 <section>
 	<!-- page top : profile picture, first & last name -->
-	<a href="timeline">Fil d'actualité</a>
 	<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
 	<img src="img_baniere/<?= $profile["banner"] ?>" alt="" >
 </section>
-
+<h1 id="h1"><?=$h1?></h1>
 <section>
 	<!-- if it's not the page of the current user (he's visiting someone else's page) -->
 	<div>

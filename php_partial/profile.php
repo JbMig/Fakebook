@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 	$profile = $maRequete->fetch();
 
 	$title = "Fakebook - Profil de " . $profile["first_name"] . " " . $profile["last_name"];
-
+	$h1 = $profile["first_name"] . " " . $profile["last_name"];
 
 
 	$maRequete = $pdo->prepare("SELECT * FROM `articles` WHERE `user_id`=:profile_id ORDER BY `date` DESC"); // add condition for relationship
