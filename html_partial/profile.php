@@ -21,14 +21,14 @@
 				Demande d'ami
 			<!-- relation request or remove from relations -->
 			</button>
-			<input type="hidden" name="friend_request" value="<?= $profile["user_id"] ?>">
+			<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
 		</form>
 		<form action="/friend_removal" class="form" method="post" >
 			<button type="submit" id="friend_removal" name="friend_removal">
 				Ne plus être ami
 			<!-- relation request or remove from relations -->
 			</button>
-			<input type="hidden" name="friend_removal" value="<?= $profile["user_id"] ?>">
+			<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
 		</form>
 		<form action="/start_chat" class="form" method="post" >
 			<button type="submit" id="start_chat" name="start_chat">
