@@ -12,10 +12,10 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
     //récupère le mdp du formulaire
     $mdp = hash("sha512", filter_input(INPUT_POST, "mdp"));
     //requete sql pour trouver dans la database l'utilisateur voulu
-    $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password` FROM `users` WHERE `email` = :email;");
-    $maRequete->execute([
-        ":email" => $mail
-    ]);
+    $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password`, `first_name`, `last_name`, `profil_picture`, `banner`, `status` FROM `users` WHERE `email` = :email;");
+        $maRequete->execute([
+            ":email" => $mail
+        ]);
     //récupère le résultat de la requète
     $user = $maRequete->fetch();
     //si aucun résultat ou si le mot de passe est invalide
@@ -27,6 +27,7 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
         require_once __DIR__ . "/../html_partial/alert/banniere.php";
     } else { //sinon j'ajoute le resultat de la requete dans la session
         $_SESSION["user"] = $user;
+        http_response_code(302);
         header("Location: /timeline"); //je vais à la page projet
         exit();
     }

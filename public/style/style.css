@@ -1,5 +1,5 @@
 #depose {
-    position: absolute;
+    /* position: absolute; */
     height:60px;
     width: 374px;
     font-size:20px;
@@ -28,4 +28,8 @@
     max-width: 80px;
     margin-right:10px;
     vertical-align: middle;
+}
+
+button {
+    cursor: pointer;
 }

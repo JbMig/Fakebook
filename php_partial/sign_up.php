@@ -31,8 +31,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ":email" => $mail,
             ":mdp" => $mdp
         ]);
+        
+        $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password`, `first_name`, `last_name`, `profile_picture`, `banner`, `status` FROM `users` WHERE `email` = :email;");
+        $maRequete->execute([
+            ":email" => $mail
+        ]);
+
+        $_SESSION["user"] = $user;
         http_response_code(302);
-        header('Location: /login'); //je vais à la page login
+        header('Location: /timeline'); //je vais à la page login
         exit();
     } elseif ($user == true){ //sinon
         $message = "L'utilisateur existe déjà";
