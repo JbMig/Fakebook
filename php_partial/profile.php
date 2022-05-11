@@ -1,10 +1,12 @@
 <?php
 ob_start();
-$title = "profile";
-// j'ai juste créé le fichier, pour l'instant.
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    require_once __DIR__ . "/../database/pdo.php"; //je récupère le PDO
-}
+$title = "Fakebook - Profil de ...";
+
+require_once __DIR__ . "/../database/pdo.php"; // accessing the database
+
+$user_id = $_SESSION["user"]["user_id"]; // needed to check whether it's the user's page or someone else's.
+
+
 
 
 

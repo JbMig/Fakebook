@@ -1,7 +1,7 @@
 
 <section>
 	<!-- page top : profile picture, first & last name -->
-	<a href="timeline">Timeline</a>
+	<a href="timeline">Fil d'actualité</a>
 </section>
 
 <section>
