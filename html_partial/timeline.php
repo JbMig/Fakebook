@@ -26,19 +26,16 @@
                     <img src="img_profil/<?= $profil_picture ?>" alt="" width="40px">
                 </button>
                 <button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-                    <?= $first_name ?> 
-                </button>
-                <button type="submit" id="last_name" style="background: white; border:0; padding:0;">
-                    <?= $last_name ?>
+                    <?= $first_name . " " . $last_name ?> 
                 </button>
             </form>
             <span id="date"><?= $article["date"] ?></span>
             <br>
             <span id="data"><?= $article["content"] ?></span>
             <br>
-            <?php if($article["picture"]) {?>
+            <?php if($article["picture"]) :?>
                 <img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
-            <?php } ?>
+            <?php endif; ?>
         </div>
     <?php endforeach;?>
 </section>
