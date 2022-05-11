@@ -6,4 +6,3 @@ $dbname = "db_fakebook_ajltvv";
 $username = "root";
 $password = "root";
 $pdo = new PDO("$engine:host=$host:$port;dbname=$dbname", $username, $password);
-?>
