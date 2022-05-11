@@ -1,3 +1,7 @@
+<form id="deco_form" method="post" action="/sign_out">
+    <button class="nav_deco" id="deconnection" type="submit">Deconnection</button>
+    <input type="hidden" name="deco">
+</form>
 <section id="sectionPublication">
     <div id="newPublication">
         <!-- Form new article-->
@@ -36,6 +40,14 @@
             <?php if($article["picture"]) :?>
                 <img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
             <?php endif; ?>
+            <?php if($article["user_id"] === $_SESSION["user"]["user_id"]) :?>
+                <form id="delete_article" method="post" action="/delete_article">
+                    <button type="submit" id="delete_btn">Supprimer</button>
+                    <input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
+                    <input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
+                </form>
+            <?php endif ?>
+
         </div>
     <?php endforeach;?>
 </section>

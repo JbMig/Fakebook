@@ -11,6 +11,9 @@ switch ($uri) {
     case "/sign_up":
         require_once __DIR__ . "/php_partial/sign_up.php";
         break;
+    case "/sign_out":
+        require_once __DIR__ . "/php_partial/sign_out.php";
+        break;
     case "/profile":
         require_once __DIR__ . "/php_partial/profile.php";
         break;
@@ -19,6 +22,9 @@ switch ($uri) {
         break;
     case "/new_article":
         require_once __DIR__ . "/php_partial/new_article.php";
+        break;
+    case "/delete_article":
+        require_once __DIR__ . "/php_partial/delete_article.php";
         break;
 }
 

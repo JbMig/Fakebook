@@ -1,4 +1,7 @@
-
+<form id="deco_form" method="post" action="/sign_out">
+    <button class="nav_deco" id="deconnection" type="submit">Deconnection</button>
+    <input type="hidden" name="deco">
+</form>
 <section>
 	<!-- page top : profile picture, first & last name -->
 	<a href="timeline">Fil d'actualité</a>
