@@ -1,10 +1,7 @@
 
-<body>
-	
-
-</html>
 <section>
 	<!-- page top : profile picture, first & last name -->
+	<a href="timeline">Timeline</a>
 </section>
 
 <section>
@@ -69,4 +66,3 @@
 		</div>
 	</div>
 </section>
-</body>
