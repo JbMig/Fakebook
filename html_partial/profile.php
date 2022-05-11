@@ -48,6 +48,7 @@
 		<div>
 		<!-- new article -->
 			<!-- Form new article-->
+			<?php if ($_SESSION["user"]["user_id"] == $profile["user_id"]) :?>
 			<form id="newPublicationForm" method="post" enctype="multipart/form-data" action="/new_article">
 				<label id="publicationLabel" for="articleInput">Ecrivez votre message</label><br>
 				<textarea id="articleInput" name="articleInput" type="text"></textarea>
@@ -57,6 +58,7 @@
 				<button type="submit" id="submitPublication" >Envoyer</button>
 				<button id="cancel">Annuler</button>
 			</form>
+			<?php endif ?>
 		</div>
 		<div>
 		<!-- past articles -->
