@@ -40,6 +40,14 @@
             <?php if($article["picture"]) :?>
                 <img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
             <?php endif; ?>
+            <?php if($article["user_id"] === $_SESSION["user"]["user_id"]) :?>
+                <form id="delete_article" method="post" action="/delete_article">
+                    <button type="submit" id="delete_btn">Supprimer</button>
+                    <input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
+                    <input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
+                </form>
+            <?php endif ?>
+
         </div>
     <?php endforeach;?>
 </section>
