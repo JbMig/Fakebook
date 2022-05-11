@@ -1,16 +1,16 @@
-<div class="container col-md-3 d-grid gap-2  border border-primary rounded" style="margin-top : 10%">
+<div class="container col-md-4 d-grid gap-2  border border-primary rounded" style="margin-top : 5%; margin-bottom: 5%;">
     <form method="POST">
-        <span class="col-md-6 mx-2 ">First Name :</span>
-        <span class="col-md-6 mx-5 px-3 ">Last Name :</span>
-        <input class="col-md-5 mx-1 my-3" type="text" id="firstName" name="firstName" placeholder="">
-        <input class="col-md-5 mx-1" type="text" id="lastName" name="lastName" placeholder="">
-        <span class="col-md-12 my-3">Email :</span>
-        <input class="col-md-12 my-3" type="email" id="email" name="email" placeholder="">
-        <span class="col-md-12 my-3">Password :</span>
-        <input class="col-md-12 my-3" type="password" id="password" name="password" placeholder="">
-        <span class="col-md-12 my-3">Confirm password :</span>
-        <input class="col-md-12 my-3" type="password" id="confirmPassword" name="confirmPassword" placeholder="">
-        <input class="col-md-12 my-3 bg-primary" type="submit" id="valider" value="Valider"/>
+        <label class="col-md-4 mt-3 mx-5 " for="firstName">First Name :</label>
+        <input class="col-md-8 mx-5" type="text" id="firstName" name="firstName" placeholder="">
+        <label class="col-md-4 mt-3 mx-5" for="lastName">Last Name :</label>
+        <input class="col-md-8 mx-5" type="text" id="lastName" name="lastName" placeholder="">
+        <label class="col-md-4 mt-3 mx-5" for="email">Email :</label>
+        <input class="col-md-8 mx-5" type="email" id="email" name="email" placeholder="">
+        <label class="col-md-4 mt-3 mx-5" for="password">Password :</label>
+        <input class="col-md-8 mx-5" type="password" id="password" name="password" placeholder="">
+        <label class="col-md-5 mt-3 mx-5" for="confirmPassword">Confirm password :</label>
+        <input class="col-md-8 mx-5" type="password" id="confirmPassword" name="confirmPassword" placeholder="">
+        <input class="col-md-4 mt-4 mx-5 bg-primary" type="submit" id="valider" value="Valider"/>
     </form>
-    <a id="inscrire" href="/login">Login</a>
+    <a class="col-md-4 mb-3 mt-2 mx-5" id="inscrire" href="/login">Login</a>
 </div>
