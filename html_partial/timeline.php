@@ -1,3 +1,7 @@
+<form id="deco_form" method="post" action="/sign_out">
+    <button class="nav_deco" id="deconnection" type="submit">Deconnection</button>
+    <input type="hidden" name="deco">
+</form>
 <section id="sectionPublication">
     <div id="newPublication">
         <!-- Form new article-->
