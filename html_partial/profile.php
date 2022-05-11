@@ -5,6 +5,8 @@
 <section>
 	<!-- page top : profile picture, first & last name -->
 	<a href="timeline">Fil d'actualité</a>
+	<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
+	<img src="img_baniere/<?= $profile["banner"] ?>" alt="" >
 </section>
 
 <section>
