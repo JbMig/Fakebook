@@ -9,7 +9,6 @@ $user_id = $_SESSION["user"]["user_id"]; // needed to check whether it's the use
 
 
 
-
 require_once __DIR__ . "/../html_partial/profile.php";
 $content = ob_get_clean();
 ?>
