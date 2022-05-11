@@ -32,10 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ":mdp" => $mdp
         ]);
         
-        $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password`, `first_name`, `last_name`, `profile_picture`, `banner`, `status` FROM `users` WHERE `email` = :email;");
+        $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password`, `first_name`, `last_name`, `profil_picture`, `banner`, `status` FROM `users` WHERE `email` = :email;");
         $maRequete->execute([
             ":email" => $mail
         ]);
+
+        $user = $maRequete->fetch();
 
         $_SESSION["user"] = $user;
         http_response_code(302);
