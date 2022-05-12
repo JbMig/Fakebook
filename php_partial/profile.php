@@ -22,11 +22,21 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 
 $title = "Fakebook - Profil de " . $profile["first_name"] . " " . $profile["last_name"];
 $h1 = $profile["first_name"] . " " . $profile["last_name"];
-$maRequete = $pdo->prepare("SELECT * FROM `articles` WHERE `user_id`=:profile_id ORDER BY `date` DESC"); // add condition for relationship
+$maRequete = $pdo->prepare("SELECT * FROM `articles` WHERE `user_id` = :profile_id ORDER BY `date` DESC"); // add condition for relationship
 $maRequete->execute([
 	":profile_id" => $profile_id
 ]);
 $articles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
+$profile_id = filter_input(INPUT_POST, "profil_id");
+
+$maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b` FROM `relationships` WHERE `user_id_a` = :profile_id OR `user_id_b` = :profile_id;");
+        $maRequete->execute([
+            ":profile_id" => $profile_id
+        ]);
+	$profile_friend = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
+var_dump($profile_friend);
 
 
 require_once __DIR__ . "/../html_partial/profile.php";
