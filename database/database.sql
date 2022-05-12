@@ -182,7 +182,41 @@ ADD `theme` TINYINT DEFAULT 0;
 ALTER TABLE `relationships`
 ADD `status` ENUM('pending','approved') DEFAULT 'pending' AFTER `relation_id`;
 
-ALTER TABLE `relationships`
-ADD `who_asked` INT;
-ALTER TABLE `relationships`
-ADD CONSTRAINT FOREIGN KEY (`who_asked`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
+-- ALTER TABLE `relationships`
+-- ADD `who_asked` INT;
+-- ALTER TABLE `relationships`
+-- ADD CONSTRAINT FOREIGN KEY (`who_asked`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
+
+-- not necessary in the end : the one who sent the request is always user_id_a.
+-- if you have added the column already, drop the table and build it again.
+
+
+
+-- Fake users and articles
+INSERT INTO `users` (`email`, `password`, `first_name`, `last_name`)
+VALUES
+	("toto@gmail.com", "toto", "Thomas", "Tortue"),
+	("lulu@gmail.com", "lulu", "Lucie", "Lumière"),
+	("momo@gmail.com", "momo", "Maurice", "Moto"),
+	("lala@gmail.com", "lala", "Laurence", "Labrador");
+
+INSERT INTO `articles` (`content`, `user_id`, `date`)
+VALUES
+	("Dites... Il y a des devoirs en anglais ?", 1, '2022-04-08 16:50:52'),
+	("Ok, question sérieuse. Qui aime le latin ?", 2, '2022-04-15 14:25:34'),
+	("Qui veut faire un laser game samedi prochain ?!", 3, '2022-04-25 18:40:02'),
+	("J'ai perdu mon livre de maths. Qqun l'a trouvé ?", 4, '2022-05-09 08:22:48');
+
+INSERT INTO `comments` (`content`, `article_id`, `user_id`, `date`)
+VALUES
+	("Honnêtement, mec, j'en sais rien XD", 1, 3, '2022-04-08 16:53:28'),
+	("Lire le texte et répondre aux questions page 132. Suivez, les gars...", 1, 4, '2022-04-08 17:10:03'),
+	("Moi !!! Où et à quelle heure ?", 3, 2, '2022-04-25 19:16:18');
+
+INSERT INTO `relationships` (`user_id_a`, `user_id_b`, `status`)
+VALUES
+	(1, 3, 'approved'),
+	(4, 2, 'approved'),
+	(2, 3, 'approved'),
+	(1, 2, 'pending');
+
