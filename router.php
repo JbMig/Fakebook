@@ -33,7 +33,7 @@ switch ($uri) {
 		require_once __DIR__ . "/php_partial/friend_removal.php";
 		break;
 	case "/friend_approval":
-		require_once __DIR__ . "/php_partial/friend_removal.php";
+		require_once __DIR__ . "/php_partial/friend_approval.php";
 		break;
     case "/delete":
         require_once __DIR__ . "/php_partial/delete.php";

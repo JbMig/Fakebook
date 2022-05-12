@@ -17,33 +17,33 @@
 	<!-- interactions -->
 	<?php if ($_SESSION["user"]["user_id"] != $profile["user_id"]) :?>
 		<?php if (Count($profile_friend) >= 1): ?>
+			<!-- remove from relations -->
 			<form action="/friend_removal" class="form" method="post" >
 				<button type="submit" id="friend_removal" name="friend_removal">
 					Ne plus être ami
-				<!-- relation request or remove from relations -->
 				</button>
 				<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
 			</form>
+			<!-- start chat if the person is a relationship -->
 			<form action="/start_chat" class="form" method="post" >
 				<button type="submit" id="start_chat" name="start_chat">
 					Démarrer la conversation
-				<!-- start chat if the person is a relationship -->
 				</button>
 				<input type="hidden" name="start_chat" value="<?= $user_id ?>">
 			</form>
 		<?php else :?>
 			<?php if (Count($profile_friend_request) >= 1): ?>
+				<!-- refuse or cancel the relation request if it hasn't been approved yet -->
 				<form action="/friend_removal" class="form" method="post">
 					<button type="submit" id="friend_removal" name="friend_removal">
 						Annuler / Refuser la demande d'ami
-					<!-- relation request or remove from relations -->
 					</button>
 					<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
 				</form>
+				<!-- accept relation request -->
 				<form action="/friend_approval" class="form" method="post" >
 					<button type="submit" id="friend_approval" name="friend_approval">
 						Accepter la demande d'ami
-					<!-- start chat if the person is a relationship -->
 					</button>
 					<input type="hidden" name="friend_approval" value="<?= $profile_id ?>">
 				</form>
@@ -52,11 +52,10 @@
 		
 		
 		
-		
+					<!-- send a relation request -->
 					<form action="/friend_request" class="form" method="post" >
 					<button type="submit" id="friend_request" name="friend_request">
 						Demande d'ami
-					<!-- relation request or remove from relations -->
 					</button>
 					<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
 				</form>
