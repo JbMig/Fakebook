@@ -16,13 +16,7 @@
 	<div>
 	<!-- interactions -->
 	<?php if ($_SESSION["user"]["user_id"] != $profile["user_id"]) :?>
-		<form action="/friend_request" class="form" method="post" >
-			<button type="submit" id="friend_request" name="friend_request">
-				Demande d'ami
-			<!-- relation request or remove from relations -->
-			</button>
-			<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
-		</form>
+		<?php if (($profile_friend["user_id_a"] == $_SESSION["user"]["user_id"] && $profile_friend["user_id_b"] == $profile["user_id"]) || ($profile_friend["user_id_b"] == $_SESSION["user"]["user_id"] && $profile_friend["user_id_a"] == $profile["user_id"]) ): ?>
 		<form action="/friend_removal" class="form" method="post" >
 			<button type="submit" id="friend_removal" name="friend_removal">
 				Ne plus être ami
@@ -37,6 +31,15 @@
 			</button>
 			<input type="hidden" name="start_chat" value="<?= $user_id ?>">
 		</form>
+		<?php else :?>
+		<form action="/friend_request" class="form" method="post" >
+			<button type="submit" id="friend_request" name="friend_request">
+				Demande d'ami
+			<!-- relation request or remove from relations -->
+			</button>
+			<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
+		</form>
+		<?php endif ?>
 	<?php endif ?>
 	</div>
 </section>
