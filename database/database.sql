@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
 
 CREATE TABLE IF NOT EXISTS `likes` (
 	`like_id` INT NOT NULL AUTO_INCREMENT,
-	`date` DATETIME DEFAULT CURRENT_TIMESTAMP, -- needed to date the notifications
+	`date` DATETIME DEFAULT CURRENT_TIMESTAMP, 
 	`article_id` INT NOT NULL,
 	`comment_id` INT,
 	`user_id` INT NOT NULL,

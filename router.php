@@ -34,8 +34,10 @@ switch ($uri) {
     case "/modify_article":
         require_once __DIR__ . "/php_partial/modify_article.php";
         break;
+    // case "/settings_profil":
+    //     require_once __DIR__ . "/php_partial/settings_profil.php";
+    //     break;
 }
 
 // we require base_html to display $content ($content references in files from php_partial)
 require_once __DIR__ . "/html_partial/base_html.php";
-?>
