@@ -29,6 +29,9 @@ switch ($uri) {
 	case "/friend_request":
 		require_once __DIR__ . "/php_partial/friend_request.php";
 		break;
+	case "/friend_removal":
+		require_once __DIR__ . "/php_partial/friend_removal.php";
+		break;
     case "/delete":
         require_once __DIR__ . "/php_partial/delete.php";
         break;
