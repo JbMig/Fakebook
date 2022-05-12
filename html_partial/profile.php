@@ -70,7 +70,7 @@
 					<?php endif ?>
 				<?php endif ?>
 			<?php else :?>
-				<?php if ($profile_friend_request[0]["blocked"] === 'no'): ?>
+				<?php if (Count($profile_friend_request) < 1 || $profile_friend_request[0]["blocked"] === 'no'): ?>
 					<!-- send a relation request -->
 					<form action="/friend_request" class="form" method="post" >
 						<button type="submit" id="friend_request" name="friend_request">
