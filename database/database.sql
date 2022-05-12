@@ -181,3 +181,8 @@ ADD `theme` TINYINT DEFAULT 0;
 
 ALTER TABLE `relationships`
 ADD `status` ENUM('pending','approved') DEFAULT 'pending' AFTER `relation_id`;
+
+ALTER TABLE `relationships`
+ADD `who_asked` INT;
+ALTER TABLE `relationships`
+ADD CONSTRAINT FOREIGN KEY (`who_asked`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
