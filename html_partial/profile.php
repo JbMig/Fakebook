@@ -51,12 +51,21 @@
 						<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
 					</form>
 				<?php else :?>
-					<form action="/friend_removal" class="form" method="post">
-						<button type="submit" id="friend_removal" name="friend_removal">
-							Annuler la demande d'ami
-						</button>
-						<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
-					</form>
+					<?php if ($profile_friend_request[0]["blocked"] === 'yes'): ?>
+						<form action="/friend_removal" class="form" method="post">
+							<button type="submit" id="friend_removal" name="friend_removal">
+								Débloquer
+							</button>
+							<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
+						</form>
+					<?php else :?>
+						<form action="/friend_removal" class="form" method="post">
+							<button type="submit" id="friend_removal" name="friend_removal">
+								Annuler la demande d'ami
+							</button>
+							<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
+						</form>
+					<?php endif ?>
 				<?php endif ?>
 			<?php else :?>
 				<!-- send a relation request -->
@@ -65,6 +74,12 @@
 						Demande d'ami
 					</button>
 				<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
+				</form>
+				<form action="/block" class="form" method="post" >
+					<button type="submit" id="block" name="block">
+						Bloquer
+					</button>
+				<input type="hidden" name="block" value="<?= $profile_id ?>">
 				</form>
 			<?php endif ?>
 		<?php endif ?>
