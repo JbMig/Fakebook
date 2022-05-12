@@ -1,4 +1,10 @@
 /* drag'n drop */
+body {
+    padding-left: 200px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    
+}
 #depose {
     /* position: absolute; */
     height:60px;
@@ -38,5 +44,9 @@ button {
 
 /* modify_article_form */
 #form_modify_article {
+    display: none;
+}
+
+#comment_section {
     display: none;
 }
