@@ -41,12 +41,14 @@
 					<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
 				</form>
 				<!-- accept relation request -->
+				<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"]) : ?>
 				<form action="/friend_approval" class="form" method="post" >
 					<button type="submit" id="friend_approval" name="friend_approval">
 						Accepter la demande d'ami
 					</button>
 					<input type="hidden" name="friend_approval" value="<?= $profile_id ?>">
 				</form>
+				<?php endif ?>
 				<?php else :?>
 		
 		
