@@ -25,6 +25,7 @@
         foreach ($user_likes as $user_like) {
             if ($user_like["article_id"] === $article["article_id"]) {
                 $like = "unLike";
+                break;
             } else {
                 $like = "like";
             }
@@ -50,7 +51,7 @@
             <?php endif; ?>
             <form action="/like_article" method="post" id="like_article">
                 <button id="like_btn" type="submit"><?= $like ?></button>
-                <input type="hidden" name="like_tweet_id" value="<?= $tweet["tweet_id"] ?>">
+                <input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
             </form>
             <?php if($article["user_id"] === $_SESSION["user"]["user_id"]) :?>
                 <form id="delete_article" method="post" action="/delete_article">
