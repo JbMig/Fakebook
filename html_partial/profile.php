@@ -32,7 +32,28 @@
 			<input type="hidden" name="start_chat" value="<?= $user_id ?>">
 		</form>
 		<?php else :?>
-		<form action="/friend_request" class="form" method="post" >
+			<?php if (Count($profile_friend_request) >= 1): ?>
+			<form action="/friend_removal" class="form" method="post" >
+				<button type="submit" id="friend_removal" name="friend_removal">
+					Annuler / Refuser la demande d'ami
+				<!-- relation request or remove from relations -->
+				</button>
+				<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
+			</form>
+			<form action="/start_chat" class="form" method="post" >
+				<button type="submit" id="friend_approval" name="friend_approval">
+					Accepter la demande d'ami
+				<!-- start chat if the person is a relationship -->
+				</button>
+				<input type="hidden" name="start_chat" value="<?= $user_id ?>">
+			</form>
+			<?php else :?>
+		
+		
+		
+		
+		
+			<form action="/friend_request" class="form" method="post" >
 			<button type="submit" id="friend_request" name="friend_request">
 				Demande d'ami
 			<!-- relation request or remove from relations -->

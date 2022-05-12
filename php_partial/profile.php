@@ -39,6 +39,7 @@ $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status` FROM `rela
 			":userId" => $_SESSION["user"]["user_id"]
         ]);
 	$profile_friend = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
 // pending friend requests
 $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status` FROM `relationships` WHERE ((`user_id_a` = :profile_id AND `user_id_b` = :userId) OR (`user_id_b` = :profile_id AND `user_id_a` = :userId) AND `status`='pending');");
 	$maRequete->execute([
@@ -46,6 +47,8 @@ $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status` FROM `rela
 		":userId" => $_SESSION["user"]["user_id"]
 	]);
 $profile_friend_request = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 require_once __DIR__ . "/../html_partial/profile.php";
 $content = ob_get_clean();
