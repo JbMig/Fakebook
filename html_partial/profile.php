@@ -16,7 +16,7 @@
 	<div>
 	<!-- interactions -->
 	<?php if ($_SESSION["user"]["user_id"] != $profile["user_id"]) :?>
-		<?php if (($profile_friend["user_id_a"] === $_SESSION["user"]["user_id"] && $profile_friend["user_id_b"] === $profile["user_id"]) || ($profile_friend["user_id_b"] === $_SESSION["user"]["user_id"] && $profile_friend["user_id_a"] === $profile["user_id"]) ): ?>
+		<?php if (Count($profile_friend) >= 1): ?>
 		<form action="/friend_removal" class="form" method="post" >
 			<button type="submit" id="friend_removal" name="friend_removal">
 				Ne plus être ami
