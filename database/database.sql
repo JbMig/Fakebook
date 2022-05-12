@@ -182,6 +182,15 @@ ADD `theme` TINYINT DEFAULT 0;
 ALTER TABLE `relationships`
 ADD `status` ENUM('pending','approved') DEFAULT 'pending' AFTER `relation_id`;
 
+ALTER TABLE `relationships`
+ADD `blocked` ENUM('yes', 'no') DEFAULT 'no' AFTER `status`;
+
+ALTER TABLE `articles`
+ADD `like_count` INT DEFAULT 0 AFTER `picture`;
+
+ALTER TABLE `comments`
+ADD `like_count` INT DEFAULT 0 AFTER `date`;
+
 -- ALTER TABLE `relationships`
 -- ADD `who_asked` INT;
 -- ALTER TABLE `relationships`
@@ -219,6 +228,3 @@ VALUES
 	(4, 2, 'approved'),
 	(2, 3, 'approved'),
 	(1, 2, 'pending');
-
-ALTER TABLE `relationships`
-ADD `blocked` ENUM('yes', 'no') DEFAULT 'no' AFTER `status`;
