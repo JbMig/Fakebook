@@ -4,11 +4,8 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
     require_once __DIR__ . "/../database/pdo.php"; //je récupère le PDO
     $user_id = $_SESSION["user"]["user_id"];
 
-    if($_POST['enable']) {
-        $maRequete=$pdo->prepare("UPDATE `users` SET status = 'active' WHERE `user_id` = $user_id;");
-        $maRequete->execute();
-    }
-    elseif($_POST['disable']){
+
+    if($_POST['disable']){
         $maRequete=$pdo->prepare("UPDATE `users` SET status = 'inactive' WHERE `user_id` = $user_id;");
         $maRequete->execute();
         header("Location: /login");
