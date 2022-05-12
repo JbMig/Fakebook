@@ -47,7 +47,6 @@ $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status` FROM `rela
 		":userId" => $_SESSION["user"]["user_id"]
 	]);
 $profile_friend_request = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-var_dump($profile_friend_request);
 
 
 require_once __DIR__ . "/../html_partial/profile.php";
