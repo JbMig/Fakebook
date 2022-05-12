@@ -33,31 +33,38 @@
 			</form>
 		<?php else :?>
 			<?php if (Count($profile_friend_request) >= 1): ?>
-				<!-- refuse or cancel the relation request if it hasn't been approved yet -->
-				<form action="/friend_removal" class="form" method="post">
-					<button type="submit" id="friend_removal" name="friend_removal">
-						Annuler / Refuser la demande d'ami
-					</button>
-					<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
-				</form>
 				<!-- accept relation request -->
-				<form action="/friend_approval" class="form" method="post" >
-					<button type="submit" id="friend_approval" name="friend_approval">
-						Accepter la demande d'ami
-					</button>
-					<input type="hidden" name="friend_approval" value="<?= $profile_id ?>">
-				</form>
+				<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"]) : ?>
+					<form action="/friend_approval" class="form" method="post" >
+						<button type="submit" id="friend_approval" name="friend_approval">
+							Accepter la demande d'ami
+						</button>
+						<input type="hidden" name="friend_approval" value="<?= $profile_id ?>">
+					</form>
+				<?php endif ?>
+				<!-- refuse or cancel the relation request if it hasn't been approved yet -->
+				<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"]): ?>
+					<form action="/friend_removal" class="form" method="post">
+						<button type="submit" id="friend_removal" name="friend_removal">
+							Refuser la demande d'ami
+						</button>
+						<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
+					</form>
 				<?php else :?>
-		
-		
-		
-		
-					<!-- send a relation request -->
-					<form action="/friend_request" class="form" method="post" >
+					<form action="/friend_removal" class="form" method="post">
+						<button type="submit" id="friend_removal" name="friend_removal">
+							Annuler la demande d'ami
+						</button>
+						<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
+					</form>
+				<?php endif ?>
+			<?php else :?>
+				<!-- send a relation request -->
+				<form action="/friend_request" class="form" method="post" >
 					<button type="submit" id="friend_request" name="friend_request">
 						Demande d'ami
 					</button>
-					<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
+				<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
 				</form>
 			<?php endif ?>
 		<?php endif ?>

@@ -220,3 +220,5 @@ VALUES
 	(2, 3, 'approved'),
 	(1, 2, 'pending');
 
+ALTER TABLE `relationships`
+ADD `blocked` ENUM('yes', 'no') DEFAULT 'no' AFTER `status`;

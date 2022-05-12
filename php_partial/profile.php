@@ -33,7 +33,7 @@ $articles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 // checking whether we're friends with the person
 $profile_id = filter_input(INPUT_POST, "profil_id");
 
-$maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status` FROM `relationships` WHERE ((`user_id_a` = :profile_id AND `user_id_b` = :userId) OR (`user_id_b` = :profile_id AND `user_id_a` = :userId) AND `status`='approved');");
+$maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status` FROM `relationships` WHERE ((`user_id_a` = :profile_id AND `user_id_b` = :userId) OR (`user_id_b` = :profile_id AND `user_id_a` = :userId)) AND `status`='approved';");
         $maRequete->execute([
             ":profile_id" => $profile_id,
 			":userId" => $_SESSION["user"]["user_id"]
@@ -47,7 +47,6 @@ $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status` FROM `rela
 		":userId" => $_SESSION["user"]["user_id"]
 	]);
 $profile_friend_request = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-
 
 
 require_once __DIR__ . "/../html_partial/profile.php";
