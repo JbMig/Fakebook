@@ -25,6 +25,7 @@
         foreach ($user_likes as $user_like) {
             if ($user_like["article_id"] === $article["article_id"]) {
                 $like = "unLike";
+                break;
             } else {
                 $like = "like";
             }
