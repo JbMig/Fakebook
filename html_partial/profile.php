@@ -17,28 +17,71 @@
 	<!-- interactions -->
 	<?php if ($_SESSION["user"]["user_id"] != $profile["user_id"]) :?>
 		<?php if (Count($profile_friend) >= 1): ?>
-		<form action="/friend_removal" class="form" method="post" >
-			<button type="submit" id="friend_removal" name="friend_removal">
-				Ne plus être ami
-			<!-- relation request or remove from relations -->
-			</button>
-			<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
-		</form>
-		<form action="/start_chat" class="form" method="post" >
-			<button type="submit" id="start_chat" name="start_chat">
-				Démarrer la conversation
+			<!-- remove from relations -->
+			<form action="/friend_removal" class="form" method="post" >
+				<button type="submit" id="friend_removal" name="friend_removal">
+					Ne plus être ami
+				</button>
+				<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
+			</form>
 			<!-- start chat if the person is a relationship -->
-			</button>
-			<input type="hidden" name="start_chat" value="<?= $user_id ?>">
-		</form>
+			<form action="/start_chat" class="form" method="post" >
+				<button type="submit" id="start_chat" name="start_chat">
+					Démarrer la conversation
+				</button>
+				<input type="hidden" name="start_chat" value="<?= $user_id ?>">
+			</form>
 		<?php else :?>
-		<form action="/friend_request" class="form" method="post" >
-			<button type="submit" id="friend_request" name="friend_request">
-				Demande d'ami
-			<!-- relation request or remove from relations -->
-			</button>
-			<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
-		</form>
+			<?php if (Count($profile_friend_request) >= 1): ?>
+				<!-- accept relation request -->
+				<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"]) : ?>
+					<form action="/friend_approval" class="form" method="post" >
+						<button type="submit" id="friend_approval" name="friend_approval">
+							Accepter la demande d'ami
+						</button>
+						<input type="hidden" name="friend_approval" value="<?= $profile_id ?>">
+					</form>
+				<?php endif ?>
+				<!-- refuse or cancel the relation request if it hasn't been approved yet -->
+				<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"]): ?>
+					<form action="/friend_removal" class="form" method="post">
+						<button type="submit" id="friend_removal" name="friend_removal">
+							Refuser la demande d'ami
+						</button>
+						<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
+					</form>
+				<?php else :?>
+					<?php if ($profile_friend_request[0]["blocked"] === 'yes'): ?>
+						<form action="/friend_removal" class="form" method="post">
+							<button type="submit" id="friend_removal" name="friend_removal">
+								Débloquer
+							</button>
+							<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
+						</form>
+					<?php else :?>
+						<form action="/friend_removal" class="form" method="post">
+							<button type="submit" id="friend_removal" name="friend_removal">
+								Annuler la demande d'ami
+							</button>
+							<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
+						</form>
+					<?php endif ?>
+				<?php endif ?>
+			<?php else :?>
+				<!-- send a relation request -->
+				<form action="/friend_request" class="form" method="post" >
+					<button type="submit" id="friend_request" name="friend_request">
+						Demande d'ami
+					</button>
+				<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
+				</form>
+				<form action="/block" class="form" method="post" >
+					<button type="submit" id="block" name="block">
+						Bloquer
+					</button>
+				<input type="hidden" name="block" value="<?= $profile_id ?>">
+				</form>
+			<?php endif ?>
 		<?php endif ?>
 	<?php endif ?>
 	</div>

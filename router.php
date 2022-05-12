@@ -29,6 +29,15 @@ switch ($uri) {
 	case "/friend_request":
 		require_once __DIR__ . "/php_partial/friend_request.php";
 		break;
+	case "/friend_removal":
+		require_once __DIR__ . "/php_partial/friend_removal.php";
+		break;
+	case "/friend_approval":
+		require_once __DIR__ . "/php_partial/friend_approval.php";
+		break;
+	case "/block":
+		require_once __DIR__ . "/php_partial/block.php";
+		break;
     case "/delete":
         require_once __DIR__ . "/php_partial/delete.php";
         break;
@@ -36,6 +45,9 @@ switch ($uri) {
         require_once __DIR__ . "/php_partial/inactive.php";
     case "/modify_article":
         require_once __DIR__ . "/php_partial/modify_article.php";
+        break;
+    case "/like_article":
+        require_once __DIR__ . "/php_partial/like_article.php";
         break;
 }
 

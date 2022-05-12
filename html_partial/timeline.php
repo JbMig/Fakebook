@@ -27,6 +27,15 @@
                 $first_name = $profile["first_name"];
                 $last_name = $profile["last_name"];
             }
+        foreach ($user_likes as $user_like) {
+            if ($user_like["article_id"] === $article["article_id"]) {
+                $like = "unLike";
+                break;
+            } else {
+                $like = "like";
+            }
+        }
+
         } ?>
         <div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
             <form id="goToProfile" action="/profile" method="post">
@@ -45,6 +54,10 @@
             <?php if($article["picture"]) :?>
                 <img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
             <?php endif; ?>
+            <form action="/like_article" method="post" id="like_article">
+                <button id="like_btn" type="submit"><?= $like ?></button>
+                <input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
+            </form>
             <?php if($article["user_id"] === $_SESSION["user"]["user_id"]) :?>
                 <form id="delete_article" method="post" action="/delete_article">
                     <button type="submit" id="delete_btn">Supprimer</button>
