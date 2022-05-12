@@ -17,12 +17,12 @@
                 http_response_code(302);
                 // get the previous page
                 $direction = explode("/",$_SERVER["HTTP_REFERER"]);
-                    // got to the previous page
-                    if($direction[3] === "profile") {
-                        header('Location: /profile');
-                    } else {
-                        header('Location: /timeline');
-                    }
+                // go to the previous page
+                if($direction[3] === "profile") {
+                    header('Location: /profile');
+                } else {
+                    header('Location: /timeline');
+                }
                 exit();
             } else {
                 $message = "cet article n'est pas de vous"; 
