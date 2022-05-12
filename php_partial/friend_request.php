@@ -12,8 +12,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 				":userId" => $user_id,
 				":profileId" => $profile_id
 			]);
+
+		// pbm : it seems we're switching to method "get" here so we end up on our own profile page instead of our friend's.
 		http_response_code(302);
-		$direction = explode("/",$_SERVER["HTTP_REFERER"]);
+		// $direction = explode("/",$_SERVER["HTTP_REFERER"]);
 		header("Location: /profile");
 		exit();
     }

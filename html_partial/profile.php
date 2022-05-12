@@ -16,13 +16,7 @@
 	<div>
 	<!-- interactions -->
 	<?php if ($_SESSION["user"]["user_id"] != $profile["user_id"]) :?>
-		<form action="/friend_request" class="form" method="post" >
-			<button type="submit" id="friend_request" name="friend_request">
-				Demande d'ami
-			<!-- relation request or remove from relations -->
-			</button>
-			<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
-		</form>
+		<?php if (Count($profile_friend) >= 1): ?>
 		<form action="/friend_removal" class="form" method="post" >
 			<button type="submit" id="friend_removal" name="friend_removal">
 				Ne plus être ami
@@ -37,6 +31,15 @@
 			</button>
 			<input type="hidden" name="start_chat" value="<?= $user_id ?>">
 		</form>
+		<?php else :?>
+		<form action="/friend_request" class="form" method="post" >
+			<button type="submit" id="friend_request" name="friend_request">
+				Demande d'ami
+			<!-- relation request or remove from relations -->
+			</button>
+			<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
+		</form>
+		<?php endif ?>
 	<?php endif ?>
 	</div>
 </section>
@@ -48,6 +51,7 @@
 		<div>
 		<!-- new article -->
 			<!-- Form new article-->
+			<?php if ($_SESSION["user"]["user_id"] == $profile["user_id"]) :?>
 			<form id="newPublicationForm" method="post" enctype="multipart/form-data" action="/new_article">
 				<label id="publicationLabel" for="articleInput">Ecrivez votre message</label><br>
 				<textarea id="articleInput" name="articleInput" type="text"></textarea>
@@ -57,6 +61,7 @@
 				<button type="submit" id="submitPublication" >Envoyer</button>
 				<button id="cancel">Annuler</button>
 			</form>
+			<?php endif ?>
 		</div>
 		<div>
 		<!-- past articles -->

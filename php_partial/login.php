@@ -14,7 +14,7 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
     //requete sql pour trouver dans la database l'utilisateur voulu
     $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password`, `first_name`, `last_name`, `profil_picture`, `banner`, `status` FROM `users` WHERE `email` = :email;");
         $maRequete->execute([
-            ":email" => $mail
+            ":email" => $mail,
         ]);
     //récupère le résultat de la requète
     $user = $maRequete->fetch();
@@ -26,10 +26,18 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
         //j'appelle ma bannière html pour afficher un message d'erreur
         require_once __DIR__ . "/../html_partial/alert/banniere.php";
     } else { //sinon j'ajoute le resultat de la requete dans la session
+        if ($user["status"]=="inactive"){
+            $_SESSION["user"] = $user;
+            http_response_code(302);
+            header("Location: /inactive"); //je vais à la page projet
+            exit();
+        }
+        else{
         $_SESSION["user"] = $user;
         http_response_code(302);
         header("Location: /timeline"); //je vais à la page projet
         exit();
+        }
     }
 }
 //j'appelle l'html de cette page

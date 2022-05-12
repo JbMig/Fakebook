@@ -176,3 +176,8 @@ ADD CONSTRAINT FOREIGN KEY (`comment_id`) REFERENCES `comments`(`comment_id`) ON
 ADD CONSTRAINT FOREIGN KEY (`page_id`) REFERENCES `pages`(`page_id`) ON DELETE CASCADE,
 ADD CONSTRAINT FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE;
 
+ALTER TABLE `users`
+ADD `theme` TINYINT DEFAULT 0;
+
+ALTER TABLE `relationships`
+ADD `status` ENUM('pending','approved') DEFAULT 'pending' AFTER `relation_id`;
