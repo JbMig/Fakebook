@@ -34,12 +34,21 @@
 		<?php else :?>
 			<?php if (Count($profile_friend_request) >= 1): ?>
 				<!-- refuse or cancel the relation request if it hasn't been approved yet -->
-				<form action="/friend_removal" class="form" method="post">
-					<button type="submit" id="friend_removal" name="friend_removal">
-						Annuler / Refuser la demande d'ami
-					</button>
-					<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
-				</form>
+				<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"]): ?>
+					<form action="/friend_removal" class="form" method="post">
+						<button type="submit" id="friend_removal" name="friend_removal">
+							Refuser la demande d'ami
+						</button>
+						<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
+					</form>
+				<?php else :?>
+					<form action="/friend_removal" class="form" method="post">
+						<button type="submit" id="friend_removal" name="friend_removal">
+							Annuler la demande d'ami
+						</button>
+						<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
+					</form>
+				<?php endif ?>
 				<!-- accept relation request -->
 				<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"]) : ?>
 				<form action="/friend_approval" class="form" method="post" >
