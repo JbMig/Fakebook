@@ -6,8 +6,8 @@ $maRequete = $pdo->prepare("SELECT * FROM `comments` WHERE `article_id` = :artic
         ":articleId" => $article["article_id"]
     ]);
     $comments = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-
-$maRequete = $pdo->prepare("SELECT `user_id`, `profil_picture`, `first_name`, `last_name` FROM `users` WHERE `status` = 'active' "); // add condition for relationship
+//WHERE `status` = 'active'
+$maRequete = $pdo->prepare("SELECT `user_id`, `profil_picture`, `first_name`, `last_name` FROM `users` "); // add condition for relationship
     $maRequete->execute();
     $comment_profiles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
