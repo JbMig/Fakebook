@@ -79,12 +79,12 @@
 						<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
 					</form>
 				<?php endif ?>
+                <button type="button" id="open_comment">Comment</button>
+                <section id="comment_section">
+                    <!-- require un truc ici -->
+                    <?php require __DIR__ . "/../php_partial/comment.php"?>
+                </section>
 			</div>
-            <button type="button" id="open_comment">Comment</button>
-			<section id="comment_section">
-				<!-- require un truc ici -->
-				<?php require __DIR__ . "/../php_partial/comment.php"?>
-			</section>
 		<?php else : ?>
 			<?php foreach ($profile_friends as $profile_friend) : ?>
 				<?php if (($profile_friend["user_id_a"] === $article["user_id"] || $profile_friend["user_id_b"]=== $article["user_id"])) : ?>
@@ -109,12 +109,12 @@
 							<button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
 							<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
 						</form>
+                        <button type="button" id="open_comment">Comment</button>
+                        <section id="comment_section">
+                            <!-- require un truc ici -->
+                            <?php require __DIR__ . "/../php_partial/comment.php"?>
+                        </section>
 					</div>
-                    <button type="button" id="open_comment">Comment</button>
-					<section id="comment_section">
-                        <!-- require un truc ici -->
-                        <?php require __DIR__ . "/../php_partial/comment.php"?>
-                    </section>
 				<?php endif ?>
 			<?php endforeach ?>
 		<?php endif ?>
