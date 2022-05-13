@@ -230,3 +230,7 @@ VALUES
 	(4, 2, 'approved'),
 	(2, 3, 'approved'),
 	(1, 2, 'pending');
+
+UPDATE `users`
+SET `status` = 'inactive'
+WHERE `first_name` = 'Laurence';

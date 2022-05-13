@@ -31,6 +31,11 @@ $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked`
 		":userId" => $_SESSION["user"]["user_id"]
 	]);
 $profile_friends = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
+$maRequete = $pdo->prepare("SELECT `user_id`, `status` FROM `users`;");
+	$maRequete->execute();
+$active_accounts = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
 // var_dump($profile_friends);
 // foreach ($articles as $article) {
 // 	var_dump($article["user_id"]);
