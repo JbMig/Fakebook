@@ -91,7 +91,7 @@
 			</div>
 		<?php else : ?>
 			<?php foreach ($profile_friends as $profile_friend) : ?>
-				<?php if (($profile_friend["user_id_a"] === $article["user_id"] || $profile_friend["user_id_b"]=== $article["user_id"]) && $profile["user_id"] === $article["user_id"]) : ?>
+				<?php if (($profile_friend["user_id_a"] === $article["user_id"] || $profile_friend["user_id_b"]=== $article["user_id"]) ) : ?>
 					<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
 						<form id="goToProfile" action="/profile" method="post">
 							<input type="hidden" name="profil_id" value="<?= $article["user_id"] ?>" />
