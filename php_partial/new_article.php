@@ -7,6 +7,7 @@
             if($_FILES["fileToUpload"]["name"]) {
                 require_once __DIR__ . "/upload_img_post.php";
             } else {
+				// 1st we create the article in the articles table
                 $maRequete = $pdo->prepare(
                     "INSERT INTO `articles` (`content`, `user_id`)
                     VALUES(:content, :userId)");
@@ -14,6 +15,15 @@
                         ":content" => $text,
                         ":userId" => $user_id
                     ]);
+
+				$maRequete = $pdo->prepare(
+                    "UPDATE `stats`
+					SET `nb_articles` = `nb_articles` + 1
+					WHERE `user_id` = :userId;");
+                    $maRequete->execute([
+                        ":userId" => $user_id
+                    ]);
+					
                 http_response_code(302);
                 $direction = explode("/",$_SERVER["HTTP_REFERER"]);
                 if($direction[3] === "profile") {
