@@ -43,10 +43,8 @@
         
     } ?>
 		<!-- we only show the user's articles and his friends'. -->
-		<?php $i=0;
-		while $i < count($profile_friends) :
-		?>
-			<?php if ($_SESSION["user"]["user_id"] === $article["user_id"] || $profile_friends[$i]["user_id_a"] === $article["user_id"] || $profile_friends[$i]["user_id_b"]=== $article["user_id"]) : ?>
+        <?php foreach ($profile_friends as $profile_friend) : ?>
+			<?php if ($_SESSION["user"]["user_id"] === $article["user_id"] || $profile_friend["user_id_a"] === $article["user_id"] || $profile_friends["user_id_b"]=== $article["user_id"]) : ?>
 				<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
 					<form id="goToProfile" action="/profile" method="post">
 						<input type="hidden" name="profil_id" value="<?= $article["user_id"] ?>" />
@@ -91,6 +89,6 @@
 					<?php require __DIR__ . "/../php_partial/comment.php"?>
 				</section>
 			<?php endif ?>
-		<?php $i++ ?>
+		<?php endforeach ?>
     <?php endforeach;?>
 </section>
