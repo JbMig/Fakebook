@@ -113,7 +113,7 @@
 		</div>
 		<div>
 			<!-- you can't see the person's past articles if they blocked you or if you blocked them -->
-			<?php if ($profile_friend_request[0]["blocked"] === 'yes'): ?>
+			<?php if (Count($profile_friend_request) >= 1 && $profile_friend_request[0]["blocked"] === 'yes'): ?>
 				<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"]): ?>  <!-- you've been blocked-->
 					<span>Cette personne vous a bloqué.</span>
 				<?php else :?>
