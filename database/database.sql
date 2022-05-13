@@ -191,6 +191,8 @@ ADD `like_count` INT DEFAULT 0 AFTER `picture`;
 ALTER TABLE `comments`
 ADD `like_count` INT DEFAULT 0 AFTER `date`;
 
+ALTER TABLE `likes` MODIFY `article_id` INT;
+
 -- ALTER TABLE `relationships`
 -- ADD `who_asked` INT;
 -- ALTER TABLE `relationships`
