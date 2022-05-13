@@ -63,7 +63,6 @@
                 <button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
                 <input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
             </form>
-            <button>comment</button>
             <?php if($article["user_id"] === $_SESSION["user"]["user_id"]) :?>
                 <form id="delete_article" method="post" action="/delete_article">
                     <button type="submit" id="delete_btn">Supprimer</button>
@@ -78,12 +77,12 @@
                     <input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
                     <input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
                 </form>
-
             <?php endif ?>
-        </div>
-        <section id="comment_section">
+            <button type="button" id="open_comment">Comment</button>
+            <section id="comment_section">
             <!-- require un truc ici -->
             <?php require __DIR__ . "/../php_partial/comment.php"?>
         </section>
+        </div>
     <?php endforeach;?>
 </section>

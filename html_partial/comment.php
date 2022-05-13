@@ -1,11 +1,10 @@
 <div id="newComment">
     <!-- Form new article-->
     <form id="newcommentForm" method="post" action="/new_comment">
-        <label id="commentLabel" for="commentInput">Ecrivez votre message</label><br>
+        <label id="commentLabel" for="commentInput">Ecrivez votre commentaire</label><br>
         <textarea id="commentInput" name="commentInput" type="text"></textarea>
         <input type="hidden" id="new_comment_input" name="article_id" value="<?= $article["article_id"] ?>">
         <button type="submit" id="submitPublication" >Envoyer</button>
-        <button type="button" id="cancel">Annuler</button>
     </form>
 </div>
 <?php foreach ($comments as $comment):

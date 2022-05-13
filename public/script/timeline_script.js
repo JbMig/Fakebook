@@ -19,9 +19,34 @@ open_modify_article.forEach(button => {
   button.addEventListener("click", e => {
     const target = e.target;
     const toDisplay = target.nextElementSibling;
+    console.log("je suis là");
     isVisible = !isVisible;
     toDisplay.style.display = isVisible ? "block" : "none";
     target.innerHTML = isVisible ? "Annuler" : "Modifier"
+  })
+})
+
+let open_comment = document.querySelectorAll("#open_comment");
+open_comment.forEach(button => {
+  let isVisibleComment = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisibleComment = !isVisibleComment;
+    toDisplay.style.display = isVisibleComment ? "block" : "none";
+    target.innerHTML = isVisibleComment ? "Annuler" : "Comment"
+  })
+})
+
+let open_modify_comment = document.querySelectorAll("#open_modify_comment");
+open_modify_comment.forEach(button => {
+  let isVisibleModifyComment = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisibleModifyComment = !isVisibleModifyComment;
+    toDisplay.style.display = isVisibleModifyComment ? "block" : "none";
+    target.innerHTML = isVisibleModifyComment ? "Annuler" : "Comment"
   })
 })
 
