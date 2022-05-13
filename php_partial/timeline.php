@@ -13,8 +13,8 @@ $user_name = $_SESSION["user"]["first_name"] . " " . $_SESSION["user"]["last_nam
 $maRequete = $pdo->prepare("SELECT * FROM `articles` ORDER BY `date` DESC"); // add condition for relationship
     $maRequete->execute();
     $articles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-
-$maRequete = $pdo->prepare("SELECT `user_id`, `profil_picture`, `first_name`, `last_name`, `status` FROM `users` WHERE `status` = 'active' "); // add condition for relationship
+// WHERE `status` = 'active'
+$maRequete = $pdo->prepare("SELECT `user_id`, `profil_picture`, `first_name`, `last_name`, `status` FROM `users` "); // add condition for relationship
     $maRequete->execute();
     $profiles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
@@ -39,6 +39,9 @@ $active_accounts = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 //var_dump($profile_friends);
 foreach ($articles as $article) {
 	var_dump($article["user_id"]);
+}
+foreach ($profiles as $profile) {
+    var_dump($profile["status"]);
 }
 require_once __DIR__ . "/../html_partial/timeline.php";
 // clean buffering in $content
