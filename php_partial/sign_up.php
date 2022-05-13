@@ -40,6 +40,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $user = $maRequete->fetch();
 
         $_SESSION["user"] = $user;
+
+		// creating new user's stats
+		$maRequete = $pdo->prepare("INSERT INTO `stats` (`user_id`) VALUES (:userId);");
+		$maRequete->execute([
+			":userId" => $_SESSION["user"]["user_id"]
+		]);
+
+
         http_response_code(302);
         header('Location: /timeline'); //je vais à la page login
         exit();

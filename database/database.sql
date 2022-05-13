@@ -193,6 +193,8 @@ ADD `like_count` INT DEFAULT 0 AFTER `date`;
 
 ALTER TABLE `likes` MODIFY `article_id` INT;
 
+
+
 -- ALTER TABLE `relationships`
 -- ADD `who_asked` INT;
 -- ALTER TABLE `relationships`
@@ -234,3 +236,34 @@ VALUES
 UPDATE `users`
 SET `status` = 'inactive'
 WHERE `first_name` = 'Laurence';
+
+CREATE TABLE IF NOT EXISTS `stats` (
+	`stat_id` INT NOT NULL AUTO_INCREMENT,
+	`nb_articles` INT DEFAULT 0,
+	`nb_comments` INT DEFAULT 0,
+	`nb_likes` INT DEFAULT 0,
+	`likes_on_articles` INT DEFAULT 0,
+	`likes_on_comments` INT DEFAULT 0,
+	`comments_on_articles` INT DEFAULT 0,
+	`nb_friends` INT DEFAULT 0,
+	`user_id` INT NOT NULL,
+	PRIMARY KEY (`stat_id`)
+) ENGINE=InnoDB;
+
+ALTER TABLE `stats`
+ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
+
+INSERT INTO `relationships` (`user_id_a`,`user_id_b`,`status`)
+VALUES
+(1,2,'approved'),
+(1,3,'approved'),
+(3,2,'approved');
+
+
+INSERT INTO `stats` (`user_id`,`nb_articles`,`nb_friends`)
+VALUES
+(1,2,2),
+(2,2,2),
+(3,2,2);
+
+
