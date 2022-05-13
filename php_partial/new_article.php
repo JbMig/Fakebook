@@ -15,23 +15,13 @@
                         ":content" => $text,
                         ":userId" => $user_id
                     ]);
-				// then we adjust the writer's stats
-				$maRequete = $pdo->prepare(
-                    "SELECT `user_id`, `nb_article` FROM `stats`
-					WHERE `user_id` = :userId;");
-                    $maRequete->execute([
-                        ":userId" => $user_id
-                    ]);
-				$nb_art = $maRequete->fetch();
-				$new_nb_art = $nb_art + 1;
 
 				$maRequete = $pdo->prepare(
                     "UPDATE `stats`
-					SET `nb_article` = :new_nb_art
+					SET `nb_articles` = `nb_articles` + 1
 					WHERE `user_id` = :userId;");
                     $maRequete->execute([
-                        ":userId" => $user_id,
-                        ":new_nb_art" => $new_nb_art
+                        ":userId" => $user_id
                     ]);
 					
                 http_response_code(302);
