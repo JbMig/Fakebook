@@ -33,7 +33,7 @@ $articles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 // checking whether we're friends with the person
 $profile_id = filter_input(INPUT_POST, "profil_id");
 
-$maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status` FROM `relationships` WHERE ((`user_id_a` = :profile_id AND `user_id_b` = :userId) OR (`user_id_b` = :profile_id AND `user_id_a` = :userId)) AND `status`='approved';");
+$maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked` FROM `relationships` WHERE ((`user_id_a` = :profile_id AND `user_id_b` = :userId) OR (`user_id_b` = :profile_id AND `user_id_a` = :userId)) AND `status`='approved';");
         $maRequete->execute([
             ":profile_id" => $profile_id,
 			":userId" => $_SESSION["user"]["user_id"]
@@ -41,7 +41,7 @@ $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status` FROM `rela
 	$profile_friend = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
 // pending friend requests
-$maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status` FROM `relationships` WHERE ((`user_id_a` = :profile_id AND `user_id_b` = :userId) OR (`user_id_b` = :profile_id AND `user_id_a` = :userId) AND `status`='pending');");
+$maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked` FROM `relationships` WHERE ((`user_id_a` = :profile_id AND `user_id_b` = :userId) OR (`user_id_b` = :profile_id AND `user_id_a` = :userId) AND `status`='pending');");
 	$maRequete->execute([
 		":profile_id" => $profile_id,
 		":userId" => $_SESSION["user"]["user_id"]

@@ -38,6 +38,9 @@ switch ($uri) {
 	case "/friend_approval":
 		require_once __DIR__ . "/php_partial/friend_approval.php";
 		break;
+	case "/block":
+		require_once __DIR__ . "/php_partial/block.php";
+		break;
     case "/delete":
         require_once __DIR__ . "/php_partial/delete.php";
         break;
@@ -48,6 +51,21 @@ switch ($uri) {
         break;
     case "/like_article":
         require_once __DIR__ . "/php_partial/like_article.php";
+        break;
+    case "/new_comment":
+        require_once __DIR__ . "/php_partial/new_comment.php";
+        break;
+    case "/like_comment":
+        require_once __DIR__ . "/php_partial/like_comment.php";
+        break;
+    case "/delete_comment":
+        require_once __DIR__ . "/php_partial/delete_comment.php";
+        break;
+    case "/modify_comment":
+        require_once __DIR__ . "/php_partial/modify_comment.php";
+        break;
+    case "/search":
+        require_once __DIR__ . "/php_partial/search.php";
         break;
 }
 
