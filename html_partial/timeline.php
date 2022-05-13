@@ -55,9 +55,10 @@
                 <img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
             <?php endif; ?>
             <form action="/like_article" method="post" id="like_article">
-                <button id="like_btn" type="submit"><?= $like ?></button>
+                <button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
                 <input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
             </form>
+            <button>comment</button>
             <?php if($article["user_id"] === $_SESSION["user"]["user_id"]) :?>
                 <form id="delete_article" method="post" action="/delete_article">
                     <button type="submit" id="delete_btn">Supprimer</button>
@@ -74,7 +75,10 @@
                 </form>
 
             <?php endif ?>
-
         </div>
+        <section id="comment_section">
+            <!-- require un truc ici -->
+            <?php require __DIR__ . "/../php_partial/comment.php"?>
+        </section>
     <?php endforeach;?>
 </section>

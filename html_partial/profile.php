@@ -34,7 +34,7 @@
 		<?php else :?>
 			<?php if (Count($profile_friend_request) >= 1): ?>
 				<!-- accept relation request -->
-				<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"]) : ?>
+				<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"] && $profile_friend_request[0]["blocked"] === 'no') : ?>
 					<form action="/friend_approval" class="form" method="post" >
 						<button type="submit" id="friend_approval" name="friend_approval">
 							Accepter la demande d'ami
@@ -43,7 +43,7 @@
 					</form>
 				<?php endif ?>
 				<!-- refuse or cancel the relation request if it hasn't been approved yet -->
-				<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"]): ?>
+				<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"] && $profile_friend_request[0]["blocked"] === 'no'): ?>
 					<form action="/friend_removal" class="form" method="post">
 						<button type="submit" id="friend_removal" name="friend_removal">
 							Refuser la demande d'ami
@@ -51,14 +51,16 @@
 						<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
 					</form>
 				<?php else :?>
-					<?php if ($profile_friend_request[0]["blocked"] === 'yes'): ?>
+					<!-- un-block -->
+					<?php if ($profile_friend_request[0]["blocked"] === 'yes' && $_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_a"]): ?>
 						<form action="/friend_removal" class="form" method="post">
 							<button type="submit" id="friend_removal" name="friend_removal">
 								Débloquer
 							</button>
 							<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
 						</form>
-					<?php else :?>
+					<?php endif ?>
+					<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_a"] && $profile_friend_request[0]["blocked"] === 'no'): ?>
 						<form action="/friend_removal" class="form" method="post">
 							<button type="submit" id="friend_removal" name="friend_removal">
 								Annuler la demande d'ami
@@ -68,13 +70,16 @@
 					<?php endif ?>
 				<?php endif ?>
 			<?php else :?>
-				<!-- send a relation request -->
-				<form action="/friend_request" class="form" method="post" >
-					<button type="submit" id="friend_request" name="friend_request">
-						Demande d'ami
-					</button>
-				<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
-				</form>
+				<?php if (Count($profile_friend_request) < 1 || $profile_friend_request[0]["blocked"] === 'no'): ?>
+					<!-- send a relation request -->
+					<form action="/friend_request" class="form" method="post" >
+						<button type="submit" id="friend_request" name="friend_request">
+							Demande d'ami
+						</button>
+					<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
+					</form>
+				<?php endif ?>
+				<!-- block someone -->
 				<form action="/block" class="form" method="post" >
 					<button type="submit" id="block" name="block">
 						Bloquer
@@ -107,37 +112,43 @@
 			<?php endif ?>
 		</div>
 		<div>
-		<!-- past articles -->
-			<?php foreach ($articles as $article): ?>
-				<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
-					<form id="goToProfile" action="/profile" method="post">
-						<input type="hidden" name="profil_id" value="<?= $article["user_id"] ?>" />
-						<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-							<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
-						</button>
-						<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-							<?= $profile["first_name"] . " " . $profile["last_name"] ?> 
-						</button>
-					</form>
-					<span id="date"><?= $article["date"] ?></span>
-					<br>
-					<span id="data"><?= $article["content"] ?></span>
-					<br>
-					<?php if($article["picture"]) :?>
-						<img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
-					<?php endif; ?>
-					<?php if($article["user_id"] === $_SESSION["user"]["user_id"]) :?>
-						<form id="delete_article" method="post" action="/delete_article">
-							<button type="submit" id="delete_btn">Supprimer</button>
-							<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
-							<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
+			<!-- you can't see the person's past articles if they blocked you or if you blocked them -->
+			<?php if (Count($profile_friend_request) >= 1 && $profile_friend_request[0]["blocked"] === 'yes'): ?>
+				<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"]): ?>  <!-- you've been blocked-->
+					<span>Cette personne vous a bloqué.</span>
+				<?php else :?>
+					<span>Vous avez bloqué cette personne.</span>
+				<?php endif ?>
+			<!-- past articles -->
+			<?php else :?>
+				<?php foreach ($articles as $article): ?>
+					<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
+						<form id="goToProfile" action="/profile" method="post">
+							<input type="hidden" name="profil_id" value="<?= $article["user_id"] ?>" />
+							<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
+								<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
+							</button>
+							<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+								<?= $profile["first_name"] . " " . $profile["last_name"] ?> 
+							</button>
 						</form>
-					<?php endif ?>
-
-				</div>
-			<?php endforeach;?>
-
-
+						<span id="date"><?= $article["date"] ?></span>
+						<br>
+						<span id="data"><?= $article["content"] ?></span>
+						<br>
+						<?php if($article["picture"]) :?>
+							<img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
+						<?php endif; ?>
+						<?php if($article["user_id"] === $_SESSION["user"]["user_id"]) :?>
+							<form id="delete_article" method="post" action="/delete_article">
+								<button type="submit" id="delete_btn">Supprimer</button>
+								<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
+								<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
+							</form>
+						<?php endif ?>
+					</div>
+				<?php endforeach;?>
+			<?php endif ?>
 		</div>
 	</div>
 	<div>

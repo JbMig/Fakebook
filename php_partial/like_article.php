@@ -17,12 +17,24 @@
                 $maRequete->execute([
                     ":likeId" => $user_like["like_id"]
                 ]);
+
+                $maRequete = $pdo->prepare("UPDATE `articles` SET `like_count` = `like_count` -1 WHERE `article_id` = :articleId");
+                $maRequete->execute([
+                    ":articleId" => $article_id
+                ]);
+
             } else {
                 $maRequete = $pdo->prepare("INSERT INTO `likes` (`article_id`, `user_id`) VALUES(:article_id, :userId)");
                 $maRequete->execute([
                     ":article_id" => $article_id,
                     ":userId" => $user_id
                 ]);
+
+                $maRequete = $pdo->prepare("UPDATE `articles` SET `like_count` = `like_count` +1 WHERE `article_id` = :articleId");
+                $maRequete->execute([
+                    ":articleId" => $article_id
+                ]);
+
             }
 
             http_response_code(302);
