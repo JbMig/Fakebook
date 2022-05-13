@@ -12,7 +12,7 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
     //récupère le mdp du formulaire
     $mdp = hash("sha512", filter_input(INPUT_POST, "mdp"));
     //requete sql pour trouver dans la database l'utilisateur voulu
-    $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password`, `first_name`, `last_name`, `profil_picture`, `banner`, `status` FROM `users` WHERE `email` = :email;");
+    $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password`, `first_name`, `last_name`, `profil_picture`, `banner`, `status`, `theme` FROM `users` WHERE `email` = :email;");
         $maRequete->execute([
             ":email" => $mail,
         ]);
