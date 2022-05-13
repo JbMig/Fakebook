@@ -10,7 +10,7 @@ $maRequete = $pdo->prepare("SELECT * FROM `comments` WHERE `article_id` = :artic
 $maRequete = $pdo->prepare("SELECT `user_id`, `profil_picture`, `first_name`, `last_name` FROM `users` "); // add condition for relationship
     $maRequete->execute();
     $comment_profiles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-
+//
 $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
     $maRequete->execute([
         ":userId" => $user_id
