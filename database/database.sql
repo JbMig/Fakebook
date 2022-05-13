@@ -252,3 +252,18 @@ CREATE TABLE IF NOT EXISTS `stats` (
 
 ALTER TABLE `stats`
 ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
+
+INSERT INTO `relationships` (`user_id_a`,`user_id_b`,`status`)
+VALUES
+(1,2,'approved'),
+(1,3,'approved'),
+(3,2,'approved');
+
+
+INSERT INTO `stats` (`user_id`,`nb_articles`,`nb_friends`)
+VALUES
+(1,2,2),
+(2,2,2),
+(3,2,2);
+
+
