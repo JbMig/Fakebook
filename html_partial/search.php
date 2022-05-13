@@ -13,7 +13,7 @@ foreach ($profiles as $profile){
             array_push($memory,$user_id);?>
             <form id="goToProfile" action="/profile" method="post">
                 <button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-                    <?= $first_name . " " . $last_name . " ". $user_id?> 
+                    <?= $first_name . " " . $last_name?> 
                     
                 </button>
             </form>
