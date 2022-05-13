@@ -267,3 +267,6 @@ VALUES
 (3,2,2);
 
 
+UPDATE `stats`
+SET `nb_articles` = 3
+WHERE `user_id` = 1;
