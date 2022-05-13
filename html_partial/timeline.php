@@ -41,7 +41,7 @@
                 $like = "like";
             }
         } ?>
-		<!-- we only show the user's articles and his friends'. -->
+		<!-- first we get the user's articles -->
         <?php if ($user_id === $article["user_id"]) : ?>
 			<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
 				<form id="goToProfile" action="/profile" method="post">
@@ -64,21 +64,19 @@
 					<button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
 					<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
 				</form>
-				<?php if($article["user_id"] === $_SESSION["user"]["user_id"]) :?>
-					<form id="delete_article" method="post" action="/delete_article">
-						<button type="submit" id="delete_btn">Supprimer</button>
-						<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
-						<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
-					</form>
-					<button type="button" id="open_modify_article">Modifier</button>
-					<form id="form_modify_article" method="post" action="/modify_article">
-						<label id="label_modify" for="modify_input">Ecrivez votre message</label>
-						<textarea id="modify_article_input" type="text" name="modify_article" value=""><?= $article["content"] ?></textarea>
-						<button id="modify_btn" type="submit">Valider</button>
-						<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
-						<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
-					</form>
-				<?php endif ?>
+				<form id="delete_article" method="post" action="/delete_article">
+					<button type="submit" id="delete_btn">Supprimer</button>
+					<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
+					<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
+				</form>
+				<button type="button" id="open_modify_article">Modifier</button>
+				<form id="form_modify_article" method="post" action="/modify_article">
+					<label id="label_modify" for="modify_input">Ecrivez votre message</label>
+					<textarea id="modify_article_input" type="text" name="modify_article" value=""><?= $article["content"] ?></textarea>
+					<button id="modify_btn" type="submit">Valider</button>
+					<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
+					<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
+				</form>
                 <button type="button" id="open_comment">Comment</button>
                 <section id="comment_section">
                     <!-- require un truc ici -->
