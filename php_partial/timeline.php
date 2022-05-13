@@ -25,6 +25,13 @@ $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
     $user_likes = $maRequete->fetchAll(PDO::FETCH_ASSOC);
     $like = "like";
 
+// looking for the user's friends (will not work here)
+$maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked` FROM `relationships` WHERE (`user_id_b` = :userId OR `user_id_a` = :userId) AND `status`='approved';");
+	$maRequete->execute([
+		":userId" => $_SESSION["user"]["user_id"]
+	]);
+$profile_friends = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
 require_once __DIR__ . "/../html_partial/timeline.php";
 // clean buffering in $content
 $content = ob_get_clean();

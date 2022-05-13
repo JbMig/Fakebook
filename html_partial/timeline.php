@@ -26,7 +26,7 @@
         </form>
     </div>
     <?php foreach ($articles as $article):
-        foreach ($profiles as $profile) {
+        foreach ($profiles as $profile) { 
             if ($profile["user_id"] === $article["user_id"]) {
                 $profil_picture = $profile["profil_picture"];
                 $first_name = $profile["first_name"];
@@ -41,7 +41,8 @@
             }
         }
 
-        } ?>
+    } ?>
+		<!-- we only show the user's articles and his friends'. -->
         <div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
             <form id="goToProfile" action="/profile" method="post">
                 <input type="hidden" name="profil_id" value="<?= $article["user_id"] ?>" />
