@@ -2,11 +2,6 @@
     <button class="nav_deco" id="deconnection" type="submit">Deconnection</button>
     <input type="hidden" name="deco">
 </form>
-<form id="search" method="post" action="/search">
-    <label id="search" for="search"></label>
-    <input type="search" name="search" id="poeple">
-    <button id="search" type="submit">Chercher</button>
-</form>
 <section id="sectionPublication">
     <div id="newPublication">
         <!-- Form new article-->
