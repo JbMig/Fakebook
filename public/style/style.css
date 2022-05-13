@@ -50,3 +50,8 @@ button {
 #comment_section {
     display: none;
 }
+
+#form_modify_comment {
+    display: none;
+}
+

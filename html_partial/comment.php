@@ -1,10 +1,10 @@
 <div id="newComment">
     <!-- Form new article-->
     <form id="newcommentForm" method="post" action="/new_comment">
-        <label id="commentLabel" for="commentInput">Ecrivez votre message</label><br>
+        <label id="commentLabel" for="commentInput">Ecrivez votre commentaire</label><br>
         <textarea id="commentInput" name="commentInput" type="text"></textarea>
+        <input type="hidden" id="new_comment_input" name="article_id" value="<?= $article["article_id"] ?>">
         <button type="submit" id="submitPublication" >Envoyer</button>
-        <button type="button" id="cancel">Annuler</button>
     </form>
 </div>
 <?php foreach ($comments as $comment):
@@ -34,18 +34,17 @@
                 <?= $first_name . " " . $last_name ?> 
             </button>
         </form>
-        <?php var_dump($comment["date"]) ?>
         <span id="date"><?= $comment["date"] ?></span>
         <br>
         <span id="data"><?= $comment["content"] ?></span>
         <form action="/like_comment" method="post" id="like_comment">
             <button id="like_btn_comment" type="submit"><?= $comment_like . " " . $comment["like_count"] ?></button>
-            <input type="hidden" name="like_comment_id" value="<?= $comment["article_id"] ?>">
+            <input type="hidden" name="like_comment_id" value="<?= $comment["comment_id"] ?>">
         </form>
         <?php if($comment["user_id"] === $_SESSION["user"]["user_id"]) :?>
             <form id="delete_comment" method="post" action="/delete_comment">
                 <button type="submit" id="delete_btn_comment">Supprimer</button>
-                <input type="hidden" name="comment_id" value="<?=$comment["article_id"]?>">
+                <input type="hidden" name="comment_id" value="<?=$comment["comment_id"]?>">
                 <input type="hidden" name="comment_user" value="<?=$comment["user_id"]?>">
             </form>
             <button type="button" id="open_modify_comment">Modifier</button>
@@ -53,7 +52,7 @@
                 <label id="label_modify_comment" for="modify_comment_input">Ecrivez votre message</label>
                 <textarea id="modify_comment_input" type="text" name="modify_comment" value=""><?= $comment["content"] ?></textarea>
                 <button id="modify_btn_comment" type="submit">Valider</button>
-                <input type="hidden" name="comment_id" value="<?=$comment["article_id"]?>">
+                <input type="hidden" name="comment_id" value="<?=$comment["comment_id"]?>">
                 <input type="hidden" name="comment_user" value="<?=$comment["user_id"]?>">
             </form>
 

@@ -60,6 +60,7 @@
 							<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
 						</form>
 					<?php endif ?>
+					<!-- cancel relation request -->
 					<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_a"] && $profile_friend_request[0]["blocked"] === 'no'): ?>
 						<form action="/friend_removal" class="form" method="post">
 							<button type="submit" id="friend_removal" name="friend_removal">
