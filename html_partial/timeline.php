@@ -80,7 +80,6 @@
 						<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
 						<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
 					</form>
-
 				<?php endif ?>
 			</div>
 			<section id="comment_section">
@@ -134,7 +133,7 @@
 						<?php require __DIR__ . "/../php_partial/comment.php"?>
 					</section>
 				<?php endif ?>
-			<?php endif ?>
-		<?php endforeach ?>
+			<?php endforeach ?>
+		<?php endif ?>
     <?php endforeach;?>
 </section>
