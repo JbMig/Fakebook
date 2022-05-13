@@ -3,6 +3,7 @@
     <form id="newcommentForm" method="post" action="/new_comment">
         <label id="commentLabel" for="commentInput">Ecrivez votre message</label><br>
         <textarea id="commentInput" name="commentInput" type="text"></textarea>
+        <input type="hidden" id="new_comment_input" name="article_id" value="<?= $article["article_id"] ?>">
         <button type="submit" id="submitPublication" >Envoyer</button>
         <button type="button" id="cancel">Annuler</button>
     </form>
@@ -34,7 +35,6 @@
                 <?= $first_name . " " . $last_name ?> 
             </button>
         </form>
-        <?php var_dump($comment["date"]) ?>
         <span id="date"><?= $comment["date"] ?></span>
         <br>
         <span id="data"><?= $comment["content"] ?></span>
