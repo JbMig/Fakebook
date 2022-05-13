@@ -6,10 +6,11 @@ $who = filter_input(INPUT_POST,"search");
 $who_name = explode(" ",$who);
 $who_first_name = $who_name[0];
 $who_last_name = $who_name[1];
-$maRequete = $pdo->prepare("SELECT `user_id` ,`first_name`, `last_name` FROM `users` HAVING (`first_name` = :who_first_name) AND (`last_name` = :who_last_name);");
+$maRequete = $pdo->prepare('SELECT `user_id` ,`first_name`, `last_name` FROM `users` WHERE ((`first_name` LIKE :who_first_name) AND (`last_name` LIKE :who_last_name));');
 $maRequete->execute([
-    ":who_last_name" => $who_last_name,
-    ":who_first_name" => $who_first_name
+    // ":who_last_name" => $who_last_name,
+    ":who_last_name" => "%".$who_last_name."%",
+    ":who_first_name" => "%".$who_first_name."%"
 ]);
 $profiles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 require_once __DIR__ . "/../html_partial/search.php";
