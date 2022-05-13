@@ -6,6 +6,9 @@ $title = "Fakebook - fil d'actualité";
 
 require_once "../database/pdo.php";
 $user_id = $_SESSION["user"]["user_id"];
+
+$user_name = $_SESSION["user"]["first_name"] . " " . $_SESSION["user"]["last_name"];
+
 // je vais chercher tous les tweets
 $maRequete = $pdo->prepare("SELECT * FROM `articles` ORDER BY `date` DESC"); // add condition for relationship
     $maRequete->execute();

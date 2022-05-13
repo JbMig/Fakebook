@@ -2,6 +2,16 @@
     <button class="nav_deco" id="deconnection" type="submit">Deconnection</button>
     <input type="hidden" name="deco">
 </form>
+<!-- link to the current user's profile page -->
+<form id="goToProfile" action="/profile" method="post">
+	<input type="hidden" name="profil_id" value="<?= $_SESSION["user"]["user_id"] ?>" />
+	<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
+		<img src="img_profil/<?=  $_SESSION["user"]["profil_picture"] ?>" alt="" width="40px">
+	</button>
+	<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+		<?=$user_name?> 
+	</button>
+</form>
 <section id="sectionPublication">
     <div id="newPublication">
         <!-- Form new article-->
