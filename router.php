@@ -49,6 +49,9 @@ switch ($uri) {
     case "/like_article":
         require_once __DIR__ . "/php_partial/like_article.php";
         break;
+    case "/search":
+        require_once __DIR__ . "/php_partial/search.php";
+        break;
 }
 
 // we require base_html to display $content ($content references in files from php_partial)
