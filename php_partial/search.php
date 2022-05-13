@@ -6,7 +6,6 @@ $who = filter_input(INPUT_POST,"search");
 $who_name = explode(" ",$who);
 $who_first_name = $who_name[0];
 $who_last_name = $who_name[1];
-$i=0;
 $maRequete = $pdo->prepare("SELECT `user_id` ,`first_name`, `last_name` FROM `users` HAVING (`first_name` = :who_first_name) AND (`last_name` = :who_last_name);");
 $maRequete->execute([
     ":who_last_name" => $who_last_name,
