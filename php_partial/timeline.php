@@ -37,12 +37,12 @@ $maRequete = $pdo->prepare("SELECT `user_id`, `status` FROM `users`;");
 $active_accounts = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
 //var_dump($profile_friends);
-foreach ($articles as $article) {
-	var_dump($article["user_id"]);
-}
-foreach ($profiles as $profile) {
-    var_dump($profile["status"]);
-}
+// foreach ($articles as $article) {
+// 	var_dump($article["user_id"]);
+// }
+// foreach ($profiles as $profile) {
+//     var_dump($profile["status"]);
+// }
 require_once __DIR__ . "/../html_partial/timeline.php";
 // clean buffering in $content
 $content = ob_get_clean();
