@@ -40,7 +40,7 @@
         <span id="data"><?= $comment["content"] ?></span>
         <form action="/like_comment" method="post" id="like_comment">
             <button id="like_btn_comment" type="submit"><?= $comment_like . " " . $comment["like_count"] ?></button>
-            <input type="hidden" name="like_comment_id" value="<?= $comment["article_id"] ?>">
+            <input type="hidden" name="like_comment_id" value="<?= $comment["comment_id"] ?>">
         </form>
         <?php if($comment["user_id"] === $_SESSION["user"]["user_id"]) :?>
             <form id="delete_comment" method="post" action="/delete_comment">
