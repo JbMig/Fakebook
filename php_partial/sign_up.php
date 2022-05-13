@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		// creating new user's stats
 		$maRequete = $pdo->prepare("INSERT INTO `stats` (`user_id`) VALUES (:userId);");
 		$maRequete->execute([
-			":userId" => $_SESSION["user"]["user_id"];
+			":userId" => $_SESSION["user"]["user_id"]
 		]);
 
 
