@@ -45,7 +45,7 @@
         <?php if($comment["user_id"] === $_SESSION["user"]["user_id"]) :?>
             <form id="delete_comment" method="post" action="/delete_comment">
                 <button type="submit" id="delete_btn_comment">Supprimer</button>
-                <input type="hidden" name="comment_id" value="<?=$comment["article_id"]?>">
+                <input type="hidden" name="comment_id" value="<?=$comment["comment_id"]?>">
                 <input type="hidden" name="comment_user" value="<?=$comment["user_id"]?>">
             </form>
             <button type="button" id="open_modify_comment">Modifier</button>
@@ -53,7 +53,7 @@
                 <label id="label_modify_comment" for="modify_comment_input">Ecrivez votre message</label>
                 <textarea id="modify_comment_input" type="text" name="modify_comment" value=""><?= $comment["content"] ?></textarea>
                 <button id="modify_btn_comment" type="submit">Valider</button>
-                <input type="hidden" name="comment_id" value="<?=$comment["article_id"]?>">
+                <input type="hidden" name="comment_id" value="<?=$comment["comment_id"]?>">
                 <input type="hidden" name="comment_user" value="<?=$comment["user_id"]?>">
             </form>
 
