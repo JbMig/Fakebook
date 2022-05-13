@@ -1,7 +1,7 @@
 <?php
 ob_start();
 
-require_once __DIR__ . "/../database/pdo.php";
+require_once __DIR__ . "/../../database/pdo.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $profile_id = $_SESSION["user"]["user_id"];
@@ -12,5 +12,5 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 }
 
 
-require_once __DIR__ . "/../html_partial/settings_profil/settings_profil.php";
+require_once __DIR__ . "/../../html_partial/settings_profil/settings_profil.php";
 $content = ob_get_clean();

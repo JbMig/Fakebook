@@ -40,7 +40,7 @@ switch ($uri) {
     case "/new_first_name":
         require_once __DIR__ . "/php_partial/settings_profil/new_first_name.php";
         break;
-    case "/new_seconde_name":
+    case "/new_last_name":
         require_once __DIR__ . "/php_partial/settings_profil/new_last_name.php";
         break;
     case "/new_password":
