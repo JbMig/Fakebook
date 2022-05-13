@@ -58,6 +58,9 @@ switch ($uri) {
     case "/delete_comment":
         require_once __DIR__ . "/php_partial/delete_comment.php";
         break;
+    case "/modify_comment":
+        require_once __DIR__ . "/php_partial/modify_comment.php";
+        break;
 }
 
 // we require base_html to display $content ($content references in files from php_partial)
