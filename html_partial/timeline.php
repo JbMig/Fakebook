@@ -4,7 +4,7 @@
 </form>
 <form id="search" method="post" action="/search">
 	<label id="search" for="search"></label>
-    <input id="search" type="search" name="search">
+    <input id="search" type="text" name="search">
     <button id="search" type="submit">Chercher</button>
 </form>
 <!-- link to the current user's profile page -->

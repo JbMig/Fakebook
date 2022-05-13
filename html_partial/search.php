@@ -12,6 +12,7 @@ foreach ($profiles as $profile){
             if(in_array($user_id,$memory) == false){
             array_push($memory,$user_id);?>
             <form id="goToProfile" action="/profile" method="post">
+            <input type="hidden" name="profil_id" value="<?= $profile["user_id"] ?>" />
                 <button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
                     <?= $first_name . " " . $last_name?> 
                     
@@ -24,6 +25,7 @@ foreach ($profiles as $profile){
             if(in_array($user_id,$memory) == false){
                 array_push($memory,$user_id);?>
             <form id="goToProfile" action="/profile" method="post">
+            <input type="hidden" name="profil_id" value="<?= $profile["user_id"] ?>" />
                 <button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
                     <?= $first_name . " " . $last_name?> 
                     
