@@ -49,10 +49,6 @@ switch ($uri) {
     case "/like_article":
         require_once __DIR__ . "/php_partial/like_article.php";
         break;
-<<<<<<< HEAD
-    case "/search":
-        require_once __DIR__ . "/php_partial/search.php";
-=======
     case "/new_comment":
         require_once __DIR__ . "/php_partial/new_comment.php";
         break;
@@ -64,7 +60,9 @@ switch ($uri) {
         break;
     case "/modify_comment":
         require_once __DIR__ . "/php_partial/modify_comment.php";
->>>>>>> main
+        break;
+    case "/search":
+        require_once __DIR__ . "/php_partial/search.php";
         break;
 }
 
