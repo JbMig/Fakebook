@@ -31,7 +31,10 @@ $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked`
 		":userId" => $_SESSION["user"]["user_id"]
 	]);
 $profile_friends = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-
+foreach ($articles as $article) {
+var_dump(Count($profile_friends));
+var_dump($article["user_id"]);
+}
 require_once __DIR__ . "/../html_partial/timeline.php";
 // clean buffering in $content
 $content = ob_get_clean();
