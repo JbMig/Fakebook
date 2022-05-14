@@ -11,7 +11,15 @@
 				":profile_id" => $profile_id,
 				":userId" => $user_id
 			]);
-
+			// updating stats (impossible to test until the search works)
+			$maRequete = $pdo->prepare(
+				"UPDATE `stats`
+				SET `nb_friends` = `nb_friends` + 1
+				WHERE `user_id` = :profile_id OR `user_id` = :userId;");
+				$maRequete->execute([
+					":profile_id" => $profile_id,
+					":userId" => $user_id
+				]);
 			// go back to profile
 			http_response_code(302);
 
