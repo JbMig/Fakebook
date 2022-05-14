@@ -14,6 +14,13 @@
                     ":article_id" => $article_id,
                     ":userId" => $user_id
                 ]);
+			$maRequete = $pdo->prepare(
+				"UPDATE `stats`
+				SET `nb_comments` = `nb_comments` + 1
+				WHERE `user_id` = :userId;");
+				$maRequete->execute([
+					":userId" => $user_id
+				]);
             http_response_code(302);
             $direction = explode("/",$_SERVER["HTTP_REFERER"]);
             if($direction[3] === "profile") {
