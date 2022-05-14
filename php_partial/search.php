@@ -13,6 +13,13 @@ $maRequete->execute([
     ":who_first_name" => "%".$who_first_name."%"
 ]);
 $profiles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
+
+$maRequete = $pdo->prepare('SELECT `user_id` ,`first_name`, `last_name` FROM `users` ');
+$maRequete->execute();
+$names = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
+
 require_once __DIR__ . "/../html_partial/search.php";
 $content = ob_get_clean(); //je stock le tampon dans cette variable
 
