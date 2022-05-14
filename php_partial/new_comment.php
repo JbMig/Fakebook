@@ -18,17 +18,17 @@
 			$maRequete = $pdo->prepare(
 				"UPDATE `stats`
 				SET `nb_comments` = `nb_comments` + 1
-				WHERE `user_id` = :userId;");
+				WHERE `user_id` = :userId2;");
 				$maRequete->execute([
-					":userId" => $user_id
+					":userId2" => $user_id
 				]);
-			// updating stats of the article's writer
+			// updating stats of the article's writer (doesn't work if you're commenting your own article)
 			$maRequete = $pdo->prepare(
 				"UPDATE `stats`
 				SET `comments_on_articles` = `comments_on_articles` + 1
-				WHERE `user_id` = :article_id;");
+				WHERE `user_id` = :article_id2;");
 				$maRequete->execute([
-					":article_id" => $article_id
+					":article_id2" => $article_id
 				]);
             http_response_code(302);
             $direction = explode("/",$_SERVER["HTTP_REFERER"]);
