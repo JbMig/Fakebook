@@ -254,3 +254,13 @@ VALUES
 (2,1,1,1,0),
 (3,1,2,1,1),
 (4,1,1,1,0);
+
+
+
+
+
+
+-- for myself (Valentine). will be deleted before we send it
+INSERT INTO `relationships` (`user_id_a`,`user_id_b`,`status`)
+VALUES
+(1,2,'approved');
