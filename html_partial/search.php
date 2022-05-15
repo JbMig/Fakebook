@@ -14,9 +14,11 @@ foreach ($profiles as $profile){
             array_push($memory,$user_id);?>
             <form id="goToProfile" action="/profile" method="post">
             <input type="hidden" name="profil_id" value="<?= $profile["user_id"] ?>" />
+                <button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
+                    <img src="img_profil/<?=  $_SESSION["user"]["profil_picture"] ?>" alt="" width="40px">
+                </button>
                 <button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-                    <?= $first_name . " " . $last_name?> 
-                    
+                    <?= $first_name . " " . $last_name?>     
                 </button>
             </form>
             <?php 
@@ -32,8 +34,7 @@ foreach ($profiles as $profile){
             <form id="goToProfile" action="/profile" method="post">
             <input type="hidden" name="profil_id" value="<?= $profile["user_id"] ?>" />
                 <button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-                    <?= $first_name . " " . $last_name?> 
-                    
+                    <?= $first_name . " " . $last_name?>     
                 </button>
             </form>
         
@@ -56,9 +57,11 @@ foreach ($names as $name):
         ?>
         <form id="goToProfile" action="/profile" method="post">
         <input type="hidden" name="profil_id" value="<?= $name["user_id"] ?>" />
+            <button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
+                <img src="img_profil/<?=  $_SESSION["user"]["profil_picture"] ?>" alt="" width="40px">
+            </button>
             <button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-                <?= $first_name . " " . $last_name?> 
-                
+                <?= $first_name . " " . $last_name?>     
             </button>
         </form>
     
