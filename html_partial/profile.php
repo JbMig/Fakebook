@@ -4,6 +4,11 @@
 		<input type="hidden" name="deco">
 	</form>
 	<a href="timeline">Fil d'actualité</a>
+	<form id="search" method="post" action="/search">
+		<label id="search" for="search"></label>
+    	<input id="search" type="text" name="search">
+    	<button id="search" type="submit">Chercher</button>
+</form>
 </section>
 <section>
 	<!-- page top : profile picture, first & last name -->
