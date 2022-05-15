@@ -22,7 +22,20 @@
                 $maRequete->execute([
                     ":articleId" => $article_id
                 ]);
-
+                $maRequete = $pdo->prepare(
+                    "UPDATE `stats`
+                    SET `nb_likes` = `nb_likes` - 1
+                    WHERE `user_id` = :userId;");
+                    $maRequete->execute([
+                        ":userId" => $user_id
+                    ]);
+                $maRequete = $pdo->prepare(
+                    "UPDATE `stats`
+                    SET `likes_on_articles` = `likes_on_articles` - 1
+                    WHERE `user_id` = :userId;");
+                    $maRequete->execute([
+                        ":userId" => $user_id
+                    ]);
             } else {
                 $maRequete = $pdo->prepare("INSERT INTO `likes` (`article_id`, `user_id`) VALUES(:article_id, :userId)");
                 $maRequete->execute([
@@ -34,8 +47,22 @@
                 $maRequete->execute([
                     ":articleId" => $article_id
                 ]);
-
+                $maRequete = $pdo->prepare(
+                    "UPDATE `stats`
+                    SET `nb_likes` = `nb_likes` + 1
+                    WHERE `user_id` = :userId;");
+                    $maRequete->execute([
+                        ":userId" => $user_id
+                    ]);
+                $maRequete = $pdo->prepare(
+                    "UPDATE `stats`
+                    SET `likes_on_articles` = `likes_on_articles` + 1
+                    WHERE `user_id` = :userId;");
+                    $maRequete->execute([
+                        ":userId" => $user_id
+                    ]);
             }
+
 
             http_response_code(302);
             // get the previous page
