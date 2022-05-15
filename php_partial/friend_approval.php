@@ -11,7 +11,7 @@
 				":profile_id" => $profile_id,
 				":userId" => $user_id
 			]);
-			// updating stats (impossible to test until the search works)
+			// updating stats
 			$maRequete = $pdo->prepare(
 				"UPDATE `stats`
 				SET `nb_friends` = `nb_friends` + 1
