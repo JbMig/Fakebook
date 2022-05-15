@@ -22,6 +22,20 @@
                 $maRequete->execute([
                     ":commentId" => $comment_id
                 ]);
+                $maRequete = $pdo->prepare(
+                    "UPDATE `stats`
+                    SET `nb_likes` = `nb_likes` - 1
+                    WHERE `user_id` = :userId;");
+                    $maRequete->execute([
+                        ":userId" => $user_id
+                    ]);
+                $maRequete = $pdo->prepare(
+                    "UPDATE `stats`
+                    SET `likes_on_comments` = `likes_on_comments` - 1
+                    WHERE `user_id` = :userId;");
+                    $maRequete->execute([
+                        ":userId" => $user_id
+                    ]);
 
             } else {
                 $maRequete = $pdo->prepare("INSERT INTO `likes` (`comment_id`,`user_id`) VALUES(:comment_id, :userId)");
@@ -34,7 +48,20 @@
                 $maRequete->execute([
                     ":commentId" => $comment_id
                 ]);
-
+                $maRequete = $pdo->prepare(
+                    "UPDATE `stats`
+                    SET `nb_likes` = `nb_likes` + 1
+                    WHERE `user_id` = :userId;");
+                    $maRequete->execute([
+                        ":userId" => $user_id
+                    ]);
+                $maRequete = $pdo->prepare(
+                    "UPDATE `stats`
+                    SET `likes_on_comments` = `likes_on_comments` + 1
+                    WHERE `user_id` = :userId;");
+                    $maRequete->execute([
+                        ":userId" => $user_id
+                    ]);
             }
 
             http_response_code(302);
