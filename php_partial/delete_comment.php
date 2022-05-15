@@ -14,6 +14,13 @@
                     $maRequete->execute([
                         ":id" => $comment_id
                     ]);
+                    $maRequete = $pdo->prepare(
+						"UPDATE `stats`
+						SET `nb_comments` = `nb_comments` - 1
+						WHERE `user_id` = :userId;");
+						$maRequete->execute([
+							":userId" => $user_id
+						]);
                     // go to last location
                     http_response_code(302);
                     $direction = explode("/",$_SERVER["HTTP_REFERER"]);
