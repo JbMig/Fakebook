@@ -14,6 +14,7 @@
                     $maRequete->execute([
                         ":id" => $comment_id
                     ]);
+					// updating stats of the comment's writer
                     $maRequete = $pdo->prepare(
 						"UPDATE `stats`
 						SET `nb_comments` = `nb_comments` - 1
