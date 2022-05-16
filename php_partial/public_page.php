@@ -89,6 +89,6 @@ $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked`
 $profile_friend_request = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
 
-require_once __DIR__ . "/../html_partial/profile.php";
+require_once __DIR__ . "/../html_partial/public_page.php";
 $content = ob_get_clean();
 ?>

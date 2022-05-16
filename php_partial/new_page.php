@@ -29,6 +29,14 @@
                     ":pageId" => $page_id,
                     ":userId" => $user_id
                 ]);
+			// updating table admins
+			$maRequete = $pdo->prepare(
+                "INSERT INTO `followers` (`page_id`, `user_id`)
+                VALUES(:pageId, :userId);");
+                $maRequete->execute([
+                    ":pageId" => $page_id,
+                    ":userId" => $user_id
+                ]);
 
 
             http_response_code(302);
