@@ -49,69 +49,54 @@
 		<?php> endif ?>
 	</div>
 </section>
-<!-- on s'est arrêtés là pr ce matin -->
 <section>
 	<!-- main page -->
 	<div>
 	<!-- articles -->
 		<div>
 		<!-- new article -->
-			<!-- Form new article-->
-			<?php if ($_SESSION["user"]["user_id"] == $profile["user_id"]) :?>
+			<!-- Form new article: needs to be modified to match a page -->
+			<?php if ($is_admin) :?>
 			<form id="newPublicationForm" method="post" enctype="multipart/form-data" action="/new_article">
 				<label id="publicationLabel" for="articleInput">Ecrivez votre message</label><br>
 				<textarea id="articleInput" name="articleInput" type="text"></textarea>
 				<div id="depose">Déposez vos images ou cliquez pour choisir</div>
 				<input type="file" name="fileToUpload" id="fileToUpload" accept="image/jpeg, image/png, image/gif, image/jpg">
 				<div id="preview"></div>
-				<button type="submit" id="submitPublication" >Envoyer</button>
+				<button type="submit" id="submitPublication">Envoyer</button>
 				<button id="cancel">Annuler</button>
 			</form>
 			<?php endif ?>
 		</div>
 		<div>
-			<!-- you can't see the person's past articles if they blocked you or if you blocked them -->
-			<?php if (Count($profile_friend_request) >= 1 && $profile_friend_request[0]["blocked"] === 'yes'): ?>
-				<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"]): ?>  <!-- you've been blocked-->
-					<span>Cette personne vous a bloqué.</span>
-				<?php else :?>
-					<span>Vous avez bloqué cette personne.</span>
-				<?php endif ?>
 			<!-- past articles -->
-			<?php else :?>
-				<!-- we don't show articles from inactive accounts. -->
-				<?php if ($profile["status"]==='inactive') :?>
-					<span>Le compte de cette personne est inactif.</span>
-				<?php else :?>
-					<?php foreach ($articles as $article): ?>
-						<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
-							<form id="goToProfile" action="/profile" method="post">
-								<input type="hidden" name="profil_id" value="<?= $article["user_id"] ?>" />
-								<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-									<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
-								</button>
-								<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-									<?= $profile["first_name"] . " " . $profile["last_name"] ?> 
-								</button>
-							</form>
-							<span id="date"><?= $article["date"] ?></span>
-							<br>
-							<span id="data"><?= $article["content"] ?></span>
-							<br>
-							<?php if($article["picture"]) :?>
-								<img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
-							<?php endif; ?>
-							<?php if($article["user_id"] === $_SESSION["user"]["user_id"]) :?>
-								<form id="delete_article" method="post" action="/delete_article">
-									<button type="submit" id="delete_btn">Supprimer</button>
-									<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
-									<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
-								</form>
-							<?php endif ?>
-						</div>
-					<?php endforeach;?>
-				<?php endif ?>
-			<?php endif ?>
+			<?php foreach ($articles as $article): ?>
+				<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
+					<form id="goToProfile" action="/profile" method="post"> <!-- needs to be modified to match a page -->
+						<input type="hidden" name="profil_id" value="<?= $page_id ?>" />
+						<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
+							<img src="img_profil/<?= $page["picture"] ?>" alt="" width="40px">
+						</button>
+						<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+							<?= $page["name"] ?> 
+						</button>
+					</form>
+					<span id="date"><?= $article["date"] ?></span>
+					<br>
+					<span id="data"><?= $article["content"] ?></span>
+					<br>
+					<?php if($article["picture"]) :?>
+						<img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
+					<?php endif; ?>
+					<?php if($is_admin) :?>
+						<form id="delete_article" method="post" action="/delete_article">
+							<button type="submit" id="delete_btn">Supprimer</button>
+							<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
+							<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
+						</form>
+					<?php endif ?>
+				</div>
+			<?php endforeach;?>
 		</div>
 	</div>
 	<div>
