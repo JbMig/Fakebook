@@ -40,7 +40,7 @@
 
 
             http_response_code(302);
-            header("Location: /public_page");
+            header("Location: /public_page"); // voir avec adrien pr envoyer le page_id
             
             exit();
         }

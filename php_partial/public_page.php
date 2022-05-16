@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] =! "POST") {
 	exit();
 }
 
-$page_id = filter_input(INPUT_POST, "page_id");
+$page_id = filter_input(INPUT_POST, "page_id"); // on ne récupère pas le page_id à la fin de php_partials/new_page.php dc ça ne marche pas
 
 $maRequete = $pdo->prepare("SELECT `page_id`, `name`, `picture`, `banner`, `creation_date` FROM `pages` WHERE `page_id` = :pageId;");
 	$maRequete->execute([
