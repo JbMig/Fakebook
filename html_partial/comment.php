@@ -15,7 +15,7 @@
             $last_name = $comment_profile["last_name"];
         }
     foreach ($comment_user_likes as $comment_user_like) {
-        if ($comment_user_like["article_id"] === $comment["article_id"]) {
+        if ($comment_user_like["comment_id"] === $comment["comment_id"]) {
             $comment_like = "unLike";
             break;
         } else {
