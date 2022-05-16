@@ -196,6 +196,8 @@ ADD CONSTRAINT FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELET
 
 ALTER TABLE `stats`
 ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
+
+ALTER TABLE `chats` ADD `uuid` VARCHAR(255);
  
 
 
@@ -254,6 +256,8 @@ VALUES
 (2,1,1,1,0),
 (3,1,2,1,1),
 (4,1,1,1,0);
+
+
 
 
 

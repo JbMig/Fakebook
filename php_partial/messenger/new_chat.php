@@ -33,22 +33,54 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     }    
 }
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = filter_input(INPUT_POST, "name");
+    $name = $_POST["name"];
+    require __DIR__ . "/../function/uuid.php";
+    $uuid = guidv4($name);
 
-    $maRequete = $pdo->prepare("INSERT INTO `chats` (`name`) VALUES(:name)");
+    $maRequete = $pdo->prepare("INSERT INTO `chats` (`name`, `uuid`) VALUES(:name, :uuid)");
     $maRequete->execute([
-        ":name" => $name
+        ":name" => $name,
+        ":uuid" => $uuid
     ]);
-        
-    $maRequete = $pdo->prepare("SELECT * FROM `chats` WHERE `name` = :name;");
+
+    $maRequete = $pdo->prepare("SELECT `chat_id` FROM `chats` WHERE `uuid` = :uuid ");
     $maRequete->execute([
-        ":name" => $name
+        ":uuid" => $uuid
+    ]);
+    $chat_id = $maRequete->fetch();
+    $chat_id = $chat_id["chat_id"];
+    $maRequete = $pdo->prepare("INSERT INTO `chat_members` (`chat_id`, `user_id`) VALUES(:chatId, :userId)");
+    $maRequete->execute([
+        ":chatId" => $chat_id,
+        ":userId" => $user_id
+    ]);
+
+    foreach ($_POST as $key => $value) {
+        if ($_POST["name"] !== $value) {
+            $maRequete = $pdo->prepare("INSERT INTO `chat_members` (`chat_id`, `user_id`) VALUES(:chatId, :userId)");
+            $maRequete->execute([
+                ":chatId" => $chat_id,
+                ":userId" => $value
+            ]);
+        }
+    }
+        
+    $maRequete = $pdo->prepare("SELECT * FROM `chats` WHERE `chat_id` = :chatId;");
+    $maRequete->execute([
+        ":chatId" => $chat_id
     ]);
     $chat = $maRequete->fetch();
 
+    $maRequete = $pdo->prepare("SELECT * FROM `chat_members` WHERE `chat_id` = :chatId;");
+    $maRequete->execute([
+        ":chatId" => $chat_id
+    ]);
+    $chat_members = $maRequete->fetch();
+
     $_SESSION["chat"] = $chat;
+    $_SESSION["chat_members"] = $chat_members;
     http_response_code(302);
-    header('Location: /conversation'); //je vais à la page login
+    header('Location: /chat'); //je vais à la page login
     exit();
 }
 //j'appelle l'html de cette page

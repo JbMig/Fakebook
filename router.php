@@ -96,6 +96,12 @@ switch ($uri) {
     case "/new_chat":
         require_once __DIR__ . "/php_partial/messenger/new_chat.php";
         break;
+    case "/conversation":
+        require_once __DIR__ . "/php_partial/messenger/conversation.php";
+        break;
+    case "/chat":
+        require_once __DIR__ . "/php_partial/messenger/chat.php";
+        break;
     case "/test":
         require_once __DIR__ . "/test.php";
         break;
