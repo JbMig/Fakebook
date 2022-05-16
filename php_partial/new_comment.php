@@ -24,23 +24,23 @@
 				]);
 
 
-			// // getting the article's writer's user_id
-			// $maRequete = $pdo->prepare(
-			// 	"SELECT `article_id`,`user_id`
-			// 	FROM `stats`
-			// 	WHERE `article_id` = :article_id2;");
-			// 	$maRequete->execute([
-			// 		":article_id2" => $article_id
-			// 	]);
-			// $article = $maRequete->fetch(PDO::FETCH_ASSOC);
-			// // updating stats of the article's writer (doesn't work if you're commenting your own article)
-			// $maRequete = $pdo->prepare(
-			// 	"UPDATE `stats`
-			// 	SET `comments_on_articles` = `comments_on_articles` + 1
-			// 	WHERE `user_id` = :id;");
-			// 	$maRequete->execute([
-			// 		":id" => $article['user_id']
-			// 	]);
+			// getting the article's writer's user_id
+			$maRequete = $pdo->prepare(
+				"SELECT `article_id`,`user_id`
+				FROM `articles`
+				WHERE `article_id` = :article_id2;");
+				$maRequete->execute([
+					":article_id2" => $article_id
+				]);
+			$article = $maRequete->fetch(PDO::FETCH_ASSOC);
+			// updating stats of the article's writer (doesn't work if you're commenting your own article)
+			$maRequete = $pdo->prepare(
+				"UPDATE `stats`
+				SET `comments_on_articles` = `comments_on_articles` + 1
+				WHERE `user_id` = :id;");
+				$maRequete->execute([
+					":id" => $article['user_id']
+				]);
 
 
             http_response_code(302);
