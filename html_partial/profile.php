@@ -10,6 +10,16 @@
     	<button id="search" type="submit">Chercher</button>
 </form>
 </section>
+<!-- stats -->
+<section>
+<span> <?=$profile["first_name"]?> a <?=$profile_stats["nb_friends"]?> relations. </span>
+<span> <?=$profile["first_name"]?> a publié <?=$profile_stats["nb_articles"]?>. </span>
+<span> <?=$profile["first_name"]?> a commenté <?=$profile_stats["nb_comments"]?> articles. </span>
+<span> <?=$profile["first_name"]?> a mis <?=$profile_stats["nb_likes"]?> likes. </span>
+<span> Les articles de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["comments_on_articles"]?> commentaires. </span>
+<span> Les articles de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["likes_on_articles"]?> likes. </span>
+<span> Les commentaires de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["likes_on_comments"]?> likes. </span>
+</section>
 <section>
 	<!-- page top : profile picture, first & last name -->
 	<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
