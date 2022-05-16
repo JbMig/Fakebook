@@ -49,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     ]);
     $chat_id = $maRequete->fetch();
     $chat_id = $chat_id["chat_id"];
+    
     $maRequete = $pdo->prepare("INSERT INTO `chat_members` (`chat_id`, `user_id`) VALUES(:chatId, :userId)");
     $maRequete->execute([
         ":chatId" => $chat_id,

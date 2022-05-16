@@ -25,11 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     ]);
     $chat = $maRequete->fetch();
 
-    $maRequete = $pdo->prepare("SELECT * FROM `chat_members` WHERE `chat_id` = :chatId;");
+    $maRequete = $pdo->prepare("SELECT * FROM `users` WHERE `user_id`IN (SELECT `user_id` FROM `chat_members` WHERE `chat_id` = :chatId)");
     $maRequete->execute([
         ":chatId" => $chat_id
     ]);
-    $chat_members = $maRequete->fetch();
+    $chat_members = $maRequete->fetchAll();
 
     $_SESSION["chat"] = $chat;
     $_SESSION["chat_members"] = $chat_members;
