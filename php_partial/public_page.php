@@ -23,7 +23,7 @@ $maRequete = $pdo->prepare("SELECT `page_id`, `name`, `picture`, `banner`, `crea
 	$maRequete->execute([
 		":pageId" => $page_id
 	]);
-$page = $maRequete->fetch();
+$page = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 // displaying the page's name and its past articles
 $title = "Fakebook - Page " . $page["name"];
 $h1 = $page["name"];
