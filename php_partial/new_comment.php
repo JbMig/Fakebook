@@ -33,7 +33,7 @@
 					":article_id2" => $article_id
 				]);
 			$article = $maRequete->fetch(PDO::FETCH_ASSOC);
-			// updating stats of the article's writer (doesn't work if you're commenting your own article)
+			// updating stats of the article's writer
 			$maRequete = $pdo->prepare(
 				"UPDATE `stats`
 				SET `comments_on_articles` = `comments_on_articles` + 1
