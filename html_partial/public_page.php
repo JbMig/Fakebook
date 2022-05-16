@@ -12,105 +12,44 @@
 </section>
 <section>
 	<!-- page top : profile picture, first & last name -->
-	<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
-	<img src="img_baniere/<?= $profile["banner"] ?>" alt="" >
+	<img src="img_profil/<?= $page["picture"] ?>" alt="" width="40px">
+	<img src="img_baniere/<?= $page["banner"] ?>" alt="" >
 </section>
 <h1 id="h1"><?=$h1?></h1>
 <!-- stats -->
-<section>
-<div> <?=$profile["first_name"]?> a <?=$profile_stats["nb_friends"]?> relations. </div>
-<div> <?=$profile["first_name"]?> a publié <?=$profile_stats["nb_articles"]?>. </div>
-<div> <?=$profile["first_name"]?> a commenté <?=$profile_stats["nb_comments"]?> articles. </div>
-<div> <?=$profile["first_name"]?> a mis <?=$profile_stats["nb_likes"]?> likes. </div>
-<div> Les articles de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["comments_on_articles"]?> commentaires. </div>
-<div> Les articles de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["likes_on_articles"]?> likes. </div>
-<div> Les commentaires de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["likes_on_comments"]?> likes. </div>
+<section> 
+<div> <?=$page["name"]?> compte <?=$nb_articles?> articles. </div>
+<div> <?=$page["name"]?> est suivie par <?=$nb_followers?> personnes. </div>
 </section> <br> <!-- we will remove this br when the css is done-->
 <section>
-	<!-- if it's not the page of the current user (he's visiting someone else's page) -->
 	<div>
 	<!-- interactions -->
-	<?php if ($profile["status"]==='active') :?>
-		<!-- if the person's account is inactive, there's no button -->
-		<?php if ($_SESSION["user"]["user_id"] != $profile["user_id"]) :?>
-			<?php if (Count($profile_friend) >= 1): ?>
-				<!-- remove from relations -->
-				<form action="/friend_removal" class="form" method="post" >
-					<button type="submit" id="friend_removal" name="friend_removal">
-						Ne plus être ami
-					</button>
-					<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
-				</form>
-				<!-- start chat if the person is a relationship -->
-				<form action="/start_chat" class="form" method="post" >
-					<button type="submit" id="start_chat" name="start_chat">
-						Démarrer la conversation
-					</button>
-					<input type="hidden" name="start_chat" value="<?= $user_id ?>">
-				</form>
-			<?php else :?>
-				<?php if (Count($profile_friend_request) >= 1): ?>
-					<!-- accept relation request -->
-					<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"] && $profile_friend_request[0]["blocked"] === 'no') : ?>
-						<form action="/friend_approval" class="form" method="post" >
-							<button type="submit" id="friend_approval" name="friend_approval">
-								Accepter la demande d'ami
-							</button>
-							<input type="hidden" name="friend_approval" value="<?= $profile_id ?>">
-						</form>
-					<?php endif ?>
-					<!-- refuse or cancel the relation request if it hasn't been approved yet -->
-					<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_b"] && $profile_friend_request[0]["blocked"] === 'no'): ?>
-						<form action="/friend_removal" class="form" method="post">
-							<button type="submit" id="friend_removal" name="friend_removal">
-								Refuser la demande d'ami
-							</button>
-							<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
-						</form>
-					<?php else :?>
-						<!-- un-block -->
-						<?php if ($profile_friend_request[0]["blocked"] === 'yes' && $_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_a"]): ?>
-							<form action="/friend_removal" class="form" method="post">
-								<button type="submit" id="friend_removal" name="friend_removal">
-									Débloquer
-								</button>
-								<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
-							</form>
-						<?php endif ?>
-						<!-- cancel relation request -->
-						<?php if ($_SESSION["user"]["user_id"] === $profile_friend_request[0]["user_id_a"] && $profile_friend_request[0]["blocked"] === 'no'): ?>
-							<form action="/friend_removal" class="form" method="post">
-								<button type="submit" id="friend_removal" name="friend_removal">
-									Annuler la demande d'ami
-								</button>
-								<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
-							</form>
-						<?php endif ?>
-					<?php endif ?>
-				<?php else :?>
-					<?php if (Count($profile_friend_request) < 1 || $profile_friend_request[0]["blocked"] === 'no'): ?>
-						<!-- send a relation request -->
-						<form action="/friend_request" class="form" method="post" >
-							<button type="submit" id="friend_request" name="friend_request">
-								Demande d'ami
-							</button>
-						<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
-						</form>
-					<?php endif ?>
-					<!-- block someone -->
-					<form action="/block" class="form" method="post" >
-						<button type="submit" id="block" name="block">
-							Bloquer
-						</button>
-					<input type="hidden" name="block" value="<?= $profile_id ?>">
-					</form>
-				<?php endif ?>
-			<?php endif ?>
-		<?php endif ?>
-	<?php endif ?>
+		<?php if ($is_follower) :?>
+			<!-- unfollow -->
+			<form action="/unfollow" class="form" method="post" >
+				<button type="submit" id="unfollow" name="unfollow">
+					Ne plus suivre cette page
+				</button>
+				<input type="hidden" name="unfollow" value="<?= $page_id ?>">
+			</form>
+			<!-- i leave that here because we may use it for the group's page later, and i don't want to type it again -->
+			<!-- <form action="/start_chat" class="form" method="post" >
+				<button type="submit" id="start_chat" name="start_chat">
+					Démarrer la conversation
+				</button>
+				<input type="hidden" name="start_chat" value="<?= $user_id ?>">
+			</form> -->
+		<?php> else :?>
+			<form action="/follow" class="form" method="post" >
+				<button type="submit" id="follow" name="follow">
+					Suivre cette page
+				</button>
+				<input type="hidden" name="follow" value="<?= $page_id ?>">
+			</form>
+		<?php> endif ?>
 	</div>
 </section>
-
+<!-- on s'est arrêtés là pr ce matin -->
 <section>
 	<!-- main page -->
 	<div>

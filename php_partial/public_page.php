@@ -3,38 +3,52 @@ ob_start();
 
 require_once __DIR__ . "/../database/pdo.php";  // accessing the database
 
-// if we got on the page with the url (without following a link), we end up on our own profile page
-if($_SERVER["REQUEST_METHOD"] === "GET") {
-	$profile_id = $_SESSION["user"]["user_id"]; // needed to check whether it's the user's page or someone else's.
-	$profile = $_SESSION["user"];
-}
+// WE SHOULDN'T NEED THIS :
+// // if we got on the page with the url (without following a link), we end up on our own profile page
+// if($_SERVER["REQUEST_METHOD"] === "GET") {
+// 	$profile_id = $_SESSION["user"]["user_id"]; // needed to check whether it's the user's page or someone else's.
+// 	$profile = $_SESSION["user"];
+// }
 
-// if we got on the page by clicking a link (someone's name or pic), we end up on the perso's page
+
+// if we got on the page by clicking a link
+// WE'LL NEED SOMETHING ON TIMELINE OR PROFILE TO ACCESS THE PAGE AND SAVE ITS ID.
 if($_SERVER["REQUEST_METHOD"] === "POST") {
-	$profile_id = filter_input(INPUT_POST, "profil_id");
+	$page_id = filter_input(INPUT_POST, "page_id");
 
-    $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password`, `first_name`, `last_name`, `profil_picture`, `banner`, `status` FROM `users` WHERE `user_id` = :profile_id;");
+    $maRequete = $pdo->prepare("SELECT `page_id`, `name`, `picture`, `banner`, `creation_date` FROM `pages` WHERE `page_id` = :pageId;");
         $maRequete->execute([
-            ":profile_id" => $profile_id
+            ":pageId" => $page_id
         ]);
-	$profile = $maRequete->fetch();
+	$page = $maRequete->fetch();
 }
 
-// displaying the profile's owner name and his past articles
-$title = "Fakebook - Profil de " . $profile["first_name"] . " " . $profile["last_name"];
-$h1 = $profile["first_name"] . " " . $profile["last_name"];
-$maRequete = $pdo->prepare("SELECT * FROM `articles` WHERE `user_id` = :profile_id ORDER BY `date` DESC");
+// displaying the page's name and its past articles
+$title = "Fakebook - Page " . $page["name"];
+$h1 = $page["name"];
+$maRequete = $pdo->prepare("SELECT * FROM `articles` WHERE `page_id` = :pageId ORDER BY `date` DESC");
 $maRequete->execute([
-	":profile_id" => $profile_id
+	":pageId" => $page_id
 ]);
 $articles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
-// getting the profile's stats
-$maRequete = $pdo->prepare("SELECT `user_id`, `nb_friends`, `nb_articles`, `nb_comments`, `nb_likes`, `comments_on_articles`, `likes_on_articles`, `likes_on_comments` FROM `stats` WHERE `user_id` = :profile_id;");
+// getting the page's stats
+$nb_articles = Count($articles);
+
+$maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHERE `page_id` = :pageId;");
 	$maRequete->execute([
-		":profile_id" => $profile_id
+		":pageId" => $page_id
 	]);
-$profile_stats = $maRequete->fetch();
+$followers = $maRequete->fetch();
+$nb_followers = COUNT($followers)
+
+$is_follower = False;
+foreach ($followers as $follower) {
+	if ($follower['user_id'] === $_SESSION["user"]["user_id"]) {
+		$is_follower = True;
+	}
+}
+
 
 // checking whether we're friends with the person
 $profile_id = filter_input(INPUT_POST, "profil_id");
