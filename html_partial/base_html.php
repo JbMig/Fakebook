@@ -10,6 +10,20 @@
 </head>
 <body>
     <header>
+    <?php if(isset($_SESSION["user"]["user_id"])) {?>
+            	<form id="deco_form" method="post" action="/sign_out">
+                    <button class="nav_deco" id="deconnexion" type="submit">Deconnexion</button>
+                    <input type="hidden" name="deco">
+                </form>
+
+                <a href="timeline">Fil d'actualité</a>
+                
+                <form id="search" method="post" action="/search">
+                    <label id="search" for="search"></label>
+                    <input id="search" type="text" name="search">
+                    <button id="search" type="submit">Chercher</button>
+                </form>
+        <?php }?>
     </header>
     <main>
         <!-- Affiche $content ici -->

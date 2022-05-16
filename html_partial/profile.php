@@ -1,16 +1,4 @@
 <section>
-	<form id="deco_form" method="post" action="/sign_out">
-		<button class="nav_deco" id="deconnection" type="submit">Deconnection</button>
-		<input type="hidden" name="deco">
-	</form>
-	<a href="timeline">Fil d'actualité</a>
-	<form id="search" method="post" action="/search">
-		<label id="search" for="search"></label>
-    	<input id="search" type="text" name="search">
-    	<button id="search" type="submit">Chercher</button>
-</form>
-</section>
-<section>
 	<!-- page top : profile picture, first & last name -->
 	<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
 	<img src="img_baniere/<?= $profile["banner"] ?>" alt="" >
