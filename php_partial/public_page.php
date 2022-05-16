@@ -11,18 +11,19 @@ require_once __DIR__ . "/../database/pdo.php";  // accessing the database
 // }
 
 
-// if we got on the page by clicking a link
-// WE'LL NEED SOMETHING ON TIMELINE OR PROFILE TO ACCESS THE PAGE AND SAVE ITS ID.
-if($_SERVER["REQUEST_METHOD"] === "POST") {
-	$page_id = filter_input(INPUT_POST, "page_id");
 
-    $maRequete = $pdo->prepare("SELECT `page_id`, `name`, `picture`, `banner`, `creation_date` FROM `pages` WHERE `page_id` = :pageId;");
-        $maRequete->execute([
-            ":pageId" => $page_id
-        ]);
-	$page = $maRequete->fetch();
+if($_SERVER["REQUEST_METHOD"] =! "POST") {
+	header("Location: /timeline");
+	exit();
 }
 
+$page_id = filter_input(INPUT_POST, "page_id");
+
+$maRequete = $pdo->prepare("SELECT `page_id`, `name`, `picture`, `banner`, `creation_date` FROM `pages` WHERE `page_id` = :pageId;");
+	$maRequete->execute([
+		":pageId" => $page_id
+	]);
+$page = $maRequete->fetch();
 // displaying the page's name and its past articles
 $title = "Fakebook - Page " . $page["name"];
 $h1 = $page["name"];
@@ -40,7 +41,7 @@ $maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHE
 		":pageId" => $page_id
 	]);
 $followers = $maRequete->fetch();
-$nb_followers = COUNT($followers)
+$nb_followers = COUNT($followers);
 
 
 foreach ($followers as $follower) {
