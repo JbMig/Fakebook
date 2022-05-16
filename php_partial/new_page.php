@@ -21,9 +21,6 @@
                 ]);
 			$pages = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 			$page_id = $pages[0]["page_id"];
-			// var_dump($pages);
-			// var_dump($page_id);
-			// exit();
 			// updating table admins
 			$maRequete = $pdo->prepare(
                 "INSERT INTO `admins` (`page_id`, `user_id`)
