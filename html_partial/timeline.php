@@ -1,12 +1,3 @@
-<form id="deco_form" method="post" action="/sign_out">
-    <button class="nav_deco" id="deconnection" type="submit">Deconnection</button>
-    <input type="hidden" name="deco">
-</form>
-<form id="search" method="post" action="/search">
-	<label id="search" for="search"></label>
-    <input id="search" type="text" name="search">
-    <button id="search" type="submit">Chercher</button>
-</form>
 <!-- link to the current user's profile page -->
 <form id="goToProfile" action="/profile" method="post">
 	<input type="hidden" name="profil_id" value="<?= $_SESSION["user"]["user_id"] ?>" />
