@@ -42,10 +42,13 @@ $maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHE
 $followers = $maRequete->fetch();
 $nb_followers = COUNT($followers)
 
-$is_follower = false;
+
 foreach ($followers as $follower) {
 	if ($follower['user_id'] === $_SESSION["user"]["user_id"]) {
-		$is_follower = true;
+		$is_follower = TRUE;
+	}
+	else {
+		$is_follower = FALSE;
 	}
 }
 
@@ -56,10 +59,13 @@ $maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `admins` WHERE 
 	]);
 $admins = $maRequete->fetch();
 
-$is_admin = false;
+
 foreach ($admins as $admin) {
 	if ($admin['user_id'] === $_SESSION["user"]["user_id"]) {
-		$is_admin = true;
+		$is_admin = TRUE;
+	}
+	else {
+		$is_admin = FALSE;
 	}
 }
 
