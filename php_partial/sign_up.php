@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ":mdp" => $mdp
         ]);
         
-        $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password`, `first_name`, `last_name`, `profil_picture`, `banner`, `status` FROM `users` WHERE `email` = :email;");
+        $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password`, `first_name`, `last_name`, `profil_picture`, `banner`, `status`, `theme` FROM `users` WHERE `email` = :email;");
         $maRequete->execute([
             ":email" => $mail
         ]);
@@ -40,6 +40,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $user = $maRequete->fetch();
 
         $_SESSION["user"] = $user;
+
+		// creating new user's stats
+		$maRequete = $pdo->prepare("INSERT INTO `stats` (`user_id`) VALUES (:userId);");
+		$maRequete->execute([
+			":userId" => $_SESSION["user"]["user_id"]
+		]);
+
+
         http_response_code(302);
         header('Location: /timeline'); //je vais à la page login
         exit();

@@ -1,23 +1,23 @@
 <?php
     if($_SERVER["REQUEST_METHOD"] === "POST") {
-        if(isset($_POST["article_id"])) {
+        if(isset($_POST["comment_id"])) {
             // get info from form
             require "../database/pdo.php";
-            $article_id = filter_input(INPUT_POST, "article_id");
-            $article_user = filter_input(INPUT_POST, "article_user");
+            $comment_id = filter_input(INPUT_POST, "comment_id");
+            $comment_user = filter_input(INPUT_POST, "comment_user");
             $user_id = $_SESSION["user"]["user_id"];
-            // if user_id = article_id, i can delete the article
-            if($article_user === $user_id) {
-                if($article_id) {
-                    // delete article
-                    $maRequete = $pdo->prepare("DELETE FROM `articles` WHERE `article_id` = :id");
+            // if user_id = comment_id, i can delete the comment
+            if($comment_user === $user_id) {
+                if($comment_id) {
+                    // delete comment
+                    $maRequete = $pdo->prepare("DELETE FROM `comments` WHERE `comment_id` = :id");
                     $maRequete->execute([
-                        ":id" => $article_id
+                        ":id" => $comment_id
                     ]);
-					// update the user's stats
-					$maRequete = $pdo->prepare(
+					// updating stats of the comment's writer
+                    $maRequete = $pdo->prepare(
 						"UPDATE `stats`
-						SET `nb_articles` = `nb_articles` - 1
+						SET `nb_comments` = `nb_comments` - 1
 						WHERE `user_id` = :userId;");
 						$maRequete->execute([
 							":userId" => $user_id
@@ -33,7 +33,7 @@
                     exit();
                 }
             } else {
-                $message = "cet article n'est pas de vous"; 
+                $message = "cet comment n'est pas de vous"; 
                 http_response_code(403);
                 require_once __DIR__ . "/../html_partial/alert/baniere.php";
             }

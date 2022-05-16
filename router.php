@@ -17,6 +17,12 @@ switch ($uri) {
     case "/profile":
         require_once __DIR__ . "/php_partial/profile.php";
         break;
+    case "/profile_settings":
+        require_once __DIR__ . "/php_partial/profile_settings.php";
+        break;
+    case "/theme":
+        require_once __DIR__ . "/php_partial/theme.php";
+        break;
     case "/timeline":
         require_once __DIR__ . "/php_partial/timeline.php";
         break;
@@ -29,8 +35,23 @@ switch ($uri) {
     case "/friend_request":
         require_once __DIR__ . "/php_partial/friend_request.php";
         break;
+    case "/friend_request":
+        require_once __DIR__ . "/php_partial/friend_request.php";
+        break;
+    case "/friend_removal":
+        require_once __DIR__ . "/php_partial/friend_removal.php";
+        break;
+    case "/friend_approval":
+        require_once __DIR__ . "/php_partial/friend_approval.php";
+        break;
+    case "/block":
+        require_once __DIR__ . "/php_partial/block.php";
+        break;
     case "/delete":
-        require_once __DIR__ . "/php_partial/delete_article.php";
+        require_once __DIR__ . "/php_partial/delete.php";
+        break;
+    case "/inactive":
+        require_once __DIR__ . "/php_partial/inactive.php";
     case "/modify_article":
         require_once __DIR__ . "/php_partial/modify_article.php";
         break;
@@ -54,6 +75,23 @@ switch ($uri) {
         break;
     case "/edit_banniere":
         require_once __DIR__ . "/php_partial/settings_profil/edit_banniere.php";
+    case "/like_article":
+        require_once __DIR__ . "/php_partial/like_article.php";
+        break;
+    case "/new_comment":
+        require_once __DIR__ . "/php_partial/new_comment.php";
+        break;
+    case "/like_comment":
+        require_once __DIR__ . "/php_partial/like_comment.php";
+        break;
+    case "/delete_comment":
+        require_once __DIR__ . "/php_partial/delete_comment.php";
+        break;
+    case "/modify_comment":
+        require_once __DIR__ . "/php_partial/modify_comment.php";
+        break;
+    case "/search":
+        require_once __DIR__ . "/php_partial/search.php";
         break;
 }
 
