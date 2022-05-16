@@ -13,6 +13,7 @@
             ]);
             $user_like = $maRequete->fetch();
             if($user_like) {
+				// unlike
                 $maRequete = $pdo->prepare("DELETE FROM `likes` WHERE `like_id` = :likeId");
                 $maRequete->execute([
                     ":likeId" => $user_like["like_id"]
@@ -22,6 +23,7 @@
                 $maRequete->execute([
                     ":articleId" => $article_id
                 ]);
+                // updating stats of the liker
                 $maRequete = $pdo->prepare(
                     "UPDATE `stats`
                     SET `nb_likes` = `nb_likes` - 1
@@ -29,14 +31,25 @@
                     $maRequete->execute([
                         ":userId" => $user_id
                     ]);
+				// getting the article's writer's user_id
+				$maRequete = $pdo->prepare(
+					"SELECT `article_id`,`user_id`
+					FROM `articles`
+					WHERE `article_id` = :article_id2;");
+					$maRequete->execute([
+						":article_id2" => $article_id
+				]);
+				$article = $maRequete->fetch(PDO::FETCH_ASSOC);
+				// updating stats of the article writer
                 $maRequete = $pdo->prepare(
                     "UPDATE `stats`
                     SET `likes_on_articles` = `likes_on_articles` - 1
-                    WHERE `user_id` = :userId;");
+                    WHERE `user_id` = :Id;");
                     $maRequete->execute([
-                        ":userId" => $user_id
+                        ":Id" => $article['user_id']
                     ]);
             } else {
+				// like
                 $maRequete = $pdo->prepare("INSERT INTO `likes` (`article_id`, `user_id`) VALUES(:article_id, :userId)");
                 $maRequete->execute([
                     ":article_id" => $article_id,
@@ -47,6 +60,7 @@
                 $maRequete->execute([
                     ":articleId" => $article_id
                 ]);
+                // updating stats of the liker
                 $maRequete = $pdo->prepare(
                     "UPDATE `stats`
                     SET `nb_likes` = `nb_likes` + 1
@@ -54,12 +68,22 @@
                     $maRequete->execute([
                         ":userId" => $user_id
                     ]);
+				// getting the article's writer's user_id
+				$maRequete = $pdo->prepare(
+					"SELECT `article_id`,`user_id`
+					FROM `articles`
+					WHERE `article_id` = :article_id2;");
+					$maRequete->execute([
+						":article_id2" => $article_id
+				]);
+				$article = $maRequete->fetch(PDO::FETCH_ASSOC);
+				// updating stats of the article writer
                 $maRequete = $pdo->prepare(
                     "UPDATE `stats`
                     SET `likes_on_articles` = `likes_on_articles` + 1
-                    WHERE `user_id` = :userId;");
+                    WHERE `user_id` = :Id;");
                     $maRequete->execute([
-                        ":userId" => $user_id
+                        ":Id" => $article['user_id']
                     ]);
             }
 
