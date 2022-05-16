@@ -1,13 +1,13 @@
 <section>
-    <img id="" src="img_profil/<?= $profil_picture ?>" alt="">
-    <form action="/edit_profl" id="edit_profil" method="post" enctype="multipart/form-data">
+    <img id="" src="img_profil/<?= $profil_picture ?>" alt="" width="40px">
+    <form action="/edit_photo" id="edit_profil" method="post" enctype="multipart/form-data">
         <input type="file" name="upload_picture" accept="image/jpeg, image/png, image/gif, image/jpg">
         <button type="submit" id="valider_picture">Valider</button>
     </form>
-    <img id="" src="img_baniere/<?= $banner ?>" alt="">
-    <form action="/edit_profl" id="edit_profil" method="post" enctype="multipart/form-data">
-        <input type="file" name="upload_picture" accept="image/jpeg, image/png, image/gif, image/jpg">
-        <button type="submit" id="valider_picture">Valider</button>
+    <img id="" src="img_baniere/<?= $banner ?>" alt="" width=" 200px">
+    <form action="/edit_banniere" id="edit_banniere" method="post" enctype="multipart/form-data">
+        <input type="file" name="upload_ban" accept="image/jpeg, image/png, image/gif, image/jpg">
+        <button type="submit" id="valider_banniere">Valider</button>
     </form>
     <h2>Modifier profil</h2>
     <button>Valider</button>
