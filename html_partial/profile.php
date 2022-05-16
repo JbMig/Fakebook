@@ -111,7 +111,7 @@
 			<button type="button" id="open_new_page">Créer une page publique</button>
 			<section id="new_page_section">
 				<!-- require un truc ici -->
-				<?php require __DIR__ . "/../php_partial/new_page.php"?>
+				<?php require __DIR__ . "/../php_partial/create_page.php"?>
 			</section>
 		<?php endif ?>
 	<?php endif ?>
