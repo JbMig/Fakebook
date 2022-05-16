@@ -34,7 +34,7 @@ $maRequete = $pdo->prepare("SELECT `user_id`, `nb_friends`, `nb_articles`, `nb_c
 	$maRequete->execute([
 		":profile_id" => $profile_id
 	]);
-$profile_stats = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+$profile_stats = $maRequete->fetch();
 
 // checking whether we're friends with the person
 $profile_id = filter_input(INPUT_POST, "profil_id");
