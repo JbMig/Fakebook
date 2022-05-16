@@ -9,6 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $first_name = $_SESSION["user"]["first_name"];
     $last_name = $_SESSION["user"]["last_name"];
     $password = $_SESSION["user"]["password"];
+    $profil_picture = $_SESSION["user"]["profil_picture"];
+    $banner = $_SESSION["user"]["banner"];
 }
 
 

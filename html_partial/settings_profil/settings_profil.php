@@ -1,16 +1,13 @@
 <section>
     <img id="" src="img_profil/<?= $profil_picture ?>" alt="">
-    <?php if ($profil_id === $_SESSION["user"]["user_id"]) { ?>
-        <button>Modifier photo</button>
-        <form action="/edit_profl" id="edit_profil" method="post">
-            <input type="file" name="upload_picture" accept="image/jpeg, image/png, image/gif, image/jpg">
-            <button type="submit" id="valider_picture">Valider</button>
-        </form>
-    <?php } ?>
-    </div>
-    <form action="">
-        <img src="img_baniere/<?= $profile["banner"] ?>" alt="">
-        <button class="modifi" type="submit">Modifier</button>
+    <form action="/edit_profl" id="edit_profil" method="post" enctype="multipart/form-data">
+        <input type="file" name="upload_picture" accept="image/jpeg, image/png, image/gif, image/jpg">
+        <button type="submit" id="valider_picture">Valider</button>
+    </form>
+    <img id="" src="img_baniere/<?= $banner ?>" alt="">
+    <form action="/edit_profl" id="edit_profil" method="post" enctype="multipart/form-data">
+        <input type="file" name="upload_picture" accept="image/jpeg, image/png, image/gif, image/jpg">
+        <button type="submit" id="valider_picture">Valider</button>
     </form>
     <h2>Modifier profil</h2>
     <button>Valider</button>
@@ -33,9 +30,9 @@
         <h3>Mot de passe</h3>
         <form id="new_password" method="post" action="/new_password">
             <button class="modifi" type="submit">Modifier</button>
-            <input type="text" name="password" placeholder="Mot de passe actuel">
-            <input type="text" name="new_password" placeholder="Nouveau mot de passe">
-            <input type="text" name="confirm_password" placeholder="Confirm mot de passe">
+            <input type="password" name="password" placeholder="Mot de passe actuel">
+            <input type="password" name="new_password" placeholder="Nouveau mot de passe">
+            <input type="password" name="confirm_password" placeholder="Confirm mot de passe">
         </form>
     </div>
 </section>

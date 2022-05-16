@@ -49,6 +49,12 @@ switch ($uri) {
     case "/new_email":
         require_once __DIR__ . "/php_partial/settings_profil/new_email.php";
         break;
+    case "/edit_photo":
+        require_once __DIR__ . "/php_partial/settings_profil/edit_photo.php";
+        break;
+    case "/edit_banniere":
+        require_once __DIR__ . "/php_partial/settings_profil/edit_banniere.php";
+        break;
 }
 
 // we require base_html to display $content ($content references in files from php_partial)
