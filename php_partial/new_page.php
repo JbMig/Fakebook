@@ -8,23 +8,26 @@
             // updating table pages
             $maRequete = $pdo->prepare(
                 "INSERT INTO `pages` (`name`, `description`)
-                VALUES(:page_name, :page_description)");
+                VALUES(:page_name, :page_description);");
                 $maRequete->execute([
                     ":page_name" => $page_name,
                     ":page_description" => $page_description
                 ]);
 			// get the new page's id
 			$maRequete = $pdo->prepare(
-                "SELECT `page_id` FROM `pages` WHERE `name` = :page_name");
+                "SELECT `page_id`, `creation_date` FROM `pages` WHERE `name` = :page_name ORDER BY `creation_date` DESC;");
                 $maRequete->execute([
                     ":page_name" => $page_name
                 ]);
-			$page_id = $maRequete->fetch();
-
+			$pages = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+			// $page_id = $pages[0]["page_id"]
+			var_dump($pages);
+			// var_dump($page_id);
+			exit();
 			// updating table admins
 			$maRequete = $pdo->prepare(
                 "INSERT INTO `admins` (`page_id`, `user_id`)
-                VALUES(:pageId, :userId)");
+                VALUES(:pageId, :userId);");
                 $maRequete->execute([
                     ":pageId" => $page_id,
                     ":userId" => $user_id
