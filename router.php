@@ -102,6 +102,9 @@ switch ($uri) {
     case "/unfollow":
         require_once __DIR__ . "/php_partial/unfollow.php";
         break;
+    case "/new_page":
+        require_once __DIR__ . "/php_partial/new_page.php";
+        break;
 }
 
 // we require base_html to display $content ($content references in files from php_partial)

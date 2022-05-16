@@ -21,14 +21,17 @@ CREATE TABLE IF NOT EXISTS `pages` (
 	`name` VARCHAR(255),
 	`picture` VARCHAR(255) DEFAULT "default_page_pic.jpeg",
 	`banner` VARCHAR(255) DEFAULT "default_banner.jpg",
+	`description` TEXT,
 	`creation_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`page_id`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `groups` (
 	`group_id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255),
 	`picture` VARCHAR(255) DEFAULT "default_page_pic.jpeg",
 	`banner` VARCHAR(255) DEFAULT "default_banner.jpg",
+	`description` TEXT,
 	`creation_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	`status` ENUM('public', 'private') DEFAULT 'public',
 	PRIMARY KEY (`group_id`)
@@ -257,3 +260,8 @@ VALUES
 INSERT INTO `relationships` (`user_id_a`,`user_id_b`,`status`)
 VALUES
 (1,2,'approved');
+
+ALTER TABLE pages
+ADD `description` TEXT AFTER `banner`;
+ALTER TABLE groups
+ADD `description` TEXT AFTER `banner`;
