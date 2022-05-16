@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 CREATE TABLE IF NOT EXISTS `pages` (
 	`page_id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255),
 	`picture` VARCHAR(255) DEFAULT "default_page_pic.jpeg",
 	`banner` VARCHAR(255) DEFAULT "default_banner.jpg",
 	`creation_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -203,14 +204,6 @@ ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE C
 
 
 
-
--- ALTER TABLE `relationships`
--- ADD `who_asked` INT;
--- ALTER TABLE `relationships`
--- ADD CONSTRAINT FOREIGN KEY (`who_asked`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
-
--- not necessary in the end : the one who sent the request is always user_id_a.
--- if you have added the column already, drop the table and build it again.
 
 
 
