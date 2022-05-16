@@ -14,7 +14,7 @@
 				":profile_id" => $profile_id,
 				":userId" => $user_id
 			]);
-			$relationship = = $maRequete->fetch();
+			$relationship = $maRequete->fetch();
 			if ($relationship['status'] == 'approved') {
 				$maRequete = $pdo->prepare(
 					"UPDATE `stats`
