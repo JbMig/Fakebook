@@ -21,6 +21,18 @@
                 ]);
 			$pages = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 			$page_id = $pages[0]["page_id"];
+
+			$maRequete = $pdo->prepare(
+                "SELECT * FROM `pages` WHERE `page_id` = :pageId;");
+                $maRequete->execute([
+                    ":pageId" => $page_id
+                ]);
+			$current_page = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+			
+
+			$_SESSION["page"] = $current_page;
+
+
 			// updating table admins
 			$maRequete = $pdo->prepare(
                 "INSERT INTO `admins` (`page_id`, `user_id`)
@@ -37,7 +49,15 @@
                     ":pageId" => $page_id,
                     ":userId" => $user_id
                 ]);
-
+			
+			$maRequete = $pdo->prepare(
+				"SELECT * FROM `admins` WHERE `page_id` = :pageId;");
+				$maRequete->execute([
+					":pageId" => $page_id
+				]);
+			$current_admins = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+			
+			$_SESSION["page_admin"] = $current_admins;
 
             http_response_code(302);
             header("Location: /public_page"); // voir avec adrien pr envoyer le page_id

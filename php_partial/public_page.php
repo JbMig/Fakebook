@@ -12,18 +12,14 @@ require_once __DIR__ . "/../database/pdo.php";  // accessing the database
 
 
 
-if($_SERVER["REQUEST_METHOD"] =! "POST") {
+if($_SERVER["REQUEST_METHOD"] === "POST") {
 	header("Location: /timeline");
 	exit();
 }
 
-$page_id = filter_input(INPUT_POST, "page_id"); // on ne récupère pas le page_id à la fin de php_partials/new_page.php dc ça ne marche pas
+$page_id = $_SESSION["page"]["page_id"];
 
-$maRequete = $pdo->prepare("SELECT `page_id`, `name`, `picture`, `banner`, `creation_date` FROM `pages` WHERE `page_id` = :pageId;");
-	$maRequete->execute([
-		":pageId" => $page_id
-	]);
-$page = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+$page = $_SESSION["page"];
 // displaying the page's name and its past articles
 $title = "Fakebook - Page " . $page["name"];
 $h1 = $page["name"];
