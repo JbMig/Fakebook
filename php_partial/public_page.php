@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 	header("Location: /timeline");
 	exit();
 }
-
+$user_id = $_SESSION["user"]["user_id"];
 $page_id = $_SESSION["page"]["page_id"];
 //var_dump($page_id);
 $page = $_SESSION["page"];
