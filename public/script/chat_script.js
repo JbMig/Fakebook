@@ -1,5 +1,11 @@
 // section.scrollTop = scroll.scrollHeight;
+document.addEventListener("DOMContentLoaded",refreshState);
+
 setInterval(() => {
+    refreshState();
+}, 2000);
+
+function refreshState() {
     let section = document.querySelector("#section_message");
     fetch("/chat2")
         .then(res => res.json())
@@ -38,12 +44,35 @@ setInterval(() => {
                 span.innerHTML = name + ": " + element.content;
                 div.appendChild(span);
             });
-        });
-}, 2000);
-var new_message = document.querySelector("#new_message");
-var new_message_btn = document.querySelector("#new_message_btn");
-function send_message() {
-    fetch("/new_message")
+        })
+    ;
 }
 
-new_message_btn.addEventListener("click", send_message);
+document.querySelector("#new_message_form").addEventListener("submit", function (event) {
+    event.preventDefault()
+    // const data = new FormData(this)
+    fetch("/new_message", {
+        method: "POST",
+        body: new FormData(this)
+    }) .then(() => {
+        document.querySelector("#new_message").value = "";
+        refreshState()
+    })
+});
+
+// test param in url:
+// document.querySelector("#new_message_form").addEventListener("submit", function (event) {
+//     event.preventDefault()
+//     const data = new FormData(this)
+//     console.log(data.get("new_message"));
+//     console.log(data.get("chat_id"));
+//     fetch(`/new_message?new_message=${data.get("new_message")}&chat_id=${data.get("chat_id")}`, {
+//         method: "POST"
+//     }) .then(() => {
+//         document.querySelector("#new_message").value = "";
+//         refreshState()
+//     })
+// });
+
+
+
