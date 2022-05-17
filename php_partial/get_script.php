@@ -8,4 +8,6 @@
     <script src="script/profile_script.js?<?php echo time(); ?>"></script>
 <?php elseif($uri === "/new_chat") :?>
     <script src="script/new_chat_script.js?<?php echo time(); ?>"></script>
+<?php elseif($uri === "/chat") :?>
+    <script src="script/chat_script.js?<?php echo time(); ?>"></script>
 <?php endif; ?>
