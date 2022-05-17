@@ -54,6 +54,12 @@ $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked`
 	]);
 $profile_friend_request = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
+$maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
+    $maRequete->execute([
+        ":userId" => $user_id
+    ]);
+    $user_likes = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+    $like = "like";
 
 require_once __DIR__ . "/../html_partial/profile.php";
 $content = ob_get_clean();
