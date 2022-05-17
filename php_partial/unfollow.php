@@ -15,7 +15,7 @@
 			// go back to public_page
 			http_response_code(302);
 
-			header("Location: /public_page"); // later, change this to /public_page (we need to save which page)
+			header("Location: /public_page"); 
 			exit();
 		}
     }

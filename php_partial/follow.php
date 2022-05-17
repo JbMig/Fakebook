@@ -1,6 +1,6 @@
 <?php
     if($_SERVER["REQUEST_METHOD"] === "POST") {
-		if(isset($_POST["friend_approval"])) {
+		if(isset($_POST["follow"])) {
             // get info from form
             require "../database/pdo.php";
             $page_id = filter_input(INPUT_POST, "follow");
@@ -12,10 +12,10 @@
 				":userId" => $user_id
 			]);
 
-			// go back to profile
+			// go back to public_page
 			http_response_code(302);
 
-			header("Location: /timeline"); // later, change this to /public_page (we need to save which page)
+			header("Location: /public_page");
 			exit();
 		}
     }
