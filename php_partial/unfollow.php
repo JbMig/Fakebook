@@ -1,9 +1,9 @@
 <?php
     if($_SERVER["REQUEST_METHOD"] === "POST") {
-		if(isset($_POST["friend_approval"])) {
+		if(isset($_POST["unfollow"])) {
             // get info from form
             require "../database/pdo.php";
-            $page_id = filter_input(INPUT_POST, "follow");
+            $page_id = $_SESSION["page"]["page_id"];
             $user_id = $_SESSION["user"]["user_id"];
 			// delete relatioship from database
 			$maRequete = $pdo->prepare("DELETE FROM `followers` WHERE `page_id` = :pageId AND `user_id` = :userId;");
@@ -12,10 +12,10 @@
 				":userId" => $user_id
 			]);
 
-			// go back to profile
+			// go back to public_page
 			http_response_code(302);
 
-			header("Location: /timeline"); // later, change this to /public_page (we need to save which page)
+			header("Location: /public_page"); // later, change this to /public_page (we need to save which page)
 			exit();
 		}
     }
