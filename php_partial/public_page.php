@@ -53,12 +53,14 @@ foreach ($followers as $follower) {
 			$maRequete->execute([
 				":Id" => $follower['user_id']
 			]);
+			$maRequete->setFetchMode(PDO::FETCH_ASSOC);
 		array_push($accounts, $maRequete->fetch());
 	}
 	else {
 		$is_follower = FALSE;
 	}
 }
+var_dump($accounts);
 
 // getting the page's admins
 $maRequete = $pdo->prepare("SELECT `admin_id`, `user_id` FROM `admins` WHERE `page_id` = :pageId;");
