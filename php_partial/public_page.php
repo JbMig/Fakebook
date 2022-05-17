@@ -44,9 +44,16 @@ $followers = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 $nb_followers = COUNT($followers);
 
 
+$follow_accounts = [];
+
 foreach ($followers as $follower) {
 	if ($follower['user_id'] === $_SESSION["user"]["user_id"]) {
 		$is_follower = TRUE;
+		$maRequete = $pdo->prepare("SELECT `user_id`, `first_name`, `last_name` FROM `users` WHERE `user_id` = :Id;");
+			$maRequete->execute([
+				":Id" => $follower['user_id']
+			]);
+		$follow_accounts_push($maRequete->fetch());
 	}
 	else {
 		$is_follower = FALSE;

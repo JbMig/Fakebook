@@ -115,6 +115,12 @@
 		</div>
 	</div>
 	<div>
+		<button type="button" id="open_followers_list">Afficher les followers</button>
+		<?php foreach ($follow_accounts as $follow_account) : ?>
+			<span><?php$follow_account["first_name"] . " " . $follow_account["last_name"]?></span> </br>
+		<?php endforeach; ?>
+	</div>
+	<div>
 	<!-- stats -->
 		<div>
 		<!-- articles published through time -->
