@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 CREATE TABLE IF NOT EXISTS `pages` (
 	`page_id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(255),
-	`picture` VARCHAR(255) DEFAULT "default_page_pic.jpeg",
+	`picture` VARCHAR(255) DEFAULT "default_page_pic.jpg",
 	`banner` VARCHAR(255) DEFAULT "default_banner.jpg",
 	`description` TEXT,
 	`creation_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
 CREATE TABLE IF NOT EXISTS `groups` (
 	`group_id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(255),
-	`picture` VARCHAR(255) DEFAULT "default_page_pic.jpeg",
+	`picture` VARCHAR(255) DEFAULT "default_page_pic.jpg",
 	`banner` VARCHAR(255) DEFAULT "default_banner.jpg",
 	`description` TEXT,
 	`creation_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
