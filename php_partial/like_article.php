@@ -94,9 +94,11 @@
             // go to the previous page
             if($direction[3] === "profile") {
                 header('Location: /profile');
-            } else {
-                header('Location: /timeline');
-            }
+            } else if ($direction[3] === "timeline") {
+				header("Location: /timeline");
+			} else if ($direction[3] === "public_page") {
+				header("Location: /public_page");
+			}
             exit();
         }
     }
