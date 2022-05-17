@@ -21,7 +21,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 $user_id = $_SESSION["user"]["user_id"];
 $page_id = $_SESSION["page"]["page_id"];
-//var_dump($page_id);
 $page = $_SESSION["page"];
 
 // displaying the page's name and its past articles
@@ -43,16 +42,23 @@ $maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHE
 $followers = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 $nb_followers = COUNT($followers);
 
-//var_dump($followers);
+
+$maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHERE `page_id` = :pageId AND `user_id` = :userId;");
+	$maRequete->execute([
+		":pageId" => $page_id,
+		":userId" => $user_id
+	]);
+$user_is_follower = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+if (COUNT($user_is_follower)>0){
+	$is_follower = TRUE;
+} else {
+	$is_follower = FALSE;
+}
+
+
 $accounts = array();
 
 foreach ($followers as $follower) {
-	if ($follower['user_id'] === $_SESSION["user"]["user_id"]) {
-		$is_follower = TRUE;
-	}
-	else {
-		$is_follower = FALSE;
-	}
 	$maRequete = $pdo->prepare("SELECT `user_id`, `first_name`, `last_name`, `profil_picture` FROM `users` WHERE `user_id` = :Id;");
 		$maRequete->execute([
 			":Id" => $follower['user_id']
@@ -65,7 +71,6 @@ foreach ($followers as $follower) {
 
 
 
-var_dump($is_follower);
 // getting the page's admins
 $maRequete = $pdo->prepare("SELECT `admin_id`, `user_id` FROM `admins` WHERE `page_id` = :pageId;");
 	$maRequete->execute([
