@@ -62,9 +62,9 @@ $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
     $like = "like";
 
 // get the pages the person follows
-$maRequete = $pdo->prepare("SELECT `page_id`, `name`, `picture` FROM `pages` WHERE `page_id` IN (SELECT `page_id` FROM `followers` WHERE `user_id` = :userId)");
+$maRequete = $pdo->prepare("SELECT `page_id`, `name`, `picture` FROM `pages` WHERE `page_id` IN (SELECT `page_id` FROM `followers` WHERE `user_id` = :profile_id)");
     $maRequete->execute([
-        ":userId" => $user_id
+		":profile_id" => $profile_id
     ]);
     $pages = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 

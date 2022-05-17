@@ -3,15 +3,7 @@ ob_start();
 
 require_once __DIR__ . "/../database/pdo.php";  // accessing the database
 
-// updating $_SESSION["page"]
-$page_id = $_SESSION["page"]["page_id"];
-$maRequete = $pdo->prepare(
-	"SELECT * FROM `pages` WHERE `page_id` = :pageId;");
-	$maRequete->execute([
-		":pageId" => $page_id
-	]);
-$current_page = $maRequete->fetch();
-$_SESSION["page"] = $current_page;
+
 
 
 
@@ -21,7 +13,18 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 	$page_id = $_SESSION["page"]["page_id"];
 }
 $user_id = $_SESSION["user"]["user_id"];
+// updating $_SESSION["page"]
 
+
+$maRequete = $pdo->prepare(
+	"SELECT * FROM `pages` WHERE `page_id` = :pageId;");
+	$maRequete->execute([
+		":pageId" => $page_id
+	]);
+$current_page = $maRequete->fetch();
+$_SESSION["page"] = $current_page;
+
+$page_id = $_SESSION["page"]["page_id"];
 $page = $_SESSION["page"];
 
 // displaying the page's name and its past articles
