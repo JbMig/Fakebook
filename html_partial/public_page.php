@@ -83,6 +83,13 @@
 							<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
 							<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
 						</form>
+						<form id="form_modify_article" method="post" action="/modify_article">
+							<label id="label_modify" for="modify_input">Ecrivez votre message</label>
+							<textarea id="modify_article_input" type="text" name="modify_article" value=""><?= $article["content"] ?></textarea>
+							<button id="modify_btn" type="submit">Valider</button>
+							<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
+							<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
+						</form>
 					<?php endif ?>
 				</div>
 			<?php endforeach;?>
