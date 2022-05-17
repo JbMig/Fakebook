@@ -120,7 +120,7 @@
 		<button type="button" id="open_followers_list">Afficher les followers</button>
 		<section id="followers_list" style="display: none">
 			<?php foreach ($accounts as $account) : ?>
-				<input type="hidden" name="profil_id" value="<?= $article["user_id"] ?>" />
+				<input type="hidden" name="profil_id" value="<?= $user_id ?>" />
 				<button type="submit" id="first_name" style="background: white; border:0; padding:0;">
 				<span><?= $account["first_name"] . " " . $account["last_name"]?></span> </br>
 				</button>
