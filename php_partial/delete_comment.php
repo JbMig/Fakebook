@@ -28,8 +28,10 @@
                     if($direction[3] === "profile") {
                         header("Location: /profile");
                     } else if ($direction[3] === "timeline") {
-                        header("Location: /timeline");
-                    }
+						header("Location: /timeline");
+					} else if ($direction[3] === "public_page") {
+						header("Location: /public_page");
+					}
                     exit();
                 }
             } else {
