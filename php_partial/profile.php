@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 // displaying the profile's owner name and his past articles
 $title = "Fakebook - Profil de " . $profile["first_name"] . " " . $profile["last_name"];
 $h1 = $profile["first_name"] . " " . $profile["last_name"];
-$maRequete = $pdo->prepare("SELECT * FROM `articles` WHERE `user_id` = :profile_id ORDER BY `date` DESC");
+$maRequete = $pdo->prepare("SELECT * FROM `articles` WHERE `user_id` = :profile_id ORDER BY `date` DESC ;");
 $maRequete->execute([
 	":profile_id" => $profile_id
 ]);
