@@ -44,7 +44,7 @@ $followers = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 $nb_followers = COUNT($followers);
 
 
-$accounts = [];
+$accounts = array();
 
 foreach ($followers as $follower) {
 	if ($follower['user_id'] === $_SESSION["user"]["user_id"]) {
@@ -53,7 +53,7 @@ foreach ($followers as $follower) {
 			$maRequete->execute([
 				":Id" => $follower['user_id']
 			]);
-		$accounts_push($maRequete->fetch());
+		array_push($accounts, $maRequete->fetch());
 	}
 	else {
 		$is_follower = FALSE;
