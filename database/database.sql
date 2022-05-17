@@ -263,11 +263,4 @@ VALUES
 
 
 -- for myself (Valentine). will be deleted before we send it
-INSERT INTO `relationships` (`user_id_a`,`user_id_b`,`status`)
-VALUES
-(1,2,'approved');
-
-ALTER TABLE pages
-ADD `description` TEXT AFTER `banner`;
-ALTER TABLE groups
-ADD `description` TEXT AFTER `banner`;
+UPDATE `pages` SET `picture` = "default_page_pic.jpg" WHERE `picture` = "default_page_pic.jpeg";

@@ -1,7 +1,7 @@
 
 <section>
 	<!-- page top : profile picture, first & last name -->
-	<img src="img_profil/<?= $page["picture"] ?>" alt="" width="40px">
+	<img src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
 	<img src="img_baniere/<?= $page["banner"] ?>" alt="" >
 </section>
 <h1 id="h1"><?=$h1?></h1>
@@ -73,7 +73,7 @@
 					<form id="goToProfile" action="/profile" method="post"> <!-- needs to be modified to match a page -->
 						<input type="hidden" name="profil_id" value="<?= $page_id ?>" />
 						<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-							<img src="img_profil/<?= $page["picture"] ?>" alt="" width="40px">
+							<img src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
 						</button>
 						<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
 							<?= $page["name"] ?> 
