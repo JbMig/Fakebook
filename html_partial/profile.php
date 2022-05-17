@@ -1,16 +1,4 @@
 <section>
-	<form id="deco_form" method="post" action="/sign_out">
-		<button class="nav_deco" id="deconnection" type="submit">Deconnection</button>
-		<input type="hidden" name="deco">
-	</form>
-	<a href="timeline">Fil d'actualité</a>
-	<form id="search" method="post" action="/search">
-		<label id="search" for="search"></label>
-    	<input id="search" type="text" name="search">
-    	<button id="search" type="submit">Chercher</button>
-</form>
-</section>
-<section>
 	<!-- page top : profile picture, first & last name -->
 	<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
 	<img src="img_baniere/<?= $profile["banner"] ?>" alt="" >
@@ -18,13 +6,13 @@
 <h1 id="h1"><?=$h1?></h1>
 <!-- stats -->
 <section>
-<div> <?=$profile["first_name"]?> a <?=$profile_stats["nb_friends"]?> relations. </div>
-<div> <?=$profile["first_name"]?> a publié <?=$profile_stats["nb_articles"]?>. </div>
-<div> <?=$profile["first_name"]?> a commenté <?=$profile_stats["nb_comments"]?> articles. </div>
-<div> <?=$profile["first_name"]?> a mis <?=$profile_stats["nb_likes"]?> likes. </div>
-<div> Les articles de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["comments_on_articles"]?> commentaires. </div>
-<div> Les articles de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["likes_on_articles"]?> likes. </div>
-<div> Les commentaires de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["likes_on_comments"]?> likes. </div>
+<div> <?=$profile["first_name"]?> a <?=$profile_stats["nb_friends"]?> relation(s). </div>
+<div> <?=$profile["first_name"]?> a publié <?=$profile_stats["nb_articles"]?> article(s). </div>
+<div> <?=$profile["first_name"]?> a commenté <?=$profile_stats["nb_comments"]?> article(s). </div>
+<div> <?=$profile["first_name"]?> a mis <?=$profile_stats["nb_likes"]?> like(s). </div>
+<div> Les articles de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["comments_on_articles"]?> commentaire(s). </div>
+<div> Les articles de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["likes_on_articles"]?> like(s). </div>
+<div> Les commentaires de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["likes_on_comments"]?> like(s). </div>
 </section> <br> <!-- we will remove this br when the css is done-->
 <section>
 	<!-- if it's not the page of the current user (he's visiting someone else's page) -->

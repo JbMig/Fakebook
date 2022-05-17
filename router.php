@@ -104,6 +104,17 @@ switch ($uri) {
         break;
     case "/new_page":
         require_once __DIR__ . "/php_partial/new_page.php";
+    case "/new_chat":
+        require_once __DIR__ . "/php_partial/messenger/new_chat.php";
+        break;
+    case "/conversation":
+        require_once __DIR__ . "/php_partial/messenger/conversation.php";
+        break;
+    case "/chat":
+        require_once __DIR__ . "/php_partial/messenger/chat.php";
+        break;
+    case "/new_message":
+        require_once __DIR__ . "/php_partial/messenger/new_message.php";
         break;
 }
 

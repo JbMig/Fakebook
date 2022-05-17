@@ -103,13 +103,15 @@ CREATE TABLE IF NOT EXISTS `relationships` (
 CREATE TABLE IF NOT EXISTS `chats` (
 	`chat_id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(20) DEFAULT 'Nouvelle discussion',
-	`chat_pic` VARCHAR(255) DEFAULT "default_page_pic.jpeg",
+	`chat_pic` VARCHAR(255) DEFAULT "default_page_pic.jpg",
+	`uuid` VARCHAR(255),
 	PRIMARY KEY (`chat_id`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `messages` (
 	`message_id` INT NOT NULL AUTO_INCREMENT,
 	`date` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	`content` TEXT,
 	`picture` VARCHAR(255),
 	`chat_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
@@ -200,6 +202,8 @@ ADD CONSTRAINT FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELET
 
 ALTER TABLE `stats`
 ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
+
+ALTER TABLE `chats` ADD `uuid` VARCHAR(255);
  
 
 
@@ -250,6 +254,8 @@ VALUES
 (2,1,1,1,0),
 (3,1,2,1,1),
 (4,1,1,1,0);
+
+
 
 
 
