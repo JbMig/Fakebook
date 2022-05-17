@@ -27,7 +27,7 @@
                 $maRequete->execute([
                     ":pageId" => $page_id
                 ]);
-			$current_page = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+			$current_page = $maRequete->fetch();
 			
 
 			$_SESSION["page"] = $current_page;

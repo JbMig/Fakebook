@@ -18,8 +18,9 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 $page_id = $_SESSION["page"]["page_id"];
-
+//var_dump($page_id);
 $page = $_SESSION["page"];
+
 // displaying the page's name and its past articles
 $title = "Fakebook - Page " . $page["name"];
 $h1 = $page["name"];
@@ -36,7 +37,7 @@ $maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHE
 	$maRequete->execute([
 		":pageId" => $page_id
 	]);
-$followers = $maRequete->fetch();
+$followers = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 $nb_followers = COUNT($followers);
 
 
@@ -50,11 +51,11 @@ foreach ($followers as $follower) {
 }
 
 // getting the page's admins
-$maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `admins` WHERE `page_id` = :pageId;");
+$maRequete = $pdo->prepare("SELECT `admin_id`, `user_id` FROM `admins` WHERE `page_id` = :pageId;");
 	$maRequete->execute([
 		":pageId" => $page_id
 	]);
-$admins = $maRequete->fetch();
+$admins = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
 
 foreach ($admins as $admin) {
