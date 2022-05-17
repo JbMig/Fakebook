@@ -81,6 +81,7 @@
                 </section>
 			</div>
 		<?php else : ?>
+			<!-- then the user's friends' articles -->
 			<?php foreach ($profile_friends as $profile_friend) : ?>
 				<?php if (($profile_friend["user_id_a"] === $article["user_id"] || $profile_friend["user_id_b"]=== $article["user_id"]) && $status === "active") : ?>
 					<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
