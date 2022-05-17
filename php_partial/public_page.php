@@ -3,12 +3,15 @@ ob_start();
 
 require_once __DIR__ . "/../database/pdo.php";  // accessing the database
 
-// WE SHOULDN'T NEED THIS :
-// // if we got on the page with the url (without following a link), we end up on our own profile page
-// if($_SERVER["REQUEST_METHOD"] === "GET") {
-// 	$profile_id = $_SESSION["user"]["user_id"]; // needed to check whether it's the user's page or someone else's.
-// 	$profile = $_SESSION["user"];
-// }
+// updating $_SESSION["page"]
+$page_id = $_SESSION["page"]["page_id"];
+$maRequete = $pdo->prepare(
+	"SELECT * FROM `pages` WHERE `page_id` = :pageId;");
+	$maRequete->execute([
+		":pageId" => $page_id
+	]);
+$current_page = $maRequete->fetch();
+$_SESSION["page"] = $current_page;
 
 
 
