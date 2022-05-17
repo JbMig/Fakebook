@@ -49,18 +49,23 @@ $accounts = array();
 foreach ($followers as $follower) {
 	if ($follower['user_id'] === $_SESSION["user"]["user_id"]) {
 		$is_follower = TRUE;
-		$maRequete = $pdo->prepare("SELECT `user_id`, `first_name`, `last_name` FROM `users` WHERE `user_id` = :Id;");
-			$maRequete->execute([
-				":Id" => $follower['user_id']
-			]);
-			$maRequete->setFetchMode(PDO::FETCH_ASSOC);
-		array_push($accounts, $maRequete->fetch());
 	}
 	else {
 		$is_follower = FALSE;
 	}
+	$maRequete = $pdo->prepare("SELECT `user_id`, `first_name`, `last_name`, `profil_picture` FROM `users` WHERE `user_id` = :Id;");
+		$maRequete->execute([
+			":Id" => $follower['user_id']
+		]);
+		$maRequete->setFetchMode(PDO::FETCH_ASSOC);
+	array_push($accounts, $maRequete->fetch());
 }
-var_dump($accounts);
+
+
+
+
+
+var_dump($is_follower);
 // getting the page's admins
 $maRequete = $pdo->prepare("SELECT `admin_id`, `user_id` FROM `admins` WHERE `page_id` = :pageId;");
 	$maRequete->execute([
