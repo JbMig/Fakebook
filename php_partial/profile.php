@@ -2,7 +2,7 @@
 ob_start();
 
 require_once __DIR__ . "/../database/pdo.php";  // accessing the database
-
+$user_id = $_SESSION["user"]["user_id"];
 // if we got on the page with the url (without following a link), we end up on our own profile page
 if($_SERVER["REQUEST_METHOD"] === "GET") {
 	$profile_id = $_SESSION["user"]["user_id"]; // needed to check whether it's the user's page or someone else's.
