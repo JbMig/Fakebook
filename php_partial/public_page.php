@@ -43,7 +43,7 @@ $maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHE
 $followers = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 $nb_followers = COUNT($followers);
 
-
+//var_dump($followers);
 $accounts = array();
 
 foreach ($followers as $follower) {
@@ -60,7 +60,7 @@ foreach ($followers as $follower) {
 		$is_follower = FALSE;
 	}
 }
-
+var_dump($accounts);
 // getting the page's admins
 $maRequete = $pdo->prepare("SELECT `admin_id`, `user_id` FROM `admins` WHERE `page_id` = :pageId;");
 	$maRequete->execute([
