@@ -116,9 +116,11 @@
 	</div>
 	<div>
 		<button type="button" id="open_followers_list">Afficher les followers</button>
-		<?php foreach ($accounts as $account) : ?>
-			<span><?= $account["first_name"] . " " . $account["last_name"]?></span> </br>
-		<?php endforeach; ?>
+		<section id="followers_list">
+			<?php foreach ($accounts as $account) : ?>
+				<span><?= $account["first_name"] . " " . $account["last_name"]?></span> </br>
+			<?php endforeach; ?>
+		</section>
 	</div>
 	<div>
 	<!-- stats -->

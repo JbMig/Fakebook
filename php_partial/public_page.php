@@ -60,7 +60,6 @@ foreach ($followers as $follower) {
 		$is_follower = FALSE;
 	}
 }
-var_dump($accounts);
 
 // getting the page's admins
 $maRequete = $pdo->prepare("SELECT `admin_id`, `user_id` FROM `admins` WHERE `page_id` = :pageId;");

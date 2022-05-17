@@ -25,7 +25,7 @@ open_modify_article.forEach(button => {
     target.innerHTML = isVisible ? "Annuler" : "Modifier"
   })
 })
-
+// open the comments area
 let open_comment = document.querySelectorAll("#open_comment");
 open_comment.forEach(button => {
   let isVisibleComment = false;
@@ -37,7 +37,7 @@ open_comment.forEach(button => {
     target.innerHTML = isVisibleComment ? "Annuler" : "Comment"
   })
 })
-
+// open the comment's modification area
 let open_modify_comment = document.querySelectorAll("#open_modify_comment");
 open_modify_comment.forEach(button => {
   let isVisibleModifyComment = false;
@@ -47,6 +47,19 @@ open_modify_comment.forEach(button => {
     isVisibleModifyComment = !isVisibleModifyComment;
     toDisplay.style.display = isVisibleModifyComment ? "block" : "none";
     target.innerHTML = isVisibleModifyComment ? "Annuler" : "Comment"
+  })
+})
+
+// open the followers list area
+let open_followers_list = document.querySelectorAll("#open_followers_list");
+open_followers_list.forEach(button => {
+  let isVisibleFollowersList = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisibleFollowersList = !isVisibleFollowersList;
+    toDisplay.style.display = isVisibleFollowersList ? "block" : "none";
+    target.innerHTML = isVisibleFollowersList ? "Replier la liste" : "Afficher les followers"
   })
 })
 
