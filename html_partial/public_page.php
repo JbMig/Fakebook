@@ -116,7 +116,7 @@
 	</div>
 	<div>
 		<button type="button" id="open_followers_list">Afficher les followers</button>
-		<section id="followers_list">
+		<section id="followers_list" style="display: none">
 			<?php foreach ($accounts as $account) : ?>
 				<span><?= $account["first_name"] . " " . $account["last_name"]?></span> </br>
 			<?php endforeach; ?>
