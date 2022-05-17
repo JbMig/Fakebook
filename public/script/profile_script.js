@@ -25,3 +25,16 @@ open_modify_article.forEach(button => {
     target.innerHTML = isVisible ? "Annuler" : "Modifier"
   })
 })
+
+// open the pages list area
+let open_pages_list = document.querySelectorAll("#open_pages_list");
+open_pages_list.forEach(button => {
+  let isVisiblepagesList = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisiblepagesList = !isVisiblepagesList;
+    toDisplay.style.display = isVisiblepagesList ? "block" : "none";
+    target.innerHTML = isVisiblepagesList ? "Replier la liste" : "Afficher les pages suivies"
+  })
+})

@@ -16,11 +16,12 @@ $_SESSION["page"] = $current_page;
 
 
 if($_SERVER["REQUEST_METHOD"] === "POST") {
-	header("Location: /timeline");
-	exit();
+	$page_id = filter_input(INPUT_POST, "page_id");
+} else {
+	$page_id = $_SESSION["page"]["page_id"];
 }
 $user_id = $_SESSION["user"]["user_id"];
-$page_id = $_SESSION["page"]["page_id"];
+
 $page = $_SESSION["page"];
 
 // displaying the page's name and its past articles
