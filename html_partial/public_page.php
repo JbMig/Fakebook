@@ -7,8 +7,8 @@
 <h1 id="h1"><?=$h1?></h1>
 <!-- stats -->
 <section> 
-<div> <?=$page["name"]?> compte <?=$nb_articles?> articles. </div>
-<div> <?=$page["name"]?> est suivie par <?=$nb_followers?> personnes. </div>
+<div> <?=$page["name"]?> compte <?=$nb_articles?> article(s). </div>
+<div> <?=$page["name"]?> est suivie par <?=$nb_followers?> personne(s). </div>
 </section> <br> <!-- we will remove this br when the css is done-->
 <section>
 	<div>
@@ -46,7 +46,7 @@
 		<!-- new article -->
 			<!-- Form new article: needs to be modified to match a page -->
 			<?php if ($is_admin) :?>
-			<form id="newPublicationForm" method="post" enctype="multipart/form-data" action="/new_article">
+			<form id="newPublicationForm" method="post" enctype="multipart/form-data" action="/new_article_page">
 				<label id="publicationLabel" for="articleInput">Ecrivez votre message</label><br>
 				<textarea id="articleInput" name="articleInput" type="text"></textarea>
 				<div id="depose">Déposez vos images ou cliquez pour choisir</div>
