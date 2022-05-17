@@ -29,6 +29,9 @@ switch ($uri) {
     case "/new_article":
         require_once __DIR__ . "/php_partial/new_article.php";
         break;
+    case "/new_article_page":
+        require_once __DIR__ . "/php_partial/new_article_page.php";
+        break;
     case "/delete_article":
         require_once __DIR__ . "/php_partial/delete_article.php";
         break;
@@ -93,6 +96,17 @@ switch ($uri) {
     case "/search":
         require_once __DIR__ . "/php_partial/search.php";
         break;
+    case "/public_page":
+        require_once __DIR__ . "/php_partial/public_page.php";
+        break;
+    case "/follow":
+        require_once __DIR__ . "/php_partial/follow.php";
+        break;
+    case "/unfollow":
+        require_once __DIR__ . "/php_partial/unfollow.php";
+        break;
+    case "/new_page":
+        require_once __DIR__ . "/php_partial/new_page.php";
     case "/new_chat":
         require_once __DIR__ . "/php_partial/messenger/new_chat.php";
         break;

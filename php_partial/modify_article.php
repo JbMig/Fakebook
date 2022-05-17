@@ -7,6 +7,8 @@
             $data = filter_input(INPUT_POST, "modify_article");
             $article_user = filter_input(INPUT_POST, "article_user");
             $article_id = filter_input(INPUT_POST, "article_id");
+            $page = $_SESSION["page"];
+			$page_id = $_SESSION["page"]["page_id"];
             if($article_user === $user_id) {
                 // update the article
                 $maRequete = $pdo->prepare("UPDATE `articles` SET `content`= :oneData, `date` = CURRENT_TIMESTAMP WHERE `article_id` = :article_id");
@@ -20,8 +22,10 @@
                 // go to the previous page
                 if($direction[3] === "profile") {
                     header('Location: /profile');
-                } else {
-                    header('Location: /timeline');
+                } else if ($direction[3] === "timeline") {
+                    header("Location: /timeline");
+                } else if ($direction[3] === "public_page") {
+                    header("Location: /public_page");
                 }
                 exit();
             } else {

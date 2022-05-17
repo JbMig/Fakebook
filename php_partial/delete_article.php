@@ -6,6 +6,8 @@
             $article_id = filter_input(INPUT_POST, "article_id");
             $article_user = filter_input(INPUT_POST, "article_user");
             $user_id = $_SESSION["user"]["user_id"];
+			$page = $_SESSION["page"];
+			$page_id = $_SESSION["page"]["page_id"];
             // if user_id = article_id, i can delete the article
             if($article_user === $user_id) {
                 if($article_id) {
@@ -29,6 +31,8 @@
                         header("Location: /profile");
                     } else if ($direction[3] === "timeline") {
                         header("Location: /timeline");
+                    } else if ($direction[3] === "public_page") {
+                        header("Location: /public_page");
                     }
                     exit();
                 }

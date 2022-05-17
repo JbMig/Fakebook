@@ -18,16 +18,20 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 CREATE TABLE IF NOT EXISTS `pages` (
 	`page_id` INT NOT NULL AUTO_INCREMENT,
-	`picture` VARCHAR(255) DEFAULT "default_page_pic.jpeg",
+	`name` VARCHAR(255),
+	`picture` VARCHAR(255) DEFAULT "default_page_pic.jpg",
 	`banner` VARCHAR(255) DEFAULT "default_banner.jpg",
+	`description` TEXT,
 	`creation_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`page_id`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `groups` (
 	`group_id` INT NOT NULL AUTO_INCREMENT,
-	`picture` VARCHAR(255) DEFAULT "default_page_pic.jpeg",
+	`name` VARCHAR(255),
+	`picture` VARCHAR(255) DEFAULT "default_page_pic.jpg",
 	`banner` VARCHAR(255) DEFAULT "default_banner.jpg",
+	`description` TEXT,
 	`creation_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	`status` ENUM('public', 'private') DEFAULT 'public',
 	PRIMARY KEY (`group_id`)
@@ -208,14 +212,6 @@ ALTER TABLE `chats` ADD `uuid` VARCHAR(255);
 
 
 
--- ALTER TABLE `relationships`
--- ADD `who_asked` INT;
--- ALTER TABLE `relationships`
--- ADD CONSTRAINT FOREIGN KEY (`who_asked`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
-
--- not necessary in the end : the one who sent the request is always user_id_a.
--- if you have added the column already, drop the table and build it again.
-
 
 
 -- Fake users and articles, so that the social network isn't completely empty at first (may be useless. we'll see.)
@@ -267,6 +263,4 @@ VALUES
 
 
 -- for myself (Valentine). will be deleted before we send it
-INSERT INTO `relationships` (`user_id_a`,`user_id_b`,`status`)
-VALUES
-(1,2,'approved');
+UPDATE `pages` SET `picture` = "default_page_pic.jpg" WHERE `picture` = "default_page_pic.jpeg";
