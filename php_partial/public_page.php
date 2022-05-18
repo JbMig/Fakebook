@@ -86,8 +86,8 @@ $admins = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 foreach ($admins as $admin) {
 	if ($admin['user_id'] === $_SESSION["user"]["user_id"]) {
 		$is_admin = TRUE;
-	}
-	else {
+		break;
+	} else {
 		$is_admin = FALSE;
 	}
 }
