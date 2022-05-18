@@ -39,7 +39,7 @@
             }
         } ?>
 		<!-- articles -->
-		<?php if ($article["page_id"] IS NULL && $article["group_id"] IS NULL) {
+		<?php if ($article["page_id"] === NULL && $article["group_id"] === NULL) {
 			$show_name = $first_name . " " . $last_name;
 			$show_picture = "img_profil/" . $profil_picture;
 			$picture_id = "profil_picture";
@@ -47,7 +47,7 @@
 			$actionId = "goToProfile";
 			$action_name = "profil_id";
 			$action_value = $article["user_id"];
-		} else  if ($article["page_id"] NOT NULL){
+		} else  if ($article["page_id"] !== NULL){
 			$show_name = $name; // à créer !!!
 			$show_picture =  "img_pages_groups/" . $picture; // à créer !!!
 			$picture_id = "picture";

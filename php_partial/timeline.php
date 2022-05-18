@@ -84,7 +84,7 @@ $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
 
 echo "</br>";
 echo "</br>";
-require_once __DIR__ . "../html_partial/timeline.php";
+require_once __DIR__ . "/../html_partial/timeline.php";
 // clean buffering in $content
 $content = ob_get_clean();
 
