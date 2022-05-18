@@ -1,11 +1,14 @@
 <?php
     if($_SERVER["REQUEST_METHOD"] === "POST") {
-		if(isset($_POST["follow"])) {
+		if(isset($_POST["new_admin"])) {
             // get info from form
             require "../database/pdo.php";
-            $page_and_profile = filter_input(INPUT_POST, "new_admin");
-            $page_id = $page_and_profile[0];
-            $profile_id = $page_and_profile[1];
+            $page_id = filter_input(INPUT_POST, "new_admin_page");
+            $profile_id = filter_input(INPUT_POST, "new_admin_account");
+			var_dump($page_id);
+			var_dump($profile_id);
+			exit();
+
 			// delete relatioship from database
 			$maRequete = $pdo->prepare("INSERT INTO `admins` (`page_id`,`user_id`) VALUES (:pageId, :profileId);");
 			$maRequete->execute([

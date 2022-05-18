@@ -137,7 +137,8 @@
 								<button type="submit" id="new_admin" name="new_admin">
 									Ajouter comme administrateur de la page
 								</button>
-								<input type="hidden" name="new_admin" value="<?= [$page_id,$account["user_id"]] ?>">
+								<input type="hidden" name="new_admin_page" value="<?= $page_id ?>">
+								<input type="hidden" name="new_admin_account" value="<?= $account["user_id"] ?>">
 							</form>
 						<?php endif ?>
 					<?php endforeach; ?>
