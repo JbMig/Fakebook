@@ -116,20 +116,33 @@
 		</div>
 	</div>
 	<div>
-		<!-- showing the list of followers, with a link to their profile -->
-		<button type="button" id="open_followers_list">Afficher les followers</button>
-		<section id="followers_list" style="display: none">
-			<?php foreach ($accounts as $account) : ?>
-				<form id="goToProfile" action="/profile" method="post"> <!-- needs to be modified to match a page -->
-					<input type="hidden" name="profil_id" value="<?= $account["user_id"] ?>" />
-					<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-						<img src="img_profil/<?= $account["profil_picture"] ?>" alt="" width="40px">
-					</button>
-					<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-						<?= $account["first_name"] . " " . $account["last_name"] ?> 
-					</button>
-				</form>
-			<?php endforeach; ?>
+		<?php if($is_follower):?>
+			<!-- showing the list of followers, with a link to their profile -->
+			<button type="button" id="open_followers_list">Afficher les followers</button>
+			<section id="followers_list" style="display: none">
+				<?php foreach ($accounts as $account) : ?>
+					<form id="goToProfile" action="/profile" method="post"> <!-- needs to be modified to match a page -->
+						<input type="hidden" name="profil_id" value="<?= $account["user_id"] ?>" />
+						<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
+							<img src="img_profil/<?= $account["profil_picture"] ?>" alt="" width="40px">
+						</button>
+						<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+							<?= $account["first_name"] . " " . $account["last_name"] ?> 
+						</button>
+					</form>
+
+					<?php foreach($admins as $admin) :?>
+						<?php if($is_admin && $admin["user_id"] != $account["user_id"]):?>
+							<form action="/add_admin" class="form" method="post" >
+								<button type="submit" id="new_admin" name="new_admin">
+									Ajouter comme administrateur de la page
+								</button>
+								<input type="hidden" name="new_admin" value="<?= [$page_id,$account["user_id"]] ?>">
+							</form>
+						<?php endif ?>
+					<?php endforeach; ?>
+				<?php endforeach; ?>
+			<?php endif ?>
 		</section>
 	</div>
 	<div>
