@@ -20,6 +20,8 @@ echo "</br>";
 require_once "../database/pdo.php";
 $user_id = $_SESSION["user"]["user_id"];
 
+$user_name = $_SESSION["user"]["first_name"] . " " . $_SESSION["user"]["last_name"];
+
 $articles = [];
 // user's articles
 $maRequete = $pdo->prepare("SELECT * from `articles` WHERE `user_id` = :userId AND `page_id` IS NULL AND `group_id` IS NULL;");

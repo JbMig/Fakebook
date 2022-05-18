@@ -37,7 +37,40 @@
             } else {
                 $like = "like";
             }
-        } ?>
+        }
+		
+		if($article["page_id"] !== NULL) {
+			$maRequete = $pdo->prepare(
+				"SELECT `name` from `pages` WHERE `page_id` = :pageId ");
+				$maRequete->execute([
+					":pageId" => $article["page_id"]
+				]);
+			$name = $maRequete->fetch();
+
+			$maRequete = $pdo->prepare(
+				"SELECT `picture` from `pages` WHERE `page_id` = :pageId ");
+				$maRequete->execute([
+					":pageId" => $article["page_id"]
+				]);
+			$picture = $maRequete->fetch();
+		} else if ($article["group_id"] !== NULL) {
+			$maRequete = $pdo->prepare(
+				"SELECT `name` from `groups` WHERE `group_id` = :groupId ");
+				$maRequete->execute([
+					":groupId" => $article["group_id"]
+				]);
+			$name = $maRequete->fetch();
+
+			$maRequete = $pdo->prepare(
+				"SELECT `picture` from `groups` WHERE group_id` = :groupId ");
+				$maRequete->execute([
+					":groupId" => $article["group_id"]
+				]);
+			$picture = $maRequete->fetch();
+		}
+		
+		
+		?>
 		<!-- articles -->
 		<?php if ($article["page_id"] === NULL && $article["group_id"] === NULL) {
 			$show_name = $first_name . " " . $last_name;
