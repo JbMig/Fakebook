@@ -38,7 +38,83 @@
                 $like = "like";
             }
         } ?>
-		<!-- first we get the user's articles -->
+		<!-- articles -->
+		<?php if ($article["page_id"] IS NULL && $article["group_id"] IS NULL) {
+			$show_name = $first_name . " " . $last_name;
+			$show_picture = "img_profil/" . $profil_picture;
+			$picture_id = "profil_picture";
+			$action = "/profile";
+			$actionId = "goToProfile";
+			$action_name = "profil_id";
+			$action_value = $article["user_id"];
+		} else  if ($article["page_id"] NOT NULL){
+			$show_name = $name; // à créer !!!
+			$show_picture =  "img_pages_groups/" . $picture; // à créer !!!
+			$picture_id = "picture";
+			$action = "/public_page";
+			$actionId = "goToPage";
+			$action_name = "page_id";
+			$action_value = $article["page_id"];
+		} else {
+			$show_name = $name; // à créer !!!
+			$show_picture =  "img_pages_groups/" . $picture; // à créer !!!
+			$picture_id = "picture";
+			$action = "/group";
+			$actionId = "goToGroup";
+			$action_name = "group_id";
+			$action_value = $article["group_id"];
+		};
+		var_dump($show_name, $show_picture, $picture_id, $action, $actionId, $action_name, $action_value);
+		?>
+		<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
+			<form id="<?= $actionId ?>" action="<?= $action ?>" method="post">
+				<input type="hidden" name="<?= $action_name ?>" value="<?= $action_value ?>" />
+				<button type="submit" id="<?= $picture_id ?>" style="background: white; border:0; padding:5px;">
+					<img src="<?= $show_picture ?>" alt="" width="40px">
+				</button>
+				<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+					<?= $show_name ?> 
+				</button>
+			</form>
+			<span id="date"><?= $article["date"] ?></span>
+			<br>
+			<span id="data"><?= $article["content"] ?></span>
+			<br>
+			<?php if($article["picture"]) :?>
+				<img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
+			<?php endif; ?>
+			<form action="/like_article" method="post" id="like_article">
+				<button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
+				<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
+			</form>
+			<button type="button" id="open_comment">Comment</button>
+			<section id="comment_section">
+				<!-- require un truc ici -->
+				<?php require __DIR__ . "/../php_partial/comment.php"?>
+			</section>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <?php if ($user_id === $article["user_id"]) : ?>
 			<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
 				<form id="goToProfile" action="/profile" method="post">
