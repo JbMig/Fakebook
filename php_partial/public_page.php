@@ -47,7 +47,7 @@ $followers = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 $nb_followers = COUNT($followers);
 
 
-$maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHERE `page_id` = :pageId AND `user_id` = :userId;");
+$maRequete = $pdo->prepare("SELECT `user_id` FROM `followers` WHERE `page_id` = :pageId AND `user_id` = :userId;");
 	$maRequete->execute([
 		":pageId" => $page_id,
 		":userId" => $user_id
@@ -58,7 +58,6 @@ if (COUNT($user_is_follower)>0){
 } else {
 	$is_follower = FALSE;
 }
-
 
 $accounts = array();
 
