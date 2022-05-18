@@ -7,7 +7,6 @@
             $profile_id = filter_input(INPUT_POST, "new_admin_account");
 			var_dump($page_id);
 			var_dump($profile_id);
-			exit();
 
 			// delete relatioship from database
 			$maRequete = $pdo->prepare("INSERT INTO `admins` (`page_id`,`user_id`) VALUES (:pageId, :profileId);");
