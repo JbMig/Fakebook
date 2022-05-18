@@ -16,14 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $friend_profils = [];
     foreach ($friend_ids as $friend_id) {
         if ($friend_id["user_id_a"] !== $user_id) {
-            $maRequete = $pdo->prepare("SELECT `first_name`, `last_name`, `profil_picture` , `user_id` FROM `users` WHERE `user_id` = :userId ");
+            $maRequete = $pdo->prepare("SELECT `first_name`, `last_name`, `profil_picture`, `user_id` FROM `users` WHERE `user_id` = :userId ");
             $maRequete->execute([
                 ":userId" => $friend_id["user_id_a"]
             ]);
             $get_profil = $maRequete->fetch();
             array_push($friend_profils, $get_profil);
         } else {
-            $maRequete = $pdo->prepare("SELECT `first_name`, `last_name`, `user_id` FROM `users` WHERE `user_id` = :userId");
+            $maRequete = $pdo->prepare("SELECT `first_name`, `last_name`, `profil_picture`, `user_id` FROM `users` WHERE `user_id` = :userId");
             $maRequete->execute([
                 ":userId" => $friend_id["user_id_b"]
             ]);
