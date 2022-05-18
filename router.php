@@ -125,6 +125,9 @@ switch ($uri) {
     case "/unfollow":
         require_once __DIR__ . "/php_partial/unfollow.php";
         break;
+    case "/add_admin":
+        require_once __DIR__ . "/php_partial/add_admin.php";
+        break;
     case "/new_page":
         require_once __DIR__ . "/php_partial/new_page.php";
     case "/new_chat":
