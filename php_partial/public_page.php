@@ -91,7 +91,6 @@ foreach ($admins as $admin) {
 		$is_admin = FALSE;
 	}
 }
-var_dump($is_admin);
 // checking whether we're friends with the person
 $profile_id = filter_input(INPUT_POST, "profil_id");
 

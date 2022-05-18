@@ -137,9 +137,8 @@
 							break;
 						} else { 
 							$account_admin = false;
-						}
-						var_dump($account_admin);
-						?>
+						}?>
+					<?php endforeach; ?>
 					<?php if($account_admin === false && $is_admin):?>
 						<form action="/add_admin" class="form" method="post" >
 							<button type="submit" id="new_admin" name="new_admin">
@@ -149,7 +148,6 @@
 							<input type="hidden" name="new_admin_account" value="<?= $account["user_id"] ?>">
 						</form>
 					<?php endif ?>
-					<?php endforeach; ?>
 				<?php endforeach; ?>
 			<?php endif ?>
 		</section>
