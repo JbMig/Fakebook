@@ -119,6 +119,9 @@ switch ($uri) {
     case "/new_message":
         require_once __DIR__ . "/php_partial/messenger/new_message.php";
         break;
+    case "/chat2":
+        require_once __DIR__ . "/php_partial/messenger/chat2.php";
+        break;
 }
 
 // we require base_html to display $content ($content references in files from php_partial)
