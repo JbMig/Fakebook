@@ -20,6 +20,7 @@
 					Ne plus suivre cette page
 				</button>
 				<input type="hidden" name="unfollow" value="<?= $page_id ?>">
+				<input type="hidden" id="cancel">
 			</form>
 			<!-- i leave that here because we may use it for the group's page later, and i don't want to type it again -->
 			<!-- <form action="/start_chat" class="form" method="post" >
@@ -115,10 +116,19 @@
 		</div>
 	</div>
 	<div>
+		<!-- showing the list of followers, with a link to their profile -->
 		<button type="button" id="open_followers_list">Afficher les followers</button>
 		<section id="followers_list" style="display: none">
 			<?php foreach ($accounts as $account) : ?>
-				<span><?= $account["first_name"] . " " . $account["last_name"]?></span> </br>
+				<form id="goToProfile" action="/profile" method="post"> <!-- needs to be modified to match a page -->
+					<input type="hidden" name="profil_id" value="<?= $account["user_id"] ?>" />
+					<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
+						<img src="img_profil/<?= $account["profil_picture"] ?>" alt="" width="40px">
+					</button>
+					<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+						<?= $account["first_name"] . " " . $account["last_name"] ?> 
+					</button>
+				</form>
 			<?php endforeach; ?>
 		</section>
 	</div>

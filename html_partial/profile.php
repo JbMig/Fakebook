@@ -19,7 +19,7 @@
 	<div>
 	<!-- interactions -->
 	<?php if ($profile["status"]==='active') :?>
-		<!-- if the person's account is inactive, there's no button -->
+		<!-- if the person's page is inactive, there's no button -->
 		<?php if ($_SESSION["user"]["user_id"] != $profile["user_id"]) :?>
 			<?php if (Count($profile_friend) >= 1): ?>
 				<!-- remove from relations -->
@@ -135,7 +135,7 @@
 				<?php endif ?>
 			<!-- past articles -->
 			<?php else :?>
-				<!-- we don't show articles from inactive accounts. -->
+				<!-- we don't show articles from inactive pages. -->
 				<?php if ($profile["status"]==='inactive') :?>
 					<span>Le compte de cette personne est inactif.</span>
 				<?php else :?>
@@ -197,6 +197,23 @@
 				<?php endif ?>
 			<?php endif ?>
 		</div>
+	</div>
+	<div>
+		<!-- showing the list of pages, with a link to their profile -->
+		<button type="button" id="open_pages_list">Afficher les pages suivies</button>
+		<section id="pages_list" style="display: none">
+			<?php foreach ($pages as $page) : ?>
+				<form id="goToPage" action="/public_page" method="post"> <!-- needs to be modified to match a page -->
+					<input type="hidden" name="page_id" value="<?= $page["page_id"] ?>" />
+					<button type="submit" id="picture" style="background: white; border:0; padding:5px;">
+						<img src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
+					</button>
+					<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+						<?= $page["name"] ?> 
+					</button>
+				</form>
+			<?php endforeach; ?>
+		</section>
 	</div>
 	<div>
 	<!-- stats -->
