@@ -11,7 +11,20 @@
 				":pageId" => $page_id,
 				":userId" => $user_id
 			]);
-
+			$maRequete = $pdo->prepare("SELECT `user_id` FROM `admins` WHERE `page_id` = :pageId;");
+			$maRequete->execute([
+				":pageId" => $page_id
+			]);
+			$admins = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+			if (count($admins) === 0){
+				$maRequete = $pdo->prepare("DELETE FROM `pages` WHERE `page_id` = :pageId;");
+				$maRequete->execute([
+					":pageId" => $page_id,
+				]);
+				http_response_code(302);
+				header("Location: /timeline");
+				exit();
+			}
 			// go back to public_page
 			http_response_code(302);
 

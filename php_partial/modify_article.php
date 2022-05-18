@@ -9,7 +9,7 @@
             $article_id = filter_input(INPUT_POST, "article_id");
             $page = $_SESSION["page"];
 			$page_id = $_SESSION["page"]["page_id"];
-            if($article_user === $user_id) {
+            if($article_user === $user_id || $page_id) {
                 // update the article
                 $maRequete = $pdo->prepare("UPDATE `articles` SET `content`= :oneData, `date` = CURRENT_TIMESTAMP WHERE `article_id` = :article_id");
                 $maRequete->execute([
