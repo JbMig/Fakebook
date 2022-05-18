@@ -132,15 +132,23 @@
 					</form>
 
 					<?php foreach($admins as $admin) :?>
-						<?php if($is_admin && $admin["user_id"] != $account["user_id"]):?>
-							<form action="/add_admin" class="form" method="post" >
-								<button type="submit" id="new_admin" name="new_admin">
-									Ajouter comme administrateur de la page
-								</button>
-								<input type="hidden" name="new_admin_page" value="<?= $page_id ?>">
-								<input type="hidden" name="new_admin_account" value="<?= $account["user_id"] ?>">
-							</form>
-						<?php endif ?>
+						<?php if($admin["user_id"] === $account["user_id"]) { 
+							$account_admin = true;
+							break;
+						} else { 
+							$account_admin = false;
+						}
+						var_dump($account_admin);
+						?>
+					<?php if($account_admin === false && $is_admin):?>
+						<form action="/add_admin" class="form" method="post" >
+							<button type="submit" id="new_admin" name="new_admin">
+								Ajouter comme administrateur de la page
+							</button>
+							<input type="hidden" name="new_admin_page" value="<?= $page_id ?>">
+							<input type="hidden" name="new_admin_account" value="<?= $account["user_id"] ?>">
+						</form>
+					<?php endif ?>
 					<?php endforeach; ?>
 				<?php endforeach; ?>
 			<?php endif ?>

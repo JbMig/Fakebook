@@ -76,7 +76,7 @@ foreach ($followers as $follower) {
 
 
 // getting the page's admins
-$maRequete = $pdo->prepare("SELECT `admin_id`, `user_id` FROM `admins` WHERE `page_id` = :pageId;");
+$maRequete = $pdo->prepare("SELECT `user_id` FROM `admins` WHERE `page_id` = :pageId;");
 	$maRequete->execute([
 		":pageId" => $page_id
 	]);
@@ -91,7 +91,7 @@ foreach ($admins as $admin) {
 		$is_admin = FALSE;
 	}
 }
-
+var_dump($is_admin);
 // checking whether we're friends with the person
 $profile_id = filter_input(INPUT_POST, "profil_id");
 
