@@ -119,8 +119,28 @@
 				<button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
 				<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
 			</form>
-
-			<?php if($user_id === $article["user_id"]) : ?>
+			<!-- conditions to modify or delete articles -->
+			<?php
+			if ($user_id === $article["user_id"] && $article["page_id"] === NULL){
+				$personnal_post = true;
+			} else {
+				$personnal_post = false;
+			}
+			if ($article["page_id"] !== NULL){
+				$maRequete = $pdo->prepare("SELECT `user_id` FROM `admins` WHERE `page_id` = :pageId;");
+					$maRequete->execute([
+						":pageId" => $article["page_id"]
+					]);
+				$admins = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+				$admin_page = false;
+				foreach ($admins as $admin) {
+					if ($admin['user_id'] === $user_id) {
+						$admin_page = true;
+						break;
+					} 
+				}
+			}?>
+			<?php if($personnal_post && $admin_page) : ?>
 				<form id="delete_article" method="post" action="/delete_article">
 					<button type="submit" id="delete_btn">Supprimer</button>
 					<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
