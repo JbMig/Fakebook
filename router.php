@@ -119,6 +119,9 @@ switch ($uri) {
     case "/new_message":
         require_once __DIR__ . "/php_partial/messenger/new_message.php";
         break;
+    case "/brouillon_timeline":
+        require_once __DIR__ . "/../brouillon_timeline.php";
+        break;
 }
 
 // we require base_html to display $content ($content references in files from php_partial)
