@@ -15,13 +15,22 @@
 	<!-- interactions -->
 		<?php if ($is_follower) :?>
 			<!-- unfollow -->
-			<form action="/unfollow" class="form" method="post" >
-				<button type="submit" id="unfollow" name="unfollow">
-					Ne plus suivre cette page
-				</button>
-				<input type="hidden" name="unfollow" value="<?= $page_id ?>">
-				<input type="hidden" id="cancel">
-			</form>
+			<?php if($is_admin) :?>
+				<form action="/remove_admin" class="form" method="post" >
+					<button type="submit" id="remove_admin" name="remove_admin">
+						Ne plus être admin
+					</button>
+					<input type="hidden" id="cancel">
+				</form>
+			<?php else :?>
+				<form action="/unfollow" class="form" method="post" >
+					<button type="submit" id="unfollow" name="unfollow">
+						Ne plus suivre cette page
+					</button>
+					<input type="hidden" name="unfollow" value="<?= $page_id ?>">
+					<input type="hidden" id="cancel">
+				</form>
+			<?php endif;?>
 			<!-- i leave that here because we may use it for the group's page later, and i don't want to type it again -->
 			<!-- <form action="/start_chat" class="form" method="post" >
 				<button type="submit" id="start_chat" name="start_chat">
@@ -71,8 +80,8 @@
 					}
 				} ?>
 				<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
-					<form id="goToProfile" action="/profile" method="post"> <!-- needs to be modified to match a page -->
-						<input type="hidden" name="profil_id" value="<?= $page_id ?>" />
+					<form id="goToPage" action="/public_page" method="post"> <!-- needs to be modified to match a page -->
+						<input type="hidden" name="page_id" value="<?= $page_id ?>" />
 						<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
 							<img src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
 						</button>
@@ -116,20 +125,40 @@
 		</div>
 	</div>
 	<div>
-		<!-- showing the list of followers, with a link to their profile -->
-		<button type="button" id="open_followers_list">Afficher les followers</button>
-		<section id="followers_list" style="display: none">
-			<?php foreach ($accounts as $account) : ?>
-				<form id="goToProfile" action="/profile" method="post"> <!-- needs to be modified to match a page -->
-					<input type="hidden" name="profil_id" value="<?= $account["user_id"] ?>" />
-					<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-						<img src="img_profil/<?= $account["profil_picture"] ?>" alt="" width="40px">
-					</button>
-					<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-						<?= $account["first_name"] . " " . $account["last_name"] ?> 
-					</button>
-				</form>
-			<?php endforeach; ?>
+		<?php if($is_follower):?>
+			<!-- showing the list of followers, with a link to their profile -->
+			<button type="button" id="open_followers_list">Afficher les followers</button>
+			<section id="followers_list" style="display: none">
+				<?php foreach ($accounts as $account) : ?>
+					<form id="goToProfile" action="/profile" method="post"> <!-- needs to be modified to match a page -->
+						<input type="hidden" name="profil_id" value="<?= $account["user_id"] ?>" />
+						<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
+							<img src="img_profil/<?= $account["profil_picture"] ?>" alt="" width="40px">
+						</button>
+						<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+							<?= $account["first_name"] . " " . $account["last_name"] ?> 
+						</button>
+					</form>
+
+					<?php foreach($admins as $admin) :?>
+						<?php if($admin["user_id"] === $account["user_id"]) { 
+							$account_admin = true;
+							break;
+						} else { 
+							$account_admin = false;
+						}?>
+					<?php endforeach; ?>
+					<?php if($account_admin === false && $is_admin):?>
+						<form action="/add_admin" class="form" method="post" >
+							<button type="submit" id="new_admin" name="new_admin">
+								Ajouter comme administrateur de la page
+							</button>
+							<input type="hidden" name="new_admin_page" value="<?= $page_id ?>">
+							<input type="hidden" name="new_admin_account" value="<?= $account["user_id"] ?>">
+						</form>
+					<?php endif ?>
+				<?php endforeach; ?>
+			<?php endif ?>
 		</section>
 	</div>
 	<div>
