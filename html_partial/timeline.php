@@ -45,32 +45,35 @@
 				$maRequete->execute([
 					":pageId" => $article["page_id"]
 				]);
-			$name = $maRequete->fetch();
+			$maRequete->setFetchMode(PDO::FETCH_ASSOC);
+			$name = $maRequete->Fetch();
 
 			$maRequete = $pdo->prepare(
 				"SELECT `picture` from `pages` WHERE `page_id` = :pageId ");
 				$maRequete->execute([
 					":pageId" => $article["page_id"]
 				]);
-			$picture = $maRequete->fetch();
+			$maRequete->setFetchMode(PDO::FETCH_ASSOC);
+			$picture = $maRequete->Fetch();
+			var_dump($article["page_id"], $name, $picture);
 		} else if ($article["group_id"] !== NULL) {
 			$maRequete = $pdo->prepare(
 				"SELECT `name` from `groups` WHERE `group_id` = :groupId ");
 				$maRequete->execute([
 					":groupId" => $article["group_id"]
 				]);
-			$name = $maRequete->fetch();
+			$maRequete->setFetchMode(PDO::FETCH_ASSOC);
+			$name = $maRequete->Fetch();
 
 			$maRequete = $pdo->prepare(
 				"SELECT `picture` from `groups` WHERE group_id` = :groupId ");
 				$maRequete->execute([
 					":groupId" => $article["group_id"]
 				]);
-			$picture = $maRequete->fetch();
-		}
-		
-		
-		?>
+			$maRequete->setFetchMode(PDO::FETCH_ASSOC);
+			$picture = $maRequete->Fetch();
+			var_dump($article["group_id"], $name, $picture);
+		}; ?>
 		<!-- articles -->
 		<?php if ($article["page_id"] === NULL && $article["group_id"] === NULL) {
 			$show_name = $first_name . " " . $last_name;
@@ -96,9 +99,7 @@
 			$actionId = "goToGroup";
 			$action_name = "group_id";
 			$action_value = $article["group_id"];
-		};
-		var_dump($show_name, $show_picture, $picture_id, $action, $actionId, $action_name, $action_value);
-		?>
+		}; ?>
 		<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
 			<form id="<?= $actionId ?>" action="<?= $action ?>" method="post">
 				<input type="hidden" name="<?= $action_name ?>" value="<?= $action_value ?>" />
