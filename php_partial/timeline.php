@@ -1,13 +1,3 @@
-- nos articles
-- ceux des amis
-- ceux des pages suivies
-- idem gpes
-
-nos articles : tout
-amis (approved) : comptes actifs (html), tous les articles où on est en relation "approved" et non "block"
-pages : follower, (cdt d'affichage ds le html)
-gpes : membre
-
 <?php
 
 // start buffering
@@ -15,8 +5,6 @@ ob_start();
 $title = "Fakebook - fil d'actualité";
 
 
-echo "</br>";
-echo "</br>";
 require_once "../database/pdo.php";
 $user_id = $_SESSION["user"]["user_id"];
 
@@ -31,11 +19,11 @@ $maRequete = $pdo->prepare("SELECT * from `articles` WHERE `user_id` = :userId A
 $user_articles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 $articles = array_merge($articles, $user_articles);
 
-// friends' articles
+// friends' articles (except those they wrote as admins)
 $maRequete = $pdo->prepare(
 	"SELECT * from `articles`
-	WHERE `user_id` IN (SELECT `user_id_a` FROM `relationships` WHERE `user_id_b` = :userId AND `blocked` = 'no' AND `status` = 'approved')
-	OR `user_id` IN (SELECT `user_id_b` FROM `relationships` WHERE `user_id_a` = :userId AND `blocked` = 'no' AND `status` = 'approved')");
+	WHERE (`user_id` IN (SELECT `user_id_a` FROM `relationships` WHERE `user_id_b` = :userId AND `blocked` = 'no' AND `status` = 'approved') AND `page_id` IS NULL AND `group_id` IS NULL)
+	OR (`user_id` IN (SELECT `user_id_b` FROM `relationships` WHERE `user_id_a` = :userId AND `blocked` = 'no' AND `status` = 'approved') AND `page_id` IS NULL AND `group_id` IS NULL)");
 	$maRequete->execute([
 		":userId" => $user_id
 	]);
@@ -66,11 +54,6 @@ usort($articles, function ($a, $b) {
 	return 0;
 });
 
-// foreach ($articles as $article) {
-// 	var_dump($article['date']);
-// 	echo "</br>";
-// 	echo "</br>";
-// }
 
 $maRequete = $pdo->prepare("SELECT `user_id`, `profil_picture`, `first_name`, `last_name`, `status` FROM `users` "); // add condition for relationship
     $maRequete->execute();
@@ -84,8 +67,6 @@ $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
     $like = "like";
 
 
-echo "</br>";
-echo "</br>";
 require_once __DIR__ . "/../html_partial/timeline.php";
 // clean buffering in $content
 $content = ob_get_clean();

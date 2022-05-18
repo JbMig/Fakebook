@@ -55,7 +55,6 @@
 				]);
 			$maRequete->setFetchMode(PDO::FETCH_ASSOC);
 			$picture = $maRequete->Fetch();
-			var_dump($article["page_id"], $name, $picture);
 		} else if ($article["group_id"] !== NULL) {
 			$maRequete = $pdo->prepare(
 				"SELECT `name` from `groups` WHERE `group_id` = :groupId ");
@@ -72,7 +71,6 @@
 				]);
 			$maRequete->setFetchMode(PDO::FETCH_ASSOC);
 			$picture = $maRequete->Fetch();
-			var_dump($article["group_id"], $name, $picture);
 		}; ?>
 		<!-- articles -->
 		<?php if ($article["page_id"] === NULL && $article["group_id"] === NULL) {
@@ -84,16 +82,16 @@
 			$action_name = "profil_id";
 			$action_value = $article["user_id"];
 		} else  if ($article["page_id"] !== NULL){
-			$show_name = implode("", $name); // à créer !!!
-			$show_picture =  "img_pages_groups/" . implode("", $picture); // à créer !!!
+			$show_name = implode("", $name);
+			$show_picture =  "img_pages_groups/" . implode("", $picture);
 			$picture_id = "picture";
 			$action = "/public_page";
 			$actionId = "goToPage";
 			$action_name = "page_id";
 			$action_value = $article["page_id"];
 		} else {
-			$show_name = implode("", $name); // à créer !!!
-			$show_picture =  "img_pages_groups/" . implode("", $picture); // à créer !!!
+			$show_name = implode("", $name);
+			$show_picture =  "img_pages_groups/" . implode("", $picture);
 			$picture_id = "picture";
 			$action = "/group";
 			$actionId = "goToGroup";
