@@ -6,13 +6,13 @@
 <h1 id="h1"><?=$h1?></h1>
 <!-- stats -->
 <section>
-<div> <?=$profile["first_name"]?> a <?=$profile_stats["nb_friends"]?> relation(s). </div>
-<div> <?=$profile["first_name"]?> a publié <?=$profile_stats["nb_articles"]?> article(s). </div>
-<div> <?=$profile["first_name"]?> a commenté <?=$profile_stats["nb_comments"]?> article(s). </div>
-<div> <?=$profile["first_name"]?> a mis <?=$profile_stats["nb_likes"]?> like(s). </div>
-<div> Les articles de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["comments_on_articles"]?> commentaire(s). </div>
-<div> Les articles de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["likes_on_articles"]?> like(s). </div>
-<div> Les commentaires de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["likes_on_comments"]?> like(s). </div>
+	<div> <?=$profile["first_name"]?> a <?=$profile_stats["nb_friends"]?> relation(s). </div>
+	<div> <?=$profile["first_name"]?> a publié <?=$profile_stats["nb_articles"]?> article(s). </div>
+	<div> <?=$profile["first_name"]?> a commenté <?=$profile_stats["nb_comments"]?> article(s). </div>
+	<div> <?=$profile["first_name"]?> a mis <?=$profile_stats["nb_likes"]?> like(s). </div>
+	<div> Les articles de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["comments_on_articles"]?> commentaire(s). </div>
+	<div> Les articles de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["likes_on_articles"]?> like(s). </div>
+	<div> Les commentaires de <?=$profile["first_name"]?> ont reçu <?=$profile_stats["likes_on_comments"]?> like(s). </div>
 </section> <br> <!-- we will remove this br when the css is done-->
 <section>
 	<!-- if it's not the page of the current user (he's visiting someone else's page) -->

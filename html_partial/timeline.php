@@ -22,6 +22,7 @@
         </form>
     </div>
     <?php foreach ($articles as $article):
+		$is_admin = false;
         foreach ($profiles as $profile) { 
             if ($profile["user_id"] === $article["user_id"]) {
                 $profil_picture = $profile["profil_picture"];
@@ -38,42 +39,23 @@
                 $like = "like";
             }
         }
-		
 		if($article["page_id"] !== NULL) {
-			$maRequete = $pdo->prepare(
-				"SELECT `name` from `pages` WHERE `page_id` = :pageId ");
-				$maRequete->execute([
-					":pageId" => $article["page_id"]
-				]);
-			$maRequete->setFetchMode(PDO::FETCH_ASSOC);
-			$name = $maRequete->Fetch();
-
-			$maRequete = $pdo->prepare(
-				"SELECT `picture` from `pages` WHERE `page_id` = :pageId ");
-				$maRequete->execute([
-					":pageId" => $article["page_id"]
-				]);
-			$maRequete->setFetchMode(PDO::FETCH_ASSOC);
-			$picture = $maRequete->Fetch();
+			foreach($name_picture_pages as $name_picture_page) {
+				if($name_picture_page["page_id"] === $article["page_id"]) {
+					$name = $name_picture_page["name"];
+					$picture = $name_picture_page["picture"];
+				}
+			}
 		} else if ($article["group_id"] !== NULL) {
-			$maRequete = $pdo->prepare(
-				"SELECT `name` from `groups` WHERE `group_id` = :groupId ");
-				$maRequete->execute([
-					":groupId" => $article["group_id"]
-				]);
-			$maRequete->setFetchMode(PDO::FETCH_ASSOC);
-			$name = $maRequete->Fetch();
-
-			$maRequete = $pdo->prepare(
-				"SELECT `picture` from `groups` WHERE group_id` = :groupId ");
-				$maRequete->execute([
-					":groupId" => $article["group_id"]
-				]);
-			$maRequete->setFetchMode(PDO::FETCH_ASSOC);
-			$picture = $maRequete->Fetch();
-		}; ?>
-		<!-- articles -->
-		<?php if ($article["page_id"] === NULL && $article["group_id"] === NULL) {
+			foreach ($name_picture_groups as $name_picture_group) {
+				if($name_picture_group["group_id"] === $article["group_id"]) {
+					$name = $name_picture_group["name"];
+					$picture = $name_picture_group["picture"];
+				}
+			}
+		};
+		// articles
+		if ($article["page_id"] === NULL && $article["group_id"] === NULL) {
 			$show_name = $first_name . " " . $last_name;
 			$show_picture = "img_profil/" . $profil_picture;
 			$picture_id = "profil_picture";
@@ -81,30 +63,23 @@
 			$actionId = "goToProfile";
 			$action_name = "profil_id";
 			$action_value = $article["user_id"];
-		} else  if ($article["page_id"] !== NULL){
-			$show_name = implode("", $name);
-			$show_picture =  "img_pages_groups/" . implode("", $picture);
+		} else if ($article["page_id"] !== NULL){
+			$show_name = $name;
+			$show_picture =  "img_pages_groups/" . $picture;
 			$picture_id = "picture";
 			$action = "/public_page";
 			$actionId = "goToPage";
 			$action_name = "page_id";
 			$action_value = $article["page_id"];
-			$maRequete = $pdo->prepare("SELECT `user_id` FROM `admins` WHERE `page_id` = :pageId;");
-			$maRequete->execute([
-				":pageId" => $article["page_id"]
-			]);
-			$admins = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 			foreach ($admins as $admin) {
-				if ($admin['user_id'] === $_SESSION["user"]["user_id"]) {
+				if ($admin["user_id"] === $_SESSION["user"]["user_id"]) {
 					$is_admin = TRUE;
 					break;
-				} else {
-					$is_admin = FALSE;
 				}
 			}
 		} else {
-			$show_name = implode("", $name);
-			$show_picture =  "img_pages_groups/" . implode("", $picture);
+			$show_name = $name;
+			$show_picture =  "img_pages_groups/" . $picture;
 			$picture_id = "picture";
 			$action = "/group";
 			$actionId = "goToGroup";
@@ -150,7 +125,6 @@
 					<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
 				</form>
 			<?php endif; ?>
-
 
 			<button type="button" id="open_comment">Comment</button>
 			<section id="comment_section">

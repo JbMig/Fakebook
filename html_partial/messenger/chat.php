@@ -1,4 +1,4 @@
-<a href="/conversation">Discussions</a>
+<button><a style="text-decoration: none; color: black;" href="/conversation">Discussions</a></button>
 <section id="message">
     <h1><?= $_SESSION["chat"]["name"] ?></h1>
     <button type="button" id="change_chat_img_btn" style="background: white; border:0; padding:5px;">
