@@ -1,12 +1,16 @@
-// section.scrollTop = scroll.scrollHeight;
-document.addEventListener("DOMContentLoaded",refreshState);
+let section = document.querySelector("#section_message");
+document.addEventListener("DOMContentLoaded",() => {
+    refreshState(true);
+});
+function scrollDown() {
+    section.scrollTop = section.scrollHeight;
+}
 
 setInterval(() => {
-    refreshState();
+    refreshState(false);
 }, 2000);
 
-function refreshState() {
-    let section = document.querySelector("#section_message");
+function refreshState(scroll) {
     fetch("/chat2")
         .then(res => res.json())
         .then(data => {
@@ -44,6 +48,9 @@ function refreshState() {
                 span.innerHTML = name + ": " + element.content;
                 div.appendChild(span);
             });
+            if(scroll) {
+                scrollDown()
+            }
         })
     ;
 }
@@ -56,7 +63,7 @@ document.querySelector("#new_message_form").addEventListener("submit", function 
         body: new FormData(this)
     }) .then(() => {
         document.querySelector("#new_message").value = "";
-        refreshState()
+        refreshState(true)
     })
 });
 
