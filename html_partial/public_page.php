@@ -15,13 +15,22 @@
 	<!-- interactions -->
 		<?php if ($is_follower) :?>
 			<!-- unfollow -->
-			<form action="/unfollow" class="form" method="post" >
-				<button type="submit" id="unfollow" name="unfollow">
-					Ne plus suivre cette page
-				</button>
-				<input type="hidden" name="unfollow" value="<?= $page_id ?>">
-				<input type="hidden" id="cancel">
-			</form>
+			<?php if($is_admin) :?>
+				<form action="/remove_admin" class="form" method="post" >
+					<button type="submit" id="remove_admin" name="remove_admin">
+						Ne plus être admin
+					</button>
+					<input type="hidden" id="cancel">
+				</form>
+			<?php else :?>
+				<form action="/unfollow" class="form" method="post" >
+					<button type="submit" id="unfollow" name="unfollow">
+						Ne plus suivre cette page
+					</button>
+					<input type="hidden" name="unfollow" value="<?= $page_id ?>">
+					<input type="hidden" id="cancel">
+				</form>
+			<?php endif;?>
 			<!-- i leave that here because we may use it for the group's page later, and i don't want to type it again -->
 			<!-- <form action="/start_chat" class="form" method="post" >
 				<button type="submit" id="start_chat" name="start_chat">
@@ -71,8 +80,8 @@
 					}
 				} ?>
 				<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
-					<form id="goToProfile" action="/profile" method="post"> <!-- needs to be modified to match a page -->
-						<input type="hidden" name="profil_id" value="<?= $page_id ?>" />
+					<form id="goToPage" action="/public_page" method="post"> <!-- needs to be modified to match a page -->
+						<input type="hidden" name="page_id" value="<?= $page_id ?>" />
 						<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
 							<img src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
 						</button>
