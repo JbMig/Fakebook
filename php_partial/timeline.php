@@ -86,6 +86,14 @@ $maRequete->execute([
 $user_likes = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 $like = "like";
 
+$maRequete = $pdo->prepare("SELECT * FROM `pages`");
+$maRequete->execute();
+$all_pages = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
+$maRequete = $pdo->prepare("SELECT * FROM `groups`");
+$maRequete->execute();
+$all_groups = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
 
 require_once __DIR__ . "/../html_partial/timeline.php";
 // clean buffering in $content

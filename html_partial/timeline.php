@@ -139,5 +139,32 @@
 
 
 
-    <?php endforeach;?>
+    <?php endforeach; ?>
+	<section id="canHelp">
+		<h2>Pages que vous pourriez aimer</h2>
+		<?php foreach ($all_pages as $page): ?>
+			<form id="goToPages" action="/public_page" method="post">
+				<input type="hidden" name="page_id" value="<?= $page["page_id"] ?>" />
+				<button type="submit" id="picture_page" style="background: white; border:0; padding:5px;">
+					<img src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
+				</button>
+				<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+					<?= $page["name"] ?> 
+				</button>
+			</form>
+		<?php endforeach; ?>
+		<h2>Groupes que vous pourriez aimer</h2>
+		<?php foreach ($all_groups as $group): ?>
+			<form id="goTogroups" action="/public_group" method="post">
+				<input type="hidden" name="group_id" value="<?= $group["group_id"] ?>" />
+				<button type="submit" id="picture_group" style="background: white; border:0; padding:5px;">
+					<img src="img_pages_groups/<?= $group["picture"] ?>" alt="" width="40px">
+				</button>
+				<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+					<?= $group["name"] ?> 
+				</button>
+			</form>
+		<?php endforeach; ?>
+	</section>
+	
 </section>

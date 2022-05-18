@@ -11,6 +11,13 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $password = $_SESSION["user"]["password"];
     $profil_picture = $_SESSION["user"]["profil_picture"];
     $banner = $_SESSION["user"]["banner"];
+
+    $user_id = $_SESSION["user"]["user_id"];
+    $maRequete = $pdo->prepare("SELECT `theme` FROM `users` WHERE `user_id` = :userId;");
+        $maRequete->execute([
+            ":userId" => $user_id
+        ]);
+	$theme = $_SESSION["user"]["theme"];
 }
 
 
