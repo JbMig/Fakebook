@@ -119,13 +119,11 @@ switch ($uri) {
     case "/new_message":
         require_once __DIR__ . "/php_partial/messenger/new_message.php";
         break;
-<<<<<<< HEAD
     case "/brouillon_timeline":
         require_once __DIR__ . "/../brouillon_timeline.php";
-=======
+		break;
     case "/chat2":
         require_once __DIR__ . "/php_partial/messenger/chat2.php";
->>>>>>> ae55fbc17a6cfa7b86bd9dfd1d05f40970974582
         break;
 }
 
