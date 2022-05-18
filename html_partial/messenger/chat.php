@@ -11,6 +11,10 @@
         <button>Valider</button>
         <button type="button" id="cancel">Annuler</button>
     </form>
+    <form action="/quit_chat" method="post">
+        <input type="hidden" name="quit_chat_id" value="<?=$chat_id?>">
+        <button>Quitter le chat</button>
+    </form>
     <section id="section_message" style="overflow: scroll; border: 1px solid black; padding: 10px; height: 200px; width: 600px;">
         
     </section>

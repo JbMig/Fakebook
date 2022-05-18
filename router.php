@@ -125,6 +125,9 @@ switch ($uri) {
     case "/change_chat_img":
         require_once __DIR__ . "/php_partial/messenger/change_chat_img.php";
         break;
+    case "/quit_chat":
+        require_once __DIR__ . "/php_partial/messenger/quit_chat.php";
+        break;
 }
 
 // we require base_html to display $content ($content references in files from php_partial)
