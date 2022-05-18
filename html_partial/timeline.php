@@ -87,56 +87,8 @@
 				<button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
 				<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
 			</form>
-			<button type="button" id="open_comment">Comment</button>
-			<section id="comment_section">
-				<!-- require un truc ici -->
-				<?php require __DIR__ . "/../php_partial/comment.php"?>
-			</section>
-		</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <?php if ($user_id === $article["user_id"]) : ?>
-			<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
-				<form id="goToProfile" action="/profile" method="post">
-					<input type="hidden" name="profil_id" value="<?= $article["user_id"] ?>" />
-					<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-						<img src="img_profil/<?= $profil_picture ?>" alt="" width="40px">
-					</button>
-					<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-						<?= $first_name . " " . $last_name ?> 
-					</button>
-				</form>
-				<span id="date"><?= $article["date"] ?></span>
-				<br>
-				<span id="data"><?= $article["content"] ?></span>
-				<br>
-				<?php if($article["picture"]) :?>
-					<img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
-				<?php endif; ?>
-				<form action="/like_article" method="post" id="like_article">
-					<button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
-					<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
-				</form>
+			<?php if($user_id === $article["user_id"]) : ?>
 				<form id="delete_article" method="post" action="/delete_article">
 					<button type="submit" id="delete_btn">Supprimer</button>
 					<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
@@ -150,45 +102,21 @@
 					<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
 					<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
 				</form>
-                <button type="button" id="open_comment">Comment</button>
-                <section id="comment_section">
-                    <!-- require un truc ici -->
-                    <?php require __DIR__ . "/../php_partial/comment.php"?>
-                </section>
-			</div>
-		<?php else : ?>
-			<!-- then the user's friends' articles -->
-			<?php foreach ($profile_friends as $profile_friend) : ?>
-				<?php if (($profile_friend["user_id_a"] === $article["user_id"] || $profile_friend["user_id_b"]=== $article["user_id"]) && $status === "active") : ?>
-					<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
-						<form id="goToProfile" action="/profile" method="post">
-							<input type="hidden" name="profil_id" value="<?= $article["user_id"] ?>" />
-							<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-								<img src="img_profil/<?= $profil_picture ?>" alt="" width="40px">
-							</button>
-							<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-								<?= $first_name . " " . $last_name ?> 
-							</button>
-						</form>
-						<span id="date"><?= $article["date"] ?></span>
-						<br>
-						<span id="data"><?= $article["content"] ?></span>
-						<br>
-						<?php if($article["picture"]) :?>
-							<img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
-						<?php endif; ?>
-						<form action="/like_article" method="post" id="like_article">
-							<button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
-							<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
-						</form>
-                        <button type="button" id="open_comment">Comment</button>
-                        <section id="comment_section">
-                            <!-- require un truc ici -->
-                            <?php require __DIR__ . "/../php_partial/comment.php"?>
-                        </section>
-					</div>
-				<?php endif ?>
-			<?php endforeach ?>
-		<?php endif ?>
+			<?php endif; ?>
+
+
+			<button type="button" id="open_comment">Comment</button>
+			<section id="comment_section">
+				<!-- require un truc ici -->
+				<?php require __DIR__ . "/../php_partial/comment.php"?>
+			</section>
+		</div>
+
+
+
+		<!-- partie supprimée (gardée dans brouillon_html.php par sécurité) -->
+
+
+
     <?php endforeach;?>
 </section>
