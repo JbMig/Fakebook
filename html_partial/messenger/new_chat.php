@@ -9,7 +9,7 @@
     <form method="post" class="col-md-8 mx-5 mt-3">
         <select id="select">
             <?php foreach ($friend_profils as $friend_profil): ?>
-            <option value="<?= $friend_profil["user_id"] ?>"><?= $friend_profil["first_name"] . $friend_profil["last_name"] ?></option>
+            <option value="<?= $friend_profil["user_id"] . " " . $friend_profil["first_name"] . " " . $friend_profil["last_name"]  ?>"><?= $friend_profil["first_name"] . " " . $friend_profil["last_name"] ?></option>
             <?php endforeach; ?>
         </select>
         <button class="col-md-10 mb-4 mt-2 bg-primary" type="button" id="add_friend">Ajouter un ami</button>
