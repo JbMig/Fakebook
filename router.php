@@ -3,6 +3,26 @@
 // get url after first /
 $uri = $_SERVER["REQUEST_URI"];
 
+if ($uri == "/entrer.php") {
+    // if no user in session
+    if (!isset($_SESSION["user"])) {
+        // we go to login
+        header("Location: /login");
+        exit;
+    } else { // we go to timeline
+        header("Location: /timeline");
+        exit;
+    }
+// else if we are not in login or signup
+} else if ($uri != "/login" && $uri != "/sign_up") {
+    // if no user in session
+    if (!isset($_SESSION["user"])) {
+        // we go to login
+        header("Location: /login");
+        exit;
+    }
+}
+
 // if url =  "..." require the files "..."
 switch ($uri) {
     case "/login":
@@ -121,6 +141,12 @@ switch ($uri) {
         break;
     case "/chat2":
         require_once __DIR__ . "/php_partial/messenger/chat2.php";
+        break;
+    case "/change_chat_img":
+        require_once __DIR__ . "/php_partial/messenger/change_chat_img.php";
+        break;
+    case "/quit_chat":
+        require_once __DIR__ . "/php_partial/messenger/quit_chat.php";
         break;
 }
 

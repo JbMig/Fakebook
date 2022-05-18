@@ -1,6 +1,6 @@
-<button id="new_chat">
-    <a href="/new_chat">nouvelle conversation</a>
-</button>
+
+<a href="/new_chat">Nouvelle conversation</a>
+
 <section id="conversation">
     <?php foreach ($conversations as $conversation): ?>
         <form id="goToChat" action="/conversation" method="post">
