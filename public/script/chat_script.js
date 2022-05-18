@@ -60,19 +60,68 @@ document.querySelector("#new_message_form").addEventListener("submit", function 
     })
 });
 
-// test param in url:
-// document.querySelector("#new_message_form").addEventListener("submit", function (event) {
-//     event.preventDefault()
-//     const data = new FormData(this)
-//     console.log(data.get("new_message"));
-//     console.log(data.get("chat_id"));
-//     fetch(`/new_message?new_message=${data.get("new_message")}&chat_id=${data.get("chat_id")}`, {
-//         method: "POST"
-//     }) .then(() => {
-//         document.querySelector("#new_message").value = "";
-//         refreshState()
-//     })
-// });
+
+let openChangeImgBtn = document.querySelector("#change_chat_img_btn");
+let changeChatImg = document.querySelector("#change_chat_img");
+
+let isVisibleChangeImg = false;
+function changeImgBtn() {
+    isVisibleChangeImg = !isVisibleChangeImg;
+    changeChatImg.style.display = isVisibleChangeImg ? "block" : "none";
+}
+openChangeImgBtn.addEventListener("click", changeImgBtn);
+
+let cancel = document.querySelector("#cancel");
+function cancelChangeImg() {
+    changeChatImg.reset();
+    var p=document.querySelector("#preview");
+    p.innerHTML="";
+    p.style.display="none";
+    changeImgBtn();
+}
+cancel.addEventListener("click", cancelChangeImg);
+
+
+var new_image_input = document.querySelector("#fileToUpload");
+var depose = document.querySelector("#depose");
+
+depose.addEventListener("click", function(evt) {
+    evt.preventDefault();
+    new_image_input.click();
+    new_image_input.addEventListener("change", openVignette);
+  });
+  
+  depose.addEventListener("dragover", function(evt) {
+    evt.preventDefault();
+  });
+  depose.addEventListener("dragenter", function() {
+    this.className="onDropZone";
+  });
+  depose.addEventListener("dragleave", function() {
+    this.className="";
+  }); 
+  depose.addEventListener("drop", function(evt) {
+    evt.preventDefault();
+    new_image_input.files=evt.dataTransfer.files;
+    this.className="";
+    openVignette()
+  });
+  
+  // affiche la mignature de l'image upload
+  function openVignette() {
+    var p=document.querySelector("#preview");
+    p.innerHTML="";
+    for (var i=0; i<new_image_input.files.length; i++) {
+      var f=new_image_input.files[i];
+      var div=document.createElement("div");
+      div.className="fichier";
+      var vignette=document.createElement("img");
+      vignette.src = window.URL.createObjectURL(f);
+      div.appendChild(vignette);
+      p.appendChild(div);
+    }
+    p.style.display="block"; 
+  };
 
 
 
