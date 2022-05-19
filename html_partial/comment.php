@@ -36,12 +36,12 @@
         <span id="date"><?= $comment["date"] ?></span>
         <br>
         <span id="data"><?= $comment["content"] ?></span>
-        <form action="/like_article" method="post" id="like_article">
+        <form action="/like_comment" method="post" id="like_comment">
             <button class="articleColor" id="like_btn" type="submit" style="border: 0; padding:0px; margin: 5px;">
-                <img style=" width: 40px; height: 40px; margin: 0px;" src="img_ressources/<?= $like ?>" alt="">
+                <img style=" width: 40px; height: 40px; margin: 0px;" src="img_ressources/<?= $comment_like ?>" alt="">
             </button>
-            <span><?=$article["like_count"]?></span>
-            <input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
+            <span><?=$comment["like_count"]?></span>
+            <input type="hidden" name="like_comment_id" value="<?= $comment["comment_id"] ?>">
         </form>
         <?php if ($comment["user_id"] === $_SESSION["user"]["user_id"]) : ?>
             <form id="delete_comment" method="post" action="/delete_comment">
