@@ -1,5 +1,3 @@
-// Test
-var cancel = document.querySelector("#cancel");
 var newPublicationForm = document.querySelector("#newPublicationForm");
 var form_modify_article = document.querySelector("#form_modify_article");
 
@@ -28,15 +26,29 @@ open_comment.forEach(button => {
   })
 })
 
+let open_modify_comment = document.querySelectorAll("#open_modify_comment");
+open_modify_comment.forEach(button => {
+  let isVisibleModifyComment = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisibleModifyComment = !isVisibleModifyComment;
+    toDisplay.style.display = isVisibleModifyComment ? "block" : "none";
+    target.innerHTML = isVisibleModifyComment ? "Annuler" : "Comment"
+  })
+})
+
 // cancel new article
+var cancel = document.querySelector("#cancel");
 function cancel_new_post() {
-  console.log("coucou");
     newPublicationForm.reset();
     var p=document.querySelector("#preview");
     p.innerHTML="";
     p.style.display="none";
 }
-cancel.addEventListener("click", cancel_new_post);
+if(cancel) {
+  cancel.addEventListener("click", cancel_new_post);
+}
 
 
 
