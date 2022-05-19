@@ -28,6 +28,18 @@ open_comment.forEach(button => {
   })
 })
 
+let open_modify_comment = document.querySelectorAll("#open_modify_comment");
+open_modify_comment.forEach(button => {
+  let isVisibleModifyComment = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisibleModifyComment = !isVisibleModifyComment;
+    toDisplay.style.display = isVisibleModifyComment ? "block" : "none";
+    target.innerHTML = isVisibleModifyComment ? "Annuler" : "Comment"
+  })
+})
+
 // cancel new article
 function cancel_new_post() {
   console.log("coucou");
