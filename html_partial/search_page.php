@@ -12,9 +12,9 @@ foreach ($pages as $page){
             if(in_array($name_page,$memory) == false){
             array_push($memory,$name_page);?>
             <form id="goToProfile" action="/public_page" method="post">
-            <input type="hidden" name="profil_id" value="<?= $page["page_id"]; ?>" />
+                <input type="hidden" name="page_id" value="<?= $page["page_id"]; ?>" />
                 <button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-                    <img src="img_pages_groups/<?=  $name["picture"] ?>" alt="" width="40px">
+                    <img src="img_pages_groups/<?=  $page["picture"] ?>" alt="" width="40px">
                 </button>
                 <button type="submit" id="page_id" style="background: white; border:0; padding:0;"> 
                     <?= $page["name"]?>     
@@ -34,7 +34,7 @@ foreach ($names as $name):
     if (in_array($name_page,$memory) == false){
         ?>
         <form id="goToProfile" action="/public_page" method="post">
-        <input type="hidden" name="profil_id" value="<?= $name["page_id"]; ?>" />
+        <input type="hidden" name="page_id" value="<?= $name["page_id"]; ?>" />
         <button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
                     <img src="img_pages_groups/<?=  $name["picture"] ?>" alt="" width="40px">
                 </button>
