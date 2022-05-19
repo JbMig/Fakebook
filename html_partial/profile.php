@@ -1,8 +1,10 @@
-<button><a style="text-decoration: none; color: black;" href="/settings_profil">Paramètres</a></button>
+<?php if ($_SESSION["user"]["user_id"] === $profile["user_id"]) :?>
+	<button><a style="text-decoration: none; color: black;" href="/settings_profil">Paramètres</a></button>
+<?php endif; ?>
 <section>
 	<!-- page top : profile picture, first & last name -->
-	<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
-	<img src="img_baniere/<?= $profile["banner"] ?>" alt="" >
+	<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="100px">
+	<img src="img_baniere/<?= $profile["banner"] ?>" alt="" heigth="200px" width="1000px">
 </section>
 <h1 id="h1"><?=$h1?></h1>
 <!-- stats -->
