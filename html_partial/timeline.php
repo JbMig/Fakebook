@@ -1,13 +1,3 @@
-<!-- link to the current user's profile page -->
-<form id="goToProfile" action="/profile" method="post">
-	<input type="hidden" name="profil_id" value="<?= $_SESSION["user"]["user_id"] ?>" />
-	<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-		<img id="profilPic" src="img_profil/<?=  $_SESSION["user"]["profil_picture"] ?>" alt="" width="40px">
-	</button>
-	<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-		<?=$user_name?> 
-	</button>
-</form>
 <section id="sectionPublication">
     <div id="newPublication">
         <!-- Form new article-->
@@ -89,10 +79,10 @@
 		<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
 			<form id="<?= $actionId ?>" action="<?= $action ?>" method="post">
 				<input type="hidden" name="<?= $action_name ?>" value="<?= $action_value ?>" />
-				<button type="submit" id="<?= $picture_id ?>" style="background: white; border:0; padding:5px;">
+				<button class="articleColor" type="submit" id="<?= $picture_id ?>" style="border:0; padding:5px;">
 					<img id="profilPic" src="<?= $show_picture ?>" alt="" >
 				</button>
-				<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+				<button type="submit" class="articleColor" id="first_name" style="border:0; padding:0;"> 
 					<?= $show_name ?> 
 				</button>
 			</form>
@@ -104,7 +94,7 @@
 				<img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
 			<?php endif; ?>
 			<form action="/like_article" method="post" id="like_article">
-				<button id="like_btn" type="submit" style="border: 0; background: white; padding:0px; margin: 5px;">
+				<button class="articleColor" id="like_btn" type="submit" style="border: 0; padding:0px; margin: 5px;">
 					<img style=" width: 40px; height: 40px; margin: 0px;" src="img_ressources/<?= $like ?>" alt="">
 				</button>
 				<span><?=$article["like_count"]?></span>
@@ -144,7 +134,7 @@
 
     <?php endforeach; ?>
 	<section id="canHelp">
-		<h2>Pages que vous pourriez aimer</h2>
+		<h4>Pages que vous pourriez aimer</h4>
 		<?php foreach ($all_pages as $page): ?>
 			<form id="goToPages" action="/public_page" method="post">
 				<input type="hidden" name="page_id" value="<?= $page["page_id"] ?>" />
@@ -156,7 +146,7 @@
 				</button>
 			</form>
 		<?php endforeach; ?>
-		<h2>Groupes que vous pourriez aimer</h2>
+		<h4>Groupes que vous pourriez aimer</h4>
 		<?php foreach ($all_groups as $group): ?>
 			<form id="goTogroups" action="/public_group" method="post">
 				<input type="hidden" name="group_id" value="<?= $group["group_id"] ?>" />
