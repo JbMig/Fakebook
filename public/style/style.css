@@ -3,8 +3,32 @@ body {
     padding-left: 200px;
     padding-top: 50px;
     padding-bottom: 50px;
-    
+    padding-right: 200px;
 }
+
+.container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 500px;
+    grid-template-rows: 200px;
+    width: auto;
+    border: 3px solid black;
+    margin: 20px;
+}
+
+.block1 {
+    display: flex;
+    justify-content: center;
+}
+
+.inputSign {
+    width: 300px;
+}
+
+.validate {
+    width: 100px;
+}
+
 #depose {
     /* position: absolute; */
     height:60px;
