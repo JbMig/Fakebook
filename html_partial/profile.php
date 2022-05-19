@@ -3,13 +3,8 @@
 <?php endif; ?>
 <section>
 	<!-- page top : profile picture, first & last name -->
-<<<<<<< HEAD
 	<img id="profilPic" src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
 	<img src="img_baniere/<?= $profile["banner"] ?>" alt="" >
-=======
-	<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="100px">
-	<img src="img_baniere/<?= $profile["banner"] ?>" alt="" heigth="200px" width="1000px">
->>>>>>> 19c17460d073ee631404749f2d41946a06bfc396
 </section>
 <h1 id="h1"><?=$h1?></h1>
 <!-- stats -->
