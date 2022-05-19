@@ -13,30 +13,41 @@
     <?php 
         if ($uri != "/login" && $uri != "/sign_up"):
             if(isset($_SESSION["user"]["user_id"])) :?>
+        <div id="baseHtml">
                 <form id="deco_form" method="post" action="/sign_out">
-                    <button class="nav_deco" id="deconnexion" type="submit">Deconnexion</button>
-                    <input type="hidden" name="deco">
+                    <div class="baseHtml">
+                        <button class="nav_deco"id="deconnexion" type="submit">Deconnexion</button>
+                        <input type="hidden" name="deco">
+                    </div>
                 </form>
-
+                <div class="baseHtml">
+                    <form id="someone" method="post" action="/search">
+                        <label id="someone" for="someone"></label>
+                        <input id="someone" type="text" name="someone">
+                        <button id="someone" type="submit">Chercher une personne</button>
+                    </form>
+                </div>
+            <div class="baseHtml">
                 <button><a style="text-decoration: none; color: black;" href="/timeline">Fil d'actualité</a></button>
-                <br>
+            </div>
+            <div class="baseHtml">
+                    <form id="page" method="post" action="/search">
+                        <label id="page" for="page"></label>
+                        <input id="page" type="text" name="page">
+                        <button id="page" type="submit">Chercher une page</button>
+                    </form>
+                </div>
+            <div class="baseHtml">
                 <button><a style="text-decoration: none; color: black;" href="/conversation">Fakenger</a></button>
-                
-                <form id="someone" method="post" action="/search">
-                    <label id="someone" for="someone"></label>
-                    <input id="someone" type="text" name="someone">
-                    <button id="someone" type="submit">Chercher une personne</button>
-                </form>
-                <form id="page" method="post" action="/search">
-                    <label id="page" for="page"></label>
-                    <input id="page" type="text" name="page">
-                    <button id="page" type="submit">Chercher une page</button>
-                </form>
-                <form id="group" method="post" action="/search">
-                    <label id="group" for="group"></label>
-                    <input id="group" type="text" name="group">
-                    <button id="group" type="submit">Chercher un groupe</button>
-                </form>
+            </div>
+                <div class="baseHtml">
+                    <form id="group" method="post" action="/search">
+                        <label id="group" for="group"></label>
+                        <input id="group" type="text" name="group">
+                        <button id="group" type="submit">Chercher un groupe</button>
+                    </form>
+                </div>
+        </div>
             <?php endif; 
         endif; ?>
             
