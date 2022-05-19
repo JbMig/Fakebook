@@ -9,7 +9,7 @@
 			$page = $_SESSION["page"];
 			$page_id = $_SESSION["page"]["page_id"];
             // if user_id = article_id, i can delete the article
-            if($article_user === $user_id) {
+            if($article_user === $user_id || $page_id !== NULL ) {
                 if($article_id) {
                     // delete article
                     $maRequete = $pdo->prepare("DELETE FROM `articles` WHERE `article_id` = :id");

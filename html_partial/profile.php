@@ -121,7 +121,7 @@
 				<input type="file" name="fileToUpload" id="fileToUpload" accept="image/jpeg, image/png, image/gif, image/jpg">
 				<div id="preview"></div>
 				<button type="submit" id="submitPublication" >Envoyer</button>
-				<button id="cancel">Annuler</button>
+				<button type="button" id="cancel">Annuler</button>
 			</form>
 			<?php endif ?>
 		</div>

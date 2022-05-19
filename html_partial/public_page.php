@@ -20,7 +20,7 @@
 					<button type="submit" id="remove_admin" name="remove_admin">
 						Ne plus être admin
 					</button>
-					<input type="hidden" id="cancel">
+					<input type="hidden" id="input_remove_admin">
 				</form>
 			<?php else :?>
 				<form action="/unfollow" class="form" method="post" >
@@ -28,7 +28,7 @@
 						Ne plus suivre cette page
 					</button>
 					<input type="hidden" name="unfollow" value="<?= $page_id ?>">
-					<input type="hidden" id="cancel">
+					<input type="hidden" id="input_unfollow">
 				</form>
 			<?php endif;?>
 			<!-- i leave that here because we may use it for the group's page later, and i don't want to type it again -->

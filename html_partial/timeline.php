@@ -89,6 +89,19 @@
 			$actionId = "goToPage";
 			$action_name = "page_id";
 			$action_value = $article["page_id"];
+			$maRequete = $pdo->prepare("SELECT `user_id` FROM `admins` WHERE `page_id` = :pageId;");
+			$maRequete->execute([
+				":pageId" => $article["page_id"]
+			]);
+			$admins = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+			foreach ($admins as $admin) {
+				if ($admin['user_id'] === $_SESSION["user"]["user_id"]) {
+					$is_admin = TRUE;
+					break;
+				} else {
+					$is_admin = FALSE;
+				}
+			}
 		} else {
 			$show_name = implode("", $name);
 			$show_picture =  "img_pages_groups/" . implode("", $picture);
@@ -119,8 +132,10 @@
 				<button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
 				<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
 			</form>
-
-			<?php if($user_id === $article["user_id"]) : ?>
+			<!-- conditions to modify or delete articles -->
+			
+			<?php if(($user_id === $article["user_id"] && $article["page_id"] === NULL) || ($article["page_id"] !== NULL
+			&& $is_admin === true)) : ?>
 				<form id="delete_article" method="post" action="/delete_article">
 					<button type="submit" id="delete_btn">Supprimer</button>
 					<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
