@@ -128,6 +128,12 @@ switch ($uri) {
     case "/add_admin":
         require_once __DIR__ . "/php_partial/add_admin.php";
         break;
+    case "/ban":
+        require_once __DIR__ . "/php_partial/ban.php";
+        break;
+    case "/unban":
+        require_once __DIR__ . "/php_partial/unban.php";
+        break;
     case "/new_page":
         require_once __DIR__ . "/php_partial/new_page.php";
 		break;
