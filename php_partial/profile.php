@@ -20,7 +20,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 	$profile = $maRequete->fetch();
     $_SESSION["profil_watching"] = $profile;
 }
-var_dump($_SERVER["REQUEST_METHOD"]);
 
 // displaying the profile's owner name and his past articles
 $title = "Fakebook - Profil de " . $profile["first_name"] . " " . $profile["last_name"];
@@ -39,7 +38,6 @@ $maRequete = $pdo->prepare("SELECT `user_id`, `nb_friends`, `nb_articles`, `nb_c
 $profile_stats = $maRequete->fetch();
 
 // checking whether we're friends with the person
-// $profile_id = filter_input(INPUT_POST, "profil_id");
 
 $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked` FROM `relationships` WHERE ((`user_id_a` = :profile_id AND `user_id_b` = :userId) OR (`user_id_b` = :profile_id AND `user_id_a` = :userId)) AND `status`='approved';");
     $maRequete->execute([
