@@ -72,7 +72,7 @@
 			$action_name = "page_id";
 			$action_value = $article["page_id"];
 			foreach ($admins as $admin) {
-				if ($admin["user_id"] === $_SESSION["user"]["user_id"]) {
+				if ($admin["page_id"] === $article["page_id"]) {
 					$is_admin = TRUE;
 					break;
 				}
