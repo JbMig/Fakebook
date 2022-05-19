@@ -149,7 +149,7 @@
 			<form id="goToPages" action="/public_page" method="post">
 				<input type="hidden" name="page_id" value="<?= $page["page_id"] ?>" />
 				<button type="submit" id="picture_page" style="background: white; border:0; padding:5px;">
-					<img src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
+					<img id="profilPic" src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
 				</button>
 				<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
 					<?= $page["name"] ?> 
@@ -161,7 +161,7 @@
 			<form id="goTogroups" action="/public_group" method="post">
 				<input type="hidden" name="group_id" value="<?= $group["group_id"] ?>" />
 				<button type="submit" id="picture_group" style="background: white; border:0; padding:5px;">
-					<img src="img_pages_groups/<?= $group["picture"] ?>" alt="" width="40px">
+					<img id="profilPic" src="img_pages_groups/<?= $group["picture"] ?>" alt="" width="40px">
 				</button>
 				<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
 					<?= $group["name"] ?> 
