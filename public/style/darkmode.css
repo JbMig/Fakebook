@@ -1,6 +1,6 @@
 body{
     background-color: #00007A;
-    color: #396B8A;
+    color: #AFD3E9;
 }
 
 button{
@@ -13,4 +13,9 @@ button{
 
 #article {
     background-color: #97C6E3;
+    color: black;
+}
+
+#baseProfile {
+    background-color: #00007A;
 }
