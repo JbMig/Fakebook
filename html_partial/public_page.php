@@ -179,7 +179,7 @@
 						</form>
 						<?php if($account["user_id"] !== $user_id):?>
 							<form action="/ban" class="form" method="post" >
-								<button type="submit" id="ban" name="new_admin">
+								<button type="submit" id="ban" name="ban">
 									Bannir cette personne
 								</button>
 								<input type="hidden" name="ban_page" value="<?= $page_id ?>">
