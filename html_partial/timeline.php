@@ -33,10 +33,10 @@
         }
         foreach ($user_likes as $user_like) {
             if ($user_like["article_id"] === $article["article_id"]) {
-                $like = "unLike";
+                $like = "like.png";
                 break;
             } else {
-                $like = "like";
+                $like = "unlike.png";
             }
         }
 		if($article["page_id"] !== NULL) {
@@ -104,7 +104,10 @@
 				<img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
 			<?php endif; ?>
 			<form action="/like_article" method="post" id="like_article">
-				<button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
+				<button id="like_btn" type="submit" style="border: 0; background: white; padding:0px; margin: 5px;">
+					<img style=" width: 40px; height: 40px; margin: 0px;" src="img_ressources/<?= $like ?>" alt="">
+				</button>
+				<span><?=$article["like_count"]?></span>
 				<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
 			</form>
 			<!-- conditions to modify or delete articles -->
