@@ -85,7 +85,7 @@
 							<button type="submit" id="friend_request" name="friend_request">
 								Demande d'ami
 							</button>
-						<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
+							<input type="hidden" name="friend_request" value="<?= $profile_id ?>">
 						</form>
 					<?php endif ?>
 					<!-- block someone -->
