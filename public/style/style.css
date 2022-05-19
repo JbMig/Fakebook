@@ -22,7 +22,10 @@ body {
     display: flex;
     justify-content: center;
 }
-
+.block2 {
+    display: flex;
+    justify-content: center;
+}
 .inputSign {
     width: 250px;
 }
@@ -50,6 +53,21 @@ body {
    
 }
 
+.containerSignUp {
+    border: 3px solid black;
+    display: grid;
+    grid-template-columns: 250px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin: 20px;
+    gap: 20px;
+}
+
+#inscrire {
+    grid-row: 100px;
+}
 #depose {
     /* position: absolute; */
     height:60px;
