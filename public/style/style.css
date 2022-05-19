@@ -8,13 +8,15 @@ body {
 
 .container {
     display: grid;
-    justify-content: center;
-    grid-template-columns: 500px;
-    grid-template-rows: 200px;
+   
+    grid-template-columns: 250px;
+    grid-template-rows: 200px 80px 80px ;
     width: auto;
     border: 3px solid black;
     margin: 20px;
+    padding: 30px;
 }
+
 
 .block1 {
     display: flex;
@@ -22,11 +24,30 @@ body {
 }
 
 .inputSign {
-    width: 300px;
+    width: 250px;
 }
 
 .validate {
+    margin-top: 10px;
+    margin-bottom: 10px;
     width: 100px;
+    background-color:#7FB8DC;
+}
+.sign {
+    background-color:#7FB8DC;
+    text-decoration: none;
+    color: black;
+}
+.loginF {
+    color: #7FB8DC;
+}
+
+
+.signButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   
 }
 
 #depose {
