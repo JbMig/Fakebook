@@ -2,7 +2,7 @@
 <form id="goToProfile" action="/profile" method="post">
 	<input type="hidden" name="profil_id" value="<?= $_SESSION["user"]["user_id"] ?>" />
 	<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-		<img src="img_profil/<?=  $_SESSION["user"]["profil_picture"] ?>" alt="" width="40px">
+		<img id="profilPic" src="img_profil/<?=  $_SESSION["user"]["profil_picture"] ?>" alt="" width="40px">
 	</button>
 	<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
 		<?=$user_name?> 
@@ -90,7 +90,7 @@
 			<form id="<?= $actionId ?>" action="<?= $action ?>" method="post">
 				<input type="hidden" name="<?= $action_name ?>" value="<?= $action_value ?>" />
 				<button type="submit" id="<?= $picture_id ?>" style="background: white; border:0; padding:5px;">
-					<img src="<?= $show_picture ?>" alt="" width="40px">
+					<img id="profilPic" src="<?= $show_picture ?>" alt="" >
 				</button>
 				<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
 					<?= $show_name ?> 

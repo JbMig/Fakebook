@@ -2,7 +2,7 @@
 <section id="message">
     <h1><?= $_SESSION["chat"]["name"] ?></h1>
     <button type="button" id="change_chat_img_btn" style="background: white; border:0; padding:5px;">
-        <img src="img_chat_profil/<?=$_SESSION["chat"]["chat_pic"]?>" alt="" width="50px">
+        <img id="profilPic" src="img_chat_profil/<?=$_SESSION["chat"]["chat_pic"]?>" alt="" width="50px">
     </button>
     <form id="change_chat_img" action="change_chat_img" method="post" enctype="multipart/form-data">
         <div id="depose">Déposez vos images ou cliquez pour choisir</div>
