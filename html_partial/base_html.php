@@ -20,7 +20,7 @@
 						<img id="profilPic" src="img_profil/<?=  $_SESSION["user"]["profil_picture"] ?>" alt="" width="40px">
 					</button>
 					<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-						<?=$user_name?> 
+						<?=$_SESSION["user"]["first_name"] . " " . $_SESSION["user"]["last_name"]?> 
 					</button>
 				</form>
         		<div id="baseHtml">
