@@ -13,8 +13,18 @@
     <?php 
         if ($uri != "/login" && $uri != "/sign_up"):
             if(isset($_SESSION["user"]["user_id"])) :?>
-        <div id="baseHtml">
-                <form id="deco_form" method="post" action="/sign_out">
+				<!-- link to the current user's profile page -->
+				<form id="goToProfile" action="/profile" method="post">
+					<input type="hidden" name="profil_id" value="<?= $_SESSION["user"]["user_id"] ?>" />
+					<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
+						<img id="profilPic" src="img_profil/<?=  $_SESSION["user"]["profil_picture"] ?>" alt="" width="40px">
+					</button>
+					<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+						<?=$user_name?> 
+					</button>
+				</form>
+        		<div id="baseHtml">
+				<form id="deco_form" method="post" action="/sign_out">
                     <div class="baseHtml">
                         <button class="baseButton" class="nav_deco"id="deconnexion" type="submit">Deconnexion</button>
                         <input type="hidden" name="deco">
