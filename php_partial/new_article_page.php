@@ -6,7 +6,7 @@
             $user_id = $_SESSION["user"]["user_id"];
 			$page_id = $_SESSION["page"]["page_id"];
             if($_FILES["fileToUpload"]["name"]) {
-                require_once __DIR__ . "/upload_img_post.php";
+                require_once __DIR__ . "/upload_img_post_page.php";
             } else {
 				// 1st we create the article in the articles table
                 $maRequete = $pdo->prepare(
