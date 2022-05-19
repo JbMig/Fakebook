@@ -1,4 +1,4 @@
-<button><a style="text-decoration: none; color: black;" href="/settings_profil">Parametre</a></button>
+<button><a style="text-decoration: none; color: black;" href="/settings_profil">Paramètres</a></button>
 <section>
 	<!-- page top : profile picture, first & last name -->
 	<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
