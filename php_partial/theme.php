@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         ]);
     $_SESSION["user"]["theme"] = $theme;
     http_response_code(302);
-    header('Location: /profile_settings');
+    header('Location: /settings_profil');
     exit();
 }
 ?>

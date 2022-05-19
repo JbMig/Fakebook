@@ -204,6 +204,9 @@ ALTER TABLE `stats`
 ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
 
 ALTER TABLE `chats` ADD `uuid` VARCHAR(255);
+
+ALTER TABLE `pages` MODIFY `picture` VARCHAR(255) DEFAULT "default_page_pic.jpg";
+ALTER TABLE `groups` MODIFY `picture` VARCHAR(255) DEFAULT "default_page_pic.jpg";
  
 
 

@@ -37,9 +37,6 @@ switch ($uri) {
     case "/profile":
         require_once __DIR__ . "/php_partial/profile.php";
         break;
-    case "/profile_settings":
-        require_once __DIR__ . "/php_partial/profile_settings.php";
-        break;
     case "/theme":
         require_once __DIR__ . "/php_partial/theme.php";
         break;
@@ -145,6 +142,9 @@ switch ($uri) {
     case "/new_message":
         require_once __DIR__ . "/php_partial/messenger/new_message.php";
         break;
+    case "/brouillon_timeline":
+        require_once __DIR__ . "/../brouillon_timeline.php";
+		break;
     case "/chat2":
         require_once __DIR__ . "/php_partial/messenger/chat2.php";
         break;
