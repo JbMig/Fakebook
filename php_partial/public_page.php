@@ -80,7 +80,7 @@ $maRequete = $pdo->prepare("SELECT `user_id` FROM `admins` WHERE `page_id` = :pa
 		":pageId" => $page_id
 	]);
 $admins = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-
+$nb_admins = Count($admins);
 
 foreach ($admins as $admin) {
 	if ($admin['user_id'] === $_SESSION["user"]["user_id"]) {

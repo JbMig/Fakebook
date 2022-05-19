@@ -7,8 +7,9 @@
 <h1 id="h1"><?=$h1?></h1>
 <!-- stats -->
 <section> 
-<div> <?=$page["name"]?> compte <?=$nb_articles?> article(s). </div>
-<div> <?=$page["name"]?> est suivie par <?=$nb_followers?> personne(s). </div>
+<div id="description"><?=$page["description"]?></div> <!-- changer le style de police dans le css -->
+<div><?=$page["name"]?> compte <?=$nb_articles?> article(s).</div>
+<div><?=$page["name"]?> est suivie par <?=$nb_followers?> personne(s).</div>
 </section> <br> <!-- we will remove this br when the css is done-->
 <section>
 	<div>
@@ -16,6 +17,7 @@
 		<?php if ($is_follower) :?>
 			<!-- unfollow -->
 			<?php if($is_admin) :?>
+				<span>Cette page compte <?=$nb_admins?> administrateur(s). Si vous ne souhaitez plus occuper cette fonction et que vous êtes le dernier, la page sera supprimée.</span>
 				<form action="/remove_admin" class="form" method="post" >
 					<button type="submit" id="remove_admin" name="remove_admin">
 						Ne plus être admin
