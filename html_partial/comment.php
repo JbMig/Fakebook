@@ -27,7 +27,7 @@
         <form id="goToProfile" action="/profile" method="post">
             <input type="hidden" name="profil_id" value="<?= $comment["user_id"] ?>" />
             <button type="submit" id="comment_profil_picture" style="background: white; border:0; padding:5px;">
-                <img src="img_profil/<?= $profil_picture ?>" alt="" width="30px">
+                <img id="profilPic" src="img_profil/<?= $profil_picture ?>" alt="" width="30px">
             </button>
             <button type="submit" id="comment_name" style="background: white; border:0; padding:0;">
                 <?= $first_name . " " . $last_name ?>

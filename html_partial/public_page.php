@@ -1,4 +1,13 @@
-
+<!-- link to the current user's profile page -->
+<form id="goToProfile" action="/profile" method="post">
+	<input type="hidden" name="profil_id" value="<?= $_SESSION["user"]["user_id"] ?>" />
+	<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
+		<img src="img_profil/<?=  $_SESSION["user"]["profil_picture"] ?>" alt="" width="40px">
+	</button>
+	<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+		Retour au profil : <?=$_SESSION["user"]["first_name"] . " " . $_SESSION["user"]["last_name"]?> 
+	</button>
+</form>
 <section>
 	<!-- page top : profile picture, first & last name -->
 	<img src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
@@ -7,8 +16,12 @@
 <h1 id="h1"><?=$h1?></h1>
 <!-- stats -->
 <section> 
-<div> <?=$page["name"]?> compte <?=$nb_articles?> article(s). </div>
-<div> <?=$page["name"]?> est suivie par <?=$nb_followers?> personne(s). </div>
+<div id="description"><?=$page["description"]?></div> <!-- changer le style de police dans le css -->
+<?php if ($is_admin) :?>
+	<button><a style="text-decoration: none; color: black;" href="/settings_public_page">Paramètres</a></button>
+<?php endif; ?>
+<div><?=$page["name"]?> compte <?=$nb_articles?> article(s).</div>
+<div><?=$page["name"]?> est suivie par <?=$nb_followers?> personne(s).</div>
 </section> <br> <!-- we will remove this br when the css is done-->
 <section>
 	<div>
@@ -16,6 +29,7 @@
 		<?php if ($is_follower) :?>
 			<!-- unfollow -->
 			<?php if($is_admin) :?>
+				<span>Cette page compte <?=$nb_admins?> administrateur(s). Si vous ne souhaitez plus occuper cette fonction et que vous êtes le dernier, la page sera supprimée.</span>
 				<form action="/remove_admin" class="form" method="post" >
 					<button type="submit" id="remove_admin" name="remove_admin">
 						Ne plus être admin
