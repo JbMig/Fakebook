@@ -1,16 +1,7 @@
-<!-- link to the current user's profile page -->
-<form id="goToProfile" action="/profile" method="post">
-	<input type="hidden" name="profil_id" value="<?= $_SESSION["user"]["user_id"] ?>" />
-	<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-		<img src="img_profil/<?=  $_SESSION["user"]["profil_picture"] ?>" alt="" width="40px">
-	</button>
-	<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-		Retour au profil : <?=$_SESSION["user"]["first_name"] . " " . $_SESSION["user"]["last_name"]?> 
-	</button>
-</form>
+
 <section>
 	<!-- page top : profile picture, first & last name -->
-	<img src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
+	<img id="profilPic" src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
 	<img src="img_baniere/<?= $page["banner"] ?>" alt="" >
 </section>
 <h1 id="h1"><?=$h1?></h1>
@@ -100,10 +91,10 @@
 					<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
 						<form id="goToPage" action="/public_page" method="post"> <!-- needs to be modified to match a page -->
 							<input type="hidden" name="page_id" value="<?= $page_id ?>" />
-							<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-								<img src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
+							<button type="submit" class="articleColor" id="profil_picture" style="border:0; padding:5px;">
+								<img id="profilPic" src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
 							</button>
-							<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+							<button type="submit" class="articleColor" id="first_name" style="border:0; padding:0;"> 
 								<?= $page["name"] ?> 
 							</button>
 						</form>

@@ -156,10 +156,10 @@
 							<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
 								<form id="goToProfile" action="/profile" method="post">
 									<input type="hidden" name="profil_id" value="<?= $article["user_id"] ?>" />
-									<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
+									<button type="submit" class="articleColor" id="profil_picture" style="border:0; padding:5px;">
 										<img id="profilPic" src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
 									</button>
-									<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+									<button type="submit" class="articleColor" id="first_name" style="border:0; padding:0;"> 
 										<?= $profile["first_name"] . " " . $profile["last_name"] ?> 
 									</button>
 								</form>
