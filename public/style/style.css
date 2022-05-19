@@ -96,6 +96,13 @@ button {
     height: 200px;
     background-size: cover;
     background-position: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+#profileName {
+    padding-left: 10px;
 }
 #depose {
     /* position: absolute; */
@@ -167,4 +174,9 @@ button {
     object-fit: cover;
     width: 40px;
     height: 40px;
+}
+
+#newPublicationForm {
+    margin-top: 50px;
+    margin-bottom: 30px;
 }
