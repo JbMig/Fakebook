@@ -168,6 +168,18 @@
 				</button>
 			</form>
 		<?php endforeach; ?>
+		<h2>Personne que vous pourriez connaitre</h2>
+		<?php foreach ($all_users as $all_user): ?>
+			<form id="goToProfil" action="/profile" method="post">
+				<input type="hidden" name="profil_id" value="<?= $all_user["user_id"] ?>" />
+				<button type="submit" id="picture_group" style="background: white; border:0; padding:0px;">
+					<img id="profilPic" src="img_profil/<?= $all_user["profil_picture"] ?>" alt="" width="40px">
+				</button>
+				<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+					<?= $all_user["first_name"] . " " . $all_user["last_name"]?> 
+				</button>
+			</form>
+		<?php endforeach; ?>
 	</section>
 	
 </section>
