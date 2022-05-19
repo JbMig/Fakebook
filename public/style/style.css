@@ -19,6 +19,7 @@ body {
 
 #article {
     background-color: #DFEDF6;
+    border-radius: 8px;
 }
 
 .articleColor {
