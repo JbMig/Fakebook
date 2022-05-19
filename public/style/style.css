@@ -68,6 +68,12 @@ body {
 #inscrire {
     grid-row: 100px;
 }
+
+#baseHtml {
+    display:grid;
+    grid-template-rows:  repeat(3,50px);
+    grid-template-columns: 150px 380px;
+}
 #depose {
     /* position: absolute; */
     height:60px;
@@ -127,8 +133,9 @@ button {
 }
  #canHelp {
     position: fixed;
-    top: 50px;
-    right: 60px;
+    top: 43px;
+    right: 200px;
+
 }
 
 #profilPic {
