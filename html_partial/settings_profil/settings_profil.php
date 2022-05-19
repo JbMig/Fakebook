@@ -10,7 +10,6 @@
         <button type="submit" id="valider_banniere">Valider</button>
     </form>
     <h2>Modifier profil</h2>
-    <button>Valider</button>
     <div>
         <h3>Prénom</h3>
         <form id="new_first_name" method="post" action="/new_first_name">
