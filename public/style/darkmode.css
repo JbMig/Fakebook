@@ -16,6 +16,8 @@ button{
     color: black;
 }
 
-#baseProfile {
+.baseProfile {
     background-color: #00007A;
+    color: #AFD3E9;;
+    margin-top: 10px;
 }

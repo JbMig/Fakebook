@@ -95,6 +95,7 @@ button {
     width: 1000px;
     height: 200px;
     background-size: cover;
+    background-position: center;
 }
 #depose {
     /* position: absolute; */
@@ -154,7 +155,7 @@ button {
     display: none;
 }
  #canHelp {
-    position: fixed;
+    position: absolute;
     top: 43px;
     right: 100px;
 

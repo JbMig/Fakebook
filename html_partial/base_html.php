@@ -16,10 +16,10 @@
 				<!-- link to the current user's profile page -->
 				<form id="goToProfile" action="/profile" method="post">
 					<input type="hidden" name="profil_id" value="<?= $_SESSION["user"]["user_id"] ?>" />
-					<button id="baseProfile" type="submit" id="profil_picture" style=" border:0; padding:5px;">
+					<button class="baseProfile" type="submit" id="profil_picture" style=" border:0; padding:5px;">
 						<img id="profilPic" src="img_profil/<?=  $_SESSION["user"]["profil_picture"] ?>" alt="" width="40px">
 					</button>
-					<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+					<button class="baseProfile" type="submit" id="first_name" style="border:0; padding:0;"> 
 						<?=$_SESSION["user"]["first_name"] . " " . $_SESSION["user"]["last_name"]?> 
 					</button>
 				</form>
