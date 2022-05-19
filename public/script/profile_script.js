@@ -16,6 +16,18 @@ open_pages_list.forEach(button => {
   })
 })
 
+let open_comment = document.querySelectorAll("#open_comment");
+open_comment.forEach(button => {
+  let isVisibleComment = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisibleComment = !isVisibleComment;
+    toDisplay.style.display = isVisibleComment ? "block" : "none";
+    target.innerHTML = isVisibleComment ? "Annuler" : "Comment"
+  })
+})
+
 // cancel new article
 function cancel_new_post() {
   console.log("coucou");
