@@ -158,7 +158,7 @@
 				</button>
 			</form>
 		<?php endforeach; ?>
-		<h2>Personne que vous pourriez connaitre</h2>
+		<h4>Personne que vous pourriez connaitre</h4>
 		<?php foreach ($all_users as $all_user): ?>
 			<form id="goToProfil" action="/profile" method="post">
 				<input type="hidden" name="profil_id" value="<?= $all_user["user_id"] ?>" />
