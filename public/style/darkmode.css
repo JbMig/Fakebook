@@ -1,9 +1,16 @@
 body{
-    background-color: #122E40;
-    color: white;
+    background-color: #00007A;
+    color: #396B8A;
 }
 
 button{
     background-color: #AFD3E9;
 }
 
+.articleColor {
+    background-color:  #97C6E3;
+}
+
+#article {
+    background-color: #97C6E3;
+}

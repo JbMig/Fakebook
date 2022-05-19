@@ -25,6 +25,9 @@ body {
     background-color: #DFEDF6;
 }
 
+input {
+    border-radius: 10px;
+}
 .block1 {
     display: flex;
     justify-content: center;
@@ -83,6 +86,8 @@ body {
 
 button {
     background-color:#7FB8DC;
+    margin-top: 5px;
+    border-radius: 5px;
 }
 
 .bannerSize {
