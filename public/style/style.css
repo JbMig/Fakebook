@@ -62,3 +62,8 @@ button {
 #change_chat_img {
     display: none;
 }
+ #canHelp {
+    position: fixed;
+    top: 50px;
+    right: 60px;
+ }

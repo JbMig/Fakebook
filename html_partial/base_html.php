@@ -10,20 +10,28 @@
 </head>
 <body>
     <header>
-    <?php if(isset($_SESSION["user"]["user_id"])) {?>
-            	<form id="deco_form" method="post" action="/sign_out">
+    <?php 
+        if ($uri != "/login" && $uri != "/sign_up"):
+            if(isset($_SESSION["user"]["user_id"])) :?>
+                <form id="deco_form" method="post" action="/sign_out">
                     <button class="nav_deco" id="deconnexion" type="submit">Deconnexion</button>
                     <input type="hidden" name="deco">
                 </form>
 
-                <a href="timeline">Fil d'actualité</a>
+                <button><a style="text-decoration: none; color: black;" href="/timeline">Fil d'actualité</a></button>
+                <br>
+                <button><a style="text-decoration: none; color: black;" href="/conversation">Fakenger</a></button>
                 
                 <form id="search" method="post" action="/search">
                     <label id="search" for="search"></label>
                     <input id="search" type="text" name="search">
                     <button id="search" type="submit">Chercher</button>
                 </form>
-        <?php }?>
+            <?php endif; 
+        endif; ?>
+            
+
+        
     </header>
     <main>
         <!-- Affiche $content ici -->

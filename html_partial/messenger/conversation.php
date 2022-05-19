@@ -1,5 +1,5 @@
 
-<a href="/new_chat">Nouvelle conversation</a>
+<button><a style="text-decoration: none; color: black;" href="/new_chat">Nouvelle conversation</a></button>
 
 <section id="conversation">
     <?php foreach ($conversations as $conversation): ?>
