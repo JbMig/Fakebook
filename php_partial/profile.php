@@ -5,8 +5,8 @@ require_once __DIR__ . "/../database/pdo.php";  // accessing the database
 $user_id = $_SESSION["user"]["user_id"];
 // if we got on the page with the url (without following a link), we end up on our own profile page
 if($_SERVER["REQUEST_METHOD"] === "GET") {
-	$profile_id = $_SESSION["profil_watching"]["user_id"]; // needed to check whether it's the user's page or someone else's.
-	$profile = $_SESSION["profil_watching"];
+	$profile_id = $_SESSION["profile_watching"]["user_id"]; // needed to check whether it's the user's page or someone else's.
+	$profile = $_SESSION["profile_watching"];
 }
 
 // if we got on the page by clicking a link (someone's name or pic), we end up on the perso's page
@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
             ":profile_id" => $profile_id
         ]);
 	$profile = $maRequete->fetch();
-    $_SESSION["profil_watching"] = $profile;
+    $_SESSION["profile_watching"] = $profile;
 }
 
 // displaying the profile's owner name and his past articles

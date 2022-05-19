@@ -46,7 +46,10 @@ CREATE TABLE IF NOT EXISTS `articles` (
 	`user_id` INT NOT NULL,
 	`group_id` INT,
 	`page_id` INT,
-	PRIMARY KEY (`article_id`)
+	PRIMARY KEY (`article_id`),
+	CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`page_id`) REFERENCES `pages`(`page_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `comments` (
@@ -57,7 +60,9 @@ CREATE TABLE IF NOT EXISTS `comments` (
 	`like_count` INT DEFAULT 0,
 	`article_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
-	PRIMARY KEY (`comment_id`)
+	PRIMARY KEY (`comment_id`),
+	CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `articles`(`article_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `likes` (
@@ -66,7 +71,10 @@ CREATE TABLE IF NOT EXISTS `likes` (
 	`article_id` INT,
 	`comment_id` INT,
 	`user_id` INT NOT NULL,
-	PRIMARY KEY (`like_id`)
+	PRIMARY KEY (`like_id`),
+	CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `articles`(`article_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`comment_id`) REFERENCES `comments`(`comment_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `admins` (
@@ -74,23 +82,30 @@ CREATE TABLE IF NOT EXISTS `admins` (
 	`group_id` INT,
 	`page_id` INT,
 	`user_id` INT NOT NULL,
-	PRIMARY KEY (`admin_id`) 
+	PRIMARY KEY (`admin_id`),
+	CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`page_id`) REFERENCES `pages`(`page_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `members` (
 	`member_id` INT NOT NULL AUTO_INCREMENT,
+	`banned` ENUM('yes', 'no') DEFAULT 'no',
 	`group_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
-	`banned` ENUM('yes', 'no') DEFAULT 'no',
-	PRIMARY KEY (`member_id`)
+	PRIMARY KEY (`member_id`),
+	CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `followers` (
 	`follower_id` INT NOT NULL AUTO_INCREMENT,
+	`banned` ENUM('yes', 'no') DEFAULT 'no',
 	`page_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
-	`banned` ENUM('yes', 'no') DEFAULT 'no',
-	PRIMARY KEY (`follower_id`)
+	PRIMARY KEY (`follower_id`),
+	CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`page_id`) REFERENCES `pages`(`page_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `relationships` (
@@ -99,7 +114,9 @@ CREATE TABLE IF NOT EXISTS `relationships` (
 	`blocked` ENUM('yes', 'no') DEFAULT 'no',
 	`user_id_a` INT NOT NULL,
 	`user_id_b` INT NOT NULL,
-	PRIMARY KEY (`relation_id`)
+	PRIMARY KEY (`relation_id`),
+	CONSTRAINT FOREIGN KEY (`user_id_a`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`user_id_b`) REFERENCES `users`(`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `chats` (
@@ -117,14 +134,18 @@ CREATE TABLE IF NOT EXISTS `messages` (
 	`picture` VARCHAR(255),
 	`chat_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
-	PRIMARY KEY (`message_id`)
+	PRIMARY KEY (`message_id`),
+	CONSTRAINT FOREIGN KEY (`chat_id`) REFERENCES `chats`(`chat_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `chat_members` (
 	`chat_member_id` INT NOT NULL AUTO_INCREMENT,
 	`chat_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
-	PRIMARY KEY (`chat_member_id`)
+	PRIMARY KEY (`chat_member_id`),
+	CONSTRAINT FOREIGN KEY (`chat_id`) REFERENCES `chats`(`chat_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `notifications` (
@@ -133,12 +154,18 @@ CREATE TABLE IF NOT EXISTS `notifications` (
 	`type` ENUM('article','like','comment','relationship_request','relationship_agree','relationship_disagree','join_group_request','join_group_agree','join_group_disagree') NOT NULL,
 	`seen` ENUM('yes','no') NOT NULL,
 	`user_id` INT,
-	`group_id` INT,
-	`page_id` INT,
+	`article_id` INT,
 	`like_id` INT,
 	`comment_id` INT,
-	`article_id` INT,
-	PRIMARY KEY (`notif_id`)
+	`page_id` INT,
+	`group_id` INT,
+	PRIMARY KEY (`notif_id`),
+	CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `articles`(`article_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`like_id`) REFERENCES `likes`(`like_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`comment_id`) REFERENCES `comments`(`comment_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`page_id`) REFERENCES `pages`(`page_id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `stats` (
@@ -151,56 +178,6 @@ CREATE TABLE IF NOT EXISTS `stats` (
 	`comments_on_articles` INT DEFAULT 0,
 	`nb_friends` INT DEFAULT 0,
 	`user_id` INT NOT NULL,
-	PRIMARY KEY (`stat_id`)
+	PRIMARY KEY (`stat_id`),
+	CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
-
-
-ALTER TABLE  `articles`
-ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`page_id`) REFERENCES `pages`(`page_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE;
-
-ALTER TABLE  `comments`
-ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `articles`(`article_id`) ON DELETE CASCADE;
-
-ALTER TABLE  `likes`
-ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `articles`(`article_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`comment_id`) REFERENCES `comments`(`comment_id`) ON DELETE CASCADE;
-
-ALTER TABLE  `admins`
-ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`page_id`) REFERENCES `pages`(`page_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE;
-
-ALTER TABLE  `members`
-ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE;
-
-ALTER TABLE  `followers`
-ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`page_id`) REFERENCES `pages`(`page_id`) ON DELETE CASCADE;
-
-ALTER TABLE  `relationships`
-ADD CONSTRAINT FOREIGN KEY (`user_id_a`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`user_id_b`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
-
-ALTER TABLE  `messages`
-ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`chat_id`) REFERENCES `chats`(`chat_id`) ON DELETE CASCADE;
-
-ALTER TABLE  `chat_members`
-ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`chat_id`) REFERENCES `chats`(`chat_id`) ON DELETE CASCADE;
-
-ALTER TABLE  `notifications`
-ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `articles`(`article_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`like_id`) REFERENCES `likes`(`like_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`comment_id`) REFERENCES `comments`(`comment_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`page_id`) REFERENCES `pages`(`page_id`) ON DELETE CASCADE,
-ADD CONSTRAINT FOREIGN KEY (`group_id`) REFERENCES `groups`(`group_id`) ON DELETE CASCADE;
-
-ALTER TABLE `stats`
-ADD CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE;
