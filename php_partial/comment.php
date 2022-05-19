@@ -16,6 +16,6 @@ $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
         ":userId" => $user_id
     ]);
     $comment_user_likes = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-    $comment_like = "like";
+    $comment_like = "unlike.png";
 
 require __DIR__ . "/../html_partial/comment.php";

@@ -3,10 +3,6 @@ ob_start();
 
 require_once __DIR__ . "/../database/pdo.php";  // accessing the database
 
-
-
-
-
 if($_SERVER["REQUEST_METHOD"] === "POST") {
 	$page_id = filter_input(INPUT_POST, "page_id");
 } else {
@@ -144,7 +140,7 @@ $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
         ":userId" => $user_id
     ]);
     $user_likes = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-    $like = "like";
+    $like = "unlike.png";
 
 require_once __DIR__ . "/../html_partial/public_page.php";
 $content = ob_get_clean();

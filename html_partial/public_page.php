@@ -82,10 +82,10 @@
 					<?php
 					foreach ($user_likes as $user_like) {
 						if ($user_like["article_id"] === $article["article_id"]) {
-							$like = "unLike";
+							$like = "like.png";
 							break;
 						} else {
-							$like = "like";
+							$like = "unlike.png";
 						}
 					} ?>
 					<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
@@ -121,7 +121,10 @@
 							</form>
 						<?php endif ?>
 						<form action="/like_article" method="post" id="like_article">
-							<button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
+							<button class="articleColor" id="like_btn" type="submit" style="border: 0; padding:0px; margin: 5px;">
+								<img style=" width: 40px; height: 40px; margin: 0px;" src="img_ressources/<?= $like ?>" alt="">
+							</button>
+							<span><?=$article["like_count"]?></span>
 							<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
 						</form>
 						<button type="button" id="open_comment">Comment</button>

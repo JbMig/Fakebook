@@ -148,10 +148,10 @@
 							<?php
 							foreach ($user_likes as $user_like) {
 								if ($user_like["article_id"] === $article["article_id"]) {
-									$like = "unLike";
+									$like = "like.png";
 									break;
 								} else {
-									$like = "like";
+									$like = "unlike.png";
 								}
 							} ?>
 							<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
