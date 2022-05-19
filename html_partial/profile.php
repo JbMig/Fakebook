@@ -4,7 +4,8 @@
 <section>
 	<!-- page top : profile picture, first & last name -->
 	<img id="profilPic" src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
-	<img src="img_baniere/<?= $profile["banner"] ?>" alt="" >
+	<div class="bannerSize" style="background-image: url(img_baniere/<?= $profile["banner"] ?>)"></div>
+	<!-- <img src="img_baniere/<?= $profile["banner"] ?>" alt="" > -->
 </section>
 <h1 id="h1"><?=$h1?></h1>
 <!-- stats -->

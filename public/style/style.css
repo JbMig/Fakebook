@@ -84,6 +84,12 @@ body {
 button {
     background-color:#7FB8DC;
 }
+
+.bannerSize {
+    width: 1000px;
+    height: 200px;
+    background-size: cover;
+}
 #depose {
     /* position: absolute; */
     height:60px;
