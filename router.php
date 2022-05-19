@@ -135,7 +135,10 @@ switch ($uri) {
 		require_once __DIR__ . "/php_partial/settings_public_page/settings_public_page.php";
 		break;
 	case "/new_page_name":
-		require_once __DIR__ . "/php_partial/settings_public_page/new_first_name.php";
+		require_once __DIR__ . "/php_partial/settings_public_page/new_page_name.php";
+		break;
+	case "/new_page_description":
+		require_once __DIR__ . "/php_partial/settings_public_page/new_page_description.php";
 		break;
 	case "/edit_page_photo":
 		require_once __DIR__ . "/php_partial/settings_public_page/edit_page_photo.php";

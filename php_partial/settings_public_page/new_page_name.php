@@ -2,9 +2,9 @@
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST["modify_name"])) {
         require "../database/pdo.php";
-        $user_id = $_SESSION["page"]["page_id"];
-        $new_first_name = filter_input(INPUT_POST, "modify_name");
-        $maRequete = $pdo->prepare("UPDATE `users` SET `name` = :new_name WHERE `page_id` = :pageId");
+        $page_id = $_SESSION["page"]["page_id"];
+        $new_name = filter_input(INPUT_POST, "modify_name");
+        $maRequete = $pdo->prepare("UPDATE `pages` SET `name` = :new_name WHERE `page_id` = :pageId");
         $maRequete->execute([
             ":new_name" => $new_name,
             ":pageId" => $page_id
