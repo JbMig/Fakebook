@@ -1,4 +1,20 @@
 // Test
+var cancel = document.querySelector("#cancel");
+var newPublicationForm = document.querySelector("#newPublicationForm");
+var form_modify_article = document.querySelector("#form_modify_article");
+
+
+// cancel new article
+function cancel_new_post() {
+  console.log("coucou");
+    newPublicationForm.reset();
+    var p=document.querySelector("#preview");
+    p.innerHTML="";
+    p.style.display="none";
+}
+cancel.addEventListener("click", cancel_new_post);
+
+
 
 let open_new_page = document.querySelectorAll("#open_new_page");
 open_new_page.forEach(button => {
