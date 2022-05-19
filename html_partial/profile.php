@@ -3,11 +3,11 @@
 <?php endif; ?>
 <section>
 	<!-- page top : profile picture, first & last name -->
-	<img id="profilPic" src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
+	
 	<div class="bannerSize" style="background-image: url(img_baniere/<?= $profile["banner"] ?>)"></div>
 	<!-- <img src="img_baniere/<?= $profile["banner"] ?>" alt="" > -->
 </section>
-<h1 id="h1"><?=$h1?></h1>
+<h1 id="h1"><img id="profilPic" src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px"> <span id="profileName"><?=$h1?></span></h1>
 <!-- stats -->
 <section>
 	<div> <?=$profile["first_name"]?> a <?=$profile_stats["nb_friends"]?> relation(s). </div>
@@ -216,10 +216,10 @@
 			<?php foreach ($pages as $page) : ?>
 				<form id="goToPage" action="/public_page" method="post"> <!-- needs to be modified to match a page -->
 					<input type="hidden" name="page_id" value="<?= $page["page_id"] ?>" />
-					<button type="submit" id="picture" style="background: white; border:0; padding:5px;">
-						<img src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
+					<button type="submit" id="picture" class="baseProfile" style=" border:0; padding:5px;">
+						<img id="profilPic" src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
 					</button>
-					<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+					<button type="submit" id="first_name" class="baseProfile" style="border:0; padding:0;"> 
 						<?= $page["name"] ?> 
 					</button>
 				</form>
