@@ -1,7 +1,8 @@
 <?php
 ob_start();
-require_once "../database/pdo.php";
-$profile_id = $_SESSION["user"]["user_id"]; // needed to check whether it's the user's page or someone else's.
+require_once "../database/pdo.php"; 
+
+
 if(isset($_POST["someone"])) {
     $who = filter_input(INPUT_POST,"someone");
     $who_name = explode(" ",$who);
@@ -44,6 +45,7 @@ if(isset($_POST["group"])) {
     }
 
 if(isset($_POST["page"])) {
+    $page_id = $_SESSION["page"]["page_id"];
     $who = filter_input(INPUT_POST,"page");
     $maRequete = $pdo->prepare('SELECT `page_id` , `name` , `picture` , `banner` FROM pages WHERE (`name` LIKE :who_name) ORDER BY `page_id` DESC;');
     $maRequete->execute([
