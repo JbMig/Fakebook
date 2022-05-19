@@ -3,8 +3,8 @@
 <?php endif; ?>
 <section>
 	<!-- page top : profile picture, first & last name -->
-	<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="100px">
-	<img src="img_baniere/<?= $profile["banner"] ?>" alt="" heigth="200px" width="1000px">
+	<img id="profilPic" src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
+	<img src="img_baniere/<?= $profile["banner"] ?>" alt="" >
 </section>
 <h1 id="h1"><?=$h1?></h1>
 <!-- stats -->
@@ -157,7 +157,7 @@
 								<form id="goToProfile" action="/profile" method="post">
 									<input type="hidden" name="profil_id" value="<?= $article["user_id"] ?>" />
 									<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-										<img src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
+										<img id="profilPic" src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
 									</button>
 									<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
 										<?= $profile["first_name"] . " " . $profile["last_name"] ?> 

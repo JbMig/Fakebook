@@ -62,7 +62,7 @@ foreach ($names as $name):
                 <img src="img_profil/<?=  $_SESSION["user"]["profil_picture"] ?>" alt="" width="40px">
             </button>
             <button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-                <?= $first_name . " " . $last_name?>     
+                <?= $name["first_name"] . " " . $name["first_name"]?>     
             </button>
         </form>
     

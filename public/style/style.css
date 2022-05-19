@@ -111,4 +111,12 @@ button {
     position: fixed;
     top: 50px;
     right: 60px;
- }
+}
+
+#profilPic {
+    border: 1px solid black;
+    border-radius: 50%;
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+}

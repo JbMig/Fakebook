@@ -22,10 +22,20 @@
                 <br>
                 <button><a style="text-decoration: none; color: black;" href="/conversation">Fakenger</a></button>
                 
-                <form id="search" method="post" action="/search">
-                    <label id="search" for="search"></label>
-                    <input id="search" type="text" name="search">
-                    <button id="search" type="submit">Chercher</button>
+                <form id="someone" method="post" action="/search">
+                    <label id="someone" for="someone"></label>
+                    <input id="someone" type="text" name="someone">
+                    <button id="someone" type="submit">Chercher une personne</button>
+                </form>
+                <form id="page" method="post" action="/search">
+                    <label id="page" for="page"></label>
+                    <input id="page" type="text" name="page">
+                    <button id="page" type="submit">Chercher une page</button>
+                </form>
+                <form id="group" method="post" action="/search">
+                    <label id="group" for="group"></label>
+                    <input id="group" type="text" name="group">
+                    <button id="group" type="submit">Chercher un groupe</button>
                 </form>
             <?php endif; 
         endif; ?>
