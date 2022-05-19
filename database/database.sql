@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `members` (
 	`member_id` INT NOT NULL AUTO_INCREMENT,
 	`group_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
+	`banned` ENUM('yes', 'no') DEFAULT 'no',
 	PRIMARY KEY (`member_id`)
 ) ENGINE=InnoDB;
 
@@ -88,6 +89,7 @@ CREATE TABLE IF NOT EXISTS `followers` (
 	`follower_id` INT NOT NULL AUTO_INCREMENT,
 	`page_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
+	`banned` ENUM('yes', 'no') DEFAULT 'no',
 	PRIMARY KEY (`follower_id`)
 ) ENGINE=InnoDB;
 
@@ -258,12 +260,4 @@ VALUES
 (3,1,2,1,1),
 (4,1,1,1,0);
 
-
-
-
-
-
-
-
--- for myself (Valentine). will be deleted before we send it
-UPDATE `pages` SET `picture` = "default_page_pic.jpg" WHERE `picture` = "default_page_pic.jpeg";
+INSERT INTO `followers` (`page_id`,`user_id`,`banned`) VALUES (21,3,'yes');
