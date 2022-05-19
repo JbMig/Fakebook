@@ -37,6 +37,9 @@
                     <input id="group" type="text" name="group">
                     <button id="group" type="submit">Chercher un groupe</button>
                 </form>
+                <form id="notifications" method="post" action="/notifications">
+                    <button class="notifications" id="notifications" type="submit">Notifications</button>
+                </form>
             <?php endif; 
         endif; ?>
             
