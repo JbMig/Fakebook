@@ -130,6 +130,19 @@ switch ($uri) {
         break;
     case "/new_page":
         require_once __DIR__ . "/php_partial/new_page.php";
+		break;
+	case "/settings_public_page":
+		require_once __DIR__ . "/php_partial/settings_public_page/settings_public_page.php";
+		break;
+	case "/new_page_name":
+		require_once __DIR__ . "/php_partial/settings_public_page/new_first_name.php";
+		break;
+	case "/edit_page_photo":
+		require_once __DIR__ . "/php_partial/settings_public_page/edit_page_photo.php";
+		break;
+	case "/edit_page_banner":
+		require_once __DIR__ . "/php_partial/settings_public_page/edit_page_banner.php";
+		break;
     case "/new_chat":
         require_once __DIR__ . "/php_partial/messenger/new_chat.php";
         break;

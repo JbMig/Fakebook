@@ -17,6 +17,9 @@
 <!-- stats -->
 <section> 
 <div id="description"><?=$page["description"]?></div> <!-- changer le style de police dans le css -->
+<?php if ($is_admin) :?>
+	<button><a style="text-decoration: none; color: black;" href="/settings_public_page">Paramètres</a></button>
+<?php endif; ?>
 <div><?=$page["name"]?> compte <?=$nb_articles?> article(s).</div>
 <div><?=$page["name"]?> est suivie par <?=$nb_followers?> personne(s).</div>
 </section> <br> <!-- we will remove this br when the css is done-->
