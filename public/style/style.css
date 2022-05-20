@@ -125,12 +125,12 @@ button {
 }
 #open_new_group {
     position: absolute;
-    top: 1200px;
+    top: 800px;
     left: 600px;
 }
 #new_group_section {
     position: absolute;
-    top: 1260px;
+    top: 860px;
     left: 600px;
 }
 #open_followers_list {
@@ -221,6 +221,10 @@ button {
 }
 
 #new_page_section {
+    display: none;
+}
+
+#new_group_section {
     display: none;
 }
 
