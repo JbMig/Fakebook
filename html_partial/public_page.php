@@ -146,10 +146,10 @@
 				<?php foreach ($accounts as $account) : ?>
 					<form id="goToProfile" action="/profile" method="post">
 						<input type="hidden" name="profil_id" value="<?= $account["user_id"] ?>" />
-						<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-							<img src="img_profil/<?= $account["profil_picture"] ?>" alt="" width="40px">
+						<button type="submit" id="profil_picture" class="baseProfile" style="border:0; padding:5px;">
+							<img id="profilPic" src="img_profil/<?= $account["profil_picture"] ?>" alt="" width="40px">
 						</button>
-						<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+						<button type="submit" class="baseProfile" id="first_name" style="border:0; padding:0;"> 
 							<?= $account["first_name"] . " " . $account["last_name"] ?> 
 						</button>
 					</form>
@@ -190,10 +190,10 @@
 				<?php foreach ($banned_accounts as $banned_account) : ?>
 					<form id="goToProfile" action="/profile" method="post">
 						<input type="hidden" name="profil_id" value="<?= $banned_account["user_id"] ?>" />
-						<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-							<img src="img_profil/<?= $banned_account["profil_picture"] ?>" alt="" width="40px">
+						<button type="submit" id="profil_picture" class="baseProfile" style="border:0; padding:5px;">
+							<img id="profilPic" src="img_profil/<?= $banned_account["profil_picture"] ?>" alt="" width="40px">
 						</button>
-						<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+						<button type="submit" id="first_name" class="baseProfile" style="border:0; padding:0;"> 
 							<?= $banned_account["first_name"] . " " . $banned_account["last_name"] ?> 
 						</button>
 					</form>
