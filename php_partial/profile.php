@@ -5,8 +5,8 @@ require_once __DIR__ . "/../database/pdo.php";  // accessing the database
 $user_id = $_SESSION["user"]["user_id"];
 // if we got on the page with the url (without following a link), we end up on our own profile page
 if($_SERVER["REQUEST_METHOD"] === "GET") {
-	$profile_id = $_SESSION["profil_watching"]["user_id"]; // needed to check whether it's the user's page or someone else's.
-	$profile = $_SESSION["profil_watching"];
+	$profile_id = $_SESSION["profile_watching"]["user_id"]; // needed to check whether it's the user's page or someone else's.
+	$profile = $_SESSION["profile_watching"];
 }
 
 // if we got on the page by clicking a link (someone's name or pic), we end up on the perso's page
@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
             ":profile_id" => $profile_id
         ]);
 	$profile = $maRequete->fetch();
-    $_SESSION["profil_watching"] = $profile;
+    $_SESSION["profile_watching"] = $profile;
 }
 
 // displaying the profile's owner name and his past articles
@@ -38,14 +38,14 @@ $maRequete = $pdo->prepare("SELECT `user_id`, `nb_friends`, `nb_articles`, `nb_c
 $profile_stats = $maRequete->fetch();
 
 // checking whether we're friends with the person
-$profile_id = filter_input(INPUT_POST, "profil_id");
 
 $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked` FROM `relationships` WHERE ((`user_id_a` = :profile_id AND `user_id_b` = :userId) OR (`user_id_b` = :profile_id AND `user_id_a` = :userId)) AND `status`='approved';");
-        $maRequete->execute([
-            ":profile_id" => $profile_id,
-			":userId" => $_SESSION["user"]["user_id"]
-        ]);
-	$profile_friend = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+    $maRequete->execute([
+        ":profile_id" => $profile_id,
+        ":userId" => $_SESSION["user"]["user_id"]
+    ]);
+$profile_friend = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
 
 // pending friend requests
 $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked` FROM `relationships` WHERE ((`user_id_a` = :profile_id AND `user_id_b` = :userId) OR (`user_id_b` = :profile_id AND `user_id_a` = :userId) AND `status`='pending');");
@@ -60,7 +60,7 @@ $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
         ":userId" => $user_id
     ]);
     $user_likes = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-    $like = "like";
+    $like = "unlike.png";
 
 // get the pages the person follows
 $maRequete = $pdo->prepare("SELECT `page_id`, `name`, `picture` FROM `pages` WHERE `page_id` IN (SELECT `page_id` FROM `followers` WHERE `user_id` = :profile_id)");

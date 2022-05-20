@@ -16,10 +16,10 @@
         }
         foreach ($comment_user_likes as $comment_user_like) {
             if ($comment_user_like["comment_id"] === $comment["comment_id"]) {
-                $comment_like = "unLike";
+                $comment_like = "like.png";
                 break;
             } else {
-                $comment_like = "like";
+                $comment_like = "unlike.png";
             }
         }
     } ?>
@@ -27,7 +27,7 @@
         <form id="goToProfile" action="/profile" method="post">
             <input type="hidden" name="profil_id" value="<?= $comment["user_id"] ?>" />
             <button type="submit" id="comment_profil_picture" style="background: white; border:0; padding:5px;">
-                <img src="img_profil/<?= $profil_picture ?>" alt="" width="30px">
+                <img id="profilPic" src="img_profil/<?= $profil_picture ?>" alt="" width="30px">
             </button>
             <button type="submit" id="comment_name" style="background: white; border:0; padding:0;">
                 <?= $first_name . " " . $last_name ?>
@@ -37,7 +37,10 @@
         <br>
         <span id="data"><?= $comment["content"] ?></span>
         <form action="/like_comment" method="post" id="like_comment">
-            <button id="like_btn_comment" type="submit"><?= $comment_like . " " . $comment["like_count"] ?></button>
+            <button class="articleColor" id="like_btn" type="submit" style="border: 0; padding:0px; margin: 5px;">
+                <img style=" width: 40px; height: 40px; margin: 0px;" src="img_ressources/<?= $comment_like ?>" alt="">
+            </button>
+            <span><?=$comment["like_count"]?></span>
             <input type="hidden" name="like_comment_id" value="<?= $comment["comment_id"] ?>">
         </form>
         <?php if ($comment["user_id"] === $_SESSION["user"]["user_id"]) : ?>

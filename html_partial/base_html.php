@@ -13,33 +13,51 @@
     <?php 
         if ($uri != "/login" && $uri != "/sign_up"):
             if(isset($_SESSION["user"]["user_id"])) :?>
-                <form id="deco_form" method="post" action="/sign_out">
-                    <button class="nav_deco" id="deconnexion" type="submit">Deconnexion</button>
-                    <input type="hidden" name="deco">
+				<!-- link to the current user's profile page -->
+				<form id="goToProfile" action="/profile" method="post">
+					<input type="hidden" name="profil_id" value="<?= $_SESSION["user"]["user_id"] ?>" />
+					<button class="baseProfile" type="submit" id="profil_picture" style=" border:0; padding:5px;">
+						<img id="profilPic" src="img_profil/<?=  $_SESSION["user"]["profil_picture"] ?>" alt="" width="40px">
+					</button>
+					<button class="baseProfile" type="submit" id="first_name" style="border:0; padding:0;"> 
+						<?=$_SESSION["user"]["first_name"] . " " . $_SESSION["user"]["last_name"]?> 
+					</button>
+				</form>
+        		<div id="baseHtml">
+				<form id="deco_form" method="post" action="/sign_out">
+                    <div class="baseHtml">
+                        <button class="baseButton" class="nav_deco"id="deconnexion" type="submit">Deconnexion</button>
+                        <input type="hidden" name="deco">
+                    </div>
                 </form>
-
-                <button><a style="text-decoration: none; color: black;" href="/timeline">Fil d'actualité</a></button>
-                <br>
-                <button><a style="text-decoration: none; color: black;" href="/conversation">Fakenger</a></button>
-                
-                <form id="someone" method="post" action="/search">
-                    <label id="someone" for="someone"></label>
-                    <input id="someone" type="text" name="someone">
-                    <button id="someone" type="submit">Chercher une personne</button>
-                </form>
-                <form id="page" method="post" action="/search">
-                    <label id="page" for="page"></label>
-                    <input id="page" type="text" name="page">
-                    <button id="page" type="submit">Chercher une page</button>
-                </form>
-                <form id="group" method="post" action="/search">
-                    <label id="group" for="group"></label>
-                    <input id="group" type="text" name="group">
-                    <button id="group" type="submit">Chercher un groupe</button>
-                </form>
-                <form id="notifications" method="post" action="/notifications">
-                    <button class="notifications" id="notifications" type="submit">Notifications</button>
-                </form>
+                <div class="baseHtml">
+                    <form id="someone" method="post" action="/search">
+                        <label id="someone" for="someone"></label>
+                        <input id="someone" type="text" name="someone">
+                        <button class="baseButton" id="someone" type="submit">Chercher une personne</button>
+                    </form>
+                </div>
+            <div class="baseHtml">
+                <button class="baseButton" ><a style="text-decoration: none; color: black;" href="/timeline">Fil d'actualité</a></button>
+            </div>
+            <div class="baseHtml">
+                    <form id="page" method="post" action="/search">
+                        <label id="page" for="page"></label>
+                        <input id="page" type="text" name="page">
+                        <button class="baseButton" id="page" type="submit">Chercher une page</button>
+                    </form>
+                </div>
+            <div class="baseHtml">
+                <button class="baseButton" ><a style="text-decoration: none; color: black;" href="/conversation">Fakenger</a></button>
+            </div>
+                <div class="baseHtml">
+                    <form id="group" method="post" action="/search">
+                        <label id="group" for="group"></label>
+                        <input id="group" type="text" name="group">
+                        <button class="baseButton" id="group" type="submit">Chercher un groupe</button>
+                    </form>
+                </div>
+        </div>
             <?php endif; 
         endif; ?>
             

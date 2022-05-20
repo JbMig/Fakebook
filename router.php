@@ -128,8 +128,30 @@ switch ($uri) {
     case "/add_admin":
         require_once __DIR__ . "/php_partial/add_admin.php";
         break;
+    case "/ban":
+        require_once __DIR__ . "/php_partial/ban.php";
+        break;
+    case "/unban":
+        require_once __DIR__ . "/php_partial/unban.php";
+        break;
     case "/new_page":
         require_once __DIR__ . "/php_partial/new_page.php";
+		break;
+	case "/settings_public_page":
+		require_once __DIR__ . "/php_partial/settings_public_page/settings_public_page.php";
+		break;
+	case "/new_page_name":
+		require_once __DIR__ . "/php_partial/settings_public_page/new_page_name.php";
+		break;
+	case "/new_page_description":
+		require_once __DIR__ . "/php_partial/settings_public_page/new_page_description.php";
+		break;
+	case "/edit_page_photo":
+		require_once __DIR__ . "/php_partial/settings_public_page/edit_page_photo.php";
+		break;
+	case "/edit_page_banner":
+		require_once __DIR__ . "/php_partial/settings_public_page/edit_page_banner.php";
+		break;
     case "/new_chat":
         require_once __DIR__ . "/php_partial/messenger/new_chat.php";
         break;

@@ -1,13 +1,3 @@
-<!-- link to the current user's profile page -->
-<form id="goToProfile" action="/profile" method="post">
-	<input type="hidden" name="profil_id" value="<?= $_SESSION["user"]["user_id"] ?>" />
-	<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-		<img src="img_profil/<?=  $_SESSION["user"]["profil_picture"] ?>" alt="" width="40px">
-	</button>
-	<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
-		<?=$user_name?> 
-	</button>
-</form>
 <section id="sectionPublication">
     <div id="newPublication">
         <!-- Form new article-->
@@ -33,10 +23,10 @@
         }
         foreach ($user_likes as $user_like) {
             if ($user_like["article_id"] === $article["article_id"]) {
-                $like = "unLike";
+                $like = "like.png";
                 break;
             } else {
-                $like = "like";
+                $like = "unlike.png";
             }
         }
 		if($article["page_id"] !== NULL) {
@@ -89,10 +79,10 @@
 		<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
 			<form id="<?= $actionId ?>" action="<?= $action ?>" method="post">
 				<input type="hidden" name="<?= $action_name ?>" value="<?= $action_value ?>" />
-				<button type="submit" id="<?= $picture_id ?>" style="background: white; border:0; padding:5px;">
-					<img src="<?= $show_picture ?>" alt="" width="40px">
+				<button class="articleColor" type="submit" id="<?= $picture_id ?>" style="border:0; padding:5px;">
+					<img id="profilPic" src="<?= $show_picture ?>" alt="" >
 				</button>
-				<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+				<button type="submit" class="articleColor" id="first_name" style="border:0; padding:0;"> 
 					<?= $show_name ?> 
 				</button>
 			</form>
@@ -104,7 +94,10 @@
 				<img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
 			<?php endif; ?>
 			<form action="/like_article" method="post" id="like_article">
-				<button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
+				<button class="articleColor" id="like_btn" type="submit" style="border: 0; padding:0px; margin: 5px;">
+					<img style=" width: 40px; height: 40px; margin: 0px;" src="img_ressources/<?= $like ?>" alt="">
+				</button>
+				<span><?=$article["like_count"]?></span>
 				<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
 			</form>
 			<!-- conditions to modify or delete articles -->
@@ -141,27 +134,39 @@
 
     <?php endforeach; ?>
 	<section id="canHelp">
-		<h2>Pages que vous pourriez aimer</h2>
+		<h4>Pages que vous pourriez aimer</h4>
 		<?php foreach ($all_pages as $page): ?>
 			<form id="goToPages" action="/public_page" method="post">
 				<input type="hidden" name="page_id" value="<?= $page["page_id"] ?>" />
-				<button type="submit" id="picture_page" style="background: white; border:0; padding:5px;">
-					<img src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
+				<button type="submit" id="picture_page" class="baseProfile" style=" border:0; padding:0px;">
+					<img id="profilPic" src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
 				</button>
-				<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+				<button type="submit" id="first_name" class="baseProfile" style=" border:0; padding:0;"> 
 					<?= $page["name"] ?> 
 				</button>
 			</form>
 		<?php endforeach; ?>
-		<h2>Groupes que vous pourriez aimer</h2>
+		<h4>Groupes que vous pourriez aimer</h4>
 		<?php foreach ($all_groups as $group): ?>
 			<form id="goTogroups" action="/public_group" method="post">
 				<input type="hidden" name="group_id" value="<?= $group["group_id"] ?>" />
-				<button type="submit" id="picture_group" style="background: white; border:0; padding:5px;">
-					<img src="img_pages_groups/<?= $group["picture"] ?>" alt="" width="40px">
+				<button type="submit" id="picture_group" class="baseProfile" style=" border:0; padding:0px;">
+					<img id="profilPic" src="img_pages_groups/<?= $group["picture"] ?>" alt="" width="40px">
 				</button>
-				<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+				<button type="submit" id="first_name" class="baseProfile"  style=" border:0; padding:0;"> 
 					<?= $group["name"] ?> 
+				</button>
+			</form>
+		<?php endforeach; ?>
+		<h4>Personne que vous pourriez connaitre</h4>
+		<?php foreach ($all_users as $all_user): ?>
+			<form id="goToProfil" action="/profile" method="post">
+				<input type="hidden" name="profil_id" value="<?= $all_user["user_id"] ?>" />
+				<button type="submit" id="picture_group" class="baseProfile" style="border:0; padding:0px;">
+					<img id="profilPic" src="img_profil/<?= $all_user["profil_picture"] ?>" alt="" width="40px">
+				</button>
+				<button type="submit" id="first_name" class="baseProfile"  style=" border:0; padding:0;"> 
+					<?= $all_user["first_name"] . " " . $all_user["last_name"]?> 
 				</button>
 			</form>
 		<?php endforeach; ?>

@@ -4,7 +4,6 @@
 ob_start();
 $title = "Fakebook - fil d'actualité";
 
-
 require_once "../database/pdo.php";
 $user_id = $_SESSION["user"]["user_id"];
 
@@ -84,7 +83,7 @@ $maRequete->execute([
 	":userId" => $user_id
 ]);
 $user_likes = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-$like = "like";
+$like = "unlike.png";
 
 $maRequete = $pdo->prepare("SELECT * FROM `pages`");
 $maRequete->execute();
@@ -93,6 +92,11 @@ $all_pages = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 $maRequete = $pdo->prepare("SELECT * FROM `groups`");
 $maRequete->execute();
 $all_groups = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
+$maRequete = $pdo->prepare("SELECT * FROM `users`");
+$maRequete->execute();
+$all_users = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
 
 
 require_once __DIR__ . "/../html_partial/timeline.php";

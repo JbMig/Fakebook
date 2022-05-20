@@ -3,10 +3,6 @@ ob_start();
 
 require_once __DIR__ . "/../database/pdo.php";  // accessing the database
 
-
-
-
-
 if($_SERVER["REQUEST_METHOD"] === "POST") {
 	$page_id = filter_input(INPUT_POST, "page_id");
 } else {
@@ -39,7 +35,7 @@ $articles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 // getting the page's stats
 $nb_articles = Count($articles);
 
-$maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHERE `page_id` = :pageId;");
+$maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHERE `page_id` = :pageId AND `banned` = 'no';");
 	$maRequete->execute([
 		":pageId" => $page_id
 	]);
@@ -60,7 +56,6 @@ if (COUNT($user_is_follower)>0){
 }
 
 $accounts = array();
-
 foreach ($followers as $follower) {
 	$maRequete = $pdo->prepare("SELECT `user_id`, `first_name`, `last_name`, `profil_picture` FROM `users` WHERE `user_id` = :Id;");
 		$maRequete->execute([
@@ -71,16 +66,13 @@ foreach ($followers as $follower) {
 }
 
 
-
-
-
 // getting the page's admins
 $maRequete = $pdo->prepare("SELECT `user_id` FROM `admins` WHERE `page_id` = :pageId;");
 	$maRequete->execute([
 		":pageId" => $page_id
 	]);
 $admins = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-
+$nb_admins = Count($admins);
 
 foreach ($admins as $admin) {
 	if ($admin['user_id'] === $_SESSION["user"]["user_id"]) {
@@ -90,6 +82,41 @@ foreach ($admins as $admin) {
 		$is_admin = FALSE;
 	}
 }
+
+
+// getting those who were banned from the page (and checking whether the user himself is banned)
+
+$maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHERE `page_id` = :pageId AND `banned` = 'yes';");
+	$maRequete->execute([
+		":pageId" => $page_id
+	]);
+$banned_persons = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+$nb_banned_persons = COUNT($banned_persons);
+
+
+$maRequete = $pdo->prepare("SELECT `user_id` FROM `followers` WHERE `page_id` = :pageId AND `user_id` = :userId AND `banned` = 'yes';");
+	$maRequete->execute([
+		":pageId" => $page_id,
+		":userId" => $user_id
+	]);
+$user_is_banned = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+if (COUNT($user_is_banned)>0){
+	$is_banned = TRUE;
+} else {
+	$is_banned = FALSE;
+}
+
+$banned_accounts = array();
+foreach ($banned_persons as $banned_person) {
+	$maRequete = $pdo->prepare("SELECT `user_id`, `first_name`, `last_name`, `profil_picture` FROM `users` WHERE `user_id` = :Id;");
+		$maRequete->execute([
+			":Id" => $banned_person['user_id']
+		]);
+		$maRequete->setFetchMode(PDO::FETCH_ASSOC);
+	array_push($banned_accounts, $maRequete->fetch());
+}
+
+
 // checking whether we're friends with the person
 $profile_id = filter_input(INPUT_POST, "profil_id");
 
@@ -113,7 +140,7 @@ $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
         ":userId" => $user_id
     ]);
     $user_likes = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-    $like = "like";
+    $like = "unlike.png";
 
 require_once __DIR__ . "/../html_partial/public_page.php";
 $content = ob_get_clean();

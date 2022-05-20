@@ -68,6 +68,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
                     ":userId" => $user_id,
                     ":picture" => $full_name
                 ]);
+            $maRequete = $pdo->prepare(
+                "UPDATE `stats`
+                SET `nb_articles` = `nb_articles` + 1
+                WHERE `user_id` = :userId;");
+                $maRequete->execute([
+                    ":userId" => $user_id
+                ]);
             http_response_code(302);
             $direction = explode("/",$_SERVER["HTTP_REFERER"]);
             if($direction[3] === "profile") {
