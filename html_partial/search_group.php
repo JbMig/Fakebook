@@ -13,10 +13,10 @@ foreach ($groups as $group){
             array_push($memory,$name_group);?>
             <form id="goToProfile" action="/group" method="post">
                 <input type="hidden" name="page_id" value="<?= $group["group_id"]; ?>" />
-                <button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-                    <img src="img_pages_groups/<?=  $group["picture"] ?>" alt="" width="40px">
+                <button type="submit" id="profil_picture" class="baseProfile" style="border:0; padding:5px;">
+                    <img id="profilPic" src="img_pages_groups/<?=  $group["picture"] ?>" alt="" width="40px">
                 </button>
-                <button type="submit" id="page_id" style="background: white; border:0; padding:0;"> 
+                <button type="submit" id="page_id" class="baseProfile" style="border:0; padding:0;"> 
                     <?= $group["name"]?>     
                 </button>
             </form>
@@ -35,10 +35,10 @@ foreach ($names as $name):
         ?>
         <form id="goToProfile" action="/group" method="post">
         <input type="hidden" name="group" value="<?= $name["group_id"]; ?>" />
-        <button type="submit" id="picture" style="background: white; border:0; padding:5px;">
-                    <img src="img_pages_groups/<?=  $name["picture"] ?>" alt="" width="40px">
+        <button type="submit" id="picture" class="baseProfile" style="border:0; padding:5px;">
+                    <img id="profilPic" src="img_pages_groups/<?=  $name["picture"] ?>" alt="" width="40px">
                 </button>
-            <button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+            <button type="submit" id="first_name" class="baseProfile" style="border:0; padding:0;"> 
                 <?= $name["name"]?>     
             </button>
         </form>

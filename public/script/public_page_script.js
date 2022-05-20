@@ -15,7 +15,7 @@ open_followers_list.forEach(button => {
   })
 })
 
-// open the followers list area
+// open the banned list area
 let open_banned_list = document.querySelectorAll("#open_banned_list");
 open_banned_list.forEach(button => {
   let isVisibleBannedList = false;
@@ -37,7 +37,7 @@ open_comment.forEach(button => {
     const toDisplay = target.nextElementSibling;
     isVisibleComment = !isVisibleComment;
     toDisplay.style.display = isVisibleComment ? "block" : "none";
-    target.innerHTML = isVisibleComment ? "Annuler" : "Comment"
+    target.innerHTML = isVisibleComment ? "Annuler" : "Commenter"
   })
 })
 

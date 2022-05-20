@@ -5,8 +5,13 @@ require_once __DIR__ . "/../database/pdo.php";  // accessing the database
 $user_id = $_SESSION["user"]["user_id"];
 // if we got on the page with the url (without following a link), we end up on our own profile page
 if($_SERVER["REQUEST_METHOD"] === "GET") {
-	$profile_id = $_SESSION["profile_watching"]["user_id"]; // needed to check whether it's the user's page or someone else's.
-	$profile = $_SESSION["profile_watching"];
+    if(isset($_SESSION["profile_watching"])) {
+        $profile_id = $_SESSION["profile_watching"]["user_id"]; // needed to check whether it's the user's page or someone else's.
+        $profile = $_SESSION["profile_watching"];
+    } else {
+        $profile_id = $_SESSION["user"]["user_id"];
+        $profile = $_SESSION["user"];
+    }
 }
 
 // if we got on the page by clicking a link (someone's name or pic), we end up on the perso's page
@@ -68,6 +73,12 @@ $maRequete = $pdo->prepare("SELECT `page_id`, `name`, `picture` FROM `pages` WHE
 		":profile_id" => $profile_id
     ]);
     $pages = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+// get the groups a member of which the person is
+$maRequete = $pdo->prepare("SELECT `group_id`, `name`, `picture` FROM `groups` WHERE `group_id` IN (SELECT `group_id` FROM `followers` WHERE `user_id` = :profile_id)");
+    $maRequete->execute([
+		":profile_id" => $profile_id
+    ]);
+    $groups = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
 require_once __DIR__ . "/../html_partial/profile.php";
 $content = ob_get_clean();

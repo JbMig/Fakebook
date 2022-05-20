@@ -116,6 +116,9 @@ switch ($uri) {
     case "/public_page":
         require_once __DIR__ . "/php_partial/public_page.php";
         break;
+    case "/group":
+        require_once __DIR__ . "/php_partial/group.php";
+        break;
     case "/follow":
         require_once __DIR__ . "/php_partial/follow.php";
         break;
@@ -136,6 +139,9 @@ switch ($uri) {
         break;
     case "/new_page":
         require_once __DIR__ . "/php_partial/new_page.php";
+		break;
+    case "/new_group":
+        require_once __DIR__ . "/php_partial/new_group.php";
 		break;
 	case "/settings_public_page":
 		require_once __DIR__ . "/php_partial/settings_public_page/settings_public_page.php";

@@ -1,43 +1,42 @@
 
 <section>
-	<!-- page top : profile picture, first & last name -->
-	<div class="bannerSize" style="background-image: url(img_baniere/<?= $page["banner"] ?>)"></div>
+	<!-- group top : profile picture, first & last name -->
+	<div class="bannerSize" style="background-image: url(img_baniere/<?= $group["banner"] ?>)"></div>
 </section>
-<h1 id="h1"><img id="profilPic" src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px"><span id="profileName"><?=$h1?></span></h1>
+<h1 id="h1"><img id="profilPic" src="img_pages_groups/<?= $group["picture"] ?>" alt="" width="40px"><span id="profileName"><?=$h1?></span></h1>
 <!-- stats -->
 <section> 
-<div id="description"><?=$page["description"]?></div> <!-- changer le style de police dans le css -->
+<div id="description"><?=$group["description"]?></div> <!-- changer le style de police dans le css -->
 <?php if ($is_admin) :?>
-	<button style="margin-bottom: 50px; margin-top: 7px;"><a style="text-decoration: none; color: black;" href="/settings_public_page">Paramètres</a></button>
+	<button style="margin-bottom: 50px; margin-top: 7px;"><a style="text-decoration: none; color: black;" href="/settings_group">Paramètres</a></button>
 <?php endif; ?>
-<div><?=$page["name"]?> compte <?=$nb_articles?> article(s).</div>
-<div><?=$page["name"]?> est suivie par <?=$nb_followers?> personne(s).</div>
+<div><?=$group["name"]?> compte <?=$nb_articles?> article(s) et <?=$nb_members?> membre(s).</div>
 </section> <br> <!-- we will remove this br when the css is done-->
 <section>
 	<div>
 	<!-- interactions -->
 		<?php if ($is_banned === false) : ?>	
 			<!-- You can't do anything if you're banned. -->
-			<?php if ($is_follower) :?>
-				<!-- unfollow -->
+			<?php if ($is_member) :?>
+				<!-- member_removal -->
 				<?php if($is_admin) :?>
-					<div style='width: 450px;'>Cette page compte <?=$nb_admins?> administrateur(s). Si vous ne souhaitez plus occuper cette fonction et que vous êtes le dernier, la page sera supprimée.</div>
-					<form action="/remove_admin" class="form" method="post" >
+					<div style='width: 450px;'>Ce groupe compte <?=$nb_admins?> administrateur(s). Si vous ne souhaitez plus occuper cette fonction et que vous êtes le dernier, la group sera supprimée.</div>
+					<form action="/remove_admin_group" class="form" method="post" >
 						<button type="submit" id="remove_admin" name="remove_admin">
 							Ne plus être admin
 						</button>
 						<input type="hidden" id="input_remove_admin">
 					</form>
 				<?php else :?>
-					<form action="/unfollow" class="form" method="post" >
-						<button type="submit" id="unfollow" name="unfollow">
-							Ne plus suivre cette page
+					<form action="/member_removal" class="form" method="post" >
+						<button type="submit" id="member_removal" name="member_removal">
+							Ne plus suivre ce groupe
 						</button>
-						<input type="hidden" name="unfollow" value="<?= $page_id ?>">
-						<input type="hidden" id="input_unfollow">
+						<input type="hidden" name="member_removal" value="<?= $group_id ?>">
+						<input type="hidden" id="input_member_removal">
 					</form>
 				<?php endif;?>
-				<!-- i leave that here because we may use it for the group's page later, and i don't want to type it again -->
+				<!-- i leave that here because we may use it for the group's group later, and i don't want to type it again -->
 				<!-- <form action="/start_chat" class="form" method="post" >
 					<button type="submit" id="start_chat" name="start_chat">
 						Démarrer la conversation
@@ -45,25 +44,25 @@
 					<input type="hidden" name="start_chat" value="<?= $user_id ?>">
 				</form> -->
 			<?php else :?>
-				<form action="/follow" class="form" method="post" >
-					<button type="submit" id="follow" name="follow">
-						Suivre cette page
+				<form action="/member_request" class="form" method="post" >
+					<button type="submit" id="member_request" name="member_request">
+						Suivre ce groupe
 					</button>
-					<input type="hidden" name="follow" value="<?= $page_id ?>">
+					<input type="hidden" name="member_request" value="<?= $group_id ?>">
 				</form>
 			<?php endif ?>
 		<?php endif ?>
 	</div>
 </section>
 <section>
-	<!-- main page -->
+	<!-- main group -->
 	<div>
 	<!-- articles -->
 		<div>
 		<!-- new article -->
-			<!-- Form new article: needs to be modified to match a page -->
+			<!-- Form new article: needs to be modified to match a group -->
 			<?php if ($is_admin) :?>
-			<form id="newPublicationForm" method="post" enctype="multipart/form-data" action="/new_article_page">
+			<form id="newPublicationForm" method="post" enctype="multipart/form-data" action="/new_article_group">
 				<label id="publicationLabel" for="articleInput">Ecrivez votre message</label><br>
 				<textarea id="articleInput" name="articleInput" type="text"></textarea>
 				<div id="depose">Déposez vos images ou cliquez pour choisir</div>
@@ -88,13 +87,13 @@
 						}
 					} ?>
 					<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
-						<form id="goToPage" action="/public_page" method="post"> <!-- needs to be modified to match a page -->
-							<input type="hidden" name="page_id" value="<?= $page_id ?>" />
+						<form id="goTogroup" action="/group" method="post"> <!-- needs to be modified to match a group -->
+							<input type="hidden" name="group_id" value="<?= $group_id ?>" />
 							<button type="submit" class="articleColor" id="profil_picture" style="border:0; padding:5px;">
-								<img id="profilPic" src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
+								<img id="profilPic" src="img_pages_groups/<?= $group["picture"] ?>" alt="" width="40px">
 							</button>
 							<button type="submit" class="articleColor" id="first_name" style="border:0; padding:0;"> 
-								<?= $page["name"] ?> 
+								<?= $group["name"] ?> 
 							</button>
 						</form>
 						<span id="date"><?= $article["date"] ?></span>
@@ -134,15 +133,15 @@
 					</div>
 				<?php endforeach;?>
 			<?php else: ?>
-				<span>Vous avez été banni(e) de cette page. Vous ne pouvez donc plus voir son contenu.</span>
+				<span>Vous avez été banni(e) de ce groupe. Vous ne pouvez donc plus voir son contenu.</span>
 			<?php endif; ?>
 		</div>
 	</div>
 	<div>
-		<?php if($is_follower && $is_banned === false):?>
-			<!-- showing the list of followers, with a link to their profile -->
-			<button type="button" id="open_followers_list">Afficher les followers</button>
-			<section id="followers_list" style="display: none">
+		<?php if($is_member && $is_banned === false):?>
+			<!-- showing the list of members, with a link to their profile -->
+			<button type="button" id="open_members_list">Afficher les membres</button>
+			<section id="members_list" style="display: none">
 				<?php foreach ($accounts as $account) : ?>
 					<form id="goToProfile" action="/profile" method="post">
 						<input type="hidden" name="profil_id" value="<?= $account["user_id"] ?>" />
@@ -167,7 +166,7 @@
 							<button type="submit" id="new_admin" name="new_admin">
 								Ajouter comme admin
 							</button>
-							<input type="hidden" name="new_admin_page" value="<?= $page_id ?>">
+							<input type="hidden" name="new_admin_group" value="<?= $group_id ?>">
 							<input type="hidden" name="new_admin_account" value="<?= $account["user_id"] ?>">
 						</form>
 						<?php if($account["user_id"] !== $user_id):?>
@@ -175,7 +174,7 @@
 								<button type="submit" id="ban" name="ban">
 									Bannir cette personne
 								</button>
-								<input type="hidden" name="ban_page" value="<?= $page_id ?>">
+								<input type="hidden" name="ban_group" value="<?= $group_id ?>">
 								<input type="hidden" name="ban_account" value="<?= $account["user_id"] ?>">
 							</form>
 						<?php endif ?>
@@ -184,7 +183,7 @@
 			<?php endif ?>
 		</section>
 		<?php if($is_admin):?>
-			<!-- showing the list of banned followers, with a link to their profile and a button to unban them -->
+			<!-- showing the list of banned members, with a link to their profile and a button to unban them -->
 			<button type="button" id="open_banned_list">Afficher les bannis</button>
 			<section id="banned_list" style="display: none">
 				<?php foreach ($banned_accounts as $banned_account) : ?>
@@ -201,7 +200,7 @@
 						<button type="submit" id="unban" name="unban">
 							Annuler le ban
 						</button>
-						<input type="hidden" name="unban_page" value="<?= $page_id ?>">
+						<input type="hidden" name="unban_group" value="<?= $group_id ?>">
 						<input type="hidden" name="unban_account" value="<?= $banned_account["user_id"] ?>">
 					</form>
 				<?php endforeach; ?>

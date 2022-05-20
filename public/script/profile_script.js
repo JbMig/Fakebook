@@ -13,6 +13,18 @@ open_pages_list.forEach(button => {
     target.innerHTML = isVisiblepagesList ? "Replier la liste" : "Afficher les pages suivies"
   })
 })
+// open the groups list area
+let open_groups_list = document.querySelectorAll("#open_groups_list");
+open_groups_list.forEach(button => {
+  let isVisiblegroupsList = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisiblegroupsList = !isVisiblegroupsList;
+    toDisplay.style.display = isVisiblegroupsList ? "block" : "none";
+    target.innerHTML = isVisiblegroupsList ? "Replier la liste" : "Afficher les groupes suivies"
+  })
+})
 
 let open_comment = document.querySelectorAll("#open_comment");
 open_comment.forEach(button => {
@@ -61,6 +73,17 @@ open_new_page.forEach(button => {
     isVisibleName = !isVisibleName;
     toDisplay.style.display = isVisibleName ? "block" : "none";
     target.innerHTML = isVisibleName ? "Annuler" : "Créer une page publique"
+  })
+})
+let open_new_group = document.querySelectorAll("#open_new_group");
+open_new_group.forEach(button => {
+  let isVisibleName = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisibleName = !isVisibleName;
+    toDisplay.style.display = isVisibleName ? "block" : "none";
+    target.innerHTML = isVisibleName ? "Annuler" : "Créer un groupe"
   })
 })
 

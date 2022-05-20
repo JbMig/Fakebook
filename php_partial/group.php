@@ -4,11 +4,11 @@ ob_start();
 require_once __DIR__ . "/../database/pdo.php";  // accessing the database
 
 if($_SERVER["REQUEST_METHOD"] === "POST") {
-	$page_id = filter_input(INPUT_POST, "page_id");
-} else if (isset($_session["page"])) {
-	$page_id = $_SESSION["page"]["page_id"];
+	$group_id = filter_input(INPUT_POST, "group_id");
+} else if (isset($_SESSION["group"])) {
+	$group_id = $_SESSION["group"]["group_id"];
 } else {
-	$message = "Consultez une page avant de revenir ici";
+	$message = "Consultez un groupe avant de revenir ici";
 	//indique que le serveur refuse d'autoriser la requête 
 	http_response_code(403);
 	//j'appelle ma bannière html pour afficher un message d'erreur
@@ -16,67 +16,67 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 	exit;
 }
 $user_id = $_SESSION["user"]["user_id"];
-// updating $_SESSION["page"]
+// updating $_SESSION["group"]
 
 
 $maRequete = $pdo->prepare(
-	"SELECT * FROM `pages` WHERE `page_id` = :pageId;");
+	"SELECT * FROM `groups` WHERE `group_id` = :groupId;");
 	$maRequete->execute([
-		":pageId" => $page_id
+		":groupId" => $group_id
 	]);
-$current_page = $maRequete->fetch();
-$_SESSION["page"] = $current_page;
+$current_group = $maRequete->fetch();
+$_SESSION["group"] = $current_group;
 
-$page_id = $_SESSION["page"]["page_id"];
-$page = $_SESSION["page"];
+$group_id = $_SESSION["group"]["group_id"];
+$group = $_SESSION["group"];
 
-// displaying the page's name and its past articles
-$title = "Fakebook - Page " . $page["name"];
-$h1 = $page["name"];
-$maRequete = $pdo->prepare("SELECT * FROM `articles` WHERE `page_id` = :pageId ORDER BY `date` DESC");
+// displaying the group's name and its past articles
+$title = "Fakebook - group " . $group["name"];
+$h1 = $group["name"];
+$maRequete = $pdo->prepare("SELECT * FROM `articles` WHERE `group_id` = :groupId ORDER BY `date` DESC");
 $maRequete->execute([
-	":pageId" => $page_id
+	":groupId" => $group_id
 ]);
 $articles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
-// getting the page's stats
+// getting the group's stats
 $nb_articles = Count($articles);
 
-$maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHERE `page_id` = :pageId AND `banned` = 'no';");
+$maRequete = $pdo->prepare("SELECT `member_id`, `user_id` FROM `members` WHERE `group_id` = :groupId AND `banned` = 'no';");
 	$maRequete->execute([
-		":pageId" => $page_id
+		":groupId" => $group_id
 	]);
-$followers = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-$nb_followers = COUNT($followers);
+$members = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+$nb_members = COUNT($members);
 
 
-$maRequete = $pdo->prepare("SELECT `user_id` FROM `followers` WHERE `page_id` = :pageId AND `user_id` = :userId;");
+$maRequete = $pdo->prepare("SELECT `user_id` FROM `members` WHERE `group_id` = :groupId AND `user_id` = :userId;");
 	$maRequete->execute([
-		":pageId" => $page_id,
+		":groupId" => $group_id,
 		":userId" => $user_id
 	]);
-$user_is_follower = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-if (COUNT($user_is_follower)>0){
-	$is_follower = TRUE;
+$user_is_member = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+if (COUNT($user_is_member)>0){
+	$is_member = TRUE;
 } else {
-	$is_follower = FALSE;
+	$is_member = FALSE;
 }
 
 $accounts = array();
-foreach ($followers as $follower) {
+foreach ($members as $member) {
 	$maRequete = $pdo->prepare("SELECT `user_id`, `first_name`, `last_name`, `profil_picture` FROM `users` WHERE `user_id` = :Id;");
 		$maRequete->execute([
-			":Id" => $follower['user_id']
+			":Id" => $member['user_id']
 		]);
 		$maRequete->setFetchMode(PDO::FETCH_ASSOC);
 	array_push($accounts, $maRequete->fetch());
 }
 
 
-// getting the page's admins
-$maRequete = $pdo->prepare("SELECT `user_id` FROM `admins` WHERE `page_id` = :pageId;");
+// getting the group's admins
+$maRequete = $pdo->prepare("SELECT `user_id` FROM `admins` WHERE `group_id` = :groupId;");
 	$maRequete->execute([
-		":pageId" => $page_id
+		":groupId" => $group_id
 	]);
 $admins = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 $nb_admins = Count($admins);
@@ -91,19 +91,19 @@ foreach ($admins as $admin) {
 }
 
 
-// getting those who were banned from the page (and checking whether the user himself is banned)
+// getting those who were banned from the group (and checking whether the user himself is banned)
 
-$maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHERE `page_id` = :pageId AND `banned` = 'yes';");
+$maRequete = $pdo->prepare("SELECT `member_id`, `user_id` FROM `members` WHERE `group_id` = :groupId AND `banned` = 'yes';");
 	$maRequete->execute([
-		":pageId" => $page_id
+		":groupId" => $group_id
 	]);
 $banned_persons = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 $nb_banned_persons = COUNT($banned_persons);
 
 
-$maRequete = $pdo->prepare("SELECT `user_id` FROM `followers` WHERE `page_id` = :pageId AND `user_id` = :userId AND `banned` = 'yes';");
+$maRequete = $pdo->prepare("SELECT `user_id` FROM `members` WHERE `group_id` = :groupId AND `user_id` = :userId AND `banned` = 'yes';");
 	$maRequete->execute([
-		":pageId" => $page_id,
+		":groupId" => $group_id,
 		":userId" => $user_id
 	]);
 $user_is_banned = $maRequete->fetchAll(PDO::FETCH_ASSOC);
@@ -149,6 +149,6 @@ $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
     $user_likes = $maRequete->fetchAll(PDO::FETCH_ASSOC);
     $like = "unlike.png";
 
-require_once __DIR__ . "/../html_partial/public_page.php";
+require_once __DIR__ . "/../html_partial/group.php";
 $content = ob_get_clean();
 ?>

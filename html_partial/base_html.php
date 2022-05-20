@@ -66,7 +66,12 @@
     </header>
     <main>
         <!-- Affiche $content ici -->
-        <?= $content ?>
+        <?php if(!isset($content)):?>
+            <h4>Vous vous êtes perdu</h4>
+            <a href="/timeline">fil d'actualité</a>
+        <?php else :
+            echo $content;
+        endif  ?>
     </main>
 
     <footer>
