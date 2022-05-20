@@ -123,6 +123,16 @@ button {
     top: 660px;
     left: 600px;
 }
+#open_new_group {
+    position: absolute;
+    top: 1200px;
+    left: 600px;
+}
+#new_group_section {
+    position: absolute;
+    top: 1260px;
+    left: 600px;
+}
 #open_followers_list {
     position: absolute;
     top: 622px;

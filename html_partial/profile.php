@@ -105,6 +105,11 @@
 				<!-- require un truc ici -->
 				<?php require __DIR__ . "/../php_partial/create_page.php"?>
 			</section>
+			<button type="button" id="open_new_group">Créer un groupe</button>
+			<section id="new_group_section">
+				<!-- require un truc ici -->
+				<?php require __DIR__ . "/../php_partial/create_group.php"?>
+			</section>
 		<?php endif ?>
 	<?php endif ?>
 	</div>
