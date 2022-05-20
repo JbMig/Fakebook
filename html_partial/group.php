@@ -11,6 +11,9 @@
 	<button style="margin-bottom: 50px; margin-top: 7px;"><a style="text-decoration: none; color: black;" href="/settings_group">Paramètres</a></button>
 <?php endif; ?>
 <div><?=$group["name"]?> compte <?=$nb_articles?> article(s) et <?=$nb_members?> membre(s).</div>
+<?php if ($group["status"]==='private') : ?>
+	<div style='width: 450px;'>Ce groupe est privé. Toute demande de rejoindre le groupe doit donc être approuvée par un admin.</div>
+<?php endif; ?>
 </section> <br> <!-- we will remove this br when the css is done-->
 <section>
 	<div>
@@ -30,9 +33,8 @@
 				<?php else :?>
 					<form action="/member_removal" class="form" method="post" >
 						<button type="submit" id="member_removal" name="member_removal">
-							Ne plus suivre ce groupe
+							Quitter le groupe
 						</button>
-						<input type="hidden" name="member_removal" value="<?= $group_id ?>">
 						<input type="hidden" id="input_member_removal">
 					</form>
 				<?php endif;?>
@@ -44,12 +46,20 @@
 					<input type="hidden" name="start_chat" value="<?= $user_id ?>">
 				</form> -->
 			<?php else :?>
-				<form action="/member_request" class="form" method="post" >
-					<button type="submit" id="member_request" name="member_request">
-						Rejoindre ce groupe
-					</button>
-					<input type="hidden" name="member_request" value="<?= $group_id ?>">
-				</form>
+				<?php if ($user_pending_request) :?>
+					<form action="/member_removal" class="form" method="post" >
+						<button type="submit" id="member_removal" name="member_removal">
+							Annuler la demande
+						</button>
+					</form>
+				<?php else : ?>
+					<form action="/member_request" class="form" method="post" >
+						<button type="submit" id="member_request" name="member_request">
+							Rejoindre ce groupe
+						</button>
+						<input type="hidden" name="member_request" value="<?= $group_id ?>">
+					</form>
+				<?php endif ?>
 			<?php endif ?>
 		<?php endif ?>
 	</div>

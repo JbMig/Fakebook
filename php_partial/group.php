@@ -128,12 +128,19 @@ $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked`
 	$profile_friend = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
 // pending friend requests
-$maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked` FROM `relationships` WHERE ((`user_id_a` = :profile_id AND `user_id_b` = :userId) OR (`user_id_b` = :profile_id AND `user_id_a` = :userId) AND `status`='pending');");
+$maRequete = $pdo->prepare("SELECT `user_id`, `group_id`, `status`, `banned` FROM `members` WHERE `group_id` = :groupId AND `user_id` = :userId AND `status`='pending' AND `banned`='no';");
 	$maRequete->execute([
-		":profile_id" => $profile_id,
+		":groupId" => $group_id,
 		":userId" => $_SESSION["user"]["user_id"]
 	]);
-$profile_friend_request = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+$user_pending_requests = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+if (Count($user_pending_requests) >= 1) {
+	$user_pending_request = TRUE;
+} else {
+	$user_pending_request = FALSE;
+};
+
+
 
 $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
     $maRequete->execute([

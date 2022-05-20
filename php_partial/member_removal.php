@@ -3,13 +3,13 @@
         if(isset($_POST["member_removal"])) {
             // get info from form
             require "../database/pdo.php";
-            $profile_id = filter_input(INPUT_POST, "member_removal");
+            $user_id = $_SESSION["user"]["user_id"];
             $group_id = $_SESSION["group"]["group_id"];
 
 			// delete ship from database
-			$maRequete = $pdo->prepare("DELETE FROM `relationships`WHERE `group_id` = :groupId AND `profile_id` = :profile_id;");
+			$maRequete = $pdo->prepare("DELETE FROM `relationships`WHERE `group_id` = :groupId AND `user_id` = :userId;");
 			$maRequete->execute([
-				":profile_id" => $profile_id,
+				":userId" => $user_id,
 				":groupId" => $group_id
 			]);
 			// go back to group
