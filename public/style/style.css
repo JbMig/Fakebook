@@ -144,6 +144,17 @@ button {
     top: 682px;
     left: 600px;
 }
+#open_members_list {
+    position: absolute;
+    top: 622px;
+    left: 600px;
+}
+
+#members_list {
+    position: absolute;
+    top: 682px;
+    left: 600px;
+}
 #open_banned_list {
     position: absolute;
     top: 622px;

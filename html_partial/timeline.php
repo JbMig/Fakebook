@@ -119,7 +119,7 @@
 				</form>
 			<?php endif; ?>
 
-			<button type="button" id="open_comment">Comment</button>
+			<button type="button" id="open_comment">Commenter</button>
 			<section id="comment_section">
 				<!-- require un truc ici -->
 				<?php require __DIR__ . "/../php_partial/comment.php"?>

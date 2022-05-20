@@ -126,7 +126,7 @@
 							<span><?=$article["like_count"]?></span>
 							<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
 						</form>
-						<button type="button" id="open_comment">Comment</button>
+						<button type="button" id="open_comment">Commenter</button>
 						<section id="comment_section">
 							<!-- require un truc ici -->
 							<?php require __DIR__ . "/../php_partial/comment.php"?>

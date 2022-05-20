@@ -142,6 +142,6 @@ $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
     $user_likes = $maRequete->fetchAll(PDO::FETCH_ASSOC);
     $like = "unlike.png";
 
-require_once __DIR__ . "/../html_partial/public_group.php";
+require_once __DIR__ . "/../html_partial/group.php";
 $content = ob_get_clean();
 ?>
