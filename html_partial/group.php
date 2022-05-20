@@ -11,14 +11,14 @@
 	<button style="margin-bottom: 50px; margin-top: 7px;"><a style="text-decoration: none; color: black;" href="/settings_public_group">Paramètres</a></button>
 <?php endif; ?>
 <div><?=$group["name"]?> compte <?=$nb_articles?> article(s).</div>
-<div><?=$group["name"]?> est suivie par <?=$nb_followers?> personne(s).</div>
+<div><?=$group["name"]?> est suivie par <?=$nb_members?> personne(s).</div>
 </section> <br> <!-- we will remove this br when the css is done-->
 <section>
 	<div>
 	<!-- interactions -->
 		<?php if ($is_banned === false) : ?>	
 			<!-- You can't do anything if you're banned. -->
-			<?php if ($is_follower) :?>
+			<?php if ($is_member) :?>
 				<!-- unfollow -->
 				<?php if($is_admin) :?>
 					<div style='width: 450px;'>Cette group compte <?=$nb_admins?> administrateur(s). Si vous ne souhaitez plus occuper cette fonction et que vous êtes le dernier, la group sera supprimée.</div>
@@ -139,10 +139,10 @@
 		</div>
 	</div>
 	<div>
-		<?php if($is_follower && $is_banned === false):?>
-			<!-- showing the list of followers, with a link to their profile -->
-			<button type="button" id="open_followers_list">Afficher les followers</button>
-			<section id="followers_list" style="display: none">
+		<?php if($is_member && $is_banned === false):?>
+			<!-- showing the list of members, with a link to their profile -->
+			<button type="button" id="open_members_list">Afficher les members</button>
+			<section id="members_list" style="display: none">
 				<?php foreach ($accounts as $account) : ?>
 					<form id="goToProfile" action="/profile" method="post">
 						<input type="hidden" name="profil_id" value="<?= $account["user_id"] ?>" />
@@ -184,7 +184,7 @@
 			<?php endif ?>
 		</section>
 		<?php if($is_admin):?>
-			<!-- showing the list of banned followers, with a link to their profile and a button to unban them -->
+			<!-- showing the list of banned members, with a link to their profile and a button to unban them -->
 			<button type="button" id="open_banned_list">Afficher les bannis</button>
 			<section id="banned_list" style="display: none">
 				<?php foreach ($banned_accounts as $banned_account) : ?>

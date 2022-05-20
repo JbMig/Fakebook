@@ -35,31 +35,31 @@ $articles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 // getting the group's stats
 $nb_articles = Count($articles);
 
-$maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHERE `group_id` = :groupId AND `banned` = 'no';");
+$maRequete = $pdo->prepare("SELECT `member_id`, `user_id` FROM `members` WHERE `group_id` = :groupId AND `banned` = 'no';");
 	$maRequete->execute([
 		":groupId" => $group_id
 	]);
-$followers = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-$nb_followers = COUNT($followers);
+$members = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+$nb_members = COUNT($members);
 
 
-$maRequete = $pdo->prepare("SELECT `user_id` FROM `followers` WHERE `group_id` = :groupId AND `user_id` = :userId;");
+$maRequete = $pdo->prepare("SELECT `user_id` FROM `members` WHERE `group_id` = :groupId AND `user_id` = :userId;");
 	$maRequete->execute([
 		":groupId" => $group_id,
 		":userId" => $user_id
 	]);
-$user_is_follower = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-if (COUNT($user_is_follower)>0){
-	$is_follower = TRUE;
+$user_is_member = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+if (COUNT($user_is_member)>0){
+	$is_member = TRUE;
 } else {
-	$is_follower = FALSE;
+	$is_member = FALSE;
 }
 
 $accounts = array();
-foreach ($followers as $follower) {
+foreach ($members as $member) {
 	$maRequete = $pdo->prepare("SELECT `user_id`, `first_name`, `last_name`, `profil_picture` FROM `users` WHERE `user_id` = :Id;");
 		$maRequete->execute([
-			":Id" => $follower['user_id']
+			":Id" => $member['user_id']
 		]);
 		$maRequete->setFetchMode(PDO::FETCH_ASSOC);
 	array_push($accounts, $maRequete->fetch());
@@ -86,7 +86,7 @@ foreach ($admins as $admin) {
 
 // getting those who were banned from the group (and checking whether the user himself is banned)
 
-$maRequete = $pdo->prepare("SELECT `follower_id`, `user_id` FROM `followers` WHERE `group_id` = :groupId AND `banned` = 'yes';");
+$maRequete = $pdo->prepare("SELECT `member_id`, `user_id` FROM `members` WHERE `group_id` = :groupId AND `banned` = 'yes';");
 	$maRequete->execute([
 		":groupId" => $group_id
 	]);
@@ -94,7 +94,7 @@ $banned_persons = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 $nb_banned_persons = COUNT($banned_persons);
 
 
-$maRequete = $pdo->prepare("SELECT `user_id` FROM `followers` WHERE `group_id` = :groupId AND `user_id` = :userId AND `banned` = 'yes';");
+$maRequete = $pdo->prepare("SELECT `user_id` FROM `members` WHERE `group_id` = :groupId AND `user_id` = :userId AND `banned` = 'yes';");
 	$maRequete->execute([
 		":groupId" => $group_id,
 		":userId" => $user_id
