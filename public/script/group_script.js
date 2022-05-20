@@ -26,6 +26,18 @@ open_banned_list.forEach(button => {
     target.innerHTML = isVisibleBannedList ? "Replier la liste" : "Afficher les bannis"
   })
 })
+// open the requests list area
+let open_requests_list = document.querySelectorAll("#open_requests_list");
+open_requests_list.forEach(button => {
+  let isVisibleRequestsList = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisibleRequestsList = !isVisibleRequestsList;
+    toDisplay.style.display = isVisibleRequestsList ? "block" : "none";
+    target.innerHTML = isVisibleRequestsList ? "Replier la liste" : "Afficher les demandes"
+  })
+})
 
 
 // open the comments area

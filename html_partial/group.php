@@ -65,6 +65,7 @@
 		<?php endif ?>
 	</div>
 </section>
+
 <section>
 	<!-- main group -->
 	<div>
@@ -96,7 +97,7 @@
 						} else {
 							$like = "unlike.png";
 						}
-					} ?>
+					}; ?>
 					<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
 						<form id="goTogroup" action="/group" method="post"> <!-- needs to be modified to match a group -->
 							<input type="hidden" name="group_id" value="<?= $group_id ?>" />
@@ -148,6 +149,7 @@
 			<?php endif; ?>
 		</div>
 	</div>
+	
 	<div>
 		<?php if($is_member && $is_banned === false):?>
 			<!-- showing the list of members, with a link to their profile -->
@@ -163,15 +165,13 @@
 							<?= $account["first_name"] . " " . $account["last_name"] ?> 
 						</button>
 					</form>
-
-					<?php foreach($admins as $admin) :?>
-						<?php if($admin["user_id"] === $account["user_id"]) { 
+					<?php $account_admin = false;?>
+					<?php foreach($admins as $admin) {
+						if($admin["user_id"] === $account["user_id"]) { 
 							$account_admin = true;
 							break;
-						} else { 
-							$account_admin = false;
-						}?>
-					<?php endforeach; ?>
+						};
+					}?>
 					<?php if($is_admin && $account_admin === false):?>
 						<form action="/add_admin_group" class="form" method="post" >
 							<button type="submit" id="new_admin" name="new_admin">
@@ -191,7 +191,38 @@
 						<?php endif ?>
 					<?php endif ?>
 				<?php endforeach; ?>
-			<?php endif ?>
+			</section>
+		<?php endif ?>
+		<?php if($is_admin && $_SESSION["group"]["status"] === "private"): ?>
+			<!-- show list of those who wish to join the group -->
+			<button type="button" id="open_requests_list">Afficher les demandes</button>
+			<section id="requests_list" style="display: none">
+				<?php foreach ($request_accounts as $request_account) : ?>
+					<form id="goToProfile" action="/profile" method="post">
+						<input type="hidden" name="profil_id" value="<?= $request_account["user_id"] ?>" />
+						<button type="submit" id="profil_picture" class="baseProfile" style="border:0; padding:5px;">
+							<img id="profilPic" src="img_profil/<?= $request_account["profil_picture"] ?>" alt="" width="40px">
+						</button>
+						<button type="submit" class="baseProfile" id="first_name" style="border:0; padding:0;"> 
+							<?= $request_account["first_name"] . " " . $request_account["last_name"] ?> 
+						</button>
+					</form>
+					<form action="/member_approval" class="form" method="post" >
+						<button type="submit" id="member_approval" name="member_approval">
+							Accepter la demande
+						</button>
+						<input type="hidden" name="member_approval_user" value="<?= $request_account["user_id"] ?>">
+						<input type="hidden" name="member_approval_group" value="<?= $group_id ?>">
+					</form>
+					<form action="/member_removal" class="form" method="post" >
+						<button type="submit" id="member_removal" name="member_removal">
+							Rejeter la demande
+						</button>
+						<input type="hidden" name="member_removal" value="<?= $request_account["user_id"] ?>">
+					</form>
+				<?php endforeach; ?>
+			</section>
+		<?php endif ?>
 		</section>
 		<?php if($is_admin):?>
 			<!-- showing the list of banned members, with a link to their profile and a button to unban them -->
@@ -215,8 +246,8 @@
 						<input type="hidden" name="unban_account" value="<?= $banned_account["user_id"] ?>">
 					</form>
 				<?php endforeach; ?>
-			<?php endif ?>
-		</section>
+			</section>
+		<?php endif ?>
 	</div>
 	<div>
 	<!-- stats -->

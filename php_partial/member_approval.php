@@ -3,12 +3,12 @@
 		if(isset($_POST["member_approval"])) {
             // get info from form
             require "../database/pdo.php";
-            $profile_id = filter_input(INPUT_POST, "member_approval");
-            $group_id = $_SESSION["group"]["group_id"];
+            $profile_id = filter_input(INPUT_POST, "member_approval_user");
+            $group_id = filter_input(INPUT_POST, "member_approval_group");
 			// delete relatioship from database
-			$maRequete = $pdo->prepare("UPDATE `members` SET `status` = 'approved' WHERE `group_id` = :groupId AND `profile_id` = :profile_id");
+			$maRequete = $pdo->prepare("UPDATE `members` SET `status` = 'approved' WHERE `group_id` = :groupId AND `profile_id` = :profileId;");
 			$maRequete->execute([
-				":profile_id" => $profile_id,
+				":profileId" => $profile_id,
 				":groupId" => $group_id
 			]);
 			

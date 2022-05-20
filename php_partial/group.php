@@ -64,6 +64,22 @@ foreach ($members as $member) {
 	array_push($accounts, $maRequete->fetch());
 }
 
+// getting the pending requests on the group
+$maRequete = $pdo->prepare("SELECT `user_id`, `member_id` FROM `members` WHERE `group_id` = :groupId AND `status` = 'pending' AND `banned` = 'no';");
+	$maRequete->execute([
+		":groupId" => $group_id
+	]);
+$requests = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
+$request_accounts = array();
+foreach ($requests as $request) {
+	$maRequete = $pdo->prepare("SELECT `user_id`, `first_name`, `last_name`, `profil_picture` FROM `users` WHERE `user_id` = :Id;");
+		$maRequete->execute([
+			":Id" => $request['user_id']
+		]);
+		$maRequete->setFetchMode(PDO::FETCH_ASSOC);
+	array_push($request_accounts, $maRequete->fetch());
+}
 
 // getting the group's admins
 $maRequete = $pdo->prepare("SELECT `user_id` FROM `admins` WHERE `group_id` = :groupId;");
