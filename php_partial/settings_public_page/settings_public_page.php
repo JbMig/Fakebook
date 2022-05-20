@@ -11,11 +11,11 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $picture = $_SESSION["page"]["picture"];
     $banner = $_SESSION["page"]["banner"];
 
-    $maRequete = $pdo->prepare("SELECT `theme` FROM `users` WHERE `user_id` = :userId;");
-        $maRequete->execute([
-            ":userId" => $user_id
-        ]);
-	$theme = $_SESSION["user"]["theme"];
+    // $maRequete = $pdo->prepare("SELECT `theme` FROM `users` WHERE `user_id` = :userId;");
+    //     $maRequete->execute([
+    //         ":userId" => $user_id
+    //     ]);
+	// $theme = $_SESSION["user"]["theme"];
 }
 
 

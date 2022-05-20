@@ -24,7 +24,7 @@ function refreshState(scroll) {
                 if(element.user_id == user.user_id) {
                     name = user.first_name + " " + user.last_name;
                     color = "#3CFEAF";
-                    margin = "300px";
+                    margin = "500px";
                 } else {
                     members.forEach(membrs => {
                         if(membrs.user_id === element.user_id) {

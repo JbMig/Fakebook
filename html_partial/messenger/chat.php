@@ -15,7 +15,7 @@
         <input type="hidden" name="quit_chat_id" value="<?=$chat_id?>">
         <button>Quitter le chat</button>
     </form>
-    <section id="section_message" style="overflow: scroll; border: 1px solid black; padding: 10px; height: 200px; width: 600px;">
+    <section id="section_message" style="overflow: scroll; border: 1px solid black; padding: 10px; height: 200px; width: 900px;">
         
     </section>
     <form action="/new_message" method="post" id="new_message_form" style="margin: 30px;">
