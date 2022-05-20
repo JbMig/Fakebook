@@ -42,7 +42,7 @@ $members = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 $nb_members = COUNT($members);
 
 
-$maRequete = $pdo->prepare("SELECT `user_id` FROM `members` WHERE `group_id` = :groupId AND `user_id` = :userId;");
+$maRequete = $pdo->prepare("SELECT `user_id` FROM `members` WHERE `group_id` = :groupId AND `user_id` = :userId AND `status` = 'approved';");
 	$maRequete->execute([
 		":groupId" => $group_id,
 		":userId" => $user_id
@@ -126,14 +126,15 @@ $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked`
         ]);
 	$profile_friend = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
-// pending friend requests
-$maRequete = $pdo->prepare("SELECT `user_id`, `group_id`, `status`, `banned` FROM `members` WHERE `group_id` = :groupId AND `user_id` = :userId AND `status`='pending' AND `banned`='no';");
+// pending requests
+$maRequete = $pdo->prepare("SELECT `status` FROM `members` WHERE `group_id` = :groupId AND `user_id` = :userId AND `status` = 'pending'");
 	$maRequete->execute([
 		":groupId" => $group_id,
 		":userId" => $_SESSION["user"]["user_id"]
 	]);
-$user_pending_requests = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-if (Count($user_pending_requests) >= 1) {
+$user_pending = $maRequete->fetch();
+
+if (COUNT($user_pending)>0) {
 	$user_pending_request = TRUE;
 } else {
 	$user_pending_request = FALSE;
