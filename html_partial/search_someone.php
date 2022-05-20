@@ -15,10 +15,10 @@ foreach ($profiles as $profile){
             array_push($memory,$user_id);?>
             <form id="goToProfile" action="/profile" method="post">
             <input type="hidden" name="profil_id" value="<?= $profile["user_id"] ?>" />
-                <button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-                    <img src="img_profil/<?=  $profile["profil_picture"] ?>" alt="" width="40px">
+                <button type="submit" id="profil_picture" class="baseProfile" style="border:0; padding:5px;">
+                    <img id="profilPic" src="img_profil/<?=  $profile["profil_picture"] ?>" alt="" width="40px">
                 </button>
-                <button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+                <button type="submit" id="first_name" class="baseProfile" style="border:0; padding:0;"> 
 					<?= $profile["first_name"] . " " . $profile["last_name"]?>    
                 </button>
             </form>
@@ -34,7 +34,7 @@ foreach ($profiles as $profile){
                 array_push($memory,$user_id);?>
             <form id="goToProfile" action="/profile" method="post">
             <input type="hidden" name="profil_id" value="<?= $profile["user_id"] ?>" />
-                <button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+                <button type="submit" id="first_name" class="baseProfile" style="border:0; padding:0;"> 
                     <?= $first_name . " " . $last_name?>     
                 </button>
             </form>
@@ -58,10 +58,10 @@ foreach ($names as $name):
         ?>
         <form id="goToProfile" action="/profile" method="post">
         <input type="hidden" name="profil_id" value="<?= $name["user_id"] ?>" />
-            <button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-                <img src="img_profil/<?=  $name["profil_picture"] ?>" alt="" width="40px">
+            <button type="submit" id="profil_picture" class="baseProfile" style="border:0; padding:5px;">
+                <img id="profilPic" src="img_profil/<?=  $name["profil_picture"] ?>" alt="" width="40px">
             </button>
-            <button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+            <button type="submit" id="first_name" class="baseProfile" style="border:0; padding:0;"> 
                 <?= $name["first_name"] . " " . $name["last_name"]?>     
             </button>
         </form>
