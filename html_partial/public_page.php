@@ -1,15 +1,14 @@
 
 <section>
 	<!-- page top : profile picture, first & last name -->
-	<img id="profilPic" src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px">
-	<img src="img_baniere/<?= $page["banner"] ?>" alt="" >
+	<div class="bannerSize" style="background-image: url(img_baniere/<?= $page["banner"] ?>)"></div>
 </section>
-<h1 id="h1"><?=$h1?></h1>
+<h1 id="h1"><img id="profilPic" src="img_pages_groups/<?= $page["picture"] ?>" alt="" width="40px"><span id="profileName"><?=$h1?></span></h1>
 <!-- stats -->
 <section> 
 <div id="description"><?=$page["description"]?></div> <!-- changer le style de police dans le css -->
 <?php if ($is_admin) :?>
-	<button><a style="text-decoration: none; color: black;" href="/settings_public_page">Paramètres</a></button>
+	<button style="margin-bottom: 50px; margin-top: 7px;"><a style="text-decoration: none; color: black;" href="/settings_public_page">Paramètres</a></button>
 <?php endif; ?>
 <div><?=$page["name"]?> compte <?=$nb_articles?> article(s).</div>
 <div><?=$page["name"]?> est suivie par <?=$nb_followers?> personne(s).</div>
@@ -22,7 +21,7 @@
 			<?php if ($is_follower) :?>
 				<!-- unfollow -->
 				<?php if($is_admin) :?>
-					<span>Cette page compte <?=$nb_admins?> administrateur(s). Si vous ne souhaitez plus occuper cette fonction et que vous êtes le dernier, la page sera supprimée.</span>
+					<div style='width: 450px;'>Cette page compte <?=$nb_admins?> administrateur(s). Si vous ne souhaitez plus occuper cette fonction et que vous êtes le dernier, la page sera supprimée.</div>
 					<form action="/remove_admin" class="form" method="post" >
 						<button type="submit" id="remove_admin" name="remove_admin">
 							Ne plus être admin
@@ -166,7 +165,7 @@
 					<?php if($is_admin && $account_admin === false):?>
 						<form action="/add_admin" class="form" method="post" >
 							<button type="submit" id="new_admin" name="new_admin">
-								Ajouter comme administrateur de la page
+								Ajouter comme admin
 							</button>
 							<input type="hidden" name="new_admin_page" value="<?= $page_id ?>">
 							<input type="hidden" name="new_admin_account" value="<?= $account["user_id"] ?>">

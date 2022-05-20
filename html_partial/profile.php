@@ -1,13 +1,13 @@
-<?php if ($_SESSION["user"]["user_id"] === $profile["user_id"]) :?>
-	<button><a style="text-decoration: none; color: black;" href="/settings_profil">Paramètres</a></button>
-<?php endif; ?>
+
 <section>
 	<!-- page top : profile picture, first & last name -->
-	
 	<div class="bannerSize" style="background-image: url(img_baniere/<?= $profile["banner"] ?>)"></div>
 	<!-- <img src="img_baniere/<?= $profile["banner"] ?>" alt="" > -->
 </section>
 <h1 id="h1"><img id="profilPic" src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px"> <span id="profileName"><?=$h1?></span></h1>
+<?php if ($_SESSION["user"]["user_id"] === $profile["user_id"]) :?>
+	<button style="margin-bottom: 50px; margin-top: 7px;"><a style="text-decoration: none; color: black;" href="/settings_profil">Paramètres</a></button>
+<?php endif; ?>
 <!-- stats -->
 <section>
 	<div> <?=$profile["first_name"]?> a <?=$profile_stats["nb_friends"]?> relation(s). </div>

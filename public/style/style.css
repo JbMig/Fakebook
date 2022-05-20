@@ -103,25 +103,46 @@ button {
 }
 #open_pages_list {
     position: absolute;
-    top: 580px;
+    top: 600px;
     left: 900px;
 }
 
 #pages_list {
     position: absolute;
-    top: 630px;
+    top: 660px;
     left: 900px;
-
 }
+
 #open_new_page {
     position: absolute;
-    top: 580px;
+    top: 600px;
     left: 600px;
 }
 #new_page_section {
     position: absolute;
-    top: 640px;
+    top: 660px;
     left: 600px;
+}
+#open_followers_list {
+    position: absolute;
+    top: 622px;
+    left: 600px;
+}
+
+#followers_list {
+    position: absolute;
+    top: 682px;
+    left: 600px;
+}
+#open_banned_list {
+    position: absolute;
+    top: 622px;
+    left: 900px;
+}
+#banned_list {
+    position: absolute;
+    top: 682px;
+    left: 900px;
 }
 #profileName {
     padding-left: 10px;
