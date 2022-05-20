@@ -35,6 +35,10 @@
         </form>
     </div>
 </section>
+<form action="/delete" method="post">
+    <input type="submit" id="disable" name="disable" value="désactiver">
+    <input type="submit" id="delete" name="delete" value="supprimer">
+</form>
 <h2>Sélection du thème</h2>
 <form method = "post" action = "/theme">
     <input class="form-check-input" type="hidden" name="choice" id="theme_input" value="<?=$theme;?>">
