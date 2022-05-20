@@ -46,7 +46,7 @@
 			<?php else :?>
 				<form action="/member_request" class="form" method="post" >
 					<button type="submit" id="member_request" name="member_request">
-						Suivre ce groupe
+						Rejoindre ce groupe
 					</button>
 					<input type="hidden" name="member_request" value="<?= $group_id ?>">
 				</form>
