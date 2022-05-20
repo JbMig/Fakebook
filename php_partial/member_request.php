@@ -4,10 +4,9 @@ $user_id = $_SESSION["user"]["user_id"];
 if($_SERVER["REQUEST_METHOD"] === "POST") {
     if(isset($_POST["member_request"])) {
         require_once __DIR__ . "/../database/pdo.php";
-        $group_id = filter_input(INPUT_POST, 'member_request');
-		
+        $group_id = $_SESSION["group"]["group_id"];
+
 		// getting the group's status (private/public)
-	
 		$maRequete = $pdo->prepare(
 			"SELECT `status` FROM `groups` WHERE `group_id`=:groupId");
 			$maRequete->execute([
@@ -30,9 +29,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 				":st" => $status
 			]);
 
-		// pbm : it seems we're switching to method "get" here so we end up on our own group page instead of our friend's.
 		http_response_code(302);
-		// $direction = explode("/",$_SERVER["HTTP_REFERER"]);
 		header("Location: /group");
 		exit();
     }

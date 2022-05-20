@@ -35,6 +35,7 @@
 						<button type="submit" id="member_removal" name="member_removal">
 							Quitter le groupe
 						</button>
+						<input type="hidden" name="member_removal" value="<?= $user_id ?>">
 						<input type="hidden" id="input_member_removal">
 					</form>
 				<?php endif;?>
@@ -51,13 +52,13 @@
 						<button type="submit" id="member_removal" name="member_removal">
 							Annuler la demande
 						</button>
+						<input type="hidden" name="member_removal" value="<?= $user_id ?>">
 					</form>
 				<?php else : ?>
 					<form action="/member_request" class="form" method="post" >
 						<button type="submit" id="member_request" name="member_request">
 							Rejoindre ce groupe
 						</button>
-						<input type="hidden" name="member_request" value="<?= $group_id ?>">
 					</form>
 				<?php endif ?>
 			<?php endif ?>

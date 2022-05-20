@@ -9,9 +9,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 	$group_id = $_SESSION["group"]["group_id"];
 }
 $user_id = $_SESSION["user"]["user_id"];
+
 // updating $_SESSION["group"]
-
-
 $maRequete = $pdo->prepare(
 	"SELECT * FROM `groups` WHERE `group_id` = :groupId;");
 	$maRequete->execute([
