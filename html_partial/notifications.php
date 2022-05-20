@@ -17,6 +17,4 @@ foreach($profiles as $profile):
         }
     endforeach;
 endforeach;
-    
-
 require_once __DIR__ . "/../php_partial/notifications.php"?>

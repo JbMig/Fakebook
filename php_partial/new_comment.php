@@ -33,7 +33,8 @@
 					":article_id2" => $article_id
 				]);
 			$article = $maRequete->fetch(PDO::FETCH_ASSOC);
-			// updating stats of the article's writer
+
+
 			$maRequete = $pdo->prepare(
 				"UPDATE `stats`
 				SET `comments_on_articles` = `comments_on_articles` + 1
@@ -41,7 +42,15 @@
 				$maRequete->execute([
 					":id" => $article['user_id']
 				]);
-
+			// updating notification of the article writer
+			$maRequete = $pdo->prepare(
+				"INSERT INTO `notifications` (`type`, `seen`, `user_id`, `comment_id`,`article_id`)
+				VALUES('comment' ,'no', :Id, :comment_id, :article_id);");
+				$maRequete->execute([
+					":Id" => $user_id,
+					":comment_id" => $article['user_id'],
+					":article_id" => $article_id
+				]);
 
             http_response_code(302);
             $direction = explode("/",$_SERVER["HTTP_REFERER"]);

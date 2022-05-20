@@ -48,7 +48,8 @@
                     $maRequete->execute([
                         ":Id" => $article['user_id']
                     ]);
-            } else {
+                }
+                else {
 				// like
                 $maRequete = $pdo->prepare("INSERT INTO `likes` (`article_id`, `user_id`) VALUES(:article_id, :userId)");
                 $maRequete->execute([
@@ -77,6 +78,16 @@
 						":article_id2" => $article_id
 				]);
 				$article = $maRequete->fetch(PDO::FETCH_ASSOC);
+                
+                // updating notification of the article writer
+                $maRequete = $pdo->prepare(
+                "INSERT INTO `notifications` (`user_id`, `type` ,`like_id`,`article_id` , `seen`)
+                VALUES (:Id , 'like' , 1 , :article_id, 'no');");
+                $maRequete->execute([
+                ":Id" => $user_id,
+                ":article_id" => $article_id
+                ]);
+
 				// updating stats of the article writer
                 $maRequete = $pdo->prepare(
                     "UPDATE `stats`

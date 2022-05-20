@@ -20,12 +20,11 @@ $maRequete = $pdo->prepare('SELECT * FROM `notifications` WHERE `user_id` = :use
     ]);
     $notifications = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
-$maRequete = $pdo->prepare('SELECT `likes_on_articles`, `likes_on_comments` , `comments_on_articles` FROM `stats` WHERE `user_id` = :user;');
+$maRequete = $pdo->prepare('SELECT `article_id` FROM `articles` WHERE `user_id` = :user;');
     $maRequete->execute([
         ":user" => $user_id
     ]);
-    $notifications = $maRequete->fetchAll(PDO::FETCH_ASSOC);
-
+    $articles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
 require_once __DIR__ . "/../html_partial/notifications.php";
 
