@@ -13,13 +13,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 				":groupId" => $group_id
 			]);
 		$privacy = $maRequete->fetch();
-
-		if($privacy==='public') {
+	
+		if($privacy[0] === 'public') {
 			$status = 'approved';
 		} else {
 			$status = 'pending';
-		}
-
+		};
+		
 		$maRequete = $pdo->prepare(
 			"INSERT INTO `members` (`user_id`, `group_id`, `status`)
 			VALUES(:userId, :groupId, :st)");
