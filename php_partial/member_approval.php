@@ -6,7 +6,7 @@
             $profile_id = filter_input(INPUT_POST, "member_approval_user");
             $group_id = filter_input(INPUT_POST, "member_approval_group");
 			// delete relatioship from database
-			$maRequete = $pdo->prepare("UPDATE `members` SET `status` = 'approved' WHERE `group_id` = :groupId AND `profile_id` = :profileId;");
+			$maRequete = $pdo->prepare("UPDATE `members` SET `status` = 'approved' WHERE `group_id` = :groupId AND `user_id` = :profileId;");
 			$maRequete->execute([
 				":profileId" => $profile_id,
 				":groupId" => $group_id
