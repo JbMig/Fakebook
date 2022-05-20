@@ -3,22 +3,22 @@
 		if(isset($_POST["new_admin"])) {
             // get info from form
             require "../database/pdo.php";
-            $page_id = filter_input(INPUT_POST, "new_admin_page");
+            $group_id = filter_input(INPUT_POST, "new_admin_group");
             $profile_id = filter_input(INPUT_POST, "new_admin_account");
-			var_dump($page_id);
+			var_dump($group_id);
 			var_dump($profile_id);
 
 			// delete relatioship from database
-			$maRequete = $pdo->prepare("INSERT INTO `admins` (`page_id`,`user_id`) VALUES (:pageId, :profileId);");
+			$maRequete = $pdo->prepare("INSERT INTO `admins` (`group_id`,`user_id`) VALUES (:groupId, :profileId);");
 			$maRequete->execute([
-				":pageId" => $page_id,
+				":groupId" => $group_id,
 				":profileId" => $profile_id
 			]);
 
-			// go back to public_page
+			// go back to public_group
 			http_response_code(302);
 
-			header("Location: /public_page");
+			header("Location: /group");
 			exit();
 		}
     }

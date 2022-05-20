@@ -162,7 +162,7 @@
 						}?>
 					<?php endforeach; ?>
 					<?php if($is_admin && $account_admin === false):?>
-						<form action="/add_admin" class="form" method="post" >
+						<form action="/add_admin_group" class="form" method="post" >
 							<button type="submit" id="new_admin" name="new_admin">
 								Ajouter comme admin
 							</button>
