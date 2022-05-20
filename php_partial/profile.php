@@ -68,6 +68,12 @@ $maRequete = $pdo->prepare("SELECT `page_id`, `name`, `picture` FROM `pages` WHE
 		":profile_id" => $profile_id
     ]);
     $pages = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+// get the groups a member of which the person is
+$maRequete = $pdo->prepare("SELECT `group_id`, `name`, `picture` FROM `groups` WHERE `group_id` IN (SELECT `group_id` FROM `followers` WHERE `user_id` = :profile_id)");
+    $maRequete->execute([
+		":profile_id" => $profile_id
+    ]);
+    $groups = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
 require_once __DIR__ . "/../html_partial/profile.php";
 $content = ob_get_clean();

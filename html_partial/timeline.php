@@ -148,7 +148,7 @@
 		<?php endforeach; ?>
 		<h4>Groupes que vous pourriez aimer</h4>
 		<?php foreach ($all_groups as $group): ?>
-			<form id="goTogroups" action="/public_group" method="post">
+			<form id="goTogroups" action="/group" method="post">
 				<input type="hidden" name="group_id" value="<?= $group["group_id"] ?>" />
 				<button type="submit" id="picture_group" class="baseProfile" style=" border:0; padding:0px;">
 					<img id="profilPic" src="img_pages_groups/<?= $group["picture"] ?>" alt="" width="40px">

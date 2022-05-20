@@ -103,13 +103,24 @@ button {
 }
 #open_pages_list {
     position: absolute;
-    top: 600px;
-    left: 900px;
+    top: 900px;
+    left: 600px;
 }
 
 #pages_list {
     position: absolute;
-    top: 660px;
+    top: 960px;
+    left: 600px;
+}
+#open_groups_list {
+    position: absolute;
+    top: 900px;
+    left: 900px;
+}
+
+#groups_list {
+    position: absolute;
+    top: 960px;
     left: 900px;
 }
 
@@ -125,13 +136,13 @@ button {
 }
 #open_new_group {
     position: absolute;
-    top: 800px;
-    left: 600px;
+    top: 600px;
+    left: 900px;
 }
 #new_group_section {
     position: absolute;
-    top: 860px;
-    left: 600px;
+    top: 660px;
+    left: 900px;
 }
 #open_followers_list {
     position: absolute;
