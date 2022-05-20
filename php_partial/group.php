@@ -34,7 +34,7 @@ $articles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 // getting the group's stats
 $nb_articles = Count($articles);
 
-$maRequete = $pdo->prepare("SELECT `member_id`, `user_id` FROM `members` WHERE `group_id` = :groupId AND `banned` = 'no';");
+$maRequete = $pdo->prepare("SELECT `member_id`, `user_id` FROM `members` WHERE `group_id` = :groupId AND `status` = 'approved' AND `banned` = 'no';");
 	$maRequete->execute([
 		":groupId" => $group_id
 	]);
@@ -134,14 +134,14 @@ $maRequete = $pdo->prepare("SELECT `status` FROM `members` WHERE `group_id` = :g
 	]);
 $user_pending = $maRequete->fetch();
 
-if (COUNT($user_pending)>0) {
+if ($user_pending) {
 	$user_pending_request = TRUE;
 } else {
 	$user_pending_request = FALSE;
 };
 
 
-
+// getting the likes
 $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
     $maRequete->execute([
         ":userId" => $user_id
