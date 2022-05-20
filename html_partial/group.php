@@ -181,7 +181,7 @@
 							<input type="hidden" name="new_admin_account" value="<?= $account["user_id"] ?>">
 						</form>
 						<?php if($account["user_id"] !== $user_id):?>
-							<form action="/ban" class="form" method="post" >
+							<form action="/ban_group" class="form" method="post" >
 								<button type="submit" id="ban" name="ban">
 									Bannir cette personne
 								</button>
@@ -238,7 +238,7 @@
 							<?= $banned_account["first_name"] . " " . $banned_account["last_name"] ?> 
 						</button>
 					</form>
-					<form action="/unban" class="form" method="post" >
+					<form action="/unban_group" class="form" method="post" >
 						<button type="submit" id="unban" name="unban">
 							Annuler le ban
 						</button>

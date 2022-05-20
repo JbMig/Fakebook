@@ -155,6 +155,12 @@ switch ($uri) {
     case "/unban":
         require_once __DIR__ . "/php_partial/unban.php";
         break;
+    case "/ban_group":
+        require_once __DIR__ . "/php_partial/ban_group.php";
+        break;
+    case "/unban_group":
+        require_once __DIR__ . "/php_partial/unban_group.php";
+        break;
     case "/new_page":
         require_once __DIR__ . "/php_partial/new_page.php";
 		break;
