@@ -4,18 +4,18 @@
             require_once __DIR__ . "/../database/pdo.php";
             $text = filter_input(INPUT_POST, "articleInput");
             $user_id = $_SESSION["user"]["user_id"];
-			$page_id = $_SESSION["page"]["page_id"];
+			$group_id = $_SESSION["group"]["group_id"];
             if($_FILES["fileToUpload"]["name"]) {
-                require_once __DIR__ . "/upload_img_post_page.php";
+                require_once __DIR__ . "/upload_img_post_group.php";
             } else {
 				// 1st we create the article in the articles table
                 $maRequete = $pdo->prepare(
-                    "INSERT INTO `articles` (`content`, `user_id`, page_id)
-                    VALUES(:content, :userId, :pageId)");
+                    "INSERT INTO `articles` (`content`, `user_id`, group_id)
+                    VALUES(:content, :userId, :groupId)");
                     $maRequete->execute([
                         ":content" => $text,
                         ":userId" => $user_id,
-                        ":pageId" => $page_id
+                        ":groupId" => $group_id
                     ]);
 
 				$maRequete = $pdo->prepare(
@@ -27,7 +27,7 @@
                     ]);
 					
                 http_response_code(302);
-                header("Location: /public_page");
+                header("Location: /group");
                 
                 exit();
             }

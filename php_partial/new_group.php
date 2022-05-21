@@ -45,8 +45,8 @@
                 ]);
 			// updating table admins
 			$maRequete = $pdo->prepare(
-                "INSERT INTO `members` (`group_id`, `user_id`)
-                VALUES(:groupId, :userId);");
+                "INSERT INTO `members` (`group_id`, `user_id`, `status`)
+                VALUES(:groupId, :userId, 'approved');");
                 $maRequete->execute([
                     ":groupId" => $group_id,
                     ":userId" => $user_id

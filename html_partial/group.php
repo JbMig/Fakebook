@@ -11,6 +11,9 @@
 	<button style="margin-bottom: 50px; margin-top: 7px;"><a style="text-decoration: none; color: black;" href="/settings_group">Paramètres</a></button>
 <?php endif; ?>
 <div><?=$group["name"]?> compte <?=$nb_articles?> article(s) et <?=$nb_members?> membre(s).</div>
+<?php if ($group["status"]==='private') : ?>
+	<div style='width: 450px;'>Ce groupe est privé. Toute demande de rejoindre le groupe doit donc être approuvée par un admin.</div>
+<?php endif; ?>
 </section> <br> <!-- we will remove this br when the css is done-->
 <section>
 	<div>
@@ -30,9 +33,9 @@
 				<?php else :?>
 					<form action="/member_removal" class="form" method="post" >
 						<button type="submit" id="member_removal" name="member_removal">
-							Ne plus suivre ce groupe
+							Quitter le groupe
 						</button>
-						<input type="hidden" name="member_removal" value="<?= $group_id ?>">
+						<input type="hidden" name="member_removal" value="<?= $user_id ?>">
 						<input type="hidden" id="input_member_removal">
 					</form>
 				<?php endif;?>
@@ -44,16 +47,25 @@
 					<input type="hidden" name="start_chat" value="<?= $user_id ?>">
 				</form> -->
 			<?php else :?>
-				<form action="/member_request" class="form" method="post" >
-					<button type="submit" id="member_request" name="member_request">
-						Suivre ce groupe
-					</button>
-					<input type="hidden" name="member_request" value="<?= $group_id ?>">
-				</form>
+				<?php if ($user_pending_request) :?>
+					<form action="/member_removal" class="form" method="post" >
+						<button type="submit" id="member_removal" name="member_removal">
+							Annuler la demande
+						</button>
+						<input type="hidden" name="member_removal" value="<?= $user_id ?>">
+					</form>
+				<?php else : ?>
+					<form action="/member_request" class="form" method="post" >
+						<button type="submit" id="member_request" name="member_request">
+							Rejoindre ce groupe
+						</button>
+					</form>
+				<?php endif ?>
 			<?php endif ?>
 		<?php endif ?>
 	</div>
 </section>
+
 <section>
 	<!-- main group -->
 	<div>
@@ -85,7 +97,7 @@
 						} else {
 							$like = "unlike.png";
 						}
-					} ?>
+					}; ?>
 					<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
 						<form id="goTogroup" action="/group" method="post"> <!-- needs to be modified to match a group -->
 							<input type="hidden" name="group_id" value="<?= $group_id ?>" />
@@ -137,6 +149,7 @@
 			<?php endif; ?>
 		</div>
 	</div>
+	
 	<div>
 		<?php if($is_member && $is_banned === false):?>
 			<!-- showing the list of members, with a link to their profile -->
@@ -152,17 +165,15 @@
 							<?= $account["first_name"] . " " . $account["last_name"] ?> 
 						</button>
 					</form>
-
-					<?php foreach($admins as $admin) :?>
-						<?php if($admin["user_id"] === $account["user_id"]) { 
+					<?php $account_admin = false;?>
+					<?php foreach($admins as $admin) {
+						if($admin["user_id"] === $account["user_id"]) { 
 							$account_admin = true;
 							break;
-						} else { 
-							$account_admin = false;
-						}?>
-					<?php endforeach; ?>
+						};
+					}?>
 					<?php if($is_admin && $account_admin === false):?>
-						<form action="/add_admin" class="form" method="post" >
+						<form action="/add_admin_group" class="form" method="post" >
 							<button type="submit" id="new_admin" name="new_admin">
 								Ajouter comme admin
 							</button>
@@ -170,7 +181,7 @@
 							<input type="hidden" name="new_admin_account" value="<?= $account["user_id"] ?>">
 						</form>
 						<?php if($account["user_id"] !== $user_id):?>
-							<form action="/ban" class="form" method="post" >
+							<form action="/ban_group" class="form" method="post" >
 								<button type="submit" id="ban" name="ban">
 									Bannir cette personne
 								</button>
@@ -180,7 +191,38 @@
 						<?php endif ?>
 					<?php endif ?>
 				<?php endforeach; ?>
-			<?php endif ?>
+			</section>
+		<?php endif ?>
+		<?php if($is_admin && $_SESSION["group"]["status"] === "private"): ?>
+			<!-- show list of those who wish to join the group -->
+			<button type="button" id="open_requests_list">Afficher les demandes</button>
+			<section id="requests_list" style="display: none">
+				<?php foreach ($request_accounts as $request_account) : ?>
+					<form id="goToProfile" action="/profile" method="post">
+						<input type="hidden" name="profil_id" value="<?= $request_account["user_id"] ?>" />
+						<button type="submit" id="profil_picture" class="baseProfile" style="border:0; padding:5px;">
+							<img id="profilPic" src="img_profil/<?= $request_account["profil_picture"] ?>" alt="" width="40px">
+						</button>
+						<button type="submit" class="baseProfile" id="first_name" style="border:0; padding:0;"> 
+							<?= $request_account["first_name"] . " " . $request_account["last_name"] ?> 
+						</button>
+					</form>
+					<form action="/member_approval" class="form" method="post" >
+						<button type="submit" id="member_approval" name="member_approval">
+							Accepter la demande
+						</button>
+						<input type="hidden" name="member_approval_user" value="<?= $request_account["user_id"] ?>">
+						<input type="hidden" name="member_approval_group" value="<?= $group_id ?>">
+					</form>
+					<form action="/member_removal" class="form" method="post" >
+						<button type="submit" id="member_removal" name="member_removal">
+							Rejeter la demande
+						</button>
+						<input type="hidden" name="member_removal" value="<?= $request_account["user_id"] ?>">
+					</form>
+				<?php endforeach; ?>
+			</section>
+		<?php endif ?>
 		</section>
 		<?php if($is_admin):?>
 			<!-- showing the list of banned members, with a link to their profile and a button to unban them -->
@@ -196,7 +238,7 @@
 							<?= $banned_account["first_name"] . " " . $banned_account["last_name"] ?> 
 						</button>
 					</form>
-					<form action="/unban" class="form" method="post" >
+					<form action="/unban_group" class="form" method="post" >
 						<button type="submit" id="unban" name="unban">
 							Annuler le ban
 						</button>
@@ -204,8 +246,8 @@
 						<input type="hidden" name="unban_account" value="<?= $banned_account["user_id"] ?>">
 					</form>
 				<?php endforeach; ?>
-			<?php endif ?>
-		</section>
+			</section>
+		<?php endif ?>
 	</div>
 	<div>
 	<!-- stats -->

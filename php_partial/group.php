@@ -16,9 +16,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 	exit;
 }
 $user_id = $_SESSION["user"]["user_id"];
+
 // updating $_SESSION["group"]
-
-
 $maRequete = $pdo->prepare(
 	"SELECT * FROM `groups` WHERE `group_id` = :groupId;");
 	$maRequete->execute([
@@ -42,7 +41,7 @@ $articles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 // getting the group's stats
 $nb_articles = Count($articles);
 
-$maRequete = $pdo->prepare("SELECT `member_id`, `user_id` FROM `members` WHERE `group_id` = :groupId AND `banned` = 'no';");
+$maRequete = $pdo->prepare("SELECT `member_id`, `user_id` FROM `members` WHERE `group_id` = :groupId AND `status` = 'approved' AND `banned` = 'no';");
 	$maRequete->execute([
 		":groupId" => $group_id
 	]);
@@ -50,7 +49,7 @@ $members = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 $nb_members = COUNT($members);
 
 
-$maRequete = $pdo->prepare("SELECT `user_id` FROM `members` WHERE `group_id` = :groupId AND `user_id` = :userId;");
+$maRequete = $pdo->prepare("SELECT `user_id` FROM `members` WHERE `group_id` = :groupId AND `user_id` = :userId AND `status` = 'approved';");
 	$maRequete->execute([
 		":groupId" => $group_id,
 		":userId" => $user_id
@@ -72,6 +71,22 @@ foreach ($members as $member) {
 	array_push($accounts, $maRequete->fetch());
 }
 
+// getting the pending requests on the group
+$maRequete = $pdo->prepare("SELECT `user_id`, `member_id` FROM `members` WHERE `group_id` = :groupId AND `status` = 'pending' AND `banned` = 'no';");
+	$maRequete->execute([
+		":groupId" => $group_id
+	]);
+$requests = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
+$request_accounts = array();
+foreach ($requests as $request) {
+	$maRequete = $pdo->prepare("SELECT `user_id`, `first_name`, `last_name`, `profil_picture` FROM `users` WHERE `user_id` = :Id;");
+		$maRequete->execute([
+			":Id" => $request['user_id']
+		]);
+		$maRequete->setFetchMode(PDO::FETCH_ASSOC);
+	array_push($request_accounts, $maRequete->fetch());
+}
 
 // getting the group's admins
 $maRequete = $pdo->prepare("SELECT `user_id` FROM `admins` WHERE `group_id` = :groupId;");
@@ -134,14 +149,22 @@ $maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked`
         ]);
 	$profile_friend = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
-// pending friend requests
-$maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked` FROM `relationships` WHERE ((`user_id_a` = :profile_id AND `user_id_b` = :userId) OR (`user_id_b` = :profile_id AND `user_id_a` = :userId) AND `status`='pending');");
+// pending requests
+$maRequete = $pdo->prepare("SELECT `status` FROM `members` WHERE `group_id` = :groupId AND `user_id` = :userId AND `status` = 'pending'");
 	$maRequete->execute([
-		":profile_id" => $profile_id,
+		":groupId" => $group_id,
 		":userId" => $_SESSION["user"]["user_id"]
 	]);
-$profile_friend_request = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+$user_pending = $maRequete->fetch();
 
+if ($user_pending) {
+	$user_pending_request = TRUE;
+} else {
+	$user_pending_request = FALSE;
+};
+
+
+// getting the likes
 $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
     $maRequete->execute([
         ":userId" => $user_id

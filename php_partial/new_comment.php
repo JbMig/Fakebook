@@ -51,6 +51,8 @@
                 header("Location: /timeline");
             } else if ($direction[3] === "public_page") {
 				header("Location: /public_page");
+			} else if ($direction[3] === "group") {
+				header("Location: /group");
 			}
             exit();
         }

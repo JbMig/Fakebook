@@ -49,6 +49,9 @@ switch ($uri) {
     case "/new_article_page":
         require_once __DIR__ . "/php_partial/new_article_page.php";
         break;
+    case "/new_article_group":
+        require_once __DIR__ . "/php_partial/new_article_group.php";
+        break;
     case "/delete_article":
         require_once __DIR__ . "/php_partial/delete_article.php";
         break;
@@ -63,6 +66,15 @@ switch ($uri) {
         break;
     case "/friend_approval":
         require_once __DIR__ . "/php_partial/friend_approval.php";
+        break;
+    case "/member_request":
+        require_once __DIR__ . "/php_partial/member_request.php";
+        break;
+    case "/member_removal":
+        require_once __DIR__ . "/php_partial/member_removal.php";
+        break;
+    case "/member_approval":
+        require_once __DIR__ . "/php_partial/member_approval.php";
         break;
     case "/block":
         require_once __DIR__ . "/php_partial/block.php";
@@ -131,11 +143,23 @@ switch ($uri) {
     case "/add_admin":
         require_once __DIR__ . "/php_partial/add_admin.php";
         break;
+    case "/remove_admin_group":
+        require_once __DIR__ . "/php_partial/remove_admin_group.php";
+        break;
+    case "/add_admin_group":
+        require_once __DIR__ . "/php_partial/add_admin_group.php";
+        break;
     case "/ban":
         require_once __DIR__ . "/php_partial/ban.php";
         break;
     case "/unban":
         require_once __DIR__ . "/php_partial/unban.php";
+        break;
+    case "/ban_group":
+        require_once __DIR__ . "/php_partial/ban_group.php";
+        break;
+    case "/unban_group":
+        require_once __DIR__ . "/php_partial/unban_group.php";
         break;
     case "/new_page":
         require_once __DIR__ . "/php_partial/new_page.php";
