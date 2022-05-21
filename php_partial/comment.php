@@ -34,7 +34,6 @@ $maRequete = $pdo->prepare("SELECT `group_id`, `page_id` FROM `articles` WHERE `
     $group_or_page = $maRequete->fetch();
 
 if ($group_or_page["page_id"] !== NULL) {
-	var_dump("PAGE NON NULLE");
 	// then we get the page's info if needed
 	$maRequete = $pdo->prepare("SELECT `page_id`, `picture`, `name` FROM `pages` WHERE `page_id` IN (SELECT `page_id` FROM `articles` WHERE `article_id` = :articleId)");
 		$maRequete->execute([
@@ -50,7 +49,6 @@ if ($group_or_page["page_id"] !== NULL) {
 };
 
 if ($group_or_page["group_id"] !== NULL) {
-	var_dump("GROUPE NON NUL");
 	// then we get the group's info if needed
 	$maRequete = $pdo->prepare("SELECT `group_id`, `picture`, `name` FROM `groups` WHERE `group_id` IN (SELECT `group_id` FROM `articles` WHERE `article_id` = :articleId)");
 		$maRequete->execute([
