@@ -18,7 +18,7 @@
                 $profil_picture = $profile["profil_picture"];
                 $first_name = $profile["first_name"];
                 $last_name = $profile["last_name"];
-                $status = $profile["status"];
+                $status = $profile["status"]; // needs to be taken into account !!!
             }
         }
         foreach ($user_likes as $user_like) {

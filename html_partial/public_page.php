@@ -37,13 +37,6 @@
 						<input type="hidden" id="input_unfollow">
 					</form>
 				<?php endif;?>
-				<!-- i leave that here because we may use it for the group's page later, and i don't want to type it again -->
-				<!-- <form action="/start_chat" class="form" method="post" >
-					<button type="submit" id="start_chat" name="start_chat">
-						Démarrer la conversation
-					</button>
-					<input type="hidden" name="start_chat" value="<?= $user_id ?>">
-				</form> -->
 			<?php else :?>
 				<form action="/follow" class="form" method="post" >
 					<button type="submit" id="follow" name="follow">
