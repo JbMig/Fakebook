@@ -62,7 +62,7 @@ open_modify_comment.forEach(button => {
     const toDisplay = target.nextElementSibling;
     isVisibleModifyComment = !isVisibleModifyComment;
     toDisplay.style.display = isVisibleModifyComment ? "block" : "none";
-    target.innerHTML = isVisibleModifyComment ? "Annuler" : "Comment"
+    target.innerHTML = isVisibleModifyComment ? "Annuler" : "Commenter"
   })
 })
 

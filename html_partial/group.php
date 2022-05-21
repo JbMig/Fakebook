@@ -128,7 +128,7 @@
 							$action_name = "profil_id";
 							$action_value = $article["user_id"];
 						} else { // group's article (because it's written by an admin)
-							$show_name = $name;
+							$show_name = $group["name"];
 							$show_picture =  "img_pages_groups/" . $group["picture"];
 							$picture_id = "picture";
 							$action = "/group";
@@ -138,12 +138,12 @@
 						}; ?>
 						<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
 							<form id="<?= $actionId ?>" action="<?= $action ?>" method="post"> <!-- needs to be modified to match a group -->
-								<input type="hidden" name="?= $action_name ?>" value="<?= $action_value ?>" />
+								<input type="hidden" name="<?= $action_name ?>" value="<?= $action_value ?>" />
 								<button type="submit" class="articleColor" id="<?= $picture_id ?>" style="border:0; padding:5px;">
 									<img id="profilPic" src="<?= $show_picture ?>" alt="" width="40px">
 								</button>
 								<button type="submit" class="articleColor" id="first_name" style="border:0; padding:0;"> 
-									<?= $group["name"] ?> 
+									<?= $show_name ?> 
 								</button>
 							</form>
 							<span id="date"><?= $article["date"] ?></span>
