@@ -104,6 +104,7 @@
 							}
 						}
 						$writer_is_admin = false;
+			
 						foreach($admins as $admin) {
 							if($admin["user_id"] === $article["user_id"]) {
 								$writer_is_admin = true;
@@ -127,6 +128,7 @@
 							$actionId = "goToProfile";
 							$action_name = "profil_id";
 							$action_value = $article["user_id"];
+				
 						} else { // group's article (because it's written by an admin)
 							$show_name = $group["name"];
 							$show_picture =  "img_pages_groups/" . $group["picture"];

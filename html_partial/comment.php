@@ -104,9 +104,10 @@
             <input type="hidden" name="like_comment_id" value="<?= $comment["comment_id"] ?>">
         </form>
 
-		<!-- need to add conditions for admins to modify/delete their fellow admins' comments-->
+		<!-- need to adapt modify_comment.php so that admins can modify/delete their fellow admins' comments-->
+		<!-- we're gonna have the same problem with pages -->
 
-        <?php if ($comment["user_id"] === $_SESSION["user"]["user_id"]) : ?>
+        <?php if ($comment["user_id"] === $_SESSION["user"]["user_id"] || ($group_or_page["page_id"] !== NULL && $page_admin) || ($group_or_page["group_id"] !== NULL && $group_admin)) : ?>
             <form id="delete_comment" method="post" action="/delete_comment">
                 <button type="submit" id="delete_btn_comment">Supprimer</button>
                 <input type="hidden" name="comment_id" value="<?= $comment["comment_id"] ?>">

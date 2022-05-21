@@ -15,9 +15,17 @@
 				":profileId" => $profile_id
 			]);
 
+			// we need to make sure the page session is set before going back
+			$maRequete = $pdo->prepare(
+				"SELECT * FROM `pages` WHERE `page_id` = :pageId;");
+				$maRequete->execute([
+					":pageId" => $page_id
+				]);
+			$current_page = $maRequete->fetch();
+			$_SESSION["page"] = $current_page;
+						
 			// go back to public_page
 			http_response_code(302);
-
 			header("Location: /public_page");
 			exit();
 		}
