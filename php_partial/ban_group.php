@@ -11,7 +11,11 @@
 				":groupId" => $group_id,
 				":profileId" => $profile_id
 			]);
-			
+			$maRequete = $pdo->prepare("DELETE FROM `articles` WHERE `group_id` = :groupId AND `user_id` = :profileId;");
+			$maRequete->execute([
+				":profileId" => $profile_id,
+				":groupId" => $group_id
+			]);
 
 			// go back to group
 			http_response_code(302);

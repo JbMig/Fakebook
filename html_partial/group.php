@@ -120,7 +120,7 @@
 							}
 						}
 						// articles
-						if ($writer_is_admin === false) { // writer's own article
+						if ($writer_is_admin === false ) { // writer's own article
 							$show_name = $first_name . " " . $last_name;
 							$show_picture = "img_profil/" . $profil_picture;
 							$picture_id = "profil_picture";

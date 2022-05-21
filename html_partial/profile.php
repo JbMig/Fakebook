@@ -242,6 +242,20 @@
 				</form>
 			<?php endforeach; ?>
 		</section>
+		<button type="button" id="open_invitation">Invitation</button>
+		<section id="invitation" style="display: none">
+			<?php foreach ($groups as $group) : ?>
+				<form id="goTogroup" action="/group" method="post"> <!-- needs to be modified to match a group -->
+					<input type="hidden" name="group_id" value="<?= $group["group_id"] ?>" />
+					<button type="submit" id="picture" class="baseProfile" style=" border:0; padding:5px;">
+						<img id="profilPic" src="img_pages_groups/<?= $group["picture"] ?>" alt="" width="40px">
+					</button>
+					<button type="submit" id="first_name" class="baseProfile" style="border:0; padding:0;"> 
+						<?= $group["name"] ?> 
+					</button>
+				</form>
+			<?php endforeach; ?>
+		</section>
 	</div>
 	<div>
 	<!-- stats -->
