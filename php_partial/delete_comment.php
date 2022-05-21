@@ -6,8 +6,10 @@
             $comment_id = filter_input(INPUT_POST, "comment_id");
             $comment_user = filter_input(INPUT_POST, "comment_user");
             $user_id = $_SESSION["user"]["user_id"];
+            $group = $_SESSION["group"];
+            $group_id = $_SESSION["group"]["group_id"];
             // if user_id = comment_id, i can delete the comment
-            if($comment_user === $user_id) {
+            if($comment_user === $user_id || $group_id !== NULL) {
                 if($comment_id) {
                     // delete comment
                     $maRequete = $pdo->prepare("DELETE FROM `comments` WHERE `comment_id` = :id");

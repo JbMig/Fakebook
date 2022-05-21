@@ -63,7 +63,7 @@ if (COUNT($user_is_member)>0){
 
 $accounts = array();
 foreach ($members as $member) {
-	$maRequete = $pdo->prepare("SELECT `user_id`, `first_name`, `last_name`, `profil_picture` FROM `users` WHERE `user_id` = :Id;");
+	$maRequete = $pdo->prepare("SELECT `user_id`, `first_name`, `last_name`, `profil_picture`,`status` FROM `users` WHERE `user_id` = :Id;");
 		$maRequete->execute([
 			":Id" => $member['user_id']
 		]);

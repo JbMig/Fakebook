@@ -7,7 +7,9 @@
             $data = filter_input(INPUT_POST, "modify_comment");
             $comment_user = filter_input(INPUT_POST, "comment_user");
             $comment_id = filter_input(INPUT_POST, "comment_id");
-            if($comment_user === $user_id) {
+            $group = $_SESSION["group"];
+            $group_id = $_SESSION["group"]["group_id"];
+            if($comment_user === $user_id || $group_id) {
                 // update the comment
                 $maRequete = $pdo->prepare("UPDATE `comments` SET `content`= :oneData, `date` = CURRENT_TIMESTAMP WHERE `comment_id` = :comment_id");
                 $maRequete->execute([
