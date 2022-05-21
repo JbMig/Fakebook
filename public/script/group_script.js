@@ -38,6 +38,18 @@ open_requests_list.forEach(button => {
     target.innerHTML = isVisibleRequestsList ? "Replier la liste" : "Afficher les demandes"
   })
 })
+// open the friends list area
+let open_friends_list = document.querySelectorAll("#open_friends_list");
+open_friends_list.forEach(button => {
+  let isVisibleFriendsList = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisibleFriendsList = !isVisibleFriendsList;
+    toDisplay.style.display = isVisibleFriendsList ? "block" : "none";
+    target.innerHTML = isVisibleFriendsList ? "Replier la liste" : "Inviter des amis"
+  })
+})
 
 
 // open the comments area
