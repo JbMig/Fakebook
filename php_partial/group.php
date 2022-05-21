@@ -127,7 +127,7 @@ if (COUNT($user_is_banned)>0){
 } else {
 	$is_banned = FALSE;
 }
-
+var_dump($is_banned);
 $banned_accounts = array();
 foreach ($banned_persons as $banned_person) {
 	$maRequete = $pdo->prepare("SELECT `user_id`, `first_name`, `last_name`, `profil_picture` FROM `users` WHERE `user_id` = :Id;");

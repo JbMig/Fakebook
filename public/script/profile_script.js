@@ -25,7 +25,18 @@ open_groups_list.forEach(button => {
     target.innerHTML = isVisiblegroupsList ? "Replier la liste" : "Afficher les groupes suivies"
   })
 })
-
+// open the invitation list area
+let open_invitation = document.querySelectorAll("#open_invitation");
+open_invitation.forEach(button => {
+  let isVisibleInvitation = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisibleInvitation = !isVisibleInvitation;
+    toDisplay.style.display = isVisibleInvitation ? "block" : "none";
+    target.innerHTML = isVisibleInvitation ? "Replier la liste" : "Afficher les invitations de groupe"
+  })
+})
 let open_comment = document.querySelectorAll("#open_comment");
 open_comment.forEach(button => {
   let isVisibleComment = false;
