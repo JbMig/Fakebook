@@ -5,15 +5,20 @@
             $text = filter_input(INPUT_POST, "commentInput");
             $article_id = filter_input(INPUT_POST, "article_id");
             $user_id = $_SESSION["user"]["user_id"];
-            
+
+
+            $name = "un truc";
+			require __DIR__ . "/function/uuid.php";
+			$uuid = guidv4($name);
 			// 1st we create the comment in the comment table
             $maRequete = $pdo->prepare(
-                "INSERT INTO `comments` (`content`, article_id, `user_id`)
-                VALUES(:content, :article_id, :userId)");
+                "INSERT INTO `comments` (`content`, article_id, `user_id`, `uuid`)
+                VALUES(:content, :article_id, :userId, :uuid)");
                 $maRequete->execute([
                     ":content" => $text,
                     ":article_id" => $article_id,
-                    ":userId" => $user_id
+                    ":userId" => $user_id,
+					":uuid" => $uuid
                 ]);
 			// updating stats of the commenter
 			$maRequete = $pdo->prepare(
@@ -43,15 +48,24 @@
 				$maRequete->execute([
 					":id" => $article['user_id']
 				]);
+
+			$maRequete = $pdo->prepare(
+				"SELECT `comment_id`
+				FROM `comments`
+				WHERE `uuid` = :uuid;");
+			$maRequete->execute([
+				":uuid" => $uuid
+			]);
+			$comment_id = $maRequete->fetch();
 			// updating notification of the article writer
-			// $maRequete = $pdo->prepare(
-			// 	"INSERT INTO `notifications` (`type`, `seen`, `user_id`, `comment_id`,`article_id`)
-			// 	VALUES('comment' ,'no', :Id, :comment_id, :article_id);");
-			// 	$maRequete->execute([
-			// 		":Id" => $user_id,
-			// 		":comment_id" => $comment['comment_id'],
-			// 		":article_id" => $article_id
-			// 	]);
+			$maRequete = $pdo->prepare(
+				"INSERT INTO `notifications` (`type`, `seen`, `user_id`, `comment_id`,`article_id`)
+				VALUES('comment' ,'no', :Id, :comment_id, :article_id);");
+				$maRequete->execute([
+					":Id" => $user_id,
+					":comment_id" => $comment_id['comment_id'],
+					":article_id" => $article_id
+				]);
 
             http_response_code(302);
             $direction = explode("/",$_SERVER["HTTP_REFERER"]);

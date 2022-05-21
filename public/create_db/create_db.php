@@ -70,6 +70,7 @@
             `like_count` INT DEFAULT 0,
             `article_id` INT NOT NULL,
             `user_id` INT NOT NULL,
+            `uuid` VARCHAR(255),
             PRIMARY KEY (`comment_id`),
             CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
             CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `articles`(`article_id`) ON DELETE CASCADE
@@ -81,6 +82,7 @@
             `article_id` INT,
             `comment_id` INT,
             `user_id` INT NOT NULL,
+            `uuid` VARCHAR(255),
             PRIMARY KEY (`like_id`),
             CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE,
             CONSTRAINT FOREIGN KEY (`article_id`) REFERENCES `articles`(`article_id`) ON DELETE CASCADE,

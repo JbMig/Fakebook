@@ -53,11 +53,15 @@
                     ]);
                 }
                 else {
+                $name = "un truc";
+                require __DIR__ . "/function/uuid.php";
+                $uuid = guidv4($name);
 				// if no result, add like
-                $maRequete = $pdo->prepare("INSERT INTO `likes` (`article_id`, `user_id`) VALUES(:article_id, :userId)");
+                $maRequete = $pdo->prepare("INSERT INTO `likes` (`article_id`, `user_id`, `uuid`) VALUES(:article_id, :userId, :uuid)");
                 $maRequete->execute([
                     ":article_id" => $article_id,
-                    ":userId" => $user_id
+                    ":userId" => $user_id,
+                    ":uuid" => $uuid
                 ]);
 
                 // update number of like of the article
@@ -73,24 +77,25 @@
                     $maRequete->execute([
                         ":userId" => $user_id
                     ]);
-				// getting the article's writer's user_id
+				
 				$maRequete = $pdo->prepare(
-					"SELECT `article_id`,`user_id`
-					FROM `articles`
-					WHERE `article_id` = :article_id2;");
+					"SELECT `like_id`
+					FROM `likes`
+					WHERE `uuid` = :uuid;");
 					$maRequete->execute([
-						":article_id2" => $article_id
+						":uuid" => $uuid
 				]);
-				$article = $maRequete->fetch(PDO::FETCH_ASSOC);
+				$like_id = $maRequete->fetch();
                 
                 // updating notification of the article writer
-                // $maRequete = $pdo->prepare(
-                // "INSERT INTO `notifications` (`user_id`, `type` ,`like_id`,`article_id` , `seen`)
-                // VALUES (:Id , 'like' , 1 , :article_id, 'no');");
-                // $maRequete->execute([
-                // ":Id" => $user_id,
-                // ":article_id" => $article_id
-                // ]);
+                $maRequete = $pdo->prepare(
+                "INSERT INTO `notifications` (`user_id`, `type` ,`like_id`,`article_id` , `seen`)
+                VALUES (:Id , 'like' , :like_id , :article_id, 'no');");
+                $maRequete->execute([
+                ":Id" => $user_id,
+                ":like_id" => $like_id["like_id"],
+                ":article_id" => $article_id
+                ]);
 
 				// updating stats of the article writer
                 $maRequete = $pdo->prepare(

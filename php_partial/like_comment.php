@@ -54,11 +54,15 @@
                     ]);
             
             } else {
+                $name = "un truc";
+                require __DIR__ . "/function/uuid.php";
+                $uuid = guidv4($name);
 				// if no result, add like
-                $maRequete = $pdo->prepare("INSERT INTO `likes` (`comment_id`,`user_id`) VALUES(:comment_id, :userId)");
+                $maRequete = $pdo->prepare("INSERT INTO `likes` (`comment_id`,`user_id`, `uuid`) VALUES(:comment_id, :userId, :uuid)");
                 $maRequete->execute([
                     ":comment_id" => $comment_id,
-                    ":userId" => $user_id
+                    ":userId" => $user_id,
+                    ":uuid" => $uuid
                 ]);
 
                 // update number of like of the article
