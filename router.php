@@ -182,6 +182,24 @@ switch ($uri) {
 	case "/edit_page_banner":
 		require_once __DIR__ . "/php_partial/settings_public_page/edit_page_banner.php";
 		break;
+	case "/settings_group":
+		require_once __DIR__ . "/php_partial/settings_group/settings_group.php";
+		break;
+	case "/new_group_name":
+		require_once __DIR__ . "/php_partial/settings_group/new_group_name.php";
+		break;
+	case "/new_group_description":
+		require_once __DIR__ . "/php_partial/settings_group/new_group_description.php";
+		break;
+	case "/edit_group_photo":
+		require_once __DIR__ . "/php_partial/settings_group/edit_group_photo.php";
+		break;
+	case "/edit_group_banner":
+		require_once __DIR__ . "/php_partial/settings_group/edit_group_banner.php";
+		break;
+	case "/edit_group_status":
+		require_once __DIR__ . "/php_partial/settings_group/edit_group_status.php";
+		break;
     case "/new_chat":
         require_once __DIR__ . "/php_partial/messenger/new_chat.php";
         break;
