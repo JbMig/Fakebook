@@ -5,7 +5,7 @@ require_once __DIR__ . "/../database/pdo.php";  // accessing the database
 
 if($_SERVER["REQUEST_METHOD"] === "POST") {
 	$page_id = filter_input(INPUT_POST, "page_id");
-} else if (isset($_session["page"])) {
+} else if (isset($_SESSION["page"])) {
 	$page_id = $_SESSION["page"]["page_id"];
 } else {
 	$message = "Consultez une page avant de revenir ici";
