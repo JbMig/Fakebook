@@ -139,15 +139,17 @@ foreach ($banned_persons as $banned_person) {
 }
 
 
-// checking whether we're friends with the person
-$profile_id = filter_input(INPUT_POST, "profil_id");
 
-$maRequete = $pdo->prepare("SELECT `user_id_a`, `user_id_b`, `status`, `blocked` FROM `relationships` WHERE ((`user_id_a` = :profile_id AND `user_id_b` = :userId) OR (`user_id_b` = :profile_id AND `user_id_a` = :userId)) AND `status`='approved';");
+// getting all the user's friends and their infos
+$maRequete = $pdo->prepare(
+	"SELECT `user_id`, `first_name`, `last_name`, `profil_picture` FROM `users`
+	WHERE `user_id` IN (SELECT `user_id_a` FROM `relationships` WHERE `user_id_b` = :userId AND `status`='approved')
+	OR`user_id` IN (SELECT `user_id_b` FROM `relationships` WHERE `user_id_a` = :userId AND `status`='approved')");
         $maRequete->execute([
-            ":profile_id" => $profile_id,
 			":userId" => $_SESSION["user"]["user_id"]
         ]);
-	$profile_friend = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+	$friends = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
 
 // pending requests
 $maRequete = $pdo->prepare("SELECT `status` FROM `members` WHERE `group_id` = :groupId AND `user_id` = :userId AND `status` = 'pending'");
@@ -162,6 +164,12 @@ if ($user_pending) {
 } else {
 	$user_pending_request = FALSE;
 };
+// pending invites
+$maRequete = $pdo->prepare("SELECT `user_id` FROM `members` WHERE `group_id` = :groupId");
+	$maRequete->execute([
+		":groupId" => $group_id
+	]);
+$all_members = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
 
 // getting the likes

@@ -76,6 +76,12 @@ switch ($uri) {
     case "/member_approval":
         require_once __DIR__ . "/php_partial/member_approval.php";
         break;
+    case "/invite":
+        require_once __DIR__ . "/php_partial/invite.php";
+        break;
+    case "/invite_accepted":
+        require_once __DIR__ . "/php_partial/invite_accepted.php";
+        break;
     case "/block":
         require_once __DIR__ . "/php_partial/block.php";
         break;

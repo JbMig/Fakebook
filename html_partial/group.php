@@ -234,6 +234,39 @@
 					<?php endif ?>
 				<?php endforeach; ?>
 			</section>
+			<!-- showing the list of friends who are not members yet, with a link to their profile and a button to invite them -->
+			<button type="button" id="open_friends_list">Inviter des amis</button>
+			<section id="friends_list" style="display: none">
+				<?php foreach ($friends as $friend) : ?>
+					<?php
+					$friend_is_member =false;
+					foreach ($all_members as $all_member) {
+						if($all_member["user_id"] === $friend["user_id"]) {
+							$friend_is_member =true;
+							break;
+						}
+					}
+					?>
+					<?php if (!$friend_is_member) : ?>
+						<form id="goToProfile" action="/profile" method="post">
+							<input type="hidden" name="profil_id" value="<?= $friend["user_id"] ?>" />
+							<button type="submit" id="profil_picture" class="baseProfile" style="border:0; padding:5px;">
+								<img id="profilPic" src="img_profil/<?= $friend["profil_picture"] ?>" alt="" width="40px">
+							</button>
+							<button type="submit" class="baseProfile" id="first_name" style="border:0; padding:0;"> 
+								<?= $friend["first_name"] . " " . $friend["last_name"] ?> 
+							</button>
+						</form>
+						<form action="/invite" class="form" method="post" >
+							<button type="submit" id="invite" name="invite">
+								Inviter à rejoindre le groupe
+							</button>
+							<input type="hidden" name="invite_group" value="<?= $group_id ?>">
+							<input type="hidden" name="invite_friend" value="<?= $friend["user_id"] ?>">
+						</form>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			</section>
 		<?php endif ?>
 		<?php if($is_admin && $_SESSION["group"]["status"] === "private"): ?>
 			<!-- show list of those who wish to join the group -->
