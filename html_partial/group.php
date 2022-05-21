@@ -104,7 +104,7 @@
 							}
 						}
 						$writer_is_admin = false;
-						$writer_is_followers = false;
+			
 						foreach($admins as $admin) {
 							if($admin["user_id"] === $article["user_id"]) {
 								$writer_is_admin = true;
@@ -128,7 +128,7 @@
 							$actionId = "goToProfile";
 							$action_name = "profil_id";
 							$action_value = $article["user_id"];
-							$writer_is_followers = true;
+				
 						} else { // group's article (because it's written by an admin)
 							$show_name = $group["name"];
 							$show_picture =  "img_pages_groups/" . $group["picture"];
@@ -155,7 +155,7 @@
 							<?php if($article["picture"]) :?>
 								<img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
 							<?php endif; ?>
-							<?php if((($writer_is_admin && $is_admin) || ( $writer_is_followers)) || ($writer_is_admin === false && $article["user_id"] === $user_id)) :?>
+							<?php if(($writer_is_admin && $is_admin) || ($writer_is_admin === false && $article["user_id"] === $user_id)) :?>
 								<!-- members can modify/delete their own articles and admins can do the same for the group's articles-->
 								<form id="delete_article" method="post" action="/delete_article">
 									<button type="submit" id="delete_btn">Supprimer</button>
