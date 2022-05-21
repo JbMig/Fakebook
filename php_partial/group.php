@@ -165,11 +165,11 @@ if ($user_pending) {
 	$user_pending_request = FALSE;
 };
 // pending invites
-$maRequete = $pdo->prepare("SELECT `user_id` FROM `members` WHERE `group_id` = :groupId AND `status` = 'invite'");
+$maRequete = $pdo->prepare("SELECT `user_id` FROM `members` WHERE `group_id` = :groupId");
 	$maRequete->execute([
 		":groupId" => $group_id
 	]);
-$invited_accounts = $maRequete->fetch();
+$all_members = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
 
 // getting the likes
