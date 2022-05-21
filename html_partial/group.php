@@ -248,19 +248,17 @@
 						</button>
 					</form>
 					<?php $already_invited = false;
-					if(COUNT($invited_accounts)>0) {
-						foreach($invited_accounts as $invited_account) {
-							if ($invited_account["user_id"] === $friend["user_id"]) {
-								$already_invited = true;
-							}
-						}
-					}
+					foreach($invited_accounts as $invited_account) {
+						if ($invited_account["user_id"] === $friend["user_id"]) {
+							$already_invited = true;
+						};
+					};
 					?>
 					<?php if($already_invited) : ?>
 						<span>Invitation en attente</span>
 					<?php else : ?>
-						<form action="/member_invite" class="form" method="post" >
-							<button type="submit" id="member_invite" name="member_invite">
+						<form action="/invite" class="form" method="post" >
+							<button type="submit" id="invite" name="invite">
 								Inviter à rejoindre le groupe
 							</button>
 							<input type="hidden" name="invite_group" value="<?= $group_id ?>">
