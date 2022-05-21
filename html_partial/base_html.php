@@ -11,7 +11,7 @@
 <body>
     <header>
     <?php 
-        if ($uri != "/login" && $uri != "/sign_up"):
+        if ($uri != "/login" && $uri != "/sign_up" && $uri != "/inactive"):
             if(isset($_SESSION["user"]["user_id"])) :?>
 				<!-- link to the current user's profile page -->
 				<form id="goToProfile" action="/profile" method="post">
@@ -66,7 +66,12 @@
     </header>
     <main>
         <!-- Affiche $content ici -->
-        <?= $content ?>
+        <?php if(!isset($content)):?>
+            <h4>Vous vous êtes perdu</h4>
+            <a href="/timeline">fil d'actualité</a>
+        <?php else :
+            echo $content;
+        endif  ?>
     </main>
 
     <footer>

@@ -26,10 +26,10 @@
     <div id="comment" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 300px">
         <form id="goToProfile" action="/profile" method="post">
             <input type="hidden" name="profil_id" value="<?= $comment["user_id"] ?>" />
-            <button type="submit" id="comment_profil_picture" style="background: white; border:0; padding:5px;">
+            <button class="articleColor" type="submit" id="comment_profil_picture" style="border:0; padding:5px;">
                 <img id="profilPic" src="img_profil/<?= $profil_picture ?>" alt="" width="30px">
             </button>
-            <button type="submit" id="comment_name" style="background: white; border:0; padding:0;">
+            <button class="articleColor" type="submit" id="comment_name" style="border:0; padding:0;">
                 <?= $first_name . " " . $last_name ?>
             </button>
         </form>

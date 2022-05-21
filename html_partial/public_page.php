@@ -37,13 +37,6 @@
 						<input type="hidden" id="input_unfollow">
 					</form>
 				<?php endif;?>
-				<!-- i leave that here because we may use it for the group's page later, and i don't want to type it again -->
-				<!-- <form action="/start_chat" class="form" method="post" >
-					<button type="submit" id="start_chat" name="start_chat">
-						Démarrer la conversation
-					</button>
-					<input type="hidden" name="start_chat" value="<?= $user_id ?>">
-				</form> -->
 			<?php else :?>
 				<form action="/follow" class="form" method="post" >
 					<button type="submit" id="follow" name="follow">
@@ -126,7 +119,7 @@
 							<span><?=$article["like_count"]?></span>
 							<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
 						</form>
-						<button type="button" id="open_comment">Comment</button>
+						<button type="button" id="open_comment">Commenter</button>
 						<section id="comment_section">
 							<!-- require un truc ici -->
 							<?php require __DIR__ . "/../php_partial/comment.php"?>
@@ -146,10 +139,10 @@
 				<?php foreach ($accounts as $account) : ?>
 					<form id="goToProfile" action="/profile" method="post">
 						<input type="hidden" name="profil_id" value="<?= $account["user_id"] ?>" />
-						<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-							<img src="img_profil/<?= $account["profil_picture"] ?>" alt="" width="40px">
+						<button type="submit" id="profil_picture" class="baseProfile" style="border:0; padding:5px;">
+							<img id="profilPic" src="img_profil/<?= $account["profil_picture"] ?>" alt="" width="40px">
 						</button>
-						<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+						<button type="submit" class="baseProfile" id="first_name" style="border:0; padding:0;"> 
 							<?= $account["first_name"] . " " . $account["last_name"] ?> 
 						</button>
 					</form>
@@ -190,10 +183,10 @@
 				<?php foreach ($banned_accounts as $banned_account) : ?>
 					<form id="goToProfile" action="/profile" method="post">
 						<input type="hidden" name="profil_id" value="<?= $banned_account["user_id"] ?>" />
-						<button type="submit" id="profil_picture" style="background: white; border:0; padding:5px;">
-							<img src="img_profil/<?= $banned_account["profil_picture"] ?>" alt="" width="40px">
+						<button type="submit" id="profil_picture" class="baseProfile" style="border:0; padding:5px;">
+							<img id="profilPic" src="img_profil/<?= $banned_account["profil_picture"] ?>" alt="" width="40px">
 						</button>
-						<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+						<button type="submit" id="first_name" class="baseProfile" style="border:0; padding:0;"> 
 							<?= $banned_account["first_name"] . " " . $banned_account["last_name"] ?> 
 						</button>
 					</form>

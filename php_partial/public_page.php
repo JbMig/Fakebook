@@ -5,8 +5,15 @@ require_once __DIR__ . "/../database/pdo.php";  // accessing the database
 
 if($_SERVER["REQUEST_METHOD"] === "POST") {
 	$page_id = filter_input(INPUT_POST, "page_id");
-} else {
+} else if (isset($_session["page"])) {
 	$page_id = $_SESSION["page"]["page_id"];
+} else {
+	$message = "Consultez une page avant de revenir ici";
+	//indique que le serveur refuse d'autoriser la requête 
+	http_response_code(403);
+	//j'appelle ma bannière html pour afficher un message d'erreur
+	require_once __DIR__ . "/../html_partial/alert/banniere.php";
+	exit;
 }
 $user_id = $_SESSION["user"]["user_id"];
 // updating $_SESSION["page"]

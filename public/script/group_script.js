@@ -2,6 +2,70 @@ var cancel = document.querySelector("#cancel");
 var newPublicationForm = document.querySelector("#newPublicationForm");
 var form_modify_article = document.querySelector("#form_modify_article");
 
+// open the members list area
+let open_members_list = document.querySelectorAll("#open_members_list");
+open_members_list.forEach(button => {
+  let isVisiblemembersList = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisiblemembersList = !isVisiblemembersList;
+    toDisplay.style.display = isVisiblemembersList ? "block" : "none";
+    target.innerHTML = isVisiblemembersList ? "Replier la liste" : "Afficher les membres"
+  })
+})
+// open the banned list area
+let open_banned_list = document.querySelectorAll("#open_banned_list");
+open_banned_list.forEach(button => {
+  let isVisibleBannedList = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisibleBannedList = !isVisibleBannedList;
+    toDisplay.style.display = isVisibleBannedList ? "block" : "none";
+    target.innerHTML = isVisibleBannedList ? "Replier la liste" : "Afficher les bannis"
+  })
+})
+// open the requests list area
+let open_requests_list = document.querySelectorAll("#open_requests_list");
+open_requests_list.forEach(button => {
+  let isVisibleRequestsList = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisibleRequestsList = !isVisibleRequestsList;
+    toDisplay.style.display = isVisibleRequestsList ? "block" : "none";
+    target.innerHTML = isVisibleRequestsList ? "Replier la liste" : "Afficher les demandes"
+  })
+})
+
+
+// open the comments area
+let open_comment = document.querySelectorAll("#open_comment");
+open_comment.forEach(button => {
+  let isVisibleComment = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisibleComment = !isVisibleComment;
+    toDisplay.style.display = isVisibleComment ? "block" : "none";
+    target.innerHTML = isVisibleComment ? "Annuler" : "Commenter"
+  })
+})
+
+// open the comment's modification area
+let open_modify_comment = document.querySelectorAll("#open_modify_comment");
+open_modify_comment.forEach(button => {
+  let isVisibleModifyComment = false;
+  button.addEventListener("click", e => {
+    const target = e.target;
+    const toDisplay = target.nextElementSibling;
+    isVisibleModifyComment = !isVisibleModifyComment;
+    toDisplay.style.display = isVisibleModifyComment ? "block" : "none";
+    target.innerHTML = isVisibleModifyComment ? "Annuler" : "Comment"
+  })
+})
+
 
 // cancel new article
 function cancel_new_post() {
@@ -26,29 +90,6 @@ open_modify_article.forEach(button => {
   })
 })
 
-let open_comment = document.querySelectorAll("#open_comment");
-open_comment.forEach(button => {
-  let isVisibleComment = false;
-  button.addEventListener("click", e => {
-    const target = e.target;
-    const toDisplay = target.nextElementSibling;
-    isVisibleComment = !isVisibleComment;
-    toDisplay.style.display = isVisibleComment ? "block" : "none";
-    target.innerHTML = isVisibleComment ? "Annuler" : "Comment"
-  })
-})
-
-let open_modify_comment = document.querySelectorAll("#open_modify_comment");
-open_modify_comment.forEach(button => {
-  let isVisibleModifyComment = false;
-  button.addEventListener("click", e => {
-    const target = e.target;
-    const toDisplay = target.nextElementSibling;
-    isVisibleModifyComment = !isVisibleModifyComment;
-    toDisplay.style.display = isVisibleModifyComment ? "block" : "none";
-    target.innerHTML = isVisibleModifyComment ? "Annuler" : "Commenter"
-  })
-})
 
 // drag n drop
 var new_image_input = document.querySelector("#fileToUpload");

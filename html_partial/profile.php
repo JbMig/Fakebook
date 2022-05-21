@@ -33,13 +33,6 @@
 					</button>
 					<input type="hidden" name="friend_removal" value="<?= $profile_id ?>">
 				</form>
-				<!-- start chat if the person is a relationship -->
-				<form action="/start_chat" class="form" method="post" >
-					<button type="submit" id="start_chat" name="start_chat">
-						Démarrer la conversation
-					</button>
-					<input type="hidden" name="start_chat" value="<?= $user_id ?>">
-				</form>
 			<?php else :?>
 				<?php if (Count($profile_friend_request) >= 1): ?>
 					<!-- accept relation request -->
@@ -105,6 +98,11 @@
 				<!-- require un truc ici -->
 				<?php require __DIR__ . "/../php_partial/create_page.php"?>
 			</section>
+			<button type="button" id="open_new_group">Créer un groupe</button>
+			<section id="new_group_section">
+				<!-- require un truc ici -->
+				<?php require __DIR__ . "/../php_partial/create_group.php"?>
+			</section>
 		<?php endif ?>
 	<?php endif ?>
 	</div>
@@ -143,68 +141,73 @@
 				<?php if ($profile["status"]==='inactive') :?>
 					<span>Le compte de cette personne est inactif.</span>
 				<?php else :?>
-					<?php foreach ($articles as $article): ?>
-						<?php if ($article["page_id"] === NULL AND $article["group_id"] === NULL) :?>
-							<?php
-							foreach ($user_likes as $user_like) {
-								if ($user_like["article_id"] === $article["article_id"]) {
-									$like = "like.png";
-									break;
-								} else {
-									$like = "unlike.png";
-								}
-							} ?>
-							<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
-								<form id="goToProfile" action="/profile" method="post">
-									<input type="hidden" name="profil_id" value="<?= $article["user_id"] ?>" />
-									<button type="submit" class="articleColor" id="profil_picture" style="border:0; padding:5px;">
-										<img id="profilPic" src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
-									</button>
-									<button type="submit" class="articleColor" id="first_name" style="border:0; padding:0;"> 
-										<?= $profile["first_name"] . " " . $profile["last_name"] ?> 
-									</button>
-								</form>
-								<span id="date"><?= $article["date"] ?></span>
-								<br>
-								<span id="data"><?= $article["content"] ?></span>
-								<br>
-								<?php if($article["picture"]) :?>
-									<img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
-								<?php endif; ?>
-								<?php if($article["user_id"] === $_SESSION["user"]["user_id"]) :?>
-									<form id="delete_article" method="post" action="/delete_article">
-										<button type="submit" id="delete_btn">Supprimer</button>
-										<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
-										<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
+					<!-- you can only see the profile's articles if it's yours or if it's your friend -->
+					<?php if ($_SESSION["user"]["user_id"] !== $profile["user_id"] && Count($profile_friend) < 1) :?>
+						<span>Vous ne pouvez voir que les publications de vos amis.</span>
+					<?php else :?>
+						<?php foreach ($articles as $article): ?>
+							<?php if ($article["page_id"] === NULL AND $article["group_id"] === NULL) :?>
+								<?php
+								foreach ($user_likes as $user_like) {
+									if ($user_like["article_id"] === $article["article_id"]) {
+										$like = "like.png";
+										break;
+									} else {
+										$like = "unlike.png";
+									}
+								} ?>
+								<div id="article" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 500px">
+									<form id="goToProfile" action="/profile" method="post">
+										<input type="hidden" name="profil_id" value="<?= $article["user_id"] ?>" />
+										<button type="submit" class="articleColor" id="profil_picture" style="border:0; padding:5px;">
+											<img id="profilPic" src="img_profil/<?= $profile["profil_picture"] ?>" alt="" width="40px">
+										</button>
+										<button type="submit" class="articleColor" id="first_name" style="border:0; padding:0;"> 
+											<?= $profile["first_name"] . " " . $profile["last_name"] ?> 
+										</button>
 									</form>
-									<button type="button" id="open_modify_article">Modifier</button>
-									<form id="form_modify_article" method="post" action="/modify_article">
-										<label id="label_modify" for="modify_input">Ecrivez votre message</label>
-										<textarea id="modify_article_input" type="text" name="modify_article" value=""><?= $article["content"] ?></textarea>
-										<button id="modify_btn" type="submit">Valider</button>
-										<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
-										<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
+									<span id="date"><?= $article["date"] ?></span>
+									<br>
+									<span id="data"><?= $article["content"] ?></span>
+									<br>
+									<?php if($article["picture"]) :?>
+										<img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
+									<?php endif; ?>
+									<?php if($article["user_id"] === $_SESSION["user"]["user_id"]) :?>
+										<form id="delete_article" method="post" action="/delete_article">
+											<button type="submit" id="delete_btn">Supprimer</button>
+											<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
+											<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
+										</form>
+										<button type="button" id="open_modify_article">Modifier</button>
+										<form id="form_modify_article" method="post" action="/modify_article">
+											<label id="label_modify" for="modify_input">Ecrivez votre message</label>
+											<textarea id="modify_article_input" type="text" name="modify_article" value=""><?= $article["content"] ?></textarea>
+											<button id="modify_btn" type="submit">Valider</button>
+											<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
+											<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
+										</form>
+									<?php endif ?>
+									<!-- <form action="/like_article" method="post" id="like_article">
+										<button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
+										<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
+									</form> -->
+									<form action="/like_article" method="post" id="like_article">
+										<button class="articleColor" id="like_btn" type="submit" style="border: 0; padding:0px; margin: 5px;">
+											<img style=" width: 40px; height: 40px; margin: 0px;" src="img_ressources/<?= $like ?>" alt="">
+										</button>
+										<span><?=$article["like_count"]?></span>
+										<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
 									</form>
-								<?php endif ?>
-								<!-- <form action="/like_article" method="post" id="like_article">
-									<button id="like_btn" type="submit"><?= $like . " " . $article["like_count"] ?></button>
-									<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
-								</form> -->
-								<form action="/like_article" method="post" id="like_article">
-									<button class="articleColor" id="like_btn" type="submit" style="border: 0; padding:0px; margin: 5px;">
-										<img style=" width: 40px; height: 40px; margin: 0px;" src="img_ressources/<?= $like ?>" alt="">
-									</button>
-									<span><?=$article["like_count"]?></span>
-									<input type="hidden" name="like_article_id" value="<?= $article["article_id"] ?>">
-								</form>
-								<button type="button" id="open_comment">Comment</button>
-								<section id="comment_section">
-									<!-- require un truc ici -->
-									<?php require __DIR__ . "/../php_partial/comment.php"?>
-								</section>
-							</div>
-						<?php endif ?>
-					<?php endforeach;?>
+									<button type="button" id="open_comment">Commenter</button>
+									<section id="comment_section">
+										<!-- require un truc ici -->
+										<?php require __DIR__ . "/../php_partial/comment.php"?>
+									</section>
+								</div>
+							<?php endif ?>
+						<?php endforeach;?>
+					<?php endif ?>
 				<?php endif ?>
 			<?php endif ?>
 		</div>
@@ -221,6 +224,20 @@
 					</button>
 					<button type="submit" id="first_name" class="baseProfile" style="border:0; padding:0;"> 
 						<?= $page["name"] ?> 
+					</button>
+				</form>
+			<?php endforeach; ?>
+		</section>
+		<button type="button" id="open_groups_list">Afficher les groupes suivis</button>
+		<section id="groups_list" style="display: none">
+			<?php foreach ($groups as $group) : ?>
+				<form id="goTogroup" action="/group" method="post"> <!-- needs to be modified to match a group -->
+					<input type="hidden" name="group_id" value="<?= $group["group_id"] ?>" />
+					<button type="submit" id="picture" class="baseProfile" style=" border:0; padding:5px;">
+						<img id="profilPic" src="img_pages_groups/<?= $group["picture"] ?>" alt="" width="40px">
+					</button>
+					<button type="submit" id="first_name" class="baseProfile" style="border:0; padding:0;"> 
+						<?= $group["name"] ?> 
 					</button>
 				</form>
 			<?php endforeach; ?>

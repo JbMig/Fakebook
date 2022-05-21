@@ -103,13 +103,24 @@ button {
 }
 #open_pages_list {
     position: absolute;
-    top: 600px;
-    left: 900px;
+    top: 900px;
+    left: 600px;
 }
 
 #pages_list {
     position: absolute;
-    top: 660px;
+    top: 960px;
+    left: 600px;
+}
+#open_groups_list {
+    position: absolute;
+    top: 900px;
+    left: 900px;
+}
+
+#groups_list {
+    position: absolute;
+    top: 960px;
     left: 900px;
 }
 
@@ -123,6 +134,16 @@ button {
     top: 660px;
     left: 600px;
 }
+#open_new_group {
+    position: absolute;
+    top: 600px;
+    left: 900px;
+}
+#new_group_section {
+    position: absolute;
+    top: 660px;
+    left: 900px;
+}
 #open_followers_list {
     position: absolute;
     top: 622px;
@@ -130,6 +151,17 @@ button {
 }
 
 #followers_list {
+    position: absolute;
+    top: 682px;
+    left: 600px;
+}
+#open_members_list {
+    position: absolute;
+    top: 622px;
+    left: 600px;
+}
+
+#members_list {
     position: absolute;
     top: 682px;
     left: 600px;
@@ -157,6 +189,9 @@ button {
     display: flex;
 }
 h3, h2  {
+    margin-top: 20px;
+}
+h4  {
     margin-top: 20px;
 }
 
@@ -208,6 +243,10 @@ button {
 }
 
 #new_page_section {
+    display: none;
+}
+
+#new_group_section {
     display: none;
 }
 

@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
 CREATE TABLE IF NOT EXISTS `members` (
 	`member_id` INT NOT NULL AUTO_INCREMENT,
 	`banned` ENUM('yes', 'no') DEFAULT 'no',
+	`status` ENUM('pending','approved') DEFAULT 'pending',
 	`group_id` INT NOT NULL,
 	`user_id` INT NOT NULL,
 	PRIMARY KEY (`member_id`),

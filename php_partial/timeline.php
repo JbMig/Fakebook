@@ -31,7 +31,7 @@ $articles = array_merge($articles, $friends_articles);
 
 // followed pages' articles
 $maRequete = $pdo->prepare(
-	"SELECT * from `articles` WHERE `page_id` IN (SELECT `page_id` FROM `followers` WHERE `user_id`= :userId)");
+	"SELECT * from `articles` WHERE `page_id` IN (SELECT `page_id` FROM `followers` WHERE `user_id`= :userId AND `banned`='no')");
 $maRequete->execute([
 	":userId" => $user_id
 ]);

@@ -2,6 +2,7 @@
 ob_start();
 if ("POST" === $_SERVER["REQUEST_METHOD"]) {
     require_once __DIR__ . "/../database/pdo.php"; //je récupère le PDO
+    $page_id = $_SESSION["page"]["page_id"];
     $user_id = $_SESSION["user"]["user_id"];
     $page_id = $_SESSION["page"]["page_id"];
     
@@ -12,6 +13,7 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
         $maRequete->execute();
         header("Location: /login");
     }
+
     elseif($_POST['delete']){
         $maRequete = $pdo->prepare("DELETE FROM `admins` WHERE `page_id` = :pageId AND `user_id` = :userId;");
         $maRequete->execute([
@@ -29,19 +31,16 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
                 ":pageId" => $page_id,
             ]);
         }
-
-        $maRequete=$pdo->prepare("DELETE FROM `users` WHERE `user_id` = $user_id;");
-        $maRequete->execute();
-
-        unset($_SESSION["user"]);
-        http_response_code(302);
-        // je redirige vers /login
-        header('Location: /login');
-        exit();
+        $maRequete = $pdo->prepare("DELETE FROM `users` WHERE `user_id` = :user;");
+        $maRequete->execute([
+            ":user" => $user_id,
+        ]);
     }
 }
 
-//j'appelle l'html de cette page
-require_once __DIR__ . "/../html_partial/delete.php";
-$content = ob_get_clean(); //je stock le tampon dans cette variable
+unset($_SESSION["user"]);
+http_response_code(302);
+// je redirige vers /login
+header('Location: /login');
+exit();
 ?>
