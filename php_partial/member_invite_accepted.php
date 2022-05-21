@@ -2,7 +2,7 @@
 $user_id = $_SESSION["user"]["user_id"];
 
 if($_SERVER["REQUEST_METHOD"] === "POST") {
-    if(isset($_POST["member_request"])) {
+    if(isset($_POST["member_invite_accepted"])) {
         require_once __DIR__ . "/../database/pdo.php";
         $group_id = filter_input(INPUT_POST, "invite_group");
 		$friend_id =  filter_input(INPUT_POST, "invite_friend");

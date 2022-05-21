@@ -248,9 +248,11 @@
 						</button>
 					</form>
 					<?php $already_invited = false;
-					foreach($invited_accounts as $invited_account) {
-						if ($invited_account["user_id"] === $friend["user_id"]) {
-							$already_invited = true;
+					if(COUNT($invited_accounts)>0) {
+						foreach($invited_accounts as $invited_account) {
+							if ($invited_account["user_id"] === $friend["user_id"]) {
+								$already_invited = true;
+							}
 						}
 					}
 					?>
