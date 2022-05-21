@@ -45,7 +45,7 @@
 			// updating notification of the article writer
 			$maRequete = $pdo->prepare(
 				"INSERT INTO `notifications` (`type`, `seen`, `user_id`, `comment_id`,`article_id`)
-				VALUES('comment' ,'no', :Id, :comment_id, :article_id);");
+				VALUES('comment' ,'no', `user_id` = :Id, `comment_id` =  :comment_id, `article_id` = :article_id);");
 				$maRequete->execute([
 					":Id" => $user_id,
 					":comment_id" => $article['user_id'],
