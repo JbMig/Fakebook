@@ -1,9 +1,9 @@
 <?php
-    // si on est en method post
+    // if Post method
     if($_SERVER["REQUEST_METHOD"] === "POST") {
         require_once "../database/pdo.php";
         $chat_id = $_SESSION["chat"]["chat_id"];
-        // chemin vers le repertoir
+        // path to load img
         $target_dir = __DIR__ . "/../../public/img_chat_profil/";
         $full_name = $_FILES["fileToUpload"]["name"];
         $name_exploded = explode(".",$full_name);
@@ -12,11 +12,10 @@
         $extension = $name_exploded[1];
         $full_name = $file_name . "." . $extension;
         $target_file = $target_dir . basename($full_name);
-        // conteur upload ou pas
         $uploadOk = 1;
-        // extension du fichier en minuscule
+        // lower the extension (png, jpg ect)
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        // si $_POST  a récuperer les infos du formulaire
+
         if(isset($_POST["fileToUpload"])) {
             // si c'est une image
             $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -54,13 +53,14 @@
             $uploadOk = 0;
         }
 
-        // si $uploadOk === 0 alors il y a une erreur quelque part
         if ($uploadOk === 0) {
             $message = "Une erreur est survenue";
             http_response_code(403);
             require_once __DIR__ . "/../../html_partial/alert/banniere.php";
-        } else { // sinon
+        } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                // if upload succeeded
+                // add result in database and session
                 $maRequete = $pdo->prepare(
                     "UPDATE `chats` SET `chat_pic` = :chat_pic WHERE `chat_id` = :chatId"
                 );
@@ -70,6 +70,7 @@
                 ]);
                 $_SESSION['chat']['chat_pic'] = $full_name;
                 http_response_code(302);
+                // go back to chat
                 header("Location: /chat");
                 exit();
             } else {

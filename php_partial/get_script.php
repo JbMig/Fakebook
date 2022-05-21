@@ -1,3 +1,4 @@
+<!-- select right script by checking url -->
 <?php if($uri === "/entrer.php") :?>
     <!-- script here -->
 <?php elseif($uri === "/login") :?>

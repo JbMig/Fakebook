@@ -2,6 +2,7 @@
 <button><a style="text-decoration: none; color: black;" href="/new_chat">Nouvelle conversation</a></button>
 
 <section id="conversation">
+    <!-- show every conversation wich include the user -->
     <?php foreach ($conversations as $conversation): ?>
         <form id="goToChat" action="/conversation" method="post">
             <input type="hidden" name="chat_id" value="<?= $conversation["chat_id"] ?>" />

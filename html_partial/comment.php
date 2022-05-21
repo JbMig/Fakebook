@@ -7,6 +7,7 @@
         <button type="submit" id="submitPublication">Envoyer</button>
     </form>
 </div>
+<!-- show comments of the article and show likes of the comment -->
 <?php foreach ($comments as $comment) :
     foreach ($comment_profiles as $comment_profile) {
         if ($comment_profile["user_id"] === $comment["user_id"]) {

@@ -6,6 +6,7 @@
             $article_id = filter_input(INPUT_POST, "article_id");
             $user_id = $_SESSION["user"]["user_id"];
             
+			// 1st we create the comment in the comment table
             $maRequete = $pdo->prepare(
                 "INSERT INTO `comments` (`content`, article_id, `user_id`)
                 VALUES(:content, :article_id, :userId)");

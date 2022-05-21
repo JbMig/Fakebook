@@ -1,29 +1,25 @@
 <?php
-//mise en tampon pour stockage dans une variable
+// start buffering
 ob_start();
-//valeur pour la balisehtml <title>
 $title = "sign up";
 
-// si on est en method POST, on reçoit les donnée du formulaire
-// permet de créer un utilisateur
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $prenom = filter_input(INPUT_POST, "firstName");
     $nom = filter_input(INPUT_POST, "lastName");
-    $mail = filter_input(INPUT_POST, "email"); //récupère le mail du formulaire
-    //récupère le mdp du formulaire
+    $mail = filter_input(INPUT_POST, "email");
     $mdp = hash("sha512", filter_input(INPUT_POST, "password"));
     $confirmMdp = hash("sha512", filter_input(INPUT_POST, "confirmPassword"));
-    require_once __DIR__ . "/../database/pdo.php"; //je récupère le PDO
-    //requete sql pour trouver dans la database l'utilisateur voulu
+    require_once __DIR__ . "/../database/pdo.php";
+    
+    // watch in database if user exist already
     $maRequete = $pdo->prepare("SELECT `email` FROM `users` WHERE `email` = :email;");
     $maRequete->execute([
         ":email" => $mail
     ]);
-
-    //récupère le résultat de la requète
     $user = $maRequete->fetch();
-    if ($user == false && strcmp($mdp, $confirmMdp) == 0) { //si aucun résultat
-        //j'ajoute le résultat du formulaire dans la database
+
+    // if no result, create new user
+    if ($user == false && strcmp($mdp, $confirmMdp) == 0) {
         $maRequete = $pdo->prepare("INSERT INTO `users` (`first_name`, `last_name`, `email`, `password`) VALUES(:first_name, :last_name, :email, :mdp)");
         $maRequete->execute([
             ":first_name" => $prenom,
@@ -38,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ]);
 
         $user = $maRequete->fetch();
-
+        // set session witch new user infos
         $_SESSION["user"] = $user;
 
 		// creating new user's stats
@@ -46,27 +42,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		$maRequete->execute([
 			":userId" => $_SESSION["user"]["user_id"]
 		]);
-
-
+        // got to timeline
         http_response_code(302);
-        header('Location: /timeline'); //je vais à la page login
+        header('Location: /timeline');
         exit();
-    } elseif ($user == true){ //sinon
+        // if user already exists, send error message
+    } elseif ($user == true){
         $message = "L'utilisateur existe déjà";
-        //indique que le serveur refuse d'autoriser la requête 
         http_response_code(403);
-        //j'appelle ma bannière html pour afficher un message d'erreur
         require_once __DIR__ . "/../html_partial/alert/banniere.php";
     } else {
         $message = "Les mots de passe ne correspondent pas";
-        //indique que le serveur refuse d'autoriser la requête 
         http_response_code(403);
-        //j'appelle ma bannière html pour afficher un message d'erreur
         require_once __DIR__ . "/../html_partial/alert/banniere.php";
     }
 }
-//j'appelle l'html de cette page
-require_once __DIR__ . '/../html_partial/sign_up.php';
 
-$content = ob_get_clean(); //je stock le tampon dans cette variable
+require_once __DIR__ . '/../html_partial/sign_up.php';
+// clean buffering in $content
+$content = ob_get_clean();
 

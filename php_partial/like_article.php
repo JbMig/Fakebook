@@ -6,19 +6,22 @@
             $article_id = filter_input(INPUT_POST, "like_article_id");
             $user_id = $_SESSION["user"]["user_id"];
 
+            // get like where user = user_id and article = article_id
             $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId AND `article_id` = :articleId");
             $maRequete->execute([
                 "userId" => $user_id,
                 ":articleId" => $article_id
             ]);
             $user_like = $maRequete->fetch();
+            // if result, delete like
             if($user_like) {
 				// unlike
                 $maRequete = $pdo->prepare("DELETE FROM `likes` WHERE `like_id` = :likeId");
                 $maRequete->execute([
                     ":likeId" => $user_like["like_id"]
                 ]);
-
+                
+                // update number of like of the article
                 $maRequete = $pdo->prepare("UPDATE `articles` SET `like_count` = `like_count` -1 WHERE `article_id` = :articleId");
                 $maRequete->execute([
                     ":articleId" => $article_id
@@ -50,13 +53,14 @@
                     ]);
                 }
                 else {
-				// like
+				// if no result, add like
                 $maRequete = $pdo->prepare("INSERT INTO `likes` (`article_id`, `user_id`) VALUES(:article_id, :userId)");
                 $maRequete->execute([
                     ":article_id" => $article_id,
                     ":userId" => $user_id
                 ]);
 
+                // update number of like of the article
                 $maRequete = $pdo->prepare("UPDATE `articles` SET `like_count` = `like_count` +1 WHERE `article_id` = :articleId");
                 $maRequete->execute([
                     ":articleId" => $article_id

@@ -8,6 +8,7 @@
 
     <form method="post" class="col-md-8 mx-5 mt-3">
         <select id="select">
+            <!-- show every friends of the user -->
             <?php foreach ($friend_profils as $friend_profil): ?>
             <option value="<?= $friend_profil["user_id"] . " " . $friend_profil["first_name"] . " " . $friend_profil["last_name"]  ?>"><?= $friend_profil["first_name"] . " " . $friend_profil["last_name"] ?></option>
             <?php endforeach; ?>

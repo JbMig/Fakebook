@@ -1,46 +1,42 @@
 <?php
-//mise en tampon pour stockage dans une variable
+// start buffering
 ob_start();
-//valeur pour la balisehtml <title>
 $title = "login";
 
-// si on est en method POST, on reçoit les donnée du formulaire
-//permet de verifier l'utilisateur dans la base de donnée pour créer un connexion
+
 if ("POST" === $_SERVER["REQUEST_METHOD"]) {
-    require_once __DIR__ . "/../database/pdo.php"; //je récupère le PDO
-    $mail = filter_input(INPUT_POST, "mail"); //récupère le mail du formulaire
-    //récupère le mdp du formulaire
+    require_once __DIR__ . "/../database/pdo.php";
+    $mail = filter_input(INPUT_POST, "mail");
     $mdp = hash("sha512", filter_input(INPUT_POST, "mdp"));
-    //requete sql pour trouver dans la database l'utilisateur voulu
+    
+    // get user info by checking mail
     $maRequete = $pdo->prepare("SELECT `user_id`, `email`, `password`, `first_name`, `last_name`, `profil_picture`, `banner`, `status`, `theme` FROM `users` WHERE `email` = :email;");
         $maRequete->execute([
             ":email" => $mail,
         ]);
-    //récupère le résultat de la requète
     $user = $maRequete->fetch();
-    //si aucun résultat ou si le mot de passe est invalide
+    // if no result, error message
     if (!$user || $user["password"] !== $mdp) {
         $message = "Utilisateur invalide";
-        //indique que le serveur refuse d'autoriser la requête 
         http_response_code(403);
-        //j'appelle ma bannière html pour afficher un message d'erreur
         require_once __DIR__ . "/../html_partial/alert/banniere.php";
-    } else { //sinon j'ajoute le resultat de la requete dans la session
+    } else { // if result, set user informations in session
         if ($user["status"]=="inactive"){
             $_SESSION["user"] = $user;
             http_response_code(302);
-            header("Location: /inactive"); //je vais à la page projet
+            header("Location: /inactive");
             exit();
         }
         else{
         $_SESSION["user"] = $user;
         http_response_code(302);
-        header("Location: /timeline"); //je vais à la page projet
+        // go to timeline
+        header("Location: /timeline");
         exit();
         }
     }
 }
-//j'appelle l'html de cette page
-require_once __DIR__ . "/../html_partial/login.php";
 
-$content = ob_get_clean(); //je stock le tampon dans cette variable
+require_once __DIR__ . "/../html_partial/login.php";
+// clean buffering in $content
+$content = ob_get_clean();
