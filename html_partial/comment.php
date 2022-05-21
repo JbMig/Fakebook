@@ -23,14 +23,73 @@
             }
         }
     } ?>
+	<!-- just like articles, comments are shown differently depending on the writer -->
+	<!-- if it's an admin of the page/group who posted the original article, the comment is shown as that of the page/group -->
+	<!-- in any other case, the comment is shown as that of the person -->
+	<?php
+	if ($group_or_page["group_id"] !== NULL) { // if it's a group's article
+		$group_admin = false;
+		foreach ($article_group_admins as $article_group_admin){
+			if ($article_group_admin["user_id"] === $comment["user_id"]) {
+				$group_admin = true;
+				break;
+			}
+		}
+		if($group_admin){
+			$show_name = $article_group["name"];
+			$show_picture =  "img_pages_groups/" . $article_group["picture"];
+			$action = "/group";
+			$actionId = "goTogroup";
+			$action_name = "group_id";
+			$action_value = $article_group["group_id"];
+		} else { // writer's own comment
+			$show_name = $first_name . " " . $last_name;
+			$show_picture = "img_profil/" . $profil_picture;
+			$action = "/profile";
+			$actionId = "goToProfile";
+			$action_name = "profil_id";
+			$action_value = $comment["user_id"];
+		}
+	} elseif ($group_or_page["page_id"] !== NULL) { // if it's a page's article
+		// we check if the user is an admin on that page
+		$page_admin = false;
+		foreach ($article_page_admins as $article_page_admin){
+			if ($article_page_admin["user_id"] === $comment["user_id"]) {
+				$page_admin = true;
+				break;
+			}
+		}
+		if($page_admin) {
+			$show_name = $article_page["name"];
+			$show_picture =  "img_pages_groups/" . $article_page["picture"];
+			$action = "/public_page";
+			$actionId = "goToPage";
+			$action_name = "page_id";
+			$action_value = $article_page["page_id"];
+		} else { // writer's own comment
+			$show_name = $first_name . " " . $last_name;
+			$show_picture = "img_profil/" . $profil_picture;
+			$action = "/profile";
+			$actionId = "goToProfile";
+			$action_name = "profil_id";
+			$action_value = $comment["user_id"];
+		}
+	} else { // writer's own comment
+		$show_name = $first_name . " " . $last_name;
+		$show_picture = "img_profil/" . $profil_picture;
+		$action = "/profile";
+		$actionId = "goToProfile";
+		$action_name = "profil_id";
+		$action_value = $comment["user_id"];
+	} ?>
     <div id="comment" style="margin-top:20px; border: solid 1px black; padding: 10px; width: 300px">
-        <form id="goToProfile" action="/profile" method="post">
-            <input type="hidden" name="profil_id" value="<?= $comment["user_id"] ?>" />
+        <form id="<?= $actionId ?>" action="<?= $action ?>" method="post">
+            <input type="hidden" name="<?= $action_name ?>" value="<?= $action_value ?>" />
             <button class="articleColor" type="submit" id="comment_profil_picture" style="border:0; padding:5px;">
-                <img id="profilPic" src="img_profil/<?= $profil_picture ?>" alt="" width="30px">
+                <img id="profilPic" src="<?= $show_picture ?>" alt="" width="30px">
             </button>
             <button class="articleColor" type="submit" id="comment_name" style="border:0; padding:0;">
-                <?= $first_name . " " . $last_name ?>
+			<?= $show_name ?>
             </button>
         </form>
         <span id="date"><?= $comment["date"] ?></span>
@@ -43,6 +102,9 @@
             <span><?=$comment["like_count"]?></span>
             <input type="hidden" name="like_comment_id" value="<?= $comment["comment_id"] ?>">
         </form>
+
+		<!-- need to add conditions for admins to modify/delete their fellow admins' comments-->
+
         <?php if ($comment["user_id"] === $_SESSION["user"]["user_id"]) : ?>
             <form id="delete_comment" method="post" action="/delete_comment">
                 <button type="submit" id="delete_btn_comment">Supprimer</button>
