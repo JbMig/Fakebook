@@ -34,7 +34,7 @@ open_comment.forEach(button => {
     const toDisplay = target.nextElementSibling;
     isVisibleComment = !isVisibleComment;
     toDisplay.style.display = isVisibleComment ? "block" : "none";
-    target.innerHTML = isVisibleComment ? "Annuler" : "Comment"
+    target.innerHTML = isVisibleComment ? "Annuler" : "Commenter"
   })
 })
 
