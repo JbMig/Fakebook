@@ -84,13 +84,13 @@
 				$article = $maRequete->fetch(PDO::FETCH_ASSOC);
                 
                 // updating notification of the article writer
-                $maRequete = $pdo->prepare(
-                "INSERT INTO `notifications` (`user_id`, `type` ,`like_id`,`article_id` , `seen`)
-                VALUES (:Id , 'like' , 1 , :article_id, 'no');");
-                $maRequete->execute([
-                ":Id" => $user_id,
-                ":article_id" => $article_id
-                ]);
+                // $maRequete = $pdo->prepare(
+                // "INSERT INTO `notifications` (`user_id`, `type` ,`like_id`,`article_id` , `seen`)
+                // VALUES (:Id , 'like' , 1 , :article_id, 'no');");
+                // $maRequete->execute([
+                // ":Id" => $user_id,
+                // ":article_id" => $article_id
+                // ]);
 
 				// updating stats of the article writer
                 $maRequete = $pdo->prepare(
