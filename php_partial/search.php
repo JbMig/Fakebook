@@ -29,6 +29,7 @@ if(isset($_POST["someone"])) {
 
 
 if(isset($_POST["group"])) {
+    $group_id = $_SESSION["group"]["group_id"];
     $who = filter_input(INPUT_POST,"group");
     $maRequete = $pdo->prepare('SELECT `group_id` , `name` , `picture` , `banner` FROM groups WHERE (`name` LIKE :who_name) ORDER BY `group_id` DESC;');
     $maRequete->execute([
@@ -37,7 +38,7 @@ if(isset($_POST["group"])) {
     ]);
     $groups = $maRequete->fetchAll(PDO::FETCH_ASSOC);
     
-    $maRequete = $pdo->prepare('SELECT `group_id` , `name` , `picture` , `banner` FROM groups ');
+    $maRequete = $pdo->prepare('SELECT `group_id` , `name` , `picture` , `banner` FROM groups ;');
     $maRequete->execute();
     $names = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
