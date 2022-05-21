@@ -3,6 +3,8 @@ let sendFormBtn = document.querySelector("#valider");
 let addFriend = document.querySelector("#add_friend");
 let formValidate = document.querySelector("#form_validate");
 let select = document.querySelector("#select");
+
+// add value from select friend in input
 function addValue() {
     let splitSelect = ""
     if (!firstFriend.value){
@@ -20,6 +22,7 @@ function addValue() {
         newInput.style.display = "none";
         formValidate.appendChild(newInput);
     }
+    // add name's friend in label
     let newLabel = document.createElement("input");
     newLabel.value = splitSelect[1] + " " + splitSelect[2]
     newLabel.className = "col-md-8 mx-5";
@@ -29,6 +32,7 @@ function addValue() {
 
 addFriend.addEventListener("click", addValue);
 
+// change every id of friend selected for php reading post informations
 function changeName() {
     if (!firstFriend.value){
         alert("Ajouter un ami");

@@ -26,6 +26,7 @@ open_modify_article.forEach(button => {
   })
 })
 
+// open comment section
 let open_comment = document.querySelectorAll("#open_comment");
 open_comment.forEach(button => {
   let isVisibleComment = false;
@@ -38,6 +39,7 @@ open_comment.forEach(button => {
   })
 })
 
+// open modify comment form
 let open_modify_comment = document.querySelectorAll("#open_modify_comment");
 open_modify_comment.forEach(button => {
   let isVisibleModifyComment = false;
@@ -76,7 +78,7 @@ depose.addEventListener("click", function(evt) {
     openVignette()
   });
   
-  // affiche la mignature de l'image upload
+  // print vignette to see picture we want to download
   function openVignette() {
     var p=document.querySelector("#preview");
     p.innerHTML="";

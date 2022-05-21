@@ -1,7 +1,7 @@
 <?php
 ob_start();
 if ("POST" === $_SERVER["REQUEST_METHOD"]) {
-    require_once __DIR__ . "/../database/pdo.php"; //je récupère le PDO
+    require_once __DIR__ . "/../database/pdo.php"; 
     $page_id = $_SESSION["page"]["page_id"];
     $user_id = $_SESSION["user"]["user_id"];
     $page_id = $_SESSION["page"]["page_id"];

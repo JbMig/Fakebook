@@ -19,22 +19,26 @@ $conversations = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $chat_id = filter_input(INPUT_POST, "chat_id");
 
+    // get chat wanted
     $maRequete = $pdo->prepare("SELECT * FROM `chats` WHERE `chat_id` = :chatId;");
     $maRequete->execute([
         ":chatId" => $chat_id
     ]);
     $chat = $maRequete->fetch();
 
+    // get every user from chat wanted
     $maRequete = $pdo->prepare("SELECT * FROM `users` WHERE `user_id`IN (SELECT `user_id` FROM `chat_members` WHERE `chat_id` = :chatId)");
     $maRequete->execute([
         ":chatId" => $chat_id
     ]);
     $chat_members = $maRequete->fetchAll();
 
+    // set result in session
     $_SESSION["chat"] = $chat;
     $_SESSION["chat_members"] = $chat_members;
     http_response_code(302);
-    header('Location: /chat'); //je vais à la page login
+    // go to chat
+    header('Location: /chat');
     exit();
 }
 

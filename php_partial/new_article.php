@@ -25,6 +25,7 @@
                     ]);
 					
                 http_response_code(302);
+                // get previous pages and go
                 $direction = explode("/",$_SERVER["HTTP_REFERER"]);
                 if($direction[3] === "profile") {
                     header("Location: /profile");

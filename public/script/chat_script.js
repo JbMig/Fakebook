@@ -1,15 +1,20 @@
 let section = document.querySelector("#section_message");
+// start reading info witch scroll down true at openning pages
 document.addEventListener("DOMContentLoaded",() => {
     refreshState(true);
 });
+// function to scroll down
 function scrollDown() {
     section.scrollTop = section.scrollHeight;
 }
 
+// call every 2000ms reading info
 setInterval(() => {
     refreshState(false);
 }, 2000);
 
+// read every message from chat2 (php request)
+// create div and span to print messages with message's user's name
 function refreshState(scroll) {
     fetch("/chat2")
         .then(res => res.json())
@@ -55,9 +60,9 @@ function refreshState(scroll) {
     ;
 }
 
+// send form info to new_message (php request)
 document.querySelector("#new_message_form").addEventListener("submit", function (event) {
     event.preventDefault()
-    // const data = new FormData(this)
     fetch("/new_message", {
         method: "POST",
         body: new FormData(this)
@@ -72,6 +77,7 @@ let openChangeImgBtn = document.querySelector("#change_chat_img_btn");
 let changeChatImg = document.querySelector("#change_chat_img");
 
 let isVisibleChangeImg = false;
+// open form to change chat's img
 function changeImgBtn() {
     isVisibleChangeImg = !isVisibleChangeImg;
     changeChatImg.style.display = isVisibleChangeImg ? "block" : "none";
@@ -79,6 +85,7 @@ function changeImgBtn() {
 openChangeImgBtn.addEventListener("click", changeImgBtn);
 
 let cancel = document.querySelector("#cancel");
+// cancel open form
 function cancelChangeImg() {
     changeChatImg.reset();
     var p=document.querySelector("#preview");
@@ -92,6 +99,7 @@ cancel.addEventListener("click", cancelChangeImg);
 var new_image_input = document.querySelector("#fileToUpload");
 var depose = document.querySelector("#depose");
 
+// drag'n drop
 depose.addEventListener("click", function(evt) {
     evt.preventDefault();
     new_image_input.click();
@@ -114,7 +122,7 @@ depose.addEventListener("click", function(evt) {
     openVignette()
   });
   
-  // affiche la mignature de l'image upload
+  // print vignette to see picture we want to download
   function openVignette() {
     var p=document.querySelector("#preview");
     p.innerHTML="";

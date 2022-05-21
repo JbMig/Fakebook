@@ -7,12 +7,12 @@ $maRequete = $pdo->prepare("SELECT * FROM `comments` WHERE `article_id` = :artic
     ]);
     $comments = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
-	
+// get information about every users
 $maRequete = $pdo->prepare("SELECT `user_id`, `profil_picture`, `first_name`, `last_name` FROM `users` ");
     $maRequete->execute();
     $comment_profiles = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
-
+// get every likes
 $maRequete = $pdo->prepare("SELECT * FROM `likes` WHERE `user_id` = :userId");
     $maRequete->execute([
         ":userId" => $user_id
