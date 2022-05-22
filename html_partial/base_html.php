@@ -68,13 +68,13 @@
         
     </header>
     <main>
-        <?php //if(!isset($content)):?>
-            <!-- <h4>Vous vous êtes perdu</h4>
-            <a href="/timeline">fil d'actualité</a> -->
-        <?php //else :
+        <?php if(!isset($content)):?>
+            <h4>Vous vous êtes perdu</h4>
+            <a href="/timeline">fil d'actualité</a>
+        <?php else :
             //show $content here 
             echo $content;
-        //endif  ?>
+        endif  ?>
     </main>
 
     <footer>

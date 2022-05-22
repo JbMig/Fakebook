@@ -20,10 +20,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 		} else {
 			$status = 'pending';
 		};
-		var_dump($privacy[0]);
-		var_dump($status);
-		var_dump($group_id);
-		var_dump($friend_id);
+		
 		$maRequete = $pdo->prepare(
 			"UPDATE `members` SET `status` = :st WHERE `user_id`= :userId AND `group_id`= :groupId");
 			$maRequete->execute([
