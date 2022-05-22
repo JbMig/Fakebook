@@ -43,7 +43,7 @@
 				break;
 			}
 		}
-		if($article_group_admin){
+		if($comment_from_group_admin){
 			$show_name = $article_group["name"];
 			$show_picture =  "img_pages_groups/" . $article_group["picture"];
 			$action = "/group";
@@ -74,7 +74,7 @@
 				break;
 			}
 		}
-		if($article_page_admin) {
+		if($comment_from_page_admin) {
 			$show_name = $article_page["name"];
 			$show_picture =  "img_pages_groups/" . $article_page["picture"];
 			$action = "/public_page";
