@@ -35,7 +35,8 @@
 						<button type="submit" id="member_removal" name="member_removal">
 							Quitter le groupe
 						</button>
-						<input type="hidden" name="member_removal" value="<?= $user_id ?>">
+						<input type="hidden" name="member_removal_group" value="<?= $group["group_id"] ?>" />
+						<input type="hidden" name="member_removal_account" value="<?= $user_id ?>" />
 						<input type="hidden" id="input_member_removal">
 					</form>
 				<?php endif;?>
@@ -293,7 +294,8 @@
 						<button type="submit" id="member_removal" name="member_removal">
 							Rejeter la demande
 						</button>
-						<input type="hidden" name="member_removal" value="<?= $request_account["user_id"] ?>">
+						<input type="hidden" name="member_removal_group" value="<?= $group["group_id"] ?>" />
+						<input type="hidden" name="member_removal_account" value="<?= $request_account["user_id"] ?>" />
 					</form>
 				<?php endforeach; ?>
 			</section>

@@ -231,7 +231,7 @@
 		<button type="button" id="open_groups_list">Afficher les groupes suivis</button>
 		<section id="groups_list" style="display: none">
 			<?php foreach ($groups as $group) : ?>
-				<form id="goTogroup" action="/group" method="post"> <!-- needs to be modified to match a group -->
+				<form id="goTogroup" action="/group" method="post">
 					<input type="hidden" name="group_id" value="<?= $group["group_id"] ?>" />
 					<button type="submit" id="picture" class="baseProfile" style=" border:0; padding:5px;">
 						<img id="profilPic" src="img_pages_groups/<?= $group["picture"] ?>" alt="" width="40px">
@@ -246,7 +246,7 @@
 		<button type="button" id="open_invitation">Invitation</button>
 		<section id="invitation" style="display: none">
 			<?php foreach ($groups_invite as $group) : ?>
-					<form id="goTogroup" action="/group" method="post"> <!-- needs to be modified to match a group -->
+					<form id="goTogroup" action="/group" method="post">
 						<input type="hidden" name="group_id" value="<?= $group["group_id"] ?>" />
 						<button type="submit" id="picture" class="baseProfile" style=" border:0; padding:5px;">
 							<img id="profilPic" src="img_pages_groups/<?= $group["picture"] ?>" alt="" width="40px">
@@ -255,11 +255,18 @@
 							<?= $group["name"] ?> 
 						</button>
 					</form>
-					<form id="lol" action="/invite_accepted" method="post"> <!-- needs to be modified to match a group -->
+					<form id="invite_accepted" action="/invite_accepted" method="post">
 						<input type="hidden" name="invite_group" value="<?= $group["group_id"] ?>" />
 						<input type="hidden" name="invite_friend" value="<?= $user_id ?>" />
 						<button type="submit" id="validate_invite" name="invite_accepted"> 
 							Accepter
+						</button>
+					</form>
+					<form id="member_removal" action="/member_removal" method="post">
+						<input type="hidden" name="member_removal_group" value="<?= $group["group_id"] ?>" />
+						<input type="hidden" name="member_removal_account" value="<?= $user_id ?>" />
+						<button type="submit" id="validate_member_removal" name="member_removal"> 
+							Refuser
 						</button>
 					</form>
 			<?php endforeach; ?>
