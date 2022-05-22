@@ -53,7 +53,8 @@
 						<button type="submit" id="member_removal" name="member_removal">
 							Annuler la demande
 						</button>
-						<input type="hidden" name="member_removal" value="<?= $user_id ?>">
+						<input type="hidden" name="member_removal_group" value="<?= $group["group_id"] ?>" />
+						<input type="hidden" name="member_removal_account" value="<?= $user_id ?>" />
 					</form>
 				<?php else : ?>
 					<form action="/member_request" class="form" method="post" >
