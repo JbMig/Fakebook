@@ -57,11 +57,37 @@
 						<input type="hidden" name="member_removal_account" value="<?= $user_id ?>" />
 					</form>
 				<?php else : ?>
-					<form action="/member_request" class="form" method="post" >
-						<button type="submit" id="member_request" name="member_request">
-							Rejoindre ce groupe
-						</button>
-					</form>
+					<?php
+					$member_or_invite =false;
+					foreach ($all_members as $all_member) {
+						if($all_member["user_id"] === $user_id) {
+							$member_or_invite =true;
+							break;
+						}
+					}
+					?>
+					<?php if(!$member_or_invite) : ?>
+						<form action="/member_request" class="form" method="post" >
+							<button type="submit" id="member_request" name="member_request">
+								Rejoindre ce groupe
+							</button>
+						</form>
+					<?php else : ?>
+						<form id="invite_accepted" action="/invite_accepted" method="post">
+							<input type="hidden" name="invite_group" value="<?= $group["group_id"] ?>" />
+							<input type="hidden" name="invite_friend" value="<?= $user_id ?>" />
+							<button type="submit" id="validate_invite" name="invite_accepted"> 
+								Accepter l'invitation
+							</button>
+						</form>
+						<form id="member_removal" action="/member_removal" method="post">
+							<input type="hidden" name="member_removal_group" value="<?= $group["group_id"] ?>" />
+							<input type="hidden" name="member_removal_account" value="<?= $user_id ?>" />
+							<button type="submit" id="validate_member_removal" name="member_removal"> 
+								Refuser l'invitation
+							</button>
+						</form>
+					<?php endif; ?>
 				<?php endif ?>
 			<?php endif ?>
 		<?php endif ?>
