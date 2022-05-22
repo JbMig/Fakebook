@@ -25,6 +25,7 @@ if ($uri == "/entrer.php") {
 
 // if url =  "..." require the files "..."
 switch ($uri) {
+	// everything related to login, sign_up, ...
     case "/login":
         require_once __DIR__ . "/php_partial/login.php";
         break;
@@ -34,144 +35,119 @@ switch ($uri) {
     case "/sign_out":
         require_once __DIR__ . "/php_partial/sign_out.php";
         break;
+
+
+
+
+
+
+	// general
+	case "/new_article":
+        require_once __DIR__ . "/php_partial/new_article.php";
+        break;
+	case "/delete_article":
+		require_once __DIR__ . "/php_partial/delete_article.php";
+		break;
+	case "/modify_article":
+		require_once __DIR__ . "/php_partial/modify_article.php";
+		break;
+	case "/like_article":
+		require_once __DIR__ . "/php_partial/like_article.php";
+		break;
+	case "/new_comment":
+		require_once __DIR__ . "/php_partial/new_comment.php";
+		break;
+	case "/like_comment":
+		require_once __DIR__ . "/php_partial/like_comment.php";
+		break;
+	case "/delete_comment":
+		require_once __DIR__ . "/php_partial/delete_comment.php";
+		break;
+	case "/modify_comment":
+		require_once __DIR__ . "/php_partial/modify_comment.php";
+		break;
+	case "/search":
+		require_once __DIR__ . "/php_partial/search.php";
+		break;
+	case "/timeline":
+		require_once __DIR__ . "/php_partial/timeline.php";
+		break;
+	case "/notifications":
+		require_once __DIR__ . "/php_partial/notifications.php";
+		break;
+
+
+
+
+
+
+	// related to profile
     case "/profile":
         require_once __DIR__ . "/php_partial/profile.php";
         break;
+	case "/settings_profil":
+		require_once __DIR__ . "/php_partial/settings_profil/settings_profil.php";
+		break;
     case "/theme":
         require_once __DIR__ . "/php_partial/theme.php";
         break;
-    case "/timeline":
-        require_once __DIR__ . "/php_partial/timeline.php";
-        break;
-    case "/new_article":
-        require_once __DIR__ . "/php_partial/new_article.php";
-        break;
+	case "/delete":
+		require_once __DIR__ . "/php_partial/delete.php";
+		break;
+	case "/inactive":
+		require_once __DIR__ . "/php_partial/inactive.php";
+		break;
+	case "/new_first_name":
+		require_once __DIR__ . "/php_partial/settings_profil/new_first_name.php";
+		break;
+	case "/new_last_name":
+		require_once __DIR__ . "/php_partial/settings_profil/new_last_name.php";
+		break;
+	case "/new_password":
+		require_once __DIR__ . "/php_partial/settings_profil/new_password.php";
+		break;
+	case "/new_email":
+		require_once __DIR__ . "/php_partial/settings_profil/new_email.php";
+		break;
+	case "/edit_photo":
+		require_once __DIR__ . "/php_partial/settings_profil/edit_photo.php";
+		break;
+	case "/edit_banniere":
+		require_once __DIR__ . "/php_partial/settings_profil/edit_banniere.php";
+		break;
+
+
+
+
+
+
+	// related to public_page
     case "/new_article_page":
         require_once __DIR__ . "/php_partial/new_article_page.php";
         break;
-    case "/new_article_group":
-        require_once __DIR__ . "/php_partial/new_article_group.php";
-        break;
-    case "/delete_article":
-        require_once __DIR__ . "/php_partial/delete_article.php";
-        break;
-    case "/friend_request":
-        require_once __DIR__ . "/php_partial/friend_request.php";
-        break;
-    case "/friend_request":
-        require_once __DIR__ . "/php_partial/friend_request.php";
-        break;
-    case "/friend_removal":
-        require_once __DIR__ . "/php_partial/friend_removal.php";
-        break;
-    case "/friend_approval":
-        require_once __DIR__ . "/php_partial/friend_approval.php";
-        break;
-    case "/member_request":
-        require_once __DIR__ . "/php_partial/member_request.php";
-        break;
-    case "/member_removal":
-        require_once __DIR__ . "/php_partial/member_removal.php";
-        break;
-    case "/member_approval":
-        require_once __DIR__ . "/php_partial/member_approval.php";
-        break;
-    case "/invite":
-        require_once __DIR__ . "/php_partial/invite.php";
-        break;
-    case "/invite_accepted":
-        require_once __DIR__ . "/php_partial/invite_accepted.php";
-        break;
-    case "/block":
-        require_once __DIR__ . "/php_partial/block.php";
-        break;
-    case "/delete":
-        require_once __DIR__ . "/php_partial/delete.php";
-        break;
-    case "/inactive":
-        require_once __DIR__ . "/php_partial/inactive.php";
-    case "/modify_article":
-        require_once __DIR__ . "/php_partial/modify_article.php";
-        break;
-    case "/settings_profil":
-        require_once __DIR__ . "/php_partial/settings_profil/settings_profil.php";
-        break;
-    case "/new_first_name":
-        require_once __DIR__ . "/php_partial/settings_profil/new_first_name.php";
-        break;
-    case "/new_last_name":
-        require_once __DIR__ . "/php_partial/settings_profil/new_last_name.php";
-        break;
-    case "/new_password":
-        require_once __DIR__ . "/php_partial/settings_profil/new_password.php";
-        break;
-    case "/new_email":
-        require_once __DIR__ . "/php_partial/settings_profil/new_email.php";
-        break;
-    case "/edit_photo":
-        require_once __DIR__ . "/php_partial/settings_profil/edit_photo.php";
-        break;
-    case "/edit_banniere":
-        require_once __DIR__ . "/php_partial/settings_profil/edit_banniere.php";
-    case "/like_article":
-        require_once __DIR__ . "/php_partial/like_article.php";
-        break;
-    case "/new_comment":
-        require_once __DIR__ . "/php_partial/new_comment.php";
-        break;
-    case "/like_comment":
-        require_once __DIR__ . "/php_partial/like_comment.php";
-        break;
-    case "/delete_comment":
-        require_once __DIR__ . "/php_partial/delete_comment.php";
-        break;
-    case "/modify_comment":
-        require_once __DIR__ . "/php_partial/modify_comment.php";
-        break;
-    case "/search":
-        require_once __DIR__ . "/php_partial/search.php";
-        break;
-    case "/public_page":
-        require_once __DIR__ . "/php_partial/public_page.php";
-        break;
-    case "/group":
-        require_once __DIR__ . "/php_partial/group.php";
-        break;
-    case "/follow":
-        require_once __DIR__ . "/php_partial/follow.php";
-        break;
-    case "/unfollow":
-        require_once __DIR__ . "/php_partial/unfollow.php";
-        break;
-    case "/remove_admin":
-        require_once __DIR__ . "/php_partial/remove_admin.php";
-        break;
-    case "/add_admin":
-        require_once __DIR__ . "/php_partial/add_admin.php";
-        break;
-    case "/remove_admin_group":
-        require_once __DIR__ . "/php_partial/remove_admin_group.php";
-        break;
-    case "/add_admin_group":
-        require_once __DIR__ . "/php_partial/add_admin_group.php";
-        break;
-    case "/ban":
-        require_once __DIR__ . "/php_partial/ban.php";
-        break;
-    case "/unban":
-        require_once __DIR__ . "/php_partial/unban.php";
-        break;
-    case "/ban_group":
-        require_once __DIR__ . "/php_partial/ban_group.php";
-        break;
-    case "/unban_group":
-        require_once __DIR__ . "/php_partial/unban_group.php";
-        break;
-    case "/new_page":
-        require_once __DIR__ . "/php_partial/new_page.php";
+	case "/public_page":
+		require_once __DIR__ . "/php_partial/public_page.php";
 		break;
-    case "/new_group":
-        require_once __DIR__ . "/php_partial/new_group.php";
+	case "/follow":
+		require_once __DIR__ . "/php_partial/follow.php";
+		break;
+	case "/unfollow":
+		require_once __DIR__ . "/php_partial/unfollow.php";
+		break;
+	case "/remove_admin":
+		require_once __DIR__ . "/php_partial/remove_admin.php";
+		break;
+	case "/add_admin":
+		require_once __DIR__ . "/php_partial/add_admin.php";
+		break;
+	case "/ban":
+		require_once __DIR__ . "/php_partial/ban.php";
+		break;
+	case "/unban":
+		require_once __DIR__ . "/php_partial/unban.php";
+		break;
+	case "/new_page":
+		require_once __DIR__ . "/php_partial/new_page.php";
 		break;
 	case "/settings_public_page":
 		require_once __DIR__ . "/php_partial/settings_public_page/settings_public_page.php";
@@ -187,6 +163,49 @@ switch ($uri) {
 		break;
 	case "/edit_page_banner":
 		require_once __DIR__ . "/php_partial/settings_public_page/edit_page_banner.php";
+		break;
+
+
+
+
+
+
+	// related to group
+    case "/new_article_group":
+        require_once __DIR__ . "/php_partial/new_article_group.php";
+        break;
+	case "/member_request":
+		require_once __DIR__ . "/php_partial/member_request.php";
+		break;
+	case "/member_removal":
+		require_once __DIR__ . "/php_partial/member_removal.php";
+		break;
+	case "/member_approval":
+		require_once __DIR__ . "/php_partial/member_approval.php";
+		break;
+	case "/invite":
+		require_once __DIR__ . "/php_partial/invite.php";
+		break;
+	case "/invite_accepted":
+		require_once __DIR__ . "/php_partial/invite_accepted.php";
+		break;
+	case "/group":
+		require_once __DIR__ . "/php_partial/group.php";
+		break;
+	case "/remove_admin_group":
+		require_once __DIR__ . "/php_partial/remove_admin_group.php";
+		break;
+	case "/add_admin_group":
+		require_once __DIR__ . "/php_partial/add_admin_group.php";
+		break;
+	case "/ban_group":
+		require_once __DIR__ . "/php_partial/ban_group.php";
+		break;
+	case "/unban_group":
+		require_once __DIR__ . "/php_partial/unban_group.php";
+		break;
+	case "/new_group":
+		require_once __DIR__ . "/php_partial/new_group.php";
 		break;
 	case "/settings_group":
 		require_once __DIR__ . "/php_partial/settings_group/settings_group.php";
@@ -206,6 +225,32 @@ switch ($uri) {
 	case "/edit_group_status":
 		require_once __DIR__ . "/php_partial/settings_group/edit_group_status.php";
 		break;
+
+
+
+
+
+
+    // related to relationships
+    case "/friend_request":
+        require_once __DIR__ . "/php_partial/friend_request.php";
+        break;
+    case "/friend_removal":
+        require_once __DIR__ . "/php_partial/friend_removal.php";
+        break;
+    case "/friend_approval":
+        require_once __DIR__ . "/php_partial/friend_approval.php";
+        break;
+    case "/block":
+        require_once __DIR__ . "/php_partial/block.php";
+        break;
+
+
+
+
+
+
+// related to chat
     case "/new_chat":
         require_once __DIR__ . "/php_partial/messenger/new_chat.php";
         break;
@@ -218,9 +263,6 @@ switch ($uri) {
     case "/new_message":
         require_once __DIR__ . "/php_partial/messenger/new_message.php";
         break;
-    case "/brouillon_timeline":
-        require_once __DIR__ . "/../brouillon_timeline.php";
-		break;
     case "/chat2":
         require_once __DIR__ . "/php_partial/messenger/chat2.php";
         break;
@@ -229,9 +271,6 @@ switch ($uri) {
         break;
     case "/quit_chat":
         require_once __DIR__ . "/php_partial/messenger/quit_chat.php";
-        break;
-    case "/notifications":
-        require_once __DIR__ . "/php_partial/notifications.php";
         break;
 }
 
