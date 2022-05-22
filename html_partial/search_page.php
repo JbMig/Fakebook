@@ -5,6 +5,8 @@ $general_memory=[];
 foreach ($pages as $page){
     $tampon = $who;
     while(strlen($who)){
+
+// improve the search 
         $name_page = strtolower($page["name"]);
         $page_id =$page["page_id"];
         array_push($general_memory,$name_page);
@@ -28,6 +30,8 @@ foreach ($pages as $page){
         }
     };
 }
+
+// find any pages which don't where before
 foreach ($names as $name):
     $page_id = $name["page_id"];
     $name_page = strtolower($name["name"]);

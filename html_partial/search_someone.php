@@ -3,6 +3,7 @@
 $memory=[];
 $general_memory=[];
 foreach ($profiles as $profile){
+    // improve the search with the first name
     $tampon_first = $who_first_name;
     $tampon_last = $who_last_name;
     while(strlen($who_first_name) > 0 || strlen($who_last_name)>0){
@@ -29,6 +30,7 @@ foreach ($profiles as $profile){
         }
         $who_first_name=substr($who_first_name,0,-1);
     }
+// improve the search with the first name
         if(strlen($who_last_name)>0){
             if(in_array($user_id,$memory) == false){
                 array_push($memory,$user_id);?>
@@ -50,6 +52,8 @@ foreach ($profiles as $profile){
     $who_first_name = $tampon_first;
     $who_last_name = $tampon_last;
 }
+
+// find anyone which don't where before
 foreach ($names as $name):
     $user_id = $name["user_id"];
     $first_name = strtolower($name["first_name"]);

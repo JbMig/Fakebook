@@ -27,6 +27,13 @@
 					</button>
 				</form>
         		<div id="baseHtml">
+                    <br>
+                <form id="deco_form" method="post" action="/notifications">
+                    <div class="baseHtml">
+                        <button class="baseButton" class="nav_deco"id="notifications" type="submit">Notification</button>
+                        <input type="hidden" name="notif">
+                    </div>
+                </form>
 				<form id="deco_form" method="post" action="/sign_out">
                     <div class="baseHtml">
                         <button class="baseButton" class="nav_deco"id="deconnexion" type="submit">Deconnexion</button>

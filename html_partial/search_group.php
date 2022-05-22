@@ -5,6 +5,8 @@ $general_memory=[];
 foreach ($groups as $group){
     $tampon = $who;
     while(strlen($who)){
+
+// improve the search 
         $name_group = strtolower($group["name"]);
         $group_id =$group["group_id"];
         array_push($general_memory,$name_group);
@@ -28,6 +30,8 @@ foreach ($groups as $group){
         }
     };
 }
+
+// find any groups which don't where before
 foreach ($names as $name):
     $page_id = $name["group_id"];
     $name_group = strtolower($name["name"]);
