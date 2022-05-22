@@ -157,13 +157,8 @@
 							<?php if($article["picture"]) :?>
 								<img id="image_article" width="300px" src="img_post/<?=$article["picture"]?>" >
 							<?php endif; ?>
-							<?php if(($writer_is_admin && $is_admin) || ($writer_is_admin === false && $article["user_id"] === $user_id)) :?>
-								<!-- members can modify/delete their own articles and admins can do the same for the group's articles-->
-								<form id="delete_article" method="post" action="/delete_article">
-									<button type="submit" id="delete_btn">Supprimer</button>
-									<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
-									<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
-								</form>
+							<?php if(($writer_is_admin && $is_admin) || (!$writer_is_admin && $article["user_id"] === $user_id)) :?>
+								<!-- members can modify their own articles and admins can do the same for the group's articles-->
 								<button type="button" id="open_modify_article">Modifier</button>
 								<form id="form_modify_article" method="post" action="/modify_article">
 									<label id="label_modify" for="modify_input">Ecrivez votre message</label>
@@ -173,6 +168,14 @@
 									<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
 								</form>
 							<?php endif ?>
+							<!-- members can delete their own articles and admins can do the same for any article -->
+							<?php if($is_admin || (!$writer_is_admin && $article["user_id"] === $user_id)) : ?>
+								<form id="delete_article" method="post" action="/delete_article">
+									<button type="submit" id="delete_btn">Supprimer</button>
+									<input type="hidden" name="article_id" value="<?=$article["article_id"]?>">
+									<input type="hidden" name="article_user" value="<?=$article["user_id"]?>">
+								</form>
+							<?php endif; ?>
 							<form action="/like_article" method="post" id="like_article">
 								<button class="articleColor" id="like_btn" type="submit" style="border: 0; padding:0px; margin: 5px;">
 									<img style=" width: 40px; height: 40px; margin: 0px;" src="img_ressources/<?= $like ?>" alt="">
