@@ -1,9 +1,9 @@
 <form id="goToPage" action="/public_page" method="post"> <!-- needs to be modified to match a page -->
 	<input type="hidden" name="page_id" value="<?= $_SESSION["page"]["page_id"] ?>" />
-	<button type="submit" id="picture" style="background: white; border:0; padding:5px;">
-		<img src="img_pages_groups/<?= $_SESSION["page"]["picture"] ?>" alt="" width="40px">
+	<button class="baseProfile" type="submit" id="picture" style="border:0; padding:5px;">
+		<img id="profilPic" src="img_pages_groups/<?= $_SESSION["page"]["picture"] ?>" alt="" width="40px">
 	</button>
-	<button type="submit" id="first_name" style="background: white; border:0; padding:0;"> 
+	<button class="baseProfile" type="submit" id="first_name" style="border:0; padding:0;"> 
 		Retour à <?= $_SESSION["page"]["name"] ?> 
 	</button>
 </form>
