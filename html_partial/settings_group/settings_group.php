@@ -40,7 +40,7 @@
 		<?php endif; ?>
 		<form id="edit_group_status" method="post" action="/edit_group_status">
 			<label id="modify_status_label" for="modify_status">Choisissez la confidentialité de votre groupe :</label><br>
-			<input id="public" name="modify_status" type="radio" value="public">Publique</input>
+			<input id="public" name="modify_status" type="radio" value="public">Public</input>
 			<input id="private" name="modify_status" type="radio" value="private">Privé</input>
 			<button class="modify" type="submit" style="margin-left:55px;">Valider</button>
 		</form>
