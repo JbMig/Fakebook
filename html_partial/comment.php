@@ -29,14 +29,21 @@
 	<!-- in any other case, the comment is shown as that of the person -->
 	<?php
 	if ($group_or_page["group_id"] !== NULL) { // if it's a group's article
-		$group_admin = false;
+		$comment_from_group_admin = false;
 		foreach ($article_group_admins as $article_group_admin){
 			if ($article_group_admin["user_id"] === $comment["user_id"]) {
-				$group_admin = true;
+				$comment_from_group_admin = true;
 				break;
 			}
 		}
-		if($group_admin){
+		$i_am_group_admin = false;
+		foreach ($article_group_admins as $article_group_admin){
+			if ($article_group_admin["user_id"] === $_SESSION["user"]["user_id"]) {
+				$i_am_group_admin = true;
+				break;
+			}
+		}
+		if($article_group_admin){
 			$show_name = $article_group["name"];
 			$show_picture =  "img_pages_groups/" . $article_group["picture"];
 			$action = "/group";
@@ -53,14 +60,21 @@
 		}
 	} elseif ($group_or_page["page_id"] !== NULL) { // if it's a page's article
 		// we check if the user is an admin on that page
-		$page_admin = false;
+		$comment_from_page_admin = false;
 		foreach ($article_page_admins as $article_page_admin){
 			if ($article_page_admin["user_id"] === $comment["user_id"]) {
-				$page_admin = true;
+				$comment_from_page_admin = true;
 				break;
 			}
 		}
-		if($page_admin) {
+		$i_am_page_admin = false;
+		foreach ($article_page_admins as $article_page_admin){
+			if ($article_page_admin["user_id"] === $_SESSION["user"]["user_id"]) {
+				$i_am_page_admin = true;
+				break;
+			}
+		}
+		if($article_page_admin) {
 			$show_name = $article_page["name"];
 			$show_picture =  "img_pages_groups/" . $article_page["picture"];
 			$action = "/public_page";
@@ -103,11 +117,8 @@
             <span><?=$comment["like_count"]?></span>
             <input type="hidden" name="like_comment_id" value="<?= $comment["comment_id"] ?>">
         </form>
-
-		<!-- need to adapt modify_comment.php so that admins can modify/delete their fellow admins' comments-->
-		<!-- we're gonna have the same problem with pages -->
-
-        <?php if ($comment["user_id"] === $_SESSION["user"]["user_id"] || ($group_or_page["page_id"] !== NULL && $page_admin) || ($group_or_page["group_id"] !== NULL && $group_admin)) : ?>
+		<!-- admins can modify/delete their fellow admins' comments-->
+        <?php if ($comment["user_id"] === $_SESSION["user"]["user_id"] || ($group_or_page["page_id"] !== NULL && $i_am_page_admin) || ($group_or_page["group_id"] !== NULL && $i_am_group_admin)) : ?>
             <form id="delete_comment" method="post" action="/delete_comment">
                 <button type="submit" id="delete_btn_comment">Supprimer</button>
                 <input type="hidden" name="comment_id" value="<?= $comment["comment_id"] ?>">
@@ -121,7 +132,6 @@
                 <input type="hidden" name="comment_id" value="<?= $comment["comment_id"] ?>">
                 <input type="hidden" name="comment_user" value="<?= $comment["user_id"] ?>">
             </form>
-
         <?php endif ?>
 
     </div>
