@@ -244,7 +244,7 @@
 		</section>
 		<button type="button" id="open_invitation">Invitation</button>
 		<section id="invitation" style="display: none">
-			<?php foreach ($groups as $group) : ?>
+			<?php foreach ($groups_invite as $group) : ?>
 					<form id="goTogroup" action="/group" method="post"> <!-- needs to be modified to match a group -->
 						<input type="hidden" name="group_id" value="<?= $group["group_id"] ?>" />
 						<button type="submit" id="picture" class="baseProfile" style=" border:0; padding:5px;">
