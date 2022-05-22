@@ -242,6 +242,7 @@
 				</form>
 			<?php endforeach; ?>
 		</section>
+		<!-- Showing the list of all the user's group invitation -->
 		<button type="button" id="open_invitation">Invitation</button>
 		<section id="invitation" style="display: none">
 			<?php foreach ($groups_invite as $group) : ?>
@@ -252,6 +253,13 @@
 						</button>
 						<button type="submit" id="first_name" class="baseProfile" style="border:0; padding:0;"> 
 							<?= $group["name"] ?> 
+						</button>
+					</form>
+					<form id="lol" action="/invite_accepted" method="post"> <!-- needs to be modified to match a group -->
+						<input type="hidden" name="invite_group" value="<?= $group["group_id"] ?>" />
+						<input type="hidden" name="invite_friend" value="<?= $user_id ?>" />
+						<button type="submit" id="validate_invite" name="invite_accepted"> 
+							Accepter
 						</button>
 					</form>
 			<?php endforeach; ?>
