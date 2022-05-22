@@ -242,46 +242,36 @@
 				</form>
 			<?php endforeach; ?>
 		</section>
-		<!-- Showing the list of all the user's group invitation -->
-		<button type="button" id="open_invitation_list">Afficher les invitations de groupe</button>
-		<section id="invitation_list" style="display: none">
-			<?php foreach ($groups_invite as $group) : ?>
-					<form id="goTogroup" action="/group" method="post">
-						<input type="hidden" name="group_id" value="<?= $group["group_id"] ?>" />
-						<button type="submit" id="picture" class="baseProfile" style=" border:0; padding:5px;">
-							<img id="profilPic" src="img_pages_groups/<?= $group["picture"] ?>" alt="" width="40px">
-						</button>
-						<button type="submit" id="first_name" class="baseProfile" style="border:0; padding:0;"> 
-							<?= $group["name"] ?> 
-						</button>
-					</form>
-					<form id="invite_accepted" action="/invite_accepted" method="post">
-						<input type="hidden" name="invite_group" value="<?= $group["group_id"] ?>" />
-						<input type="hidden" name="invite_friend" value="<?= $user_id ?>" />
-						<button type="submit" id="validate_invite" name="invite_accepted"> 
-							Accepter
-						</button>
-					</form>
-					<form id="member_removal" action="/member_removal" method="post">
-						<input type="hidden" name="member_removal_group" value="<?= $group["group_id"] ?>" />
-						<input type="hidden" name="member_removal_account" value="<?= $user_id ?>" />
-						<button type="submit" id="validate_member_removal" name="member_removal"> 
-							Refuser
-						</button>
-					</form>
-			<?php endforeach; ?>
-		</section>
-	</div>
-	<div>
-	<!-- stats -->
-		<div>
-		<!-- articles published through time -->
-		</div>
-		<div>
-		<!-- likes / the person put through time -->
-		</div>
-		<div>
-		<!-- likes / the person obtained through time -->
-		</div>
+		<?php if($_SESSION["user"]["user_id"] === $profile["user_id"]) : ?>
+			<!-- Showing the list of all the user's group invitation -->
+			<button type="button" id="open_invitation_list">Afficher les invitations de groupe</button>
+			<section id="invitation_list" style="display: none">
+				<?php foreach ($groups_invite as $group) : ?>
+						<form id="goTogroup" action="/group" method="post">
+							<input type="hidden" name="group_id" value="<?= $group["group_id"] ?>" />
+							<button type="submit" id="picture" class="baseProfile" style=" border:0; padding:5px;">
+								<img id="profilPic" src="img_pages_groups/<?= $group["picture"] ?>" alt="" width="40px">
+							</button>
+							<button type="submit" id="first_name" class="baseProfile" style="border:0; padding:0;"> 
+								<?= $group["name"] ?> 
+							</button>
+						</form>
+						<form id="invite_accepted" action="/invite_accepted" method="post">
+							<input type="hidden" name="invite_group" value="<?= $group["group_id"] ?>" />
+							<input type="hidden" name="invite_friend" value="<?= $user_id ?>" />
+							<button type="submit" id="validate_invite" name="invite_accepted"> 
+								Accepter
+							</button>
+						</form>
+						<form id="member_removal" action="/member_removal" method="post">
+							<input type="hidden" name="member_removal_group" value="<?= $group["group_id"] ?>" />
+							<input type="hidden" name="member_removal_account" value="<?= $user_id ?>" />
+							<button type="submit" id="validate_member_removal" name="member_removal"> 
+								Refuser
+							</button>
+						</form>
+				<?php endforeach; ?>
+			</section>
+		<?php endif ; ?>
 	</div>
 </section>
