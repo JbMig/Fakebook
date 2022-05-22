@@ -35,6 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
     }    
 }
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if(!isset($_POST["friend0"])) {
+        header("Location: /new_chat");
+        exit;
+    }
     $name = $_POST["name"];
     require __DIR__ . "/../function/uuid.php";
     $uuid = guidv4($name);

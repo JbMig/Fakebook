@@ -12,18 +12,18 @@ Reseau social Hetic par le groupe 2 composé de :
 <br>
 -Adrien Quimbre
 <br>
--Loic Jin
+-Loïc Jin
 
 ## Pour commencer:
 
-Vérifiez que le ports utilisé est sur 3306 pour Mysql
+Vérifiez que le port utilisé est sur 3306 pour Mysql
 <br>
 Sinon vous pouvez changer le port dans database/pdo.php
 ainsi que dans public/create_db/create_db.php
 <br>
 
 ## Configuration server:
-le server doit pointer dans le dossier "public"
+Le server doit pointer dans le dossier "public"
 Vérifiez que le serveur est bien Apache (ne fonctionne que sur Apache, .htaccess)
 
 ## Installation de la base de données:

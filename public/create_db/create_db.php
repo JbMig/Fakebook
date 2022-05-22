@@ -197,5 +197,5 @@
     ");
     $maRequete->execute();
 
-    echo "la database a été installé avec succés";
+    echo "La database a été installée avec succès";
 ?>

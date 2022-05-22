@@ -113,3 +113,46 @@ open_modify_article.forEach(button => {
     target.innerHTML = isVisible ? "Annuler" : "Modifier"
   })
 })
+
+// drag n drop
+var new_image_input = document.querySelector("#fileToUpload");
+var depose = document.querySelector("#depose");
+
+depose.addEventListener("click", function(evt) {
+    evt.preventDefault();
+    new_image_input.click();
+    new_image_input.addEventListener("change", openVignette);
+  });
+  
+  depose.addEventListener("dragover", function(evt) {
+    evt.preventDefault();
+  });
+  depose.addEventListener("dragenter", function() {
+    this.className="onDropZone";
+  });
+  depose.addEventListener("dragleave", function() {
+    this.className="";
+  }); 
+  depose.addEventListener("drop", function(evt) {
+    evt.preventDefault();
+    new_image_input.files=evt.dataTransfer.files;
+    this.className="";
+    openVignette()
+  });
+  
+  // print vignette to see picture we want to download
+  function openVignette() {
+    var p=document.querySelector("#preview");
+    p.innerHTML="";
+    for (var i=0; i<new_image_input.files.length; i++) {
+      var f=new_image_input.files[i];
+      var div=document.createElement("div");
+      div.className="fichier";
+      var vignette=document.createElement("img");
+      vignette.src = window.URL.createObjectURL(f);
+      div.appendChild(vignette);
+      p.appendChild(div);
+    }
+    p.style.display="block"; 
+  };
+
