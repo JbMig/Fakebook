@@ -243,8 +243,8 @@
 			<?php endforeach; ?>
 		</section>
 		<!-- Showing the list of all the user's group invitation -->
-		<button type="button" id="open_invitation">Invitation</button>
-		<section id="invitation" style="display: none">
+		<button type="button" id="open_invitation_list">Afficher les invitations de groupe</button>
+		<section id="invitation_list" style="display: none">
 			<?php foreach ($groups_invite as $group) : ?>
 					<form id="goTogroup" action="/group" method="post">
 						<input type="hidden" name="group_id" value="<?= $group["group_id"] ?>" />

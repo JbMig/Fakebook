@@ -22,19 +22,19 @@ open_groups_list.forEach(button => {
     const toDisplay = target.nextElementSibling;
     isVisiblegroupsList = !isVisiblegroupsList;
     toDisplay.style.display = isVisiblegroupsList ? "block" : "none";
-    target.innerHTML = isVisiblegroupsList ? "Replier la liste" : "Afficher les groupes suivies"
+    target.innerHTML = isVisiblegroupsList ? "Replier la liste" : "Afficher les groupes suivis"
   })
 })
 // open the invitation list area
-let open_invitation = document.querySelectorAll("#open_invitation");
-open_invitation.forEach(button => {
-  let isVisibleInvitation = false;
+let open_invitation_list = document.querySelectorAll("#open_invitation_list");
+open_invitation_list.forEach(button => {
+  let isVisibleInvitationList = false;
   button.addEventListener("click", e => {
     const target = e.target;
     const toDisplay = target.nextElementSibling;
-    isVisibleInvitation = !isVisibleInvitation;
-    toDisplay.style.display = isVisibleInvitation ? "block" : "none";
-    target.innerHTML = isVisibleInvitation ? "Replier la liste" : "Afficher les invitations de groupe"
+    isVisibleInvitationList = !isVisibleInvitationList;
+    toDisplay.style.display = isVisibleInvitationList ? "block" : "none";
+    target.innerHTML = isVisibleInvitationList ? "Replier la liste" : "Afficher les invitations de groupe"
   })
 })
 let open_comment = document.querySelectorAll("#open_comment");

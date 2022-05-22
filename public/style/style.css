@@ -117,10 +117,20 @@ button {
     top: 900px;
     left: 900px;
 }
-
 #groups_list {
     position: absolute;
     top: 960px;
+    left: 900px;
+}
+
+#open_invitation_list {
+    position: absolute;
+    top: 1200px;
+    left: 900px;
+}
+#invitation_list {
+    position: absolute;
+    top: 1260px;
     left: 900px;
 }
 
