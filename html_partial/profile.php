@@ -244,13 +244,7 @@
 		</section>
 		<button type="button" id="open_invitation">Invitation</button>
 		<section id="invitation" style="display: none">
-			<?php foreach ($groups_invite as $group) : ?>
-				<?php foreach ($members as $member) {
-				}; ?>
-				<?php var_dump($member["status"]); 
-				var_dump($member["group_id"]);
-				var_dump($group["group_id"]);?>
-				<?php if ($member["status"] === "invite" && $member["group_id"] === $group["group_id"]) : ?>
+			<?php foreach ($groups as $group) : ?>
 					<form id="goTogroup" action="/group" method="post"> <!-- needs to be modified to match a group -->
 						<input type="hidden" name="group_id" value="<?= $group["group_id"] ?>" />
 						<button type="submit" id="picture" class="baseProfile" style=" border:0; padding:5px;">
@@ -260,7 +254,6 @@
 							<?= $group["name"] ?> 
 						</button>
 					</form>
-				<?php endif; ?>
 			<?php endforeach; ?>
 		</section>
 	</div>
