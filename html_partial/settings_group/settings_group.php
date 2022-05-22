@@ -34,7 +34,7 @@
 		<?php if($_SESSION["group"]["status"] === 'private') : ?>
 		<span>Le groupe est actuellement privé.</span>
 		<?php elseif($_SESSION["group"]["status"] === 'public') : ?>
-		<span>Le groupe est actuellement publique.</span>
+		<span>Le groupe est actuellement public.</span>
 		<?php else : ?>
 		<span>ERREUR DE IF</span>
 		<?php endif; ?>
