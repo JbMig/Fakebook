@@ -124,6 +124,8 @@
                 <input type="hidden" name="comment_id" value="<?= $comment["comment_id"] ?>">
                 <input type="hidden" name="comment_user" value="<?= $comment["user_id"] ?>">
             </form>
+        <?php endif ?>
+        <?php if ($comment["user_id"] === $_SESSION["user"]["user_id"] || ($group_or_page["page_id"] !== NULL && $comment_from_page_admin && $i_am_page_admin) || ($group_or_page["group_id"] !== NULL && $comment_from_group_admin && $i_am_group_admin)) : ?>
             <button type="button" id="open_modify_comment">Modifier</button>
             <form id="form_modify_comment" method="post" action="/modify_comment">
                 <label id="label_modify_comment" for="modify_comment_input">Ecrivez votre message</label>
