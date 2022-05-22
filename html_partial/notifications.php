@@ -23,7 +23,7 @@ foreach($notifications as $notification):
 <!-- new comment -->
         <form action="/timeline" method='post'>
             <input type="hidden" value="<?= $user_id ?>">
-            <button type="hidden" id="first_name" style="background: white; border:0; padding:0;"> Nouveau commentaire </button>
+            <button type="hidden" id="first_name" style="background: white; border:0; padding:0;"> Nouveau like </button>
         </form>
     <?php
     }
@@ -32,7 +32,7 @@ foreach($notifications as $notification):
 <!-- new like -->
         <form action="/timeline" method='post'>
             <input type="hidden" value="<?= $user_id ?>">
-            <button type="hidden" id="first_name" style="background: white; border:0; padding:0;"> Nouveau like </button>
+            <button type="hidden" id="first_name" style="background: white; border:0; padding:0;"> Nouveau commentaire </button>
         </form>
     <?php
     }
