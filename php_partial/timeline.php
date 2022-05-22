@@ -40,7 +40,7 @@ $articles = array_merge($articles, $pages_articles);
 
 // groups' articles
 $maRequete = $pdo->prepare(
-	"SELECT * from `articles` WHERE `group_id` IN (SELECT `group_id` FROM `members` WHERE `user_id`= :userId)");
+	"SELECT * from `articles` WHERE `group_id` IN (SELECT `group_id` FROM `members` WHERE `user_id`= :userId AND `status` = 'approved')");
 $maRequete->execute([
 	":userId" => $user_id
 ]);
